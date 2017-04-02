@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
+
 namespace QuanLyDaiLy_Source
 {
     /// <summary>
@@ -23,6 +25,26 @@ namespace QuanLyDaiLy_Source
         public MainWindow()
         {
             InitializeComponent();
+
+            /*
+            Utilities.SetAccentColor(Rectangle_NavigationFill_1);
+            Utilities.SetAccentColor(Rectangle_NavigationFill_2);
+            Utilities.SetAccentColor(Rectangle_NavigationFill_3);
+            */
+
+        }
+
+        public object NavigationService { get; private set; }
+
+        private void ButtonHome_Click(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+
+        }
+
+        private void TextBlock_HomePage_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            throw new NotImplementedException();
         }
     }
 }

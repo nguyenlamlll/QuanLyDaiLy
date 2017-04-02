@@ -6,17 +6,101 @@
         xmlns:local="clr-namespace:QuanLyDaiLy_Source"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
-    <Grid>
+    <Grid x:Name="MainGrid">
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="0.25*" 
+                              MaxWidth="180" MinWidth="100"/>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
+
+        <DockPanel>
+            <Frame x:Name="_NavigationFrame" NavigationUIVisibility="Hidden" />
+        </DockPanel>
+
+        <Rectangle x:Name="Rectangle_NavigationFill_1"
+                   Fill="Gray"
+                   Grid.Row="1"/>
+        <Rectangle x:Name="Rectangle_NavigationFill_2"
+                   Fill="Gray" Grid.Row="2"/>
+        <Rectangle x:Name="Rectangle_NavigationFill_3"
+                   Fill="Gray" Grid.Row="3"/>
+
+        <!-- Navigation Menu-->
+        <StackPanel Grid.Row="1">
+            <!-- Button 1: Homepage-->
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="ButtonHome" 
+                        FontFamily="Segoe MDL2 Assets"
+                        FontSize="15"
+                        Content="&#xE10F;"
+                        Height="25" Width="25"
+                        Click="ButtonHome_Click"
+                        />
+                <Viewbox>
+                    <TextBlock x:Name="TextBlock_HomePage" 
+                               FontSize="15" 
+                               VerticalAlignment="Center"
+                               TextWrapping="Wrap" MouseDown="TextBlock_HomePage_MouseDown">
+                    Trang Chủ
+                    </TextBlock>
+                </Viewbox>
+
+            </StackPanel>
+
+            <!-- Button 2: Danh sach Dai Ly. Navigate to DanhSachDaiLy page-->
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="ButtonList" 
+                        FontFamily="Segoe MDL2 Assets"
+                        FontSize="15"
+                        Content="&#xE14C;"
+                        Height="25" Width="25"
+                        />
+                <TextBlock FontSize="15" 
+                           VerticalAlignment="Center"> 
+                    Danh Sách
+                </TextBlock>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="ButtonAddEdit" 
+                        FontFamily="Segoe MDL2 Assets"
+                        FontSize="15"
+                        Content="&#xE15E;"
+                        Height="25" Width="25"
+                        />
+                <TextBlock FontSize="15" 
+                           VerticalAlignment="Center"> 
+                    Chỉnh sửa
+                </TextBlock>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="ButtonReports" 
+                        FontFamily="Segoe MDL2 Assets"
+                        FontSize="15"
+                        Content="&#xE82D;"
+                        Height="25" Width="25"
+                        />
+                <TextBlock FontSize="15" 
+                           VerticalAlignment="Center"> 
+                    Báo Cáo
+                </TextBlock>
+            </StackPanel>
+
+            <Border x:Name="Border_NavigationMenuBorder" 
+                    BorderBrush="Black"
+                    BorderThickness="1"
+                    Margin="0,5,0,0"/>
+        </StackPanel>
         
+        <ContentControl x:Name="ContentArea" />
+
     </Grid>
 </Window>
