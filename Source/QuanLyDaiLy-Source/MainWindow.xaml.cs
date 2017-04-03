@@ -25,6 +25,8 @@ namespace QuanLyDaiLy_Source
         public MainWindow()
         {
             InitializeComponent();
+            //Grid_AdvancedList.Visibility = Visibility.Visible;
+            ContentFrame.Navigate(new Windows.MainContent());
             //ContentFrame.Navigate(typeof(Windows.Page1)); //Host some placeholder page - work as a MainContents page
             /*
             Utilities.SetAccentColor(Rectangle_NavigationFill_1);
@@ -44,6 +46,37 @@ namespace QuanLyDaiLy_Source
         private void TextBlock_HomePage_MouseDown(object sender, MouseButtonEventArgs e)
         {
             ContentFrame.Navigate(new Windows.Page1());
+        }
+
+        private void Button_List_MouseEnter(object sender, MouseEventArgs e)
+        {
+            try
+            {
+                if (Grid_AdvancedList.Visibility == Visibility.Collapsed)
+                    Grid_AdvancedList.Visibility = Visibility.Visible;
+                if (Grid_AdvancedList.Visibility == Visibility.Visible)
+                    Grid_AdvancedList.Visibility = Visibility.Collapsed;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Loi" + ex.Message);
+            }
+            
+        }
+
+        private void Button_List_MouseLeave(object sender, MouseEventArgs e)
+        {
+            try
+            {
+                if (Grid_AdvancedList.Visibility == Visibility.Collapsed)
+                    Grid_AdvancedList.Visibility = Visibility.Visible;
+                if (Grid_AdvancedList.Visibility == Visibility.Visible)
+                    Grid_AdvancedList.Visibility = Visibility.Collapsed;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Loi" + ex.Message);
+            }
         }
     }
 }

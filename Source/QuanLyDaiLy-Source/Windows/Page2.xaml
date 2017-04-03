@@ -9,7 +9,7 @@
       Title="Page2">
 
     <Border Name="dummy" Grid.Column="0" Grid.Row="1">
-        <Viewbox Name="vboxButtons" Stretch="UniformToFill">
+        <Viewbox Name="vboxBauttons" Stretch="UniformToFill">
             <Grid Name="GridButtons">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
