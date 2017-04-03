@@ -9,6 +9,17 @@
       Title="Page1">
 
     <Grid>
+        <TextBlock x:Name="textBlock" 
+                   HorizontalAlignment="Left" 
+                   Margin="77,105,0,0" 
+                   TextWrapping="Wrap" Text="This is a place holder" 
+                   VerticalAlignment="Top" Height="61" Width="147"
+                   FontSize="20"
+                   Visibility="Hidden"/>
+        <Viewbox HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Center" Height="50">
+            <TextBlock Margin="10 0 10 0">Hello World</TextBlock>
+        </Viewbox>
         
+
     </Grid>
 </Page>

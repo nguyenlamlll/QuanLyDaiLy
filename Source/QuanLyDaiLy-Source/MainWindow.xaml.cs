@@ -25,7 +25,7 @@ namespace QuanLyDaiLy_Source
         public MainWindow()
         {
             InitializeComponent();
-
+            //ContentFrame.Navigate(typeof(Windows.Page1)); //Host some placeholder page - work as a MainContents page
             /*
             Utilities.SetAccentColor(Rectangle_NavigationFill_1);
             Utilities.SetAccentColor(Rectangle_NavigationFill_2);
@@ -38,13 +38,12 @@ namespace QuanLyDaiLy_Source
 
         private void ButtonHome_Click(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
-
+            ContentFrame.Navigate(new Windows.Page1());
         }
 
         private void TextBlock_HomePage_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            throw new NotImplementedException();
+            ContentFrame.Navigate(new Windows.Page1());
         }
     }
 }
