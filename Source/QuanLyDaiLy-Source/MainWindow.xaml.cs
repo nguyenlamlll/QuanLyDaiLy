@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using QuanLyDaiLy_Source.Models;
 
 
 namespace QuanLyDaiLy_Source
@@ -22,6 +22,7 @@ namespace QuanLyDaiLy_Source
     /// </summary>
     public partial class MainWindow : Window
     {
+        private List<Models.MenuItem> MenuItems;
         public MainWindow()
         {
             InitializeComponent();
@@ -33,29 +34,29 @@ namespace QuanLyDaiLy_Source
             Utilities.SetAccentColor(Rectangle_NavigationFill_2);
             Utilities.SetAccentColor(Rectangle_NavigationFill_3);
             */
+            MenuItems = MenuItemManager.GetMenuItems(); //ItemSource for NavigationListView
+            NavigationListView.ItemsSource = MenuItems;
 
         }
 
         public object NavigationService { get; private set; }
 
-        private void ButtonHome_Click(object sender, RoutedEventArgs e)
-        {
-            ContentFrame.Navigate(new Windows.Page1());
-        }
-
-        private void TextBlock_HomePage_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            ContentFrame.Navigate(new Windows.Page1());
-        }
-
         private void Button_List_MouseEnter(object sender, MouseEventArgs e)
         {
+
             try
             {
                 if (Grid_AdvancedList.Visibility == Visibility.Collapsed)
+                {
                     Grid_AdvancedList.Visibility = Visibility.Visible;
+                    return;
+                }
+                   
                 if (Grid_AdvancedList.Visibility == Visibility.Visible)
+                { 
                     Grid_AdvancedList.Visibility = Visibility.Collapsed;
+                    return;
+                }
             }
             catch (Exception ex)
             {
@@ -69,13 +70,48 @@ namespace QuanLyDaiLy_Source
             try
             {
                 if (Grid_AdvancedList.Visibility == Visibility.Collapsed)
+                {
                     Grid_AdvancedList.Visibility = Visibility.Visible;
+                    return;
+                }
+                    
                 if (Grid_AdvancedList.Visibility == Visibility.Visible)
+                {
                     Grid_AdvancedList.Visibility = Visibility.Collapsed;
+                    return;
+                }
+                    
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Loi" + ex.Message);
+            }
+        }
+
+        private void NavigationListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Models.MenuItem item = (Models.MenuItem)NavigationListView.SelectedItem;
+            //MenuItemCategory category = (Models.MenuItemCategory)item;
+            if (item != null)
+            {
+                switch (item.Category)
+                {
+                    case MenuItemCategory.Homepage:
+                        {
+                            MessageBox.Show("Homepage clicked");
+                            break;
+                        }
+                    case MenuItemCategory.Lists:
+                        {
+                            MessageBox.Show("Danh Sach clicked");
+                            break;
+                        }
+                    case MenuItemCategory.Edit:
+                        {
+                            MessageBox.Show("Chinh Sua clicked");
+                            break;
+                        }
+                }
             }
         }
     }
