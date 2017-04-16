@@ -32,7 +32,7 @@
 
             <StackPanel x:Name="InputLabelStackPanel"
                         Orientation="Vertical"
-                        >
+                        Margin="50,0,0,0">
                 <TextBlock x:Name="NameInputTextBlock"
                            Style="{DynamicResource InputTextBlock}">
                     Tên:
@@ -73,75 +73,87 @@
                 <StackPanel Orientation="Horizontal">
                     <TextBox x:Name="NameInputTextBox"
                          Style="{DynamicResource InputTextBox}" 
-                         Text="Nhập tên đại lý cần lưu"/>
+                         />
                     <TextBlock x:Name="NameInputStatus" 
                        Style="{StaticResource CommentTextBlock}"
                        Visibility="Hidden"/>
                 </StackPanel>
-                
 
-                <TextBox x:Name="IDInputTextBox"
-                         Style="{DynamicResource InputTextBox}"/>
+                <StackPanel Orientation="Horizontal">
+                    <TextBox x:Name="IDInputTextBox"
+                             Style="{DynamicResource InputTextBox}"
+                             />
+                    <TextBlock x:Name="IDStatus"
+                       Style="{StaticResource CommentTextBlock}"
+                       Visibility="Hidden"/>
+                </StackPanel>
 
-                <ComboBox x:Name="TypeInputComboBox"
+                <StackPanel Orientation="Horizontal">
+                    <ComboBox x:Name="TypeInputComboBox"
                           Style="{DynamicResource InputComboBox}">
-                    <ComboBoxItem>1</ComboBoxItem>
-                    <ComboBoxItem>2</ComboBoxItem>
-                </ComboBox>
+                        <ComboBoxItem>1</ComboBoxItem>
+                        <ComboBoxItem>2</ComboBoxItem>
+                    </ComboBox>
+                    <TextBlock x:Name="TypeStatus"
+                       Style="{StaticResource CommentTextBlock}"
+                       Visibility="Hidden"/>
+                </StackPanel>
 
-                <TextBox x:Name="PhoneNumberInputTextBox"
+                <StackPanel Orientation="Horizontal">
+                    <TextBox x:Name="PhoneNumberInputTextBox"
                          Style="{DynamicResource InputTextBox}"/>
+                    <TextBlock x:Name="PhoneNumberStatus"
+                       Style="{StaticResource CommentTextBlock}"
+                       Visibility="Hidden"/>
+                </StackPanel>
 
-                <TextBox x:Name="AddressNumberInputTextBox"
+                <StackPanel Orientation="Horizontal">
+                    <TextBox x:Name="AddressNumberInputTextBox"
                          Style="{DynamicResource InputTextBox}"/>
+                    <TextBlock x:Name="AddressNumberStatus"
+                       Style="{StaticResource CommentTextBlock}"
+                       Visibility="Hidden"/>
+                </StackPanel>
 
-                <TextBox x:Name="StreetInputTextBox"
+                <StackPanel Orientation="Horizontal">
+                    <TextBox x:Name="StreetInputTextBox"
                          Style="{DynamicResource InputTextBox}"/>
+                    <TextBlock x:Name="StreetStatus"
+                       Style="{StaticResource CommentTextBlock}"
+                       Visibility="Hidden"/>
+                </StackPanel>
 
-                <TextBox x:Name="DistrictInputTextBox"
+                <StackPanel Orientation="Horizontal">
+                    <TextBox x:Name="DistrictInputTextBox"
                          Style="{DynamicResource InputTextBox}"/>
-                
-                <DatePicker x:Name="AcceptanceDateDatePicker"
+                    <TextBlock x:Name="DistrictStatus"
+                       Style="{StaticResource CommentTextBlock}"
+                       Visibility="Hidden"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <DatePicker x:Name="AcceptanceDateDatePicker"
                             Style="{DynamicResource InputDatePicker}" 
                             FirstDayOfWeek="Monday" 
                             IsTodayHighlighted="True"/>
-
+                    <TextBlock x:Name="AcceptanceDateStatus"
+                       Style="{StaticResource CommentTextBlock}"
+                       Visibility="Hidden"/>
+                </StackPanel>
+             
             </StackPanel>
 
-            <!-- Status comments-->
-            <StackPanel Grid.Column="2" >
-               
-                <TextBlock x:Name="IDStatus"
-                       Style="{StaticResource CommentTextBlock}"
-                       Visibility="Hidden"/>
-                <TextBlock x:Name="TypeStatus"
-                       Style="{StaticResource CommentTextBlock}"
-                       Visibility="Hidden"/>
-                <TextBlock x:Name="PhoneNumberStatus"
-                       Style="{StaticResource CommentTextBlock}"
-                       Visibility="Hidden"/>
-                <TextBlock x:Name="AddressNumberStatus"
-                       Style="{StaticResource CommentTextBlock}"
-                       Visibility="Hidden"/>
-                <TextBlock x:Name="StreetStatus"
-                       Style="{StaticResource CommentTextBlock}"
-                       Visibility="Hidden"/>
-                <TextBlock x:Name="DistrictStatus"
-                       Style="{StaticResource CommentTextBlock}"
-                       Visibility="Hidden"/>
-                <TextBlock x:Name="AcceptanceDateStatus"
-                       Style="{StaticResource CommentTextBlock}"
-                       Visibility="Hidden"/>
-            </StackPanel>
-           
         </Grid>
+        
+        <!-- Buttons -->
         <StackPanel Grid.Row="2" Orientation="Horizontal"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Top"
-                    Margin="100,0,0,0">
+                    Margin="100,0,0,20">
             <Button x:Name="SaveAndExitButton" 
                     Content="Lưu"
-                    Style="{DynamicResource InputButton}">
+                    Style="{DynamicResource InputButton}"
+                    Click="SaveAndExitButton_Click">
                 <Button.ToolTip>
                     <StackPanel>
                         <TextBlock FontWeight="Bold" FontSize="14" Margin="0,0,0,5">Lưu Đại Lý</TextBlock>
@@ -183,8 +195,9 @@
             </Button>
 
             <Button x:Name="ExitButton" 
-                            Content="Thoát"
-                            Style="{DynamicResource InputButton}">
+                    Content="Thoát"
+                    Style="{DynamicResource InputButton}"
+                    Click="ExitButton_Click">
                 <Button.ToolTip>
                     <StackPanel>
                         <TextBlock FontWeight="Bold" FontSize="14" Margin="0,0,0,5">Lưu Đại Lý</TextBlock>

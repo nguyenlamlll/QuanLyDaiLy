@@ -136,5 +136,13 @@ namespace QuanLyDaiLy_Source
             }
           
         }
+
+        public void GoBackButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (ContentFrame.CanGoBack)
+            {
+                ContentFrame.GoBack();
+            }
+        }
     }
 }

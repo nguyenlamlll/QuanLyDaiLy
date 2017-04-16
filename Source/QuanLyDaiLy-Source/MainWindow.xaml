@@ -15,7 +15,6 @@
     
     <Grid x:Name="MainGrid">
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.05*"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="0.065*"/>
@@ -27,45 +26,29 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="0.15*" />
         </Grid.ColumnDefinitions>
-<!--
-        <Rectangle x:Name="Rectangle_NavigationFill_1"
-                   Fill="{x:Static SystemColors.ControlDarkDarkBrush}"
-                   Grid.RowSpan="3"
 
-                   />
--->
-
-        <Menu Grid.Column="0" Grid.ColumnSpan="4"
-              Grid.Row="0"
-              Background="WhiteSmoke">
-            <Menu DockPanel.Dock="Top">
-                <MenuItem Header="_File">
-                    <MenuItem Header="_Exit" />
-                </MenuItem>
-                <MenuItem Header="_Tools">
-                    <MenuItem Header="_Manage users">
-
-                    </MenuItem>
-                    <MenuItem Header="_Show groups" IsCheckable="True" IsChecked="True" />
-                </MenuItem>
-            </Menu>
-            <TextBox AcceptsReturn="True" />
-        </Menu>
-        
-        <!--
-        <DockPanel x:Name="DockPanel_Icon" Grid.Column="0" Grid.Row="0">
-            <Rectangle Fill="Black" 
-                       Width="50" Height="50"
-                       Margin="0,10,0,0"/>
-
+        <DockPanel HorizontalAlignment="Left" VerticalAlignment="Center"
+                   Grid.ColumnSpan="4">
+            <Button x:Name="HamburgerButton" 
+                    FontFamily="Segoe MDL2 Assets"
+                    FontSize="22"
+                    Content="&#xE700;"
+                    Height="45" Width="45"
+                    Margin="10,0,0,0"
+                    Click="HamburgerButton_Click"/>
+            <Button x:Name="GoBackButton"
+                    FontFamily="Segoe MDL2 Assets"
+                    FontSize="22"
+                    Content="&#xE0A6;"
+                    Height="45" Width="45"
+                    Margin="5,0,0,0"
+                    Click="GoBackButton_Click"/>
         </DockPanel>
-        -->
+        
         <!-- Navigation Menu-->
         <Grid x:Name="NavigationMenu" Grid.Row="1" 
               Background="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}">
-
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
@@ -77,19 +60,11 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <StackPanel>
-                <Button x:Name="HamburgerButton" 
-                        FontFamily="Segoe MDL2 Assets"
-                        FontSize="22"
-                        Content="&#xE700;"
-                        Height="30" Width="30"
-                        Click="HamburgerButton_Click"/>
-            </StackPanel>
             <!-- Define Navigation Bar -->
             <ListView x:Name="NavigationListView" 
                       Background="Transparent" 
                       Grid.Column="0" Grid.ColumnSpan="2"
-                      Grid.Row="1" Grid.RowSpan="10" 
+                      Grid.Row="0" Grid.RowSpan="10" 
                       ScrollViewer.CanContentScroll="False"
                       ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                       SelectionMode="Single"
@@ -200,9 +175,10 @@
         <!-- Main Content Frame-->
         <Frame x:Name="ContentFrame"
                Grid.Column="1" Grid.ColumnSpan="3"
-               Grid.Row="1" Grid.RowSpan="2"
+               Grid.Row="1" Grid.RowSpan="1"
                HorizontalContentAlignment="Stretch"
-               VerticalContentAlignment="Stretch">
+               VerticalContentAlignment="Stretch"
+               NavigationUIVisibility="Hidden">
         </Frame>
         
         <!-- Status Bar to display detail information-->
