@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using QuanLyDaiLy_Source.Models;
+using QuanLyDaiLy_Source.Windows;
 
 
 namespace QuanLyDaiLy_Source
@@ -37,6 +38,7 @@ namespace QuanLyDaiLy_Source
             MenuItems = MenuItemManager.GetMenuItems(); //ItemSource for NavigationListView
             NavigationListView.ItemsSource = MenuItems;
 
+            
         }
 
         public object NavigationService { get; private set; }
@@ -108,11 +110,31 @@ namespace QuanLyDaiLy_Source
                         }
                     case MenuItemCategory.Edit:
                         {
-                            MessageBox.Show("Chinh Sua clicked");
+                            ContentFrame.Navigate(new TiepNhanDaiLy());
+                            //MessageBox.Show("Chinh Sua clicked");
                             break;
                         }
                 }
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void HamburgerButton_Click(object sender, RoutedEventArgs e)
+        {
+            GridLength length = new GridLength(0.25, GridUnitType.Star);
+            if (NavigationMenuColumnDefinition.Width.IsStar)
+            {
+                NavigationMenuColumnDefinition.Width = new GridLength(60);
+            }
+            else
+            {
+                NavigationMenuColumnDefinition.Width = new GridLength(0.25, GridUnitType.Star);
+            }
+          
         }
     }
 }

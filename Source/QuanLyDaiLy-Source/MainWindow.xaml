@@ -6,7 +6,9 @@
         xmlns:local="clr-namespace:QuanLyDaiLy_Source"
         xmlns:data="clr-namespace:QuanLyDaiLy_Source.Models"
         mc:Ignorable="d"
-        Title="Quản Lý Đại Lý" Height="720" Width="1280">
+        Title="Quản Lý Đại Lý" 
+        Height="1080" Width="1920"
+        MinHeight="720" MinWidth="1280">
     <Window.Resources>
         <ResourceDictionary Source="Styles/Styles.xaml"/>
     </Window.Resources>
@@ -19,19 +21,19 @@
             <RowDefinition Height="0.065*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.25*" 
-                              MaxWidth="250" MinWidth="150"/>
+            <ColumnDefinition x:Name="NavigationMenuColumnDefinition" Width="0.25*" 
+                              MaxWidth="250"/>
             <ColumnDefinition Width="0.25*" />
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="0.15*" />
         </Grid.ColumnDefinitions>
-
+<!--
         <Rectangle x:Name="Rectangle_NavigationFill_1"
                    Fill="{x:Static SystemColors.ControlDarkDarkBrush}"
                    Grid.RowSpan="3"
 
                    />
-
+-->
 
         <Menu Grid.Column="0" Grid.ColumnSpan="4"
               Grid.Row="0"
@@ -59,9 +61,11 @@
         </DockPanel>
         -->
         <!-- Navigation Menu-->
-        <Grid Grid.Row="1">
+        <Grid x:Name="NavigationMenu" Grid.Row="1" 
+              Background="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}">
 
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
@@ -72,12 +76,20 @@
                 <ColumnDefinition Width="0.4*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            
+
+            <StackPanel>
+                <Button x:Name="HamburgerButton" 
+                        FontFamily="Segoe MDL2 Assets"
+                        FontSize="22"
+                        Content="&#xE700;"
+                        Height="30" Width="30"
+                        Click="HamburgerButton_Click"/>
+            </StackPanel>
             <!-- Define Navigation Bar -->
             <ListView x:Name="NavigationListView" 
                       Background="Transparent" 
                       Grid.Column="0" Grid.ColumnSpan="2"
-                      Grid.Row="0" Grid.RowSpan="10" 
+                      Grid.Row="1" Grid.RowSpan="10" 
                       ScrollViewer.CanContentScroll="False"
                       ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                       SelectionMode="Single"
@@ -187,8 +199,10 @@
 
         <!-- Main Content Frame-->
         <Frame x:Name="ContentFrame"
-                   Grid.Column="1" Grid.ColumnSpan="2"
-                   Grid.Row="1" Grid.RowSpan="2">
+               Grid.Column="1" Grid.ColumnSpan="3"
+               Grid.Row="1" Grid.RowSpan="2"
+               HorizontalContentAlignment="Stretch"
+               VerticalContentAlignment="Stretch">
         </Frame>
         
         <!-- Status Bar to display detail information-->
