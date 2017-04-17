@@ -77,4 +77,8 @@
         <Setter Property="Height" Value="16"/>
     </Style>
     
+    <!-- DataGrid Style -->
+    <Style x:Key="DataGridStyle" TargetType="DataGrid">
+        <Setter Property="FontSize" Value="30"/>
+    </Style>
 </ResourceDictionary>

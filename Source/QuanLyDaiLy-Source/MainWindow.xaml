@@ -79,7 +79,7 @@
                       ScrollViewer.CanContentScroll="False"
                       ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                       SelectionMode="Single"
-                      SelectionChanged="NavigationListView_SelectionChanged">
+                      SelectionChanged="NavigationListView_SelectionChanged" MouseEnter="NavigationListView_MouseEnter">
                 <ListView.ItemTemplate>
                     <DataTemplate DataType="data:MenuItem">
                         <StackPanel Orientation="Horizontal" Width="250">
@@ -97,7 +97,7 @@
                                        Margin="4,0,0,0"
                                        Style="{DynamicResource NavigationTextBlock}"
                                        Text="{Binding Description}"/>
-                            
+
                         </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>

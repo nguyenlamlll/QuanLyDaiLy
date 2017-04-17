@@ -18,7 +18,7 @@ namespace QuanLyDaiLy_Source.Models
         //MenuItems for main navigation menu
         Homepage,
         Lists,
-        Edit,
+        Businesses,
         Reports,
         Settings,
         About,
@@ -35,7 +35,7 @@ namespace QuanLyDaiLy_Source.Models
             var items = new List<MenuItem>();
             items.Add(new MenuItem() { IconFile = "\uE10F", Description = "Trang Chủ", Category = MenuItemCategory.Homepage });
             items.Add(new MenuItem() { IconFile = "\uE14C", Description = "Danh Sách", Category = MenuItemCategory.Lists });
-            items.Add(new MenuItem() { IconFile = "\uE15E", Description = "Chỉnh sửa", Category = MenuItemCategory.Edit });
+            items.Add(new MenuItem() { IconFile = "\uE15E", Description = "Nghiệp Vụ", Category = MenuItemCategory.Businesses });
             items.Add(new MenuItem() { IconFile = "\uE82D", Description = "Báo Cáo", Category = MenuItemCategory.Reports });
             items.Add(new MenuItem() { IconFile = "\uE115", Description = "Cài Đặt", Category = MenuItemCategory.Settings });
 

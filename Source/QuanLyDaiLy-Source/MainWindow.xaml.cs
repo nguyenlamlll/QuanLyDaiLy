@@ -28,17 +28,14 @@ namespace QuanLyDaiLy_Source
         {
             InitializeComponent();
             //Grid_AdvancedList.Visibility = Visibility.Visible;
-            ContentFrame.Navigate(new Windows.MainContent());
+            ContentFrame.Navigate(new Windows.PhieuXuatHang());
             //ContentFrame.Navigate(typeof(Windows.Page1)); //Host some placeholder page - work as a MainContents page
-            /*
-            Utilities.SetAccentColor(Rectangle_NavigationFill_1);
-            Utilities.SetAccentColor(Rectangle_NavigationFill_2);
-            Utilities.SetAccentColor(Rectangle_NavigationFill_3);
-            */
+
             MenuItems = MenuItemManager.GetMenuItems(); //ItemSource for NavigationListView
             NavigationListView.ItemsSource = MenuItems;
 
-            
+
+
         }
 
         public object NavigationService { get; private set; }
@@ -46,48 +43,11 @@ namespace QuanLyDaiLy_Source
         private void Button_List_MouseEnter(object sender, MouseEventArgs e)
         {
 
-            try
-            {
-                if (Grid_AdvancedList.Visibility == Visibility.Collapsed)
-                {
-                    Grid_AdvancedList.Visibility = Visibility.Visible;
-                    return;
-                }
-                   
-                if (Grid_AdvancedList.Visibility == Visibility.Visible)
-                { 
-                    Grid_AdvancedList.Visibility = Visibility.Collapsed;
-                    return;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Loi" + ex.Message);
-            }
-            
         }
 
         private void Button_List_MouseLeave(object sender, MouseEventArgs e)
         {
-            try
-            {
-                if (Grid_AdvancedList.Visibility == Visibility.Collapsed)
-                {
-                    Grid_AdvancedList.Visibility = Visibility.Visible;
-                    return;
-                }
-                    
-                if (Grid_AdvancedList.Visibility == Visibility.Visible)
-                {
-                    Grid_AdvancedList.Visibility = Visibility.Collapsed;
-                    return;
-                }
-                    
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Loi" + ex.Message);
-            }
+
         }
 
         private void NavigationListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -108,7 +68,7 @@ namespace QuanLyDaiLy_Source
                             MessageBox.Show("Danh Sach clicked");
                             break;
                         }
-                    case MenuItemCategory.Edit:
+                    case MenuItemCategory.Businesses:
                         {
                             ContentFrame.Navigate(new TiepNhanDaiLy());
                             //MessageBox.Show("Chinh Sua clicked");
@@ -134,7 +94,7 @@ namespace QuanLyDaiLy_Source
             {
                 NavigationMenuColumnDefinition.Width = new GridLength(0.25, GridUnitType.Star);
             }
-          
+
         }
 
         public void GoBackButton_Click(object sender, RoutedEventArgs e)
@@ -142,6 +102,28 @@ namespace QuanLyDaiLy_Source
             if (ContentFrame.CanGoBack)
             {
                 ContentFrame.GoBack();
+            }
+        }
+
+        private void NavigationListView_MouseEnter(object sender, MouseEventArgs e)
+        {
+            Models.MenuItem item = (Models.MenuItem)NavigationListView.SelectedItem;
+
+            if (item != null)
+            {
+                switch (item.Category)
+                {
+                    case MenuItemCategory.Homepage:
+                        {
+                            MessageBox.Show("Homepage hovered");
+                            break;
+                        }
+                    case MenuItemCategory.Lists:
+                        {
+                            MessageBox.Show("Danh Sach hovered");
+                            break;
+                        }
+                }
             }
         }
     }

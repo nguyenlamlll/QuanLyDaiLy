@@ -1,0 +1,76 @@
+﻿<Page x:Class="QuanLyDaiLy_Source.Windows.PhieuXuatHang"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:QuanLyDaiLy_Source.Windows"
+      mc:Ignorable="d" 
+      d:DesignHeight="720" d:DesignWidth="1280"
+      Title="PhieuXuatHang">
+    <Page.Resources>
+        <ResourceDictionary Source="/QuanLyDaiLy-Source;component/Styles/Styles.xaml"/>
+    </Page.Resources>
+    <Grid Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock x:Name="PageTitleTextBlock"
+                   Style="{DynamicResource PageTitleTextBlock}">
+            Phiếu Xuất Hàng
+        </TextBlock>
+
+        <StackPanel Orientation="Vertical"
+                    Grid.Row="1">
+
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center">
+                <TextBlock Style="{DynamicResource InputTextBlock}"
+                           VerticalAlignment="Center">
+                    Đại Lý
+                </TextBlock>
+                <ComboBox x:Name="AgencySelectComboBox"
+                      Margin="0,20,0,20"
+                      Style="{DynamicResource InputComboBox}"/>
+            </StackPanel>
+
+            <DataGrid x:Name="MerchandiseDataGrid"
+                      CanUserAddRows="True" CanUserDeleteRows="True" 
+                      CanUserResizeColumns="True"
+                      Margin="60,30,60,0"
+                      Style="{DynamicResource DataGridStyle}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="STT" Width="0.2*"/>
+                    <DataGridComboBoxColumn Header="Mặt Hàng" Width="0.9*"/>
+                    <DataGridTextColumn Header="Đơn Vị Tính" Width="0.5*"
+                                        IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Số Lượng" Width="0.5*"/>
+                    <DataGridTextColumn Header="Đơn Giá" Width="0.6*"/>
+                    <DataGridTextColumn Header="Thành Tiền" Width="0.5*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right"
+                        Margin="0,0,52,0">
+
+                <StackPanel Orientation="Horizontal" >
+                    <Image Source="/QuanLyDaiLy-Source;component/Assets/Icons/add.png"
+                           Margin="20,0,0,0"/>
+                    <Button x:Name="AddRowButton"
+                            Style="{DynamicResource InputButton}"
+                            Width="Auto">
+                        Thêm Hàng
+                        <Button.ToolTip>
+                            <StackPanel>
+
+                            </StackPanel>
+                        </Button.ToolTip>
+                    </Button>
+                </StackPanel>
+
+            </StackPanel>
+
+        </StackPanel>
+    </Grid>
+</Page>

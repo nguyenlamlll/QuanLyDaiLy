@@ -66,6 +66,9 @@
     <Compile Include="Windows\Page2.xaml.cs">
       <DependentUpon>Page2.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\PhieuXuatHang.xaml.cs">
+      <DependentUpon>PhieuXuatHang.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\TiepNhanDaiLy.xaml.cs">
       <DependentUpon>TiepNhanDaiLy.xaml</DependentUpon>
     </Compile>
@@ -94,6 +97,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\Page2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\PhieuXuatHang.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -134,6 +141,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\Icons\exclamation-mark32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Icons\add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Icons\receipt.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
