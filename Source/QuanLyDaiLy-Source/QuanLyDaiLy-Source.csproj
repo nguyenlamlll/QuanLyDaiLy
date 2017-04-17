@@ -132,6 +132,9 @@
   <ItemGroup>
     <Resource Include="Assets\Icons\question.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Icons\exclamation-mark32.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

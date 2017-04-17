@@ -38,27 +38,63 @@ namespace QuanLyDaiLy_Source.Windows
 
         private void AcceptanceDateDatePicker_FieldCheck(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            if (AcceptanceDateDatePicker.SelectedDate == null)
+            {
+                AcceptanceDateStatus.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                AcceptanceDateStatus.Visibility = Visibility.Hidden;
+            }
         }
 
         private void DistrictInputTextBox_FieldCheck(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            if (DistrictInputTextBox.SelectedIndex == -1)
+            {
+                DistrictStatus.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                DistrictStatus.Visibility = Visibility.Hidden;
+            }
         }
 
         private void StreetInputTextBox_FieldCheck(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            if (StreetInputTextBox.Text == "")
+            {
+                StreetStatus.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                StreetStatus.Visibility = Visibility.Hidden;
+
+            }
         }
 
         private void AddressNumberInputTextBox_FieldCheck(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            if (AddressNumberInputTextBox.Text == "")
+            {
+                AddressNumberStatus.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                AddressNumberStatus.Visibility = Visibility.Hidden;
+            }
         }
 
         private void PhoneNumberInputTextBox_FieldCheck(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            if (PhoneNumberInputTextBox.Text == "")
+            {
+                PhoneNumberStatus.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                PhoneNumberStatus.Visibility = Visibility.Hidden;
+            }
         }
 
         private void NameInput_FieldCheck(object sender, RoutedEventArgs e)
@@ -66,7 +102,11 @@ namespace QuanLyDaiLy_Source.Windows
             if (NameInputTextBox.Text == "")
             {
                 NameInputStatus.Visibility = Visibility.Visible;
-                NameInputStatus.Text = "Trường bắt buộc phải nhập!";
+                NameInputStatusToolTipText.Text += "\nKhông được bỏ trống.";
+            }
+            else
+            {
+                NameInputStatus.Visibility = Visibility.Hidden;
             }
         }
 
@@ -76,7 +116,10 @@ namespace QuanLyDaiLy_Source.Windows
             if (IDInputTextBox.Text == "")
             {
                 IDStatus.Visibility = Visibility.Visible;
-                IDStatus.Text = "Trường bắt buộc phải nhập!";
+            }
+            else
+            {
+                IDStatus.Visibility = Visibility.Hidden;
             }
         }
         private void TypeInputComboBox_FieldCheck(object sender, RoutedEventArgs e)
@@ -84,7 +127,11 @@ namespace QuanLyDaiLy_Source.Windows
             if (TypeInputComboBox.SelectedIndex == -1)
             {
                 TypeStatus.Visibility = Visibility.Visible;
-                TypeStatus.Text = "Lựa chọn Loại đại lý.";
+                TypeStatusToolTipText.Text += "\nChọn một trong các loại đại lý thuộc danh sách.";
+            }
+            else
+            {
+                TypeStatus.Visibility = Visibility.Hidden;
             }
         }
 
