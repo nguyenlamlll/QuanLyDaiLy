@@ -8,12 +8,18 @@
       d:DesignHeight="720" d:DesignWidth="1280"
       Title="PhieuXuatHang">
     <Page.Resources>
-        <ResourceDictionary Source="/QuanLyDaiLy-Source;component/Styles/Styles.xaml"/>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/QuanLyDaiLy-Source;component/Styles/Styles.xaml"/>
+                <ResourceDictionary Source="/QuanLyDaiLy-Source;component/Styles/PhieuXuatHangStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Page.Resources>
     <Grid Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="0.5*"/>
         </Grid.RowDefinitions>
 
         <TextBlock x:Name="PageTitleTextBlock"
@@ -21,56 +27,138 @@
             Phiếu Xuất Hàng
         </TextBlock>
 
-        <StackPanel Orientation="Vertical"
+        <!-- Main Workstation -->
+        <ScrollViewer Grid.Row="1"
+                      VerticalScrollBarVisibility="Visible"
+                      HorizontalScrollBarVisibility="Disabled">
+            <StackPanel Orientation="Vertical"
                     Grid.Row="1">
 
-            <StackPanel Orientation="Horizontal"
+                <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Center">
-                <TextBlock Style="{DynamicResource InputTextBlock}"
+                    <TextBlock Style="{DynamicResource InputTextBlock}"
                            VerticalAlignment="Center">
                     Đại Lý
-                </TextBlock>
-                <ComboBox x:Name="AgencySelectComboBox"
+                    </TextBlock>
+                    <ComboBox x:Name="AgencySelectComboBox"
                       Margin="0,20,0,20"
                       Style="{DynamicResource InputComboBox}"/>
-            </StackPanel>
+                </StackPanel>
 
-            <DataGrid x:Name="MerchandiseDataGrid"
+                <DataGrid x:Name="MerchandiseDataGrid"
+                      AutoGenerateColumns="False"
                       CanUserAddRows="True" CanUserDeleteRows="True" 
                       CanUserResizeColumns="True"
-                      Margin="60,30,60,0"
-                      Style="{DynamicResource DataGridStyle}">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="STT" Width="0.2*"/>
-                    <DataGridComboBoxColumn Header="Mặt Hàng" Width="0.9*"/>
-                    <DataGridTextColumn Header="Đơn Vị Tính" Width="0.5*"
-                                        IsReadOnly="True"/>
-                    <DataGridTextColumn Header="Số Lượng" Width="0.5*"/>
-                    <DataGridTextColumn Header="Đơn Giá" Width="0.6*"/>
-                    <DataGridTextColumn Header="Thành Tiền" Width="0.5*"/>
-                </DataGrid.Columns>
-            </DataGrid>
+                      Margin="40,30,40,0"
+                      Style="{DynamicResource DataGridStyle}"
+                      SelectionMode="Extended" SelectionUnit="Cell"
+                      >
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="STT" Width="0.2*" Binding="{Binding A}" />
+                        <DataGridComboBoxColumn Header="Mặt Hàng" Width="0.9*"/>
+                        <DataGridTextColumn Header="Đơn Vị Tính" Width="0.5*"
+                                        IsReadOnly="True"
+                                        Binding="{Binding B}"/>
+                        <DataGridTextColumn Header="Số Lượng" Width="0.5*"/>
+                        <DataGridTextColumn Header="Đơn Giá" Width="0.6*"/>
+                        <DataGridTextColumn Header="Thành Tiền" Width="0.5*" />
+                    </DataGrid.Columns>
 
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right"
-                        Margin="0,0,52,0">
+                </DataGrid>
 
-                <StackPanel Orientation="Horizontal" >
-                    <Image Source="/QuanLyDaiLy-Source;component/Assets/Icons/add.png"
-                           Margin="20,0,0,0"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right"
+                        Margin="0,10,52,0">
+
                     <Button x:Name="AddRowButton"
-                            Style="{DynamicResource InputButton}"
-                            Width="Auto">
-                        Thêm Hàng
+                        Click="AddRowButton_Click">
+                        <Button.Template>
+                            <ControlTemplate>
+                                <Image Source="/QuanLyDaiLy-Source;component/Assets/Icons/add.png"/>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </StackPanel>
+                <DockPanel Height="100" LastChildFill="False"/>
+            </StackPanel>
+        </ScrollViewer>
+
+        <!-- To edit details of a row in datagrid/ Or delete it. -->
+        <DockPanel x:Name="MerchandiseDockPanel" Grid.Row="3">
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center">
+
+                <StackPanel Orientation="Vertical" Margin="40,20,20,30">
+
+                    <Border BorderBrush="Black" BorderThickness="1">
+                        <Image x:Name="MerchandiseImage"
+                               Width="130" Height="130"
+                               VerticalAlignment="Top"/>
+                    </Border>
+                    <TextBlock Margin="0,5,0,0"
+                               FontSize="14"
+                               Style="{DynamicResource DetailsTextBlock}">
+                        Mặt hàng: &#160;
+                    </TextBlock>
+
+                </StackPanel>
+
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <TextBlock Style="{DynamicResource DetailsTextBlock}">
+                            Đơn Vị Tính:
+                        </TextBlock>
+                        <TextBox Style="{DynamicResource DetailsTextBox}" 
+                                 IsEnabled="False"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <TextBlock Style="{DynamicResource DetailsTextBlock}">
+                            Đơn Giá:
+                        </TextBlock>
+                        <TextBox Style="{DynamicResource DetailsTextBox}" 
+                                 IsEnabled="False"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <TextBlock Style="{DynamicResource DetailsTextBlock}">
+                            Số Lượng:
+                        </TextBlock>
+                        <TextBox Style="{DynamicResource DetailsTextBox}" 
+                                 IsEnabled="True"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <TextBlock Style="{DynamicResource DetailsTextBlock}">
+                            Thành Tiền:
+                        </TextBlock>
+                        <TextBox Style="{DynamicResource DetailsTextBox}" 
+                                 IsEnabled="False"/>
+                    </StackPanel>
+
+                </StackPanel>
+
+                <StackPanel Orientation="Vertical">
+                    <Button x:Name="SaveEditButton"
+                            Style="{DynamicResource DetailsButton}">
                         <Button.ToolTip>
                             <StackPanel>
 
                             </StackPanel>
                         </Button.ToolTip>
                     </Button>
+
+                    <Button x:Name="DeleteButton"
+                            Style="{DynamicResource DetailsButton}">
+                        <Button.ToolTip>
+                            <StackPanel>
+
+                            </StackPanel>
+                        </Button.ToolTip>
+                    </Button>
+                  
                 </StackPanel>
 
             </StackPanel>
-
-        </StackPanel>
+        </DockPanel>
     </Grid>
 </Page>
