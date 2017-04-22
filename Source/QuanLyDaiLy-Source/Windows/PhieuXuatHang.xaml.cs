@@ -24,9 +24,11 @@ namespace QuanLyDaiLy_Source.Windows
         public PhieuXuatHang()
         {
             InitializeComponent();
-            List<Models.DataGridTestItem> dataList = new List<Models.DataGridTestItem>();
-            MerchandiseDataGrid.ItemsSource = dataList;
+            //List<Models.DataGridTestItem> dataList = new List<Models.DataGridTestItem>();
+            //MerchandiseDataGrid.ItemsSource = dataList;
+
         }
+
 
         private void AddRowButton_Click(object sender, RoutedEventArgs e)
         {
@@ -42,5 +44,14 @@ namespace QuanLyDaiLy_Source.Windows
            
         }
 
+        private void SaveAndExitButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ExitButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

@@ -17,57 +17,32 @@
     </Page.Resources>
     <Grid Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="0.5*"/>
         </Grid.RowDefinitions>
 
-        <TextBlock x:Name="PageTitleTextBlock"
-                   Style="{DynamicResource PageTitleTextBlock}">
-            Phiếu Xuất Hàng
-        </TextBlock>
-
         <!-- Main Workstation -->
-        <ScrollViewer Grid.Row="1"
-                      VerticalScrollBarVisibility="Visible"
-                      HorizontalScrollBarVisibility="Disabled">
-            <StackPanel Orientation="Vertical"
-                    Grid.Row="1">
+        <ScrollViewer Grid.Row="0">
+            <Grid x:Name="MerchandiseGrid">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
 
-                <StackPanel Orientation="Horizontal"
+                <StackPanel Grid.Row="0" 
+                        Orientation="Horizontal"
                         HorizontalAlignment="Center">
                     <TextBlock Style="{DynamicResource InputTextBlock}"
                            VerticalAlignment="Center">
                     Đại Lý
                     </TextBlock>
                     <ComboBox x:Name="AgencySelectComboBox"
-                      Margin="0,20,0,20"
+                      Margin="0,20,0,10"
                       Style="{DynamicResource InputComboBox}"/>
                 </StackPanel>
 
-                <DataGrid x:Name="MerchandiseDataGrid"
-                      AutoGenerateColumns="False"
-                      CanUserAddRows="True" CanUserDeleteRows="True" 
-                      CanUserResizeColumns="True"
-                      Margin="40,30,40,0"
-                      Style="{DynamicResource DataGridStyle}"
-                      SelectionMode="Extended" SelectionUnit="Cell"
-                      >
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="STT" Width="0.2*" Binding="{Binding A}" />
-                        <DataGridComboBoxColumn Header="Mặt Hàng" Width="0.9*"/>
-                        <DataGridTextColumn Header="Đơn Vị Tính" Width="0.5*"
-                                        IsReadOnly="True"
-                                        Binding="{Binding B}"/>
-                        <DataGridTextColumn Header="Số Lượng" Width="0.5*"/>
-                        <DataGridTextColumn Header="Đơn Giá" Width="0.6*"/>
-                        <DataGridTextColumn Header="Thành Tiền" Width="0.5*" />
-                    </DataGrid.Columns>
-
-                </DataGrid>
-
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right"
-                        Margin="0,10,52,0">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
 
                     <Button x:Name="AddRowButton"
                         Click="AddRowButton_Click">
@@ -78,87 +53,239 @@
                         </Button.Template>
                     </Button>
                 </StackPanel>
-                <DockPanel Height="100" LastChildFill="False"/>
-            </StackPanel>
+
+                <DataGrid x:Name="MerchandiseDataGrid"
+                      Grid.Row="1"
+                      AutoGenerateColumns="False"
+                      CanUserAddRows="True" CanUserDeleteRows="True" 
+                      CanUserResizeColumns="True"
+                      Margin="40,15,40,0"
+                      Height="200"
+                      Style="{DynamicResource DataGridStyle}"
+                      SelectionMode="Extended" SelectionUnit="Cell" 
+                      ScrollViewer.CanContentScroll="True"
+                      >
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="STT" Width="0.2*" Binding="{Binding Test1}" />
+                        <DataGridComboBoxColumn Header="Mặt Hàng" Width="0.9*"/>
+                        <DataGridTextColumn Header="Đơn Vị Tính" Width="0.5*"
+                                        IsReadOnly="True"
+                                        Binding="{Binding Test2}"/>
+                        <DataGridTextColumn Header="Số Lượng" Width="0.5*"/>
+                        <DataGridTextColumn Header="Đơn Giá" Width="0.6*"/>
+                        <DataGridTextColumn Header="Thành Tiền" Width="0.5*" />
+                    </DataGrid.Columns>
+                </DataGrid>
+                
+                <StackPanel Orientation="Vertical"
+                        Grid.Row="2"
+                        HorizontalAlignment="Right"
+                        Margin="10,0,50,0">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <TextBlock Style="{DynamicResource InputTextBlock}">Tổng:</TextBlock>
+                        <TextBox Style="{DynamicResource InputTextBox}" Width="200"
+                             />
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <TextBlock Style="{DynamicResource InputTextBlock}">Số Trả:</TextBlock>
+                        <TextBox Style="{DynamicResource InputTextBox}" Width="200"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <TextBlock Style="{DynamicResource InputTextBlock}">Còn Lại:</TextBlock>
+                        <TextBox Style="{DynamicResource InputTextBox}" Width="200"/>
+                    </StackPanel>
+                </StackPanel>
+
+            </Grid>
         </ScrollViewer>
-
         <!-- To edit details of a row in datagrid/ Or delete it. -->
-        <DockPanel x:Name="MerchandiseDockPanel" Grid.Row="3">
+        <DockPanel x:Name="MerchandiseDockPanel" Grid.Row="3" Background="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}">
             <StackPanel Orientation="Horizontal"
-                        HorizontalAlignment="Center">
+                        HorizontalAlignment="Center"
+                        Margin="200,0,0,0">
+                <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
 
-                <StackPanel Orientation="Vertical" Margin="40,20,20,30">
+                    <StackPanel Orientation="Vertical" Margin="40,20,20,30">
 
-                    <Border BorderBrush="Black" BorderThickness="1">
-                        <Image x:Name="MerchandiseImage"
+                        <Border BorderBrush="Black" BorderThickness="1">
+                            <Image x:Name="MerchandiseImage"
                                Width="130" Height="130"
                                VerticalAlignment="Top"/>
-                    </Border>
-                    <TextBlock Margin="0,5,0,0"
-                               FontSize="14"
-                               Style="{DynamicResource DetailsTextBlock}">
-                        Mặt hàng: &#160;
-                    </TextBlock>
+                        </Border>
+                    </StackPanel>
 
-                </StackPanel>
+                    <StackPanel Orientation="Vertical">
 
-                <StackPanel Orientation="Vertical">
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                        <TextBlock Style="{DynamicResource DetailsTextBlock}">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                            <TextBlock Style="{DynamicResource DetailsTextBlock}">
+                            Mặt Hàng:
+                            </TextBlock>
+                            <ComboBox Style="{DynamicResource DetailsComboBox}"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                            <TextBlock Style="{DynamicResource DetailsTextBlock}">
                             Đơn Vị Tính:
-                        </TextBlock>
-                        <TextBox Style="{DynamicResource DetailsTextBox}" 
+                            </TextBlock>
+                            <TextBox Style="{DynamicResource DetailsTextBox}" 
                                  IsEnabled="False"/>
-                    </StackPanel>
+                        </StackPanel>
 
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                        <TextBlock Style="{DynamicResource DetailsTextBlock}">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                            <TextBlock Style="{DynamicResource DetailsTextBlock}">
                             Đơn Giá:
-                        </TextBlock>
-                        <TextBox Style="{DynamicResource DetailsTextBox}" 
+                            </TextBlock>
+                            <TextBox Style="{DynamicResource DetailsTextBox}" 
                                  IsEnabled="False"/>
-                    </StackPanel>
+                        </StackPanel>
 
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                        <TextBlock Style="{DynamicResource DetailsTextBlock}">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                            <TextBlock Style="{DynamicResource DetailsTextBlock}">
                             Số Lượng:
-                        </TextBlock>
-                        <TextBox Style="{DynamicResource DetailsTextBox}" 
+                            </TextBlock>
+                            <TextBox Style="{DynamicResource DetailsTextBox}" 
                                  IsEnabled="True"/>
-                    </StackPanel>
+                        </StackPanel>
 
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                        <TextBlock Style="{DynamicResource DetailsTextBlock}">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                            <TextBlock Style="{DynamicResource DetailsTextBlock}">
                             Thành Tiền:
-                        </TextBlock>
-                        <TextBox Style="{DynamicResource DetailsTextBox}" 
+                            </TextBlock>
+                            <TextBox Style="{DynamicResource DetailsTextBox}" 
                                  IsEnabled="False"/>
+                        </StackPanel>
+
                     </StackPanel>
 
-                </StackPanel>
+                    <StackPanel Orientation="Vertical" 
+                            Margin="10,30,0,0"
+                            VerticalAlignment="Center">
+                        <Button x:Name="SaveEditButton"
+                            Style="{DynamicResource DetailsButton}"
+                            Content="Thêm"
+                            >
+                            <Button.ToolTip>
+                                <StackPanel>
+                                    <TextBlock FontWeight="Bold" FontSize="14" Margin="0,0,0,5">Lưu Mặt Hàng</TextBlock>
+                                    <TextBlock>
+                                    Lưu các thông tin đã chỉnh sửa
+                                    <LineBreak/>
+                                    vào phiếu xuất hàng hiện tại.
+                                    </TextBlock>
+                                    <Border BorderBrush="Silver" BorderThickness="0,1,0,0" Margin="0,8" />
+                                    <WrapPanel>
+                                        <Image Style="{StaticResource ImageIcon}"
+                                           Source="/QuanLyDaiLy-Source;component/Assets/Icons/question.png"/>
+                                        <TextBlock FontStyle="Italic">Bấm F1 để hiển thị mục Trợ Giúp</TextBlock>
+                                    </WrapPanel>
+                                </StackPanel>
+                            </Button.ToolTip>
+                        </Button>
 
-                <StackPanel Orientation="Vertical">
-                    <Button x:Name="SaveEditButton"
-                            Style="{DynamicResource DetailsButton}">
-                        <Button.ToolTip>
-                            <StackPanel>
+                        <Button x:Name="DeleteButton"
+                            Style="{DynamicResource DetailsButton}"
+                            Content="Xóa">
+                            <Button.ToolTip>
+                                <StackPanel>
+                                    <TextBlock FontWeight="Bold" FontSize="14" Margin="0,0,0,5">Xóa Mặt Hàng</TextBlock>
+                                    <TextBlock>
+                                    Xóa mặt hàng đang chọn ra khỏi
+                                    <LineBreak/>
+                                    phiếu xuất hàng hiện tại.
+                                    </TextBlock>
+                                    <Border BorderBrush="Silver" BorderThickness="0,1,0,0" Margin="0,8" />
+                                    <WrapPanel>
+                                        <Image Style="{StaticResource ImageIcon}"
+                                           Source="/QuanLyDaiLy-Source;component/Assets/Icons/question.png"/>
+                                        <TextBlock FontStyle="Italic">Bấm F1 để hiển thị mục Trợ Giúp</TextBlock>
+                                    </WrapPanel>
+                                </StackPanel>
+                            </Button.ToolTip>
+                        </Button>
 
-                            </StackPanel>
-                        </Button.ToolTip>
-                    </Button>
+                    </StackPanel>
 
-                    <Button x:Name="DeleteButton"
-                            Style="{DynamicResource DetailsButton}">
-                        <Button.ToolTip>
-                            <StackPanel>
-
-                            </StackPanel>
-                        </Button.ToolTip>
-                    </Button>
-                  
                 </StackPanel>
 
             </StackPanel>
+
+            <StackPanel Orientation="Vertical"
+                                HorizontalAlignment="Right"
+                                Margin="100,0,0,0">
+                <Button x:Name="SaveAndExitButton" 
+                        Content="Lưu"
+                        Style="{DynamicResource InputButton}"
+                        Click="SaveAndExitButton_Click"
+                        HorizontalAlignment="Right">
+                    <Button.ToolTip>
+                        <StackPanel>
+                            <TextBlock FontWeight="Bold" FontSize="14" Margin="0,0,0,5">Lưu Đại Lý</TextBlock>
+                            <TextBlock>
+                                    Lưu hồ sơ đại lý đã nhập vào hệ thống 
+                                    <LineBreak/>
+                                    và thoát phiên làm việc tiếp nhận đại lí
+                            </TextBlock>
+                            <Border BorderBrush="Silver" BorderThickness="0,1,0,0" Margin="0,8" />
+                            <WrapPanel>
+                                <Image Style="{StaticResource ImageIcon}"
+                                           Source="/QuanLyDaiLy-Source;component/Assets/Icons/question.png"/>
+                                <TextBlock FontStyle="Italic">Bấm F1 để hiển thị mục Trợ Giúp</TextBlock>
+                            </WrapPanel>
+                        </StackPanel>
+                    </Button.ToolTip>
+                </Button>
+
+                <Button x:Name="SaveAndContinueButton" 
+                        Content="Lưu Và Tiếp Tục"
+                        Style="{DynamicResource InputButton}"
+                        Width="250"
+                        HorizontalAlignment="Right">
+                    <Button.ToolTip>
+                        <StackPanel>
+                            <TextBlock FontWeight="Bold" FontSize="14" Margin="0,0,0,5">Lưu Đại Lý Và Tiếp Tục</TextBlock>
+                            <TextBlock>
+                                    Lưu hồ sơ đại lý đã nhập vào hệ thống 
+                                    <LineBreak/>
+                                    và tiếp tục phiên làm việc tiếp nhận đại lí
+                            </TextBlock>
+                            <Border BorderBrush="Silver" BorderThickness="0,1,0,0" Margin="0,8" />
+                            <WrapPanel>
+                                <Image Style="{StaticResource ImageIcon}"
+                                           Source="/QuanLyDaiLy-Source;component/Assets/Icons/question.png"/>
+                                <TextBlock FontStyle="Italic">Bấm F1 để hiển thị mục Trợ Giúp</TextBlock>
+                            </WrapPanel>
+                        </StackPanel>
+                    </Button.ToolTip>
+                </Button>
+
+                <Button x:Name="ExitButton" 
+                    Content="Thoát"
+                    Style="{DynamicResource InputButton}"
+                    Click="ExitButton_Click"
+                        HorizontalAlignment="Right">
+                    <Button.ToolTip>
+                        <StackPanel>
+                            <TextBlock FontWeight="Bold" FontSize="14" Margin="0,0,0,5">Lưu Đại Lý</TextBlock>
+                            <TextBlock>
+                                    Xóa toàn bộ dữ liệu đã nhập
+                                    <LineBreak/>
+                                    và thoát phiên làm việc tiếp nhận đại lí
+                            </TextBlock>
+                            <Border BorderBrush="Silver" BorderThickness="0,1,0,0" Margin="0,8" />
+                            <WrapPanel>
+                                <Image Style="{StaticResource ImageIcon}"
+                                           Source="/QuanLyDaiLy-Source;component/Assets/Icons/question.png"/>
+                                <TextBlock FontStyle="Italic">Bấm F1 để hiển thị mục Trợ Giúp</TextBlock>
+                            </WrapPanel>
+                        </StackPanel>
+                    </Button.ToolTip>
+                </Button>
+            </StackPanel>
+
         </DockPanel>
     </Grid>
 </Page>
