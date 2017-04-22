@@ -28,6 +28,7 @@ namespace QuanLyDaiLy_Source
         {
             InitializeComponent();
             //Grid_AdvancedList.Visibility = Visibility.Visible;
+            this.Title.Text += "Phiếu Xuất Hàng";
             ContentFrame.Navigate(new Windows.PhieuXuatHang());
             //ContentFrame.Navigate(typeof(Windows.Page1)); //Host some placeholder page - work as a MainContents page
 
@@ -126,5 +127,6 @@ namespace QuanLyDaiLy_Source
                 }
             }
         }
+
     }
 }

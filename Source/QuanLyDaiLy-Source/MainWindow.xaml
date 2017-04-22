@@ -51,6 +51,10 @@
                         Height="50" Width="50"
                         Margin="5,0,0,0"
                         Click="GoBackButton_Click"/>
+                <TextBlock x:Name="Title" 
+                           Style="{DynamicResource InputTextBlock}" FontSize="22"
+                           Foreground="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"
+                           Visibility="Visible"/>
             </StackPanel>
 
         </DockPanel>
