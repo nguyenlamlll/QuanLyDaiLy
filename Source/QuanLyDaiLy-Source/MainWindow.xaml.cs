@@ -28,8 +28,7 @@ namespace QuanLyDaiLy_Source
         {
             InitializeComponent();
             //Grid_AdvancedList.Visibility = Visibility.Visible;
-            this.Title.Text += "Phiếu Xuất Hàng";
-            ContentFrame.Navigate(new Windows.PhieuXuatHang());
+            ContentFrame.Navigate(new MainContent());
             //ContentFrame.Navigate(typeof(Windows.Page1)); //Host some placeholder page - work as a MainContents page
 
             MenuItems = MenuItemManager.GetMenuItems(); //ItemSource for NavigationListView
@@ -61,7 +60,7 @@ namespace QuanLyDaiLy_Source
                 {
                     case MenuItemCategory.Homepage:
                         {
-                            MessageBox.Show("Homepage clicked");
+                            ContentFrame.Navigate(new Page1());
                             break;
                         }
                     case MenuItemCategory.Lists:

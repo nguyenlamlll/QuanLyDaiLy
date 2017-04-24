@@ -29,7 +29,34 @@ namespace QuanLyDaiLy_Source.Windows
         {
             ListViewItem item = (ListViewItem)BusinessListView.SelectedItem;
             Test.Text = item.Name;
-           
+
+            string XuatHang = PhieuXuatHangListViewItem.Name.ToString();
+            string ThuTien = PhieuThuTienListViewItem.Name.ToString();
+
+            if (item.Name.ToString() == XuatHang)
+            {
+                try
+                {
+                    this.NavigationService.Navigate(new PhieuXuatHang());
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
+
+            if (item.Name.ToString() == ThuTien)
+            {
+                try
+                {
+                    this.NavigationService.Navigate(new PhieuThuTien());
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
+
         }
     }
 }

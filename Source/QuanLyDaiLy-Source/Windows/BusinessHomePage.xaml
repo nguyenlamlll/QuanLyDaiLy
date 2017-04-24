@@ -34,7 +34,7 @@
             </ListView.ItemsPanel>
             <ListViewItem x:Name="PhieuXuatHangListViewItem">
                 <StackPanel Orientation="Vertical">
-                    <Image Source="/QuanLyDaiLy-Source;component/Assets/Icons/receipt.png"
+                    <Image Source="/QuanLyDaiLy-Source;component/Assets/Icons/groceries.png"
                        Width="256" Height="256">
                         <Image.Effect>
                             <DropShadowEffect/>
