@@ -76,7 +76,7 @@
                 <ListView x:Name="NavigationListView" 
                       ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                       SelectionMode="Single"
-                      SelectionChanged="NavigationListView_SelectionChanged" Background="{x:Null}" BorderBrush="{x:Null}">
+                      SelectionChanged="NavigationListView_SelectionChanged" Background="{x:Null}" BorderBrush="{x:Null}" PreviewMouseDown="NavigationListView_PreviewMouseDown" PreviewMouseUp="NavigationListView_PreviewMouseUp">
                     <ListView.ItemTemplate>
                         <DataTemplate DataType="data:MenuItem">
                             <StackPanel Orientation="Vertical" Width="250" Background="{x:Null}">

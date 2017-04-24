@@ -43,32 +43,49 @@ namespace QuanLyDaiLy_Source
         }
         public object NavigationService { get; private set; }
 
+
+        bool mouseClicked = false;
+        bool enterPressed = false;
+        private void NavigationListView_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left) mouseClicked = true;
+        }
+
+        private void NavigationListView_PreviewMouseUp(object sender, MouseButtonEventArgs e)
+        {
+            mouseClicked = false;
+        }
+
         private void NavigationListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Models.MenuItem item = (Models.MenuItem)NavigationListView.SelectedItem;
-            //MenuItemCategory category = (Models.MenuItemCategory)item;
-            if (item != null)
+            if (mouseClicked || enterPressed)
             {
-                switch (item.Category)
+                Models.MenuItem item = (Models.MenuItem)NavigationListView.SelectedItem;
+                //MenuItemCategory category = (Models.MenuItemCategory)item;
+                if (item != null)
                 {
-                    case MenuItemCategory.Homepage:
-                        {
-                            ContentFrame.Navigate(new Page1());
-                            break;
-                        }
-                    case MenuItemCategory.Lists:
-                        {
-                            MessageBox.Show("Danh Sach clicked");
-                            break;
-                        }
-                    case MenuItemCategory.Businesses:
-                        {
-                            ContentFrame.Navigate(new BusinessHomePage());
-                            //MessageBox.Show("Chinh Sua clicked");
-                            break;
-                        }
+                    switch (item.Category)
+                    {
+                        case MenuItemCategory.Homepage:
+                            {
+                                ContentFrame.Navigate(new Page1());
+                                break;
+                            }
+                        case MenuItemCategory.Lists:
+                            {
+                                MessageBox.Show("Danh Sach clicked");
+                                break;
+                            }
+                        case MenuItemCategory.Businesses:
+                            {
+                                ContentFrame.Navigate(new BusinessHomePage());
+                                //MessageBox.Show("Chinh Sua clicked");
+                                break;
+                            }
+                    }
                 }
             }
+           
         }
 
         /// <summary>
@@ -125,5 +142,7 @@ namespace QuanLyDaiLy_Source
             string currentTitle = App.Current.Properties["ContentFrameTitle"].ToString();
             ContentFrameTitle.Text = currentTitle;
         }
+
+
     }
 }
