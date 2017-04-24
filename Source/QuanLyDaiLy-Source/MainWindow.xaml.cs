@@ -71,7 +71,7 @@ namespace QuanLyDaiLy_Source
                         }
                     case MenuItemCategory.Businesses:
                         {
-                            ContentFrame.Navigate(new TiepNhanDaiLy());
+                            ContentFrame.Navigate(new BusinessHomePage());
                             //MessageBox.Show("Chinh Sua clicked");
                             break;
                         }

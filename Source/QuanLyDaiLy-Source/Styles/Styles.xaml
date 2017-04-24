@@ -7,13 +7,11 @@
         <Setter Property="FontSize" Value="28"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
-        <Setter Property="Foreground" Value="{x:Static SystemColors.HighlightTextBrush}"/>
     </Style>
     <Style x:Key="PageTitleTextBlock" TargetType="TextBlock">
         <Setter Property="FontSize" Value="50"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
-        <Setter Property="Foreground" Value="{x:Static SystemColors.MenuTextBrush}"/>
     </Style>
     
     
@@ -59,7 +57,7 @@
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
         <Setter Property="ToolTipService.ShowDuration" Value="12000"/>
-        <Setter Property="ToolTipService.InitialShowDelay" Value="1200"/>
+        <Setter Property="ToolTipService.InitialShowDelay" Value="900"/>
     </Style>
 
     <Style x:Key="CommentTextBlock" TargetType="TextBlock">

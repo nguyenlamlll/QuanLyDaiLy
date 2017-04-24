@@ -28,32 +28,33 @@
         </Grid.ColumnDefinitions>
 
         <DockPanel Grid.Row="0" Grid.ColumnSpan="4" 
-                   Background="{DynamicResource {x:Static SystemColors.MenuHighlightBrushKey}}">
+                   Background="{DynamicResource {x:Static SystemColors.MenuBarBrushKey}}">
             <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Left" 
                         VerticalAlignment="Center">
                 <Button x:Name="HamburgerButton" 
-                        Background="{DynamicResource {x:Static SystemColors.MenuHighlightBrushKey}}"
+                        Background="{DynamicResource {x:Static SystemColors.MenuBarBrushKey}}"
                         BorderBrush="{x:Null}" 
-                        Foreground="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"
+                        Margin="5,0,0,0"
+                        Foreground="{DynamicResource {x:Static SystemColors.MenuTextBrushKey}}"
                         FontFamily="Segoe MDL2 Assets"
-                        FontSize="22"
+                        FontSize="28"
                         Content="&#xE700;"
                         Height="50" Width="50"
                         Click="HamburgerButton_Click"/>
                 <Button x:Name="GoBackButton"
-                        Background="{DynamicResource {x:Static SystemColors.MenuHighlightBrushKey}}"
+                        Background="{DynamicResource {x:Static SystemColors.MenuBarBrushKey}}"
                         BorderBrush="{x:Null}" 
-                        Foreground="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"
+                        Foreground="{DynamicResource {x:Static SystemColors.MenuTextBrushKey}}"
                         FontFamily="Segoe MDL2 Assets"
-                        FontSize="22"
+                        FontSize="28"
                         Content="&#xE0A6;"
                         Height="50" Width="50"
                         Margin="5,0,0,0"
                         Click="GoBackButton_Click"/>
                 <TextBlock x:Name="Title" 
                            Style="{DynamicResource InputTextBlock}" FontSize="22"
-                           Foreground="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"
+                           Foreground="{DynamicResource {x:Static SystemColors.MenuTextBrushKey}}"
                            Visibility="Visible"/>
             </StackPanel>
 
@@ -64,50 +65,41 @@
               Background="{DynamicResource {x:Static SystemColors.MenuHighlightBrushKey}}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0.4*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-
-            <!-- Define Navigation Bar -->
-            <ListView x:Name="NavigationListView" 
-                      Background="Transparent" 
-                      Grid.Column="0" Grid.ColumnSpan="2"
-                      Grid.Row="0" Grid.RowSpan="10" 
-                      Margin="0,15,0,0"
-                      ScrollViewer.CanContentScroll="False"
+            <Canvas Background="{DynamicResource {x:Static SystemColors.MenuBarBrushKey}}">
+                <!-- Define Navigation Bar -->
+                <ListView x:Name="NavigationListView" 
                       ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                       SelectionMode="Single"
-                      SelectionChanged="NavigationListView_SelectionChanged" MouseEnter="NavigationListView_MouseEnter">
-                <ListView.ItemTemplate>
-                    <DataTemplate DataType="data:MenuItem">
-                        <StackPanel Orientation="Horizontal" Width="250">
+                      SelectionChanged="NavigationListView_SelectionChanged" Background="{x:Null}" BorderBrush="{x:Null}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate DataType="data:MenuItem">
+                            <StackPanel Orientation="Vertical" Width="250" Background="{x:Null}">
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                    <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                Margin="8,25,0,0"
+                                                FontFamily="Segoe MDL2 Assets"
+                                                FontSize="28"
+                                                Foreground="{DynamicResource {x:Static SystemColors.MenuTextBrushKey}}"
+                                                Text="{Binding IconFile}"
+                                                Height="50" Width="50" Background="{x:Null}"/>
 
-                            <Button Grid.Column="0" Grid.Row="0" 
-                                    FontFamily="Segoe MDL2 Assets"
-                                    FontSize="22"
-                                    Foreground="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"
-                                    Content="{Binding IconFile}"
-                                    Height="45" Width="45"/>
+                                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+                                               Foreground="{DynamicResource {x:Static SystemColors.MenuTextBrushKey}}"
+                                               Margin="0,0,0,0"
+                                               Style="{DynamicResource NavigationTextBlock}"
+                                               Text="{Binding Description}"/>
+                                </StackPanel>
+                                
 
-                            <TextBlock Foreground="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"
-                                       Grid.Column="1"
-                                       Grid.Row="0" 
-                                       Margin="4,0,0,0"
-                                       Style="{DynamicResource NavigationTextBlock}"
-                                       Text="{Binding Description}"/>
-
-                        </StackPanel>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-
-
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Canvas>
         </Grid>
 
         <!--
