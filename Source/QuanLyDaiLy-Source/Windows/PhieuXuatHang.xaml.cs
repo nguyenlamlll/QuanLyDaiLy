@@ -24,6 +24,7 @@ namespace QuanLyDaiLy_Source.Windows
         public PhieuXuatHang()
         {
             InitializeComponent();
+            App.Current.Properties["ContentFrameTitle"] = "Phiếu Xuất Hàng";
             //List<Models.DataGridTestItem> dataList = new List<Models.DataGridTestItem>();
             //MerchandiseDataGrid.ItemsSource = dataList;
 

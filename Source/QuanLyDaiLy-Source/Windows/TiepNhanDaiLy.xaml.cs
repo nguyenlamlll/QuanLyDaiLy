@@ -24,7 +24,9 @@ namespace QuanLyDaiLy_Source.Windows
         public TiepNhanDaiLy()
         {
             InitializeComponent();
+            App.Current.Properties["ContentFrameTitle"] = "Tiếp Nhận Đại lý";
 
+            //Field Check EventHandlers
             NameInputTextBox.LostFocus += NameInput_FieldCheck;
             IDInputTextBox.LostFocus += IDInputTextBox_FieldCheck;
             TypeInputComboBox.LostFocus += TypeInputComboBox_FieldCheck;
@@ -33,6 +35,7 @@ namespace QuanLyDaiLy_Source.Windows
             StreetInputTextBox.LostFocus += StreetInputTextBox_FieldCheck;
             DistrictInputTextBox.LostFocus += DistrictInputTextBox_FieldCheck;
             AcceptanceDateDatePicker.LostFocus += AcceptanceDateDatePicker_FieldCheck;
+
 
         }
 

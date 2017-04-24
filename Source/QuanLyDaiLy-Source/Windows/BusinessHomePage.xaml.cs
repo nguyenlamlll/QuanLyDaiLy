@@ -23,6 +23,7 @@ namespace QuanLyDaiLy_Source.Windows
         public BusinessHomePage()
         {
             InitializeComponent();
+            App.Current.Properties["ContentFrameTitle"] = "Nghiệp Vụ Đại Lý";
         }
 
         private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)

@@ -52,8 +52,10 @@
                         Height="50" Width="50"
                         Margin="5,0,0,0"
                         Click="GoBackButton_Click"/>
-                <TextBlock x:Name="Title" 
-                           Style="{DynamicResource InputTextBlock}" FontSize="22"
+                <TextBlock x:Name="ContentFrameTitle" 
+                           Margin="140,0,0,0"
+                           VerticalAlignment="Center"
+                           Style="{DynamicResource InputTextBlock}" FontSize="30"
                            Foreground="{DynamicResource {x:Static SystemColors.MenuTextBrushKey}}"
                            Visibility="Visible"/>
             </StackPanel>
@@ -190,7 +192,7 @@
                    Grid.Row="1" Grid.RowSpan="1"
                    HorizontalContentAlignment="Stretch"
                    VerticalContentAlignment="Stretch"
-                   NavigationUIVisibility="Hidden">
+                   NavigationUIVisibility="Hidden" LoadCompleted="ContentFrame_LoadCompleted">
             </Frame>
         </Border>
 

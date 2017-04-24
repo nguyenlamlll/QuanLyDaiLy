@@ -27,6 +27,10 @@ namespace QuanLyDaiLy_Source
         public MainWindow()
         {
             InitializeComponent();
+            GoBackButton.Visibility = Visibility.Hidden;
+
+            App.Current.Properties["ContentFrameTitle"] = "Trang Chủ";
+
             //Grid_AdvancedList.Visibility = Visibility.Visible;
             ContentFrame.Navigate(new MainContent());
             //ContentFrame.Navigate(typeof(Windows.Page1)); //Host some placeholder page - work as a MainContents page
@@ -37,18 +41,7 @@ namespace QuanLyDaiLy_Source
 
 
         }
-
         public object NavigationService { get; private set; }
-
-        private void Button_List_MouseEnter(object sender, MouseEventArgs e)
-        {
-
-        }
-
-        private void Button_List_MouseLeave(object sender, MouseEventArgs e)
-        {
-
-        }
 
         private void NavigationListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -127,5 +120,10 @@ namespace QuanLyDaiLy_Source
             }
         }
 
+        private void ContentFrame_LoadCompleted(object sender, NavigationEventArgs e)
+        {
+            string currentTitle = App.Current.Properties["ContentFrameTitle"].ToString();
+            ContentFrameTitle.Text = currentTitle;
+        }
     }
 }

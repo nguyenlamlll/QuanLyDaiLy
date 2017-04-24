@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using QuanLyDaiLy_Source;
 
 namespace QuanLyDaiLy_Source.Windows
 {
@@ -23,6 +24,7 @@ namespace QuanLyDaiLy_Source.Windows
         public PhieuThuTien()
         {
             InitializeComponent();
+            App.Current.Properties["ContentFrameTitle"] = "Phiếu Thu Tiền";
         }
 
         private void SaveAndExitButton_Click(object sender, RoutedEventArgs e)
