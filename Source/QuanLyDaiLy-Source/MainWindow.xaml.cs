@@ -32,7 +32,7 @@ namespace QuanLyDaiLy_Source
             App.Current.Properties["ContentFrameTitle"] = "Trang Chủ";
 
             //Grid_AdvancedList.Visibility = Visibility.Visible;
-            ContentFrame.Navigate(new MainContent());
+            ContentFrame.Navigate(new DanhSachDaiLy());
             //ContentFrame.Navigate(typeof(Windows.Page1)); //Host some placeholder page - work as a MainContents page
 
             MenuItems = MenuItemManager.GetMenuItems(); //ItemSource for NavigationListView
@@ -68,7 +68,7 @@ namespace QuanLyDaiLy_Source
                     {
                         case MenuItemCategory.Homepage:
                             {
-                                ContentFrame.Navigate(new Page1());
+                                ContentFrame.Navigate(new TiepNhanDaiLy());
                                 break;
                             }
                         case MenuItemCategory.Lists:

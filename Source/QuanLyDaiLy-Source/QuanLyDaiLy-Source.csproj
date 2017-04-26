@@ -61,6 +61,9 @@
     <Compile Include="Windows\BusinessHomePage.xaml.cs">
       <DependentUpon>BusinessHomePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\DanhSachDaiLy.xaml.cs">
+      <DependentUpon>DanhSachDaiLy.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\MainContent.xaml.cs">
       <DependentUpon>MainContent.xaml</DependentUpon>
     </Compile>
@@ -91,6 +94,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Styles\DanhSachDaiLyStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Styles\PhieuXuatHangStyles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -100,6 +107,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\BusinessHomePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\DanhSachDaiLy.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -169,6 +180,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\Icons\groceries.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Icons\right-arrow-circular-button.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

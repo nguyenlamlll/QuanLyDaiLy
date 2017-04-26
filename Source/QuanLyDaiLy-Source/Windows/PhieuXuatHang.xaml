@@ -22,9 +22,10 @@
         </Grid.RowDefinitions>
 
         <!-- Main Workstation -->
-        <ScrollViewer Grid.Row="0">
+        <ScrollViewer Grid.Row="0" Grid.RowSpan="2">
             <Grid x:Name="MerchandiseGrid">
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -42,7 +43,8 @@
                       Style="{DynamicResource InputComboBox}"/>
                 </StackPanel>
 
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right"
+                            Margin="0,0,38,0">
 
                     <Button x:Name="AddRowButton"
                         Click="AddRowButton_Click">
@@ -60,7 +62,7 @@
                       CanUserAddRows="True" CanUserDeleteRows="True" 
                       CanUserResizeColumns="True"
                       Margin="40,15,40,0"
-                      Height="200"
+                      Height="240"
                       Style="{DynamicResource DataGridStyle}"
                       SelectionMode="Extended" SelectionUnit="Cell" 
                       ScrollViewer.CanContentScroll="True"
@@ -77,6 +79,7 @@
                     </DataGrid.Columns>
                 </DataGrid>
                 
+
                 <StackPanel Orientation="Vertical"
                         Grid.Row="2"
                         HorizontalAlignment="Right"
@@ -98,10 +101,86 @@
                     </StackPanel>
                 </StackPanel>
 
+                <!--#region Save, Navigation Buttons-->
+                <StackPanel Grid.Row="3" Orientation="Vertical"
+                            HorizontalAlignment="Right"
+                            Margin="0,0,38,0">
+                    <Button x:Name="SaveAndExitButton" 
+                        Content="Lưu"
+                        Style="{DynamicResource InputButton}"
+                        Click="SaveAndExitButton_Click"
+                        HorizontalAlignment="Right">
+                        <Button.ToolTip>
+                            <StackPanel>
+                                <TextBlock FontWeight="Bold" FontSize="14" Margin="0,0,0,5">Lưu Đại Lý</TextBlock>
+                                <TextBlock>
+                                    Lưu hồ sơ đại lý đã nhập vào hệ thống 
+                                    <LineBreak/>
+                                    và thoát phiên làm việc tiếp nhận đại lí
+                                </TextBlock>
+                                <Border BorderBrush="Silver" BorderThickness="0,1,0,0" Margin="0,8" />
+                                <WrapPanel>
+                                    <Image Style="{StaticResource ImageIcon}"
+                                           Source="/QuanLyDaiLy-Source;component/Assets/Icons/question.png"/>
+                                    <TextBlock FontStyle="Italic">Bấm F1 để hiển thị mục Trợ Giúp</TextBlock>
+                                </WrapPanel>
+                            </StackPanel>
+                        </Button.ToolTip>
+                    </Button>
+
+                    <Button x:Name="SaveAndContinueButton" 
+                        Content="Lưu Và Tiếp Tục"
+                        Style="{DynamicResource InputButton}"
+                        Width="250"
+                        HorizontalAlignment="Right">
+                        <Button.ToolTip>
+                            <StackPanel>
+                                <TextBlock FontWeight="Bold" FontSize="14" Margin="0,0,0,5">Lưu Đại Lý Và Tiếp Tục</TextBlock>
+                                <TextBlock>
+                                    Lưu hồ sơ đại lý đã nhập vào hệ thống 
+                                    <LineBreak/>
+                                    và tiếp tục phiên làm việc tiếp nhận đại lí
+                                </TextBlock>
+                                <Border BorderBrush="Silver" BorderThickness="0,1,0,0" Margin="0,8" />
+                                <WrapPanel>
+                                    <Image Style="{StaticResource ImageIcon}"
+                                           Source="/QuanLyDaiLy-Source;component/Assets/Icons/question.png"/>
+                                    <TextBlock FontStyle="Italic">Bấm F1 để hiển thị mục Trợ Giúp</TextBlock>
+                                </WrapPanel>
+                            </StackPanel>
+                        </Button.ToolTip>
+                    </Button>
+
+                    <Button x:Name="ExitButton" 
+                    Content="Thoát"
+                    Style="{DynamicResource InputButton}"
+                    Click="ExitButton_Click"
+                        HorizontalAlignment="Right">
+                        <Button.ToolTip>
+                            <StackPanel>
+                                <TextBlock FontWeight="Bold" FontSize="14" Margin="0,0,0,5">Lưu Đại Lý</TextBlock>
+                                <TextBlock>
+                                    Xóa toàn bộ dữ liệu đã nhập
+                                    <LineBreak/>
+                                    và thoát phiên làm việc tiếp nhận đại lí
+                                </TextBlock>
+                                <Border BorderBrush="Silver" BorderThickness="0,1,0,0" Margin="0,8" />
+                                <WrapPanel>
+                                    <Image Style="{StaticResource ImageIcon}"
+                                           Source="/QuanLyDaiLy-Source;component/Assets/Icons/question.png"/>
+                                    <TextBlock FontStyle="Italic">Bấm F1 để hiển thị mục Trợ Giúp</TextBlock>
+                                </WrapPanel>
+                            </StackPanel>
+                        </Button.ToolTip>
+                    </Button>
+                </StackPanel>
+                <!--#endregion-->
+                
             </Grid>
         </ScrollViewer>
         <!-- To edit details of a row in datagrid/ Or delete it. -->
-        <DockPanel x:Name="MerchandiseDockPanel" Grid.Row="3" Background="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}">
+        <DockPanel x:Name="MerchandiseDockPanel" Grid.Row="3" Background="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}"
+                   Visibility="Collapsed">
             <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Center"
                         Margin="200,0,0,0">
@@ -213,78 +292,7 @@
 
             </StackPanel>
 
-            <StackPanel Orientation="Vertical"
-                                HorizontalAlignment="Right"
-                                Margin="100,0,0,0">
-                <Button x:Name="SaveAndExitButton" 
-                        Content="Lưu"
-                        Style="{DynamicResource InputButton}"
-                        Click="SaveAndExitButton_Click"
-                        HorizontalAlignment="Right">
-                    <Button.ToolTip>
-                        <StackPanel>
-                            <TextBlock FontWeight="Bold" FontSize="14" Margin="0,0,0,5">Lưu Đại Lý</TextBlock>
-                            <TextBlock>
-                                    Lưu hồ sơ đại lý đã nhập vào hệ thống 
-                                    <LineBreak/>
-                                    và thoát phiên làm việc tiếp nhận đại lí
-                            </TextBlock>
-                            <Border BorderBrush="Silver" BorderThickness="0,1,0,0" Margin="0,8" />
-                            <WrapPanel>
-                                <Image Style="{StaticResource ImageIcon}"
-                                           Source="/QuanLyDaiLy-Source;component/Assets/Icons/question.png"/>
-                                <TextBlock FontStyle="Italic">Bấm F1 để hiển thị mục Trợ Giúp</TextBlock>
-                            </WrapPanel>
-                        </StackPanel>
-                    </Button.ToolTip>
-                </Button>
-
-                <Button x:Name="SaveAndContinueButton" 
-                        Content="Lưu Và Tiếp Tục"
-                        Style="{DynamicResource InputButton}"
-                        Width="250"
-                        HorizontalAlignment="Right">
-                    <Button.ToolTip>
-                        <StackPanel>
-                            <TextBlock FontWeight="Bold" FontSize="14" Margin="0,0,0,5">Lưu Đại Lý Và Tiếp Tục</TextBlock>
-                            <TextBlock>
-                                    Lưu hồ sơ đại lý đã nhập vào hệ thống 
-                                    <LineBreak/>
-                                    và tiếp tục phiên làm việc tiếp nhận đại lí
-                            </TextBlock>
-                            <Border BorderBrush="Silver" BorderThickness="0,1,0,0" Margin="0,8" />
-                            <WrapPanel>
-                                <Image Style="{StaticResource ImageIcon}"
-                                           Source="/QuanLyDaiLy-Source;component/Assets/Icons/question.png"/>
-                                <TextBlock FontStyle="Italic">Bấm F1 để hiển thị mục Trợ Giúp</TextBlock>
-                            </WrapPanel>
-                        </StackPanel>
-                    </Button.ToolTip>
-                </Button>
-
-                <Button x:Name="ExitButton" 
-                    Content="Thoát"
-                    Style="{DynamicResource InputButton}"
-                    Click="ExitButton_Click"
-                        HorizontalAlignment="Right">
-                    <Button.ToolTip>
-                        <StackPanel>
-                            <TextBlock FontWeight="Bold" FontSize="14" Margin="0,0,0,5">Lưu Đại Lý</TextBlock>
-                            <TextBlock>
-                                    Xóa toàn bộ dữ liệu đã nhập
-                                    <LineBreak/>
-                                    và thoát phiên làm việc tiếp nhận đại lí
-                            </TextBlock>
-                            <Border BorderBrush="Silver" BorderThickness="0,1,0,0" Margin="0,8" />
-                            <WrapPanel>
-                                <Image Style="{StaticResource ImageIcon}"
-                                           Source="/QuanLyDaiLy-Source;component/Assets/Icons/question.png"/>
-                                <TextBlock FontStyle="Italic">Bấm F1 để hiển thị mục Trợ Giúp</TextBlock>
-                            </WrapPanel>
-                        </StackPanel>
-                    </Button.ToolTip>
-                </Button>
-            </StackPanel>
+          
 
         </DockPanel>
     </Grid>
