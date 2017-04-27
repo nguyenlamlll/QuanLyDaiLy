@@ -32,15 +32,32 @@
                 </Grid.RowDefinitions>
 
                 <StackPanel Grid.Row="0" 
-                        Orientation="Horizontal"
+                        Orientation="Vertical"
                         HorizontalAlignment="Center">
-                    <TextBlock Style="{DynamicResource InputTextBlock}"
+
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Right" VerticalAlignment="Center">
+                        <TextBlock Style="{DynamicResource InputTextBlock}"
+                           VerticalAlignment="Center">
+                    Quận
+                        </TextBlock>
+                        <ComboBox x:Name="DistrictSelectComboBox"
+                                  Width="350"
+                                  Style="{DynamicResource InputComboBox}">
+                        </ComboBox>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Right" VerticalAlignment="Center">
+                        <TextBlock Style="{DynamicResource InputTextBlock}"
                            VerticalAlignment="Center">
                     Đại Lý
-                    </TextBlock>
-                    <ComboBox x:Name="AgencySelectComboBox"
-                      Margin="0,20,0,10"
-                      Style="{DynamicResource InputComboBox}"/>
+                        </TextBlock>
+                        <ComboBox x:Name="AgencySelectComboBox"
+                                  Style="{DynamicResource InputComboBox}"
+                                  Width="350"/>
+                    </StackPanel>
+
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right"
