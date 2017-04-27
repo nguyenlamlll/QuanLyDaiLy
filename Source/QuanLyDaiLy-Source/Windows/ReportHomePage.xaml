@@ -1,0 +1,68 @@
+﻿<Page x:Class="QuanLyDaiLy_Source.Windows.ReportHomePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:QuanLyDaiLy_Source.Windows"
+      mc:Ignorable="d" 
+      d:DesignHeight="720" d:DesignWidth="1280"
+      Title="ReportHomePage">
+
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/QuanLyDaiLy-Source;component/Styles/Styles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
+
+
+    <Grid Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <ListView x:Name="BusinessListView" Grid.Row="1"
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Center" Background="{x:Null}" SelectionMode="Single"
+                  SelectionChanged="ListView_SelectionChanged">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal"></StackPanel>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListViewItem x:Name="SalesListViewItem" Selected="SalesListViewItem_Selected">
+                <StackPanel Orientation="Vertical">
+                    <Image Source="/QuanLyDaiLy-Source;component/Assets/Icons/sales-report.png"
+                       Width="256" Height="256">
+                        <Image.Effect>
+                            <DropShadowEffect/>
+                        </Image.Effect>
+                    </Image>
+                    <TextBlock HorizontalAlignment="Center"
+                               Style="{StaticResource InputTextBlock}" TextDecorations="{x:Null}">
+                        Báo Cáo Doanh Số
+                    </TextBlock>
+                </StackPanel>
+            </ListViewItem>
+
+            <ListViewItem x:Name="DebtListViewItem">
+                <StackPanel Orientation="Vertical">
+                    <Image Source="/QuanLyDaiLy-Source;component/Assets/Icons/get-money.png"
+                       Width="256" Height="256">
+                        <Image.Effect>
+                            <DropShadowEffect/>
+                        </Image.Effect>
+                    </Image>
+                    <TextBlock HorizontalAlignment="Center"
+                               Style="{StaticResource InputTextBlock}" TextDecorations="{x:Null}">
+                        Báo Cáo Công Nợ
+                    </TextBlock>
+                </StackPanel>
+            </ListViewItem>
+
+        </ListView>
+
+
+    </Grid>
+</Page>

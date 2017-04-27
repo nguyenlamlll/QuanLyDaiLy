@@ -79,7 +79,11 @@ namespace QuanLyDaiLy_Source
                         case MenuItemCategory.Businesses:
                             {
                                 ContentFrame.Navigate(new BusinessHomePage());
-                                //MessageBox.Show("Chinh Sua clicked");
+                                break;
+                            }
+                        case MenuItemCategory.Reports:
+                            {
+                                ContentFrame.Navigate(new ReportHomePage());
                                 break;
                             }
                     }
