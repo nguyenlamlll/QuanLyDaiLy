@@ -153,5 +153,7 @@ namespace QuanLyDaiLy_Source.Windows
                 ns.Navigate(new Uri("/QuanLyDaiLy-Source;component/Windows/MainContent.xaml", UriKind.Relative));
             }
         }
+
+
     }
 }

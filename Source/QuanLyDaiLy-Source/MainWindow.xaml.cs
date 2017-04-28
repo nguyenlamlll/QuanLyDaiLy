@@ -31,7 +31,6 @@ namespace QuanLyDaiLy_Source
 
             App.Current.Properties["ContentFrameTitle"] = "Trang Chủ";
 
-            //Grid_AdvancedList.Visibility = Visibility.Visible;
             ContentFrame.Navigate(new DanhSachDaiLy());
             //ContentFrame.Navigate(typeof(Windows.Page1)); //Host some placeholder page - work as a MainContents page
 
@@ -73,7 +72,7 @@ namespace QuanLyDaiLy_Source
                             }
                         case MenuItemCategory.Lists:
                             {
-                                MessageBox.Show("Danh Sach clicked");
+                                ContentFrame.Navigate(new DanhSachDaiLy());
                                 break;
                             }
                         case MenuItemCategory.Businesses:
@@ -84,6 +83,11 @@ namespace QuanLyDaiLy_Source
                         case MenuItemCategory.Reports:
                             {
                                 ContentFrame.Navigate(new ReportHomePage());
+                                break;
+                            }
+                        case MenuItemCategory.Settings:
+                            {
+                                ContentFrame.Navigate(new ThayDoiQuyDinh());
                                 break;
                             }
                     }

@@ -30,7 +30,7 @@
                 </ComboBox>
                 <ComboBox x:Name="SearchComboBox" Style="{DynamicResource InputComboBox}"
                           Width="250"></ComboBox>
-                <ToggleButton Width="150" FontSize="30" Checked="ToggleButton_Checked" Unchecked="ToggleButton_Unchecked">Nâng Cao</ToggleButton>
+                <ToggleButton Style="{DynamicResource ToggleButtonStyle}" Checked="ToggleButton_Checked" Unchecked="ToggleButton_Unchecked">Nâng Cao</ToggleButton>
             </StackPanel>
             
             <Border x:Name="AdvancededSearch" BorderThickness="1" 

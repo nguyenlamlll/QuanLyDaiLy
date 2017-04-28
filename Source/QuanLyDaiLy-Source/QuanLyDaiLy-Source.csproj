@@ -88,6 +88,9 @@
     <Compile Include="Windows\ReportHomePage.xaml.cs">
       <DependentUpon>ReportHomePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\ThayDoiQuyDinh.xaml.cs">
+      <DependentUpon>ThayDoiQuyDinh.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\TiepNhanDaiLy.xaml.cs">
       <DependentUpon>TiepNhanDaiLy.xaml</DependentUpon>
     </Compile>
@@ -152,6 +155,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\ReportHomePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\ThayDoiQuyDinh.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
