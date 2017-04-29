@@ -32,6 +32,22 @@
                     <StackPanel Orientation="Horizontal"></StackPanel>
                 </ItemsPanelTemplate>
             </ListView.ItemsPanel>
+
+            <ListViewItem>
+                <StackPanel Orientation="Vertical">
+                    <Image Source="/QuanLyDaiLy-Source;component/Assets/Icons/contract.png"
+                       Width="256" Height="256">
+                        <Image.Effect>
+                            <DropShadowEffect/>
+                        </Image.Effect>
+                    </Image>
+                    <TextBlock HorizontalAlignment="Center"
+                               Style="{StaticResource InputTextBlock}" TextDecorations="{x:Null}">
+                        Tiếp Nhận Đại Lý
+                    </TextBlock>
+                </StackPanel>
+            </ListViewItem>
+
             <ListViewItem x:Name="PhieuXuatHangListViewItem">
                 <StackPanel Orientation="Vertical">
                     <Image Source="/QuanLyDaiLy-Source;component/Assets/Icons/groceries.png"
@@ -61,7 +77,8 @@
                     </TextBlock>
                 </StackPanel>
             </ListViewItem>
-            
+
+
         </ListView>
         
         
