@@ -1,0 +1,256 @@
+﻿<Page x:Class="QuanLyDaiLy_Source.Windows.PhieuThuTien"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:QuanLyDaiLy_Source.Windows"
+      mc:Ignorable="d" 
+      d:DesignHeight="720" d:DesignWidth="1280"
+      Title="PhieuThuTien">
+
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/QuanLyDaiLy-Source;component/Styles/Styles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
+
+    <Grid Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Vertical"
+                    Grid.Row="1"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+
+            
+            <!--#region Content of PhieuThuTIen-->
+            <StackPanel x:Name="DistrictStackPanel" Orientation="Horizontal" HorizontalAlignment="Right">
+                <TextBlock Style="{DynamicResource InputTextBlock}">
+                            Quận:
+                </TextBlock>
+                <ComboBox Style="{DynamicResource InputComboBox}"/>
+                <Image x:Name="DistrictStatus" Source="/QuanLyDaiLy-Source;component/Assets/Icons/exclamation-mark32.png"
+                           Height="16" Width="16" Cursor="Help"
+                           Visibility="Hidden">
+                    <Image.ToolTip>
+                        <StackPanel Background="#FFFFA0A0">
+                            <TextBlock FontWeight="Bold" FontSize="14" Margin="0,0,0,5">
+                                    Chọn Quận
+                            </TextBlock>
+                            <TextBlock>
+                                    Chọn quận có đại lý cần lập phiếu thu tiền.
+                            </TextBlock>
+                        </StackPanel>
+                    </Image.ToolTip>
+                </Image>
+            </StackPanel>
+
+            <StackPanel x:Name="AgencyStackPanel" Orientation="Horizontal" HorizontalAlignment="Right">
+                <TextBlock Style="{DynamicResource InputTextBlock}">
+                            Đại Lý:
+                </TextBlock>
+                <ComboBox Style="{DynamicResource InputComboBox}"/>
+                <Image x:Name="AgencyStatus" Source="/QuanLyDaiLy-Source;component/Assets/Icons/exclamation-mark32.png"
+                           Height="16" Width="16" Cursor="Help"
+                           Visibility="Hidden">
+                    <Image.ToolTip>
+                        <StackPanel Background="#FFFFA0A0">
+                            <TextBlock FontWeight="Bold" FontSize="14" Margin="0,0,0,5">
+                                    Chọn Đại Lý
+                            </TextBlock>
+                            <TextBlock>
+                                    Chọn đại lý cần lập phiếu thu tiền.
+                            </TextBlock>
+                        </StackPanel>
+                    </Image.ToolTip>
+                </Image>
+            </StackPanel>
+
+            <StackPanel x:Name="PhoneNumberStackPanel" Orientation="Horizontal" HorizontalAlignment="Right">
+                <TextBlock Style="{DynamicResource InputTextBlock}">
+                           Số Điện Thoại:
+                </TextBlock>
+                <TextBox Style="{DynamicResource InputTextBox}" IsEnabled="False"/>
+                <Image x:Name="PhoneNumberStatus" Source="/QuanLyDaiLy-Source;component/Assets/Icons/exclamation-mark32.png"
+                           Height="16" Width="16" Cursor="Help"
+                           Visibility="Hidden">
+                    <Image.ToolTip>
+                        <StackPanel Background="#FFFFA0A0">
+                            <TextBlock FontWeight="Bold" FontSize="14" Margin="0,0,0,5">
+                                    Số Điện Thoại
+                            </TextBlock>
+                            <TextBlock>
+                                   Số Điện Thoại của Đại Lý đã chọn.
+                            </TextBlock>
+                        </StackPanel>
+                    </Image.ToolTip>
+                </Image>
+            </StackPanel>
+
+            <StackPanel x:Name="AddressStackPanel" Orientation="Horizontal" HorizontalAlignment="Right">
+                <TextBlock Style="{DynamicResource InputTextBlock}">
+                           Địa chỉ:
+                </TextBlock>
+                <TextBox Style="{DynamicResource InputTextBox}" IsEnabled="False"/>
+                <Image x:Name="AddressStatus" Source="/QuanLyDaiLy-Source;component/Assets/Icons/exclamation-mark32.png"
+                           Height="16" Width="16" Cursor="Help"
+                           Visibility="Hidden">
+                    <Image.ToolTip>
+                        <StackPanel Background="#FFFFA0A0">
+                            <TextBlock FontWeight="Bold" FontSize="14" Margin="0,0,0,5">
+                                    Địa Chỉ
+                            </TextBlock>
+                            <TextBlock>
+                                   Địa chỉ của Đại Lý đã chọn.
+                            </TextBlock>
+                        </StackPanel>
+                    </Image.ToolTip>
+                </Image>
+            </StackPanel>
+
+            <StackPanel x:Name="MoneyStackPanel" Orientation="Horizontal" HorizontalAlignment="Right">
+                <TextBlock Style="{DynamicResource InputTextBlock}">
+                           Số Tiền Thu:
+                </TextBlock>
+                <TextBox Style="{DynamicResource InputTextBox}"/>
+                <Image x:Name="MoneyStatus" Source="/QuanLyDaiLy-Source;component/Assets/Icons/exclamation-mark32.png"
+                           Height="16" Width="16" Cursor="Help"
+                           Visibility="Hidden">
+                    <Image.ToolTip>
+                        <StackPanel Background="#FFFFA0A0">
+                            <TextBlock FontWeight="Bold" FontSize="14" Margin="0,0,0,5">
+                                Số Tiền Thu
+                            </TextBlock>
+                            <TextBlock>
+                                Số tiền thu từ đại lý.
+                                <LineBreak/>
+                                Lưu ý: Phải nhỏ hơn số nợ hiện tại của đại lý.
+                            </TextBlock>
+                        </StackPanel>
+                    </Image.ToolTip>
+                </Image>
+            </StackPanel>
+
+            <StackPanel x:Name="DateStackPanel" Orientation="Horizontal" HorizontalAlignment="Right">
+                <TextBlock Style="{DynamicResource InputTextBlock}">
+                           Ngày Thu:
+                </TextBlock>
+                <DatePicker Style="{DynamicResource InputDatePicker}"
+                            FirstDayOfWeek="Monday" 
+                            SelectedDateFormat="Short">
+                    <DatePicker.Resources>
+                        <Style TargetType="{x:Type DatePickerTextBox}">
+                            <Setter Property="Control.Template">
+                                <Setter.Value>
+                                    <ControlTemplate>
+                                        <TextBox x:Name="PART_TextBox" 
+                                    Text="{Binding Path=SelectedDate, RelativeSource={RelativeSource AncestorType={x:Type DatePicker}}, StringFormat={}{0:dd/MM/yyyy}}" />
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </DatePicker.Resources>
+                </DatePicker>
+                <Image x:Name="DateStatus" Source="/QuanLyDaiLy-Source;component/Assets/Icons/exclamation-mark32.png"
+                           Height="16" Width="16" Cursor="Help"
+                           Visibility="Hidden">
+                    <Image.ToolTip>
+                        <StackPanel Background="#FFFFA0A0">
+                            <TextBlock FontWeight="Bold" FontSize="14" Margin="0,0,0,5">
+                                Ngày Thu Tiền
+                            </TextBlock>
+                            <TextBlock>
+                                Chọn ngày đã thu tiền.
+                            </TextBlock>
+                        </StackPanel>
+                    </Image.ToolTip>
+                </Image>
+            </StackPanel>
+
+
+            <!--#endregion-->
+
+            
+
+            <!--#region Buttons of PhieuThuTien-->
+            <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Top"
+                            Margin="0,20,21,0">
+                <Button x:Name="SaveAndExitButton" 
+                    Content="Lưu"
+                    Style="{DynamicResource InputButton}"
+                    Click="SaveAndExitButton_Click">
+                    <Button.ToolTip>
+                        <StackPanel>
+                            <TextBlock FontWeight="Bold" FontSize="14" Margin="0,0,0,5">Lưu Phiếu Thu Tiền</TextBlock>
+                            <TextBlock>
+                                    Lưu phiếu thu đã nhập vào hệ thống 
+                                    <LineBreak/>
+                                    và thoát phiên làm việc hiện tại.
+                            </TextBlock>
+                            <Border BorderBrush="Silver" BorderThickness="0,1,0,0" Margin="0,8" />
+                            <WrapPanel>
+                                <Image Style="{StaticResource ImageIcon}"
+                                           Source="/QuanLyDaiLy-Source;component/Assets/Icons/question.png"/>
+                                <TextBlock FontStyle="Italic">Bấm F1 để hiển thị mục Trợ Giúp</TextBlock>
+                            </WrapPanel>
+                        </StackPanel>
+                    </Button.ToolTip>
+                </Button>
+
+                <Button x:Name="SaveAndContinueButton" 
+                            Content="Lưu Và Tiếp Tục"
+                            Style="{DynamicResource InputButton}"
+                            Width="250">
+                    <Button.ToolTip>
+                        <StackPanel>
+                            <TextBlock FontWeight="Bold" FontSize="14" Margin="0,0,0,5">Lưu Và Tiếp Tục</TextBlock>
+                            <TextBlock>
+                                    Lưu phiếu thu tiền đã nhập vào hệ thống 
+                                    <LineBreak/>
+                                    và tiếp tục phiên làm việc hiện tại.
+                            </TextBlock>
+                            <Border BorderBrush="Silver" BorderThickness="0,1,0,0" Margin="0,8" />
+                            <WrapPanel>
+                                <Image Style="{StaticResource ImageIcon}"
+                                           Source="/QuanLyDaiLy-Source;component/Assets/Icons/question.png"/>
+                                <TextBlock FontStyle="Italic">Bấm F1 để hiển thị mục Trợ Giúp</TextBlock>
+                            </WrapPanel>
+                        </StackPanel>
+                    </Button.ToolTip>
+                </Button>
+
+                <Button x:Name="ExitButton" 
+                    Content="Thoát"
+                    Style="{DynamicResource InputButton}"
+                    Click="ExitButton_Click">
+                    <Button.ToolTip>
+                        <StackPanel>
+                            <TextBlock FontWeight="Bold" FontSize="14" Margin="0,0,0,5">Thoát</TextBlock>
+                            <TextBlock>
+                                    Xóa toàn bộ dữ liệu đã nhập
+                                    <LineBreak/>
+                                    và thoát phiên làm việc hiện tại.
+                            </TextBlock>
+                            <Border BorderBrush="Silver" BorderThickness="0,1,0,0" Margin="0,8" />
+                            <WrapPanel>
+                                <Image Style="{StaticResource ImageIcon}"
+                                           Source="/QuanLyDaiLy-Source;component/Assets/Icons/question.png"/>
+                                <TextBlock FontStyle="Italic">Bấm F1 để hiển thị mục Trợ Giúp</TextBlock>
+                            </WrapPanel>
+                        </StackPanel>
+                    </Button.ToolTip>
+                </Button>
+            </StackPanel>
+            <!--#endregion-->
+            
+            
+        </StackPanel>
+    </Grid>
+</Page>

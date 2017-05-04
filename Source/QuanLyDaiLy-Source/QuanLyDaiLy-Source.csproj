@@ -55,6 +55,45 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\DataGridTestItem.cs" />
+    <Compile Include="Models\MenuItems.cs" />
+    <Compile Include="Utilities.cs" />
+    <Compile Include="Windows\BaoCaoCongNo.xaml.cs">
+      <DependentUpon>BaoCaoCongNo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\BaoCaoDoanhThu.xaml.cs">
+      <DependentUpon>BaoCaoDoanhThu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\BusinessHomePage.xaml.cs">
+      <DependentUpon>BusinessHomePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\DanhSachDaiLy.xaml.cs">
+      <DependentUpon>DanhSachDaiLy.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\MainContent.xaml.cs">
+      <DependentUpon>MainContent.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Page1.xaml.cs">
+      <DependentUpon>Page1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Page2.xaml.cs">
+      <DependentUpon>Page2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\PhieuThuTien.xaml.cs">
+      <DependentUpon>PhieuThuTien.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\PhieuXuatHang.xaml.cs">
+      <DependentUpon>PhieuXuatHang.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\ReportHomePage.xaml.cs">
+      <DependentUpon>ReportHomePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\ThayDoiQuyDinh.xaml.cs">
+      <DependentUpon>ThayDoiQuyDinh.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\TiepNhanDaiLy.xaml.cs">
+      <DependentUpon>TiepNhanDaiLy.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -67,6 +106,66 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Styles\DanhSachDaiLyStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\PhieuXuatHangStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\Styles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\BaoCaoCongNo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\BaoCaoDoanhThu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\BusinessHomePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\DanhSachDaiLy.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\MainContent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Page1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Page2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\PhieuThuTien.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\PhieuXuatHang.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\ReportHomePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\ThayDoiQuyDinh.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\TiepNhanDaiLy.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -94,6 +193,31 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Icons\question.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Icons\exclamation-mark32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Icons\add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Icons\receipt.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Icons\groceries.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Icons\right-arrow-circular-button.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Icons\get-money.png" />
+    <Resource Include="Assets\Icons\sales-report.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Icons\contract.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
