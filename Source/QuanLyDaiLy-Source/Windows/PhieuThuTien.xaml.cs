@@ -21,10 +21,22 @@ namespace QuanLyDaiLy_Source.Windows
     /// </summary>
     public partial class PhieuThuTien : Page
     {
+        /// <summary>
+        /// Invoke changes within the page loaded event.
+        /// </summary>
+        public static event EventHandler pageLoaded;
         public PhieuThuTien()
         {
             InitializeComponent();
-            App.Current.Properties["ContentFrameTitle"] = "Phiếu Thu Tiền";
+            Loaded += PhieuThuTien_Loaded;
+
+          
+        }
+
+        private void PhieuThuTien_Loaded(object sender, RoutedEventArgs e)
+        {
+            App.Current.Properties[Models.DefaultSettings.ContentFrameTitle] = "Phiếu Thu Tiền";
+            pageLoaded?.Invoke(this, e);
         }
 
         private void SaveAndExitButton_Click(object sender, RoutedEventArgs e)

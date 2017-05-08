@@ -21,10 +21,16 @@ namespace QuanLyDaiLy_Source.Windows
     /// </summary>
     public partial class TiepNhanDaiLy : Page
     {
+        /// <summary>
+        /// Invoke changes within the page loaded event.
+        /// </summary>
+        public static event EventHandler pageLoaded;
+
         public TiepNhanDaiLy()
         {
             InitializeComponent();
-            App.Current.Properties["ContentFrameTitle"] = "Tiếp Nhận Đại lý";
+            Loaded += TiepNhanDaiLy_Loaded;
+            
 
             //Field Check EventHandlers
             NameInputTextBox.LostFocus += NameInput_FieldCheck;
@@ -37,6 +43,12 @@ namespace QuanLyDaiLy_Source.Windows
             AcceptanceDateDatePicker.LostFocus += AcceptanceDateDatePicker_FieldCheck;
 
 
+        }
+
+        private void TiepNhanDaiLy_Loaded(object sender, RoutedEventArgs e)
+        {
+            App.Current.Properties[Models.DefaultSettings.ContentFrameTitle] = "Tiếp Nhận Đại lý";
+            pageLoaded?.Invoke(this, e);
         }
 
         private void AcceptanceDateDatePicker_FieldCheck(object sender, RoutedEventArgs e)

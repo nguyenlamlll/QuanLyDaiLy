@@ -21,15 +21,26 @@ namespace QuanLyDaiLy_Source.Windows
     /// </summary>
     public partial class PhieuXuatHang : Page
     {
+        /// <summary>
+        /// Invoke changes within the page loaded event.
+        /// </summary>
+        public static event EventHandler pageLoaded;
         public PhieuXuatHang()
         {
             InitializeComponent();
-            App.Current.Properties["ContentFrameTitle"] = "Phiếu Xuất Hàng";
+            Loaded += PhieuXuatHang_Loaded;
+
+
             //List<Models.DataGridTestItem> dataList = new List<Models.DataGridTestItem>();
             //MerchandiseDataGrid.ItemsSource = dataList;
 
         }
 
+        private void PhieuXuatHang_Loaded(object sender, RoutedEventArgs e)
+        {
+            App.Current.Properties[Models.DefaultSettings.ContentFrameTitle] = "Phiếu Xuất Hàng";
+            pageLoaded?.Invoke(this, e);
+        }
 
         private void AddRowButton_Click(object sender, RoutedEventArgs e)
         {
@@ -42,7 +53,7 @@ namespace QuanLyDaiLy_Source.Windows
             {
                 MerchandiseDataGrid.Items.Add(item);
             }
-           
+
         }
 
         private void SaveAndExitButton_Click(object sender, RoutedEventArgs e)

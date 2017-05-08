@@ -20,9 +20,21 @@ namespace QuanLyDaiLy_Source.Windows
     /// </summary>
     public partial class ThayDoiQuyDinh : Page
     {
+        /// <summary>
+        /// Invoke changes within the page loaded event.
+        /// </summary>
+        public static event EventHandler pageLoaded;
+
         public ThayDoiQuyDinh()
         {
             InitializeComponent();
+            Loaded += ThayDoiQuyDinh_Loaded;
+        }
+
+        private void ThayDoiQuyDinh_Loaded(object sender, RoutedEventArgs e)
+        {
+            App.Current.Properties[Models.DefaultSettings.ContentFrameTitle] = "Thay Đổi Quy Định";
+            pageLoaded?.Invoke(this, e);
         }
 
         private void AngecyRulesToggleButton_Checked(object sender, RoutedEventArgs e)
@@ -35,9 +47,5 @@ namespace QuanLyDaiLy_Source.Windows
 
         }
 
-        private void Page_Loaded(object sender, RoutedEventArgs e)
-        {
-            App.Current.Properties["ContentFrameTitle"] = "Thay Đổi Quy Định";
-        }
     }
 }

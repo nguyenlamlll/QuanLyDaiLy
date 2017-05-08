@@ -56,6 +56,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Models\DataGridTestItem.cs" />
+    <Compile Include="Models\DefaultSettings.cs" />
     <Compile Include="Models\MenuItems.cs" />
     <Compile Include="Utilities.cs" />
     <Compile Include="Windows\BaoCaoCongNo.xaml.cs">

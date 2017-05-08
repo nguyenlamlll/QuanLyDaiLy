@@ -29,7 +29,7 @@ namespace QuanLyDaiLy_Source
             InitializeComponent();
             GoBackButton.Visibility = Visibility.Hidden;
 
-            App.Current.Properties["ContentFrameTitle"] = "Trang Chủ";
+            App.Current.Properties[Models.DefaultSettings.ContentFrameTitle] = "Trang Chủ";
 
             ContentFrame.Navigate(new DanhSachDaiLy());
             //ContentFrame.Navigate(typeof(Windows.Page1)); //Host some placeholder page - work as a MainContents page
@@ -38,7 +38,16 @@ namespace QuanLyDaiLy_Source
             NavigationListView.ItemsSource = MenuItems;
 
 
+            BusinessHomePage.pageLoaded += new EventHandler(PageLoadCompleted);
+            PhieuThuTien.pageLoaded += new EventHandler(PageLoadCompleted);
+            PhieuXuatHang.pageLoaded += new EventHandler(PageLoadCompleted);
+            TiepNhanDaiLy.pageLoaded += new EventHandler(PageLoadCompleted);
 
+            ReportHomePage.pageLoaded += new EventHandler(PageLoadCompleted);
+            BaoCaoCongNo.pageLoaded += new EventHandler(PageLoadCompleted);
+            BaoCaoDoanhThu.pageLoaded += new EventHandler(PageLoadCompleted);
+
+            DanhSachDaiLy.pageLoaded += new EventHandler(PageLoadCompleted);
         }
         public object NavigationService { get; private set; }
 
@@ -93,11 +102,11 @@ namespace QuanLyDaiLy_Source
                     }
                 }
             }
-           
+
         }
 
         /// <summary>
-        /// 
+        /// Open or close Navigation bar
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -147,10 +156,14 @@ namespace QuanLyDaiLy_Source
 
         private void ContentFrame_LoadCompleted(object sender, NavigationEventArgs e)
         {
-            string currentTitle = App.Current.Properties["ContentFrameTitle"].ToString();
-            ContentFrameTitle.Text = currentTitle;
+            //string currentTitle = App.Current.Properties[Models.DefaultSettings.ContentFrameTitle].ToString();
+            //ContentFrameTitle.Text = currentTitle;
         }
 
-
+        public void PageLoadCompleted(object sender, EventArgs e)
+        {
+            string currentTitle = App.Current.Properties[Models.DefaultSettings.ContentFrameTitle].ToString();
+            ContentFrameTitle.Text = currentTitle;
+        }
     }
 }

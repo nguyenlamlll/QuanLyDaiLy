@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using QuanLyDaiLy_Source.Models;
 
 namespace QuanLyDaiLy_Source.Windows
 {
@@ -23,7 +24,14 @@ namespace QuanLyDaiLy_Source.Windows
         public BusinessHomePage()
         {
             InitializeComponent();
-            App.Current.Properties["ContentFrameTitle"] = "Nghiệp Vụ Đại Lý";
+            Loaded += BusinessHomePage_Loaded;
+            
+        }
+        public static event EventHandler pageLoaded;
+        private void BusinessHomePage_Loaded(object sender, RoutedEventArgs e)
+        {
+            App.Current.Properties[DefaultSettings.ContentFrameTitle] = "Nghiệp Vụ Đại Lý";
+            pageLoaded?.Invoke(this, e);
         }
 
         private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
