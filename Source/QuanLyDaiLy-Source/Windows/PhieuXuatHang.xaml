@@ -42,6 +42,7 @@
                     Quận
                         </TextBlock>
                         <ComboBox x:Name="DistrictSelectComboBox"
+                                  Selected="DistrictSelectComboBox_Selected"
                                   Width="350"
                                   Style="{DynamicResource InputComboBox}">
                         </ComboBox>
@@ -54,6 +55,7 @@
                     Đại Lý
                         </TextBlock>
                         <ComboBox x:Name="AgencySelectComboBox"
+                                  Selected="AgencySelectComboBox_Selected"
                                   Style="{DynamicResource InputComboBox}"
                                   Width="350"/>
                     </StackPanel>
@@ -103,18 +105,18 @@
                         Margin="10,0,50,0">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                         <TextBlock Style="{DynamicResource InputTextBlock}">Tổng:</TextBlock>
-                        <TextBox Style="{DynamicResource InputTextBox}" Width="200"
+                        <TextBox x:Name="SumTextBox" Style="{DynamicResource InputTextBox}" Width="200"
                              />
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                         <TextBlock Style="{DynamicResource InputTextBlock}">Số Trả:</TextBlock>
-                        <TextBox Style="{DynamicResource InputTextBox}" Width="200"/>
+                        <TextBox x:Name="PaidTextBox" Style="{DynamicResource InputTextBox}" Width="200"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                         <TextBlock Style="{DynamicResource InputTextBlock}">Còn Lại:</TextBlock>
-                        <TextBox Style="{DynamicResource InputTextBox}" Width="200"/>
+                        <TextBox x:Name="RemainderTextBox" Style="{DynamicResource InputTextBox}" Width="200"/>
                     </StackPanel>
                 </StackPanel>
 
@@ -147,6 +149,7 @@
 
                     <Button x:Name="SaveAndContinueButton" 
                         Content="Lưu Và Tiếp Tục"
+                            Click="SaveAndContinueButton_Click"
                         Style="{DynamicResource InputButton}"
                         Width="250"
                         HorizontalAlignment="Right">

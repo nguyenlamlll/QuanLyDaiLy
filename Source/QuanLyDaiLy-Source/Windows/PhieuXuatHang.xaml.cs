@@ -30,6 +30,7 @@ namespace QuanLyDaiLy_Source.Windows
             InitializeComponent();
             Loaded += PhieuXuatHang_Loaded;
 
+            //AgencySelectComboBox.IsEnabled = false;
 
             //List<Models.DataGridTestItem> dataList = new List<Models.DataGridTestItem>();
             //MerchandiseDataGrid.ItemsSource = dataList;
@@ -58,7 +59,13 @@ namespace QuanLyDaiLy_Source.Windows
 
         private void SaveAndExitButton_Click(object sender, RoutedEventArgs e)
         {
+            // Save
 
+            // Clear all input fields
+
+            //Exit
+            NavigationService ns = NavigationService.GetNavigationService(this);
+            ns.Navigate(new Uri("/QuanLyDaiLy-Source;component/Windows/BusinessHomePage.xaml", UriKind.Relative));
         }
 
         private void ExitButton_Click(object sender, RoutedEventArgs e)
@@ -70,6 +77,25 @@ namespace QuanLyDaiLy_Source.Windows
                 NavigationService ns = NavigationService.GetNavigationService(this);
                 ns.Navigate(new Uri("/QuanLyDaiLy-Source;component/Windows/BusinessHomePage.xaml", UriKind.Relative));
             }
+        }
+
+        private void SaveAndContinueButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Save
+
+            // Clear all input fields
+            MerchandiseDataGrid.Items.Clear();
+            MerchandiseDataGrid.Items.Refresh();
+        }
+
+        private void DistrictSelectComboBox_Selected(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void AgencySelectComboBox_Selected(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
