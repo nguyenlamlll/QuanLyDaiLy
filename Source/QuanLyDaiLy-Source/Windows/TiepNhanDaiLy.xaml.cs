@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using QuanLyDaiLy_Source;
 
+
 namespace QuanLyDaiLy_Source.Windows
 {
     /// <summary>
@@ -30,7 +31,7 @@ namespace QuanLyDaiLy_Source.Windows
         {
             InitializeComponent();
             Loaded += TiepNhanDaiLy_Loaded;
-            
+
 
             //Field Check EventHandlers
             NameInputTextBox.LostFocus += NameInput_FieldCheck;
@@ -125,7 +126,7 @@ namespace QuanLyDaiLy_Source.Windows
             }
         }
 
-       
+
         private void IDInputTextBox_FieldCheck(object sender, RoutedEventArgs e)
         {
             if (IDInputTextBox.Text == "")
@@ -154,6 +155,20 @@ namespace QuanLyDaiLy_Source.Windows
         private void SaveAndExitButton_Click(object sender, RoutedEventArgs e)
         {
 
+            //var dataAccessObj = DAODLL.DAOTiepNhanDaiLy.Instance;
+
+            DAODLL.DAILY daiLy = new DAODLL.DAILY();
+
+           
+            daiLy.MADL = int.Parse(IDInputTextBox.Text.ToString());
+            daiLy.TENDL = NameInputTextBox.Text.ToString();
+            daiLy.DIENTHOAI = PhoneNumberInputTextBox.Text.ToString();
+            daiLy.DIACHI = AddressNumberInputTextBox.Text.ToString() + StreetInputTextBox.Text.ToString();
+            daiLy.NGAYTIEPNHAN = AcceptanceDateDatePicker.SelectedDate;
+            daiLy.MAQUAN = int.Parse(DistrictInputTextBox.Text.ToString());
+            daiLy.LOAIDL = int.Parse(TypeInputComboBox.SelectedItem.ToString());
+
+           
         }
 
         private void ExitButton_Click(object sender, RoutedEventArgs e)

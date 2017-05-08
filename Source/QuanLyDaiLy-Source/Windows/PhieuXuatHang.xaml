@@ -15,6 +15,7 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Page.Resources>
+
     <Grid Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -42,9 +43,11 @@
                     Quận
                         </TextBlock>
                         <ComboBox x:Name="DistrictSelectComboBox"
-                                  Selected="DistrictSelectComboBox_Selected"
+
                                   Width="350"
                                   Style="{DynamicResource InputComboBox}">
+                            <ComboBoxItem>1</ComboBoxItem>
+                            <ComboBoxItem>2</ComboBoxItem>
                         </ComboBox>
                     </StackPanel>
 
@@ -55,9 +58,12 @@
                     Đại Lý
                         </TextBlock>
                         <ComboBox x:Name="AgencySelectComboBox"
-                                  Selected="AgencySelectComboBox_Selected"
+
                                   Style="{DynamicResource InputComboBox}"
-                                  Width="350"/>
+                                  Width="350">
+                            <ComboBoxItem>DL 1</ComboBoxItem>
+                            <ComboBoxItem>DL 2</ComboBoxItem>
+                        </ComboBox>
                     </StackPanel>
 
                 </StackPanel>
@@ -77,25 +83,27 @@
 
                 <DataGrid x:Name="MerchandiseDataGrid"
                       Grid.Row="1"
-                      AutoGenerateColumns="False"
+                      AutoGenerateColumns="True"
                       CanUserAddRows="True" CanUserDeleteRows="True" 
                       CanUserResizeColumns="True"
-                      Margin="40,15,40,0"
+                      Margin="42,15,38.2,0.2"
                       Height="240"
+                          ItemsSource="{Binding Path=Values}"
                       Style="{DynamicResource DataGridStyle}"
                       SelectionMode="Extended" SelectionUnit="Cell" 
                       ScrollViewer.CanContentScroll="True"
                       >
+                    <!--
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="STT" Width="0.2*" Binding="{Binding Test1}" />
+                        <DataGridTextColumn Header="STT" Width="0.2*"/>
                         <DataGridComboBoxColumn Header="Mặt Hàng" Width="0.9*"/>
                         <DataGridTextColumn Header="Đơn Vị Tính" Width="0.5*"
-                                        IsReadOnly="True"
-                                        Binding="{Binding Test2}"/>
+                                        IsReadOnly="True"/>
                         <DataGridTextColumn Header="Số Lượng" Width="0.5*"/>
                         <DataGridTextColumn Header="Đơn Giá" Width="0.6*"/>
                         <DataGridTextColumn Header="Thành Tiền" Width="0.5*" />
                     </DataGrid.Columns>
+                    -->
                 </DataGrid>
                 
 

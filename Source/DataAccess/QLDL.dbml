@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="QLDL" Class="QLDLDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=DESKTOP-6QE5JP6;Initial Catalog=QLDL;Integrated Security=True" SettingsObjectName="DAODLL.Properties.Settings" SettingsPropertyName="QLDLConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.CHUCVU" Member="CHUCVUs">
+    <Type Name="CHUCVU">
+      <Column Name="MACHUCVU" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TENCHUCVU" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Association Name="CHUCVU_NHANVIEN" Member="NHANVIENs" ThisKey="MACHUCVU" OtherKey="MACHUCVU" Type="NHANVIEN" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CTPX" Member="CTPXes">
+    <Type Name="CTPX">
+      <Column Name="MAPHIEU" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="MAHANG" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="SOLUONG" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="MATHANG_CTPX" Member="MATHANG" ThisKey="MAHANG" OtherKey="MAHANG" Type="MATHANG" IsForeignKey="true" />
+      <Association Name="PHIEUXUATHANG_CTPX" Member="PHIEUXUATHANG" ThisKey="MAPHIEU" OtherKey="MAPHIEU" Type="PHIEUXUATHANG" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DAILY" Member="DAILies">
+    <Type Name="DAILY">
+      <Column Name="MADL" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TENDL" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="LOAIDL" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DIENTHOAI" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="DIACHI" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="MAQUAN" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NGAYTIEPNHAN" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="SONO" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="TINHTRANG" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="DAILY_PHIEUXUATHANG" Member="PHIEUXUATHANG" ThisKey="MADL" OtherKey="MAPHIEU" Type="PHIEUXUATHANG" Cardinality="One" />
+      <Association Name="DAILY_PHIEUTHUTIEN" Member="PHIEUTHUTIENs" ThisKey="MADL" OtherKey="MADL" Type="PHIEUTHUTIEN" />
+      <Association Name="LOAIDL_DAILY" Member="LOAIDL1" ThisKey="LOAIDL" OtherKey="MALOAI" Type="LOAIDL" IsForeignKey="true" />
+      <Association Name="QUAN_DAILY" Member="QUAN" ThisKey="MAQUAN" OtherKey="MAQUAN" Type="QUAN" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DVT" Member="DVTs">
+    <Type Name="DVT">
+      <Column Name="MADVT" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="DVT" Member="DVT1" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="DVT_MATHANG" Member="MATHANGs" ThisKey="MADVT" OtherKey="MADVT" Type="MATHANG" />
+    </Type>
+  </Table>
+  <Table Name="dbo.LOAIDL" Member="LOAIDLs">
+    <Type Name="LOAIDL">
+      <Column Name="MALOAI" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TENLOAI" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="SONOTOIDA" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Association Name="LOAIDL_DAILY" Member="DAILies" ThisKey="MALOAI" OtherKey="LOAIDL" Type="DAILY" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MATHANG" Member="MATHANGs">
+    <Type Name="MATHANG">
+      <Column Name="MAHANG" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TENHANG" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="MADVT" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DONGIA" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Association Name="MATHANG_CTPX" Member="CTPXes" ThisKey="MAHANG" OtherKey="MAHANG" Type="CTPX" />
+      <Association Name="DVT_MATHANG" Member="DVT" ThisKey="MADVT" OtherKey="MADVT" Type="DVT" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.NHANVIEN" Member="NHANVIENs">
+    <Type Name="NHANVIEN">
+      <Column Name="MANV" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TENNV" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="NGAYSINH" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="DIACHI" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="MACHUCVU" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="NHANVIEN_TAIKHOAN" Member="TAIKHOANs" ThisKey="MANV" OtherKey="MANV" Type="TAIKHOAN" />
+      <Association Name="NHANVIEN_PHIEUXUATHANG" Member="PHIEUXUATHANGs" ThisKey="MANV" OtherKey="NGUOIXUAT" Type="PHIEUXUATHANG" />
+      <Association Name="NHANVIEN_PHIEUTHUTIEN" Member="PHIEUTHUTIENs" ThisKey="MANV" OtherKey="NGUOITHU" Type="PHIEUTHUTIEN" />
+      <Association Name="CHUCVU_NHANVIEN" Member="CHUCVU" ThisKey="MACHUCVU" OtherKey="MACHUCVU" Type="CHUCVU" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TAIKHOAN" Member="TAIKHOANs">
+    <Type Name="TAIKHOAN">
+      <Column Name="MATK" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TENDANGNHAP" Type="System.String" DbType="NChar(20)" CanBeNull="true" />
+      <Column Name="PASSWORD" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="MANV" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="NHANVIEN_TAIKHOAN" Member="NHANVIEN" ThisKey="MANV" OtherKey="MANV" Type="NHANVIEN" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.QUAN" Member="QUANs">
+    <Type Name="QUAN">
+      <Column Name="MAQUAN" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TENQUAN" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="SODLTOIDA" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="QUAN_DAILY" Member="DAILies" ThisKey="MAQUAN" OtherKey="MAQUAN" Type="DAILY" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PHIEUXUATHANG" Member="PHIEUXUATHANGs">
+    <Type Name="PHIEUXUATHANG">
+      <Column Name="MAPHIEU" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="MADL" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NGAYLAP" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="TONGTIEN" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="SOTIENTRA" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="CONLAI" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="NGUOIXUAT" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="PHIEUXUATHANG_CTPX" Member="CTPXes" ThisKey="MAPHIEU" OtherKey="MAPHIEU" Type="CTPX" />
+      <Association Name="DAILY_PHIEUXUATHANG" Member="DAILY" ThisKey="MAPHIEU" OtherKey="MADL" Type="DAILY" IsForeignKey="true" />
+      <Association Name="NHANVIEN_PHIEUXUATHANG" Member="NHANVIEN" ThisKey="NGUOIXUAT" OtherKey="MANV" Type="NHANVIEN" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PHIEUTHUTIEN" Member="PHIEUTHUTIENs">
+    <Type Name="PHIEUTHUTIEN">
+      <Column Name="MAPHIEU" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="MADL" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NGAYTHUTIEN" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="SOTIEN" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="NGUOITHU" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="DAILY_PHIEUTHUTIEN" Member="DAILY" ThisKey="MADL" OtherKey="MADL" Type="DAILY" IsForeignKey="true" />
+      <Association Name="NHANVIEN_PHIEUTHUTIEN" Member="NHANVIEN" ThisKey="NGUOITHU" OtherKey="MANV" Type="NHANVIEN" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.[vwCHUCVU-NHANVIEN-TAIKHOAN]" Member="vwCHUCVU_NHANVIEN_TAIKHOANs">
+    <Type Name="vwCHUCVU_NHANVIEN_TAIKHOAN">
+      <Column Name="TENCHUCVU" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="TENNV" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="MANV" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TENDANGNHAP" Type="System.String" DbType="NChar(20)" CanBeNull="true" />
+      <Column Name="PASSWORD" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+    </Type>
+  </Table>
+  <Table Name="dbo.[vwDAILY-PHIEUTHUTIEN-NHANVIEN]" Member="vwDAILY_PHIEUTHUTIEN_NHANVIENs">
+    <Type Name="vwDAILY_PHIEUTHUTIEN_NHANVIEN">
+      <Column Name="TENDL" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="MAPHIEU" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="MADL" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NGAYTHUTIEN" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="SOTIEN" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="NGUOITHU" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TENNV" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.[vw-SEARCH-PHIEUXUATHANG]" Member="vw_SEARCH_PHIEUXUATHANGs">
+    <Type Name="vw_SEARCH_PHIEUXUATHANG">
+      <Column Name="TENHANG" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="DVT" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="SOLUONG" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NGAYLAP" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="TENQUAN" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="TENDL" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.[vwDAILY-LOAIDL-QUAN]" Member="vwDAILY_LOAIDL_QUANs">
+    <Type Name="vwDAILY_LOAIDL_QUAN">
+      <Column Name="MADL" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TENDL" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="DIENTHOAI" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="DIACHI" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="NGAYTIEPNHAN" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="SONO" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="TINHTRANG" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TENLOAI" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="TENQUAN" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="MAQUAN" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="LOAIDL" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+</Database>

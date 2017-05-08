@@ -16,6 +16,15 @@ using System.Windows.Shapes;
 
 namespace QuanLyDaiLy_Source.Windows
 {
+    class ViewModel
+    {
+        public ObservableCollection<Models.DataGridTestItem> Values
+        {
+            get;
+            set;
+        }
+    }
+
     /// <summary>
     /// Interaction logic for PhieuXuatHang.xaml
     /// </summary>
@@ -29,9 +38,9 @@ namespace QuanLyDaiLy_Source.Windows
         {
             InitializeComponent();
             Loaded += PhieuXuatHang_Loaded;
-
+            MerchandiseDataGrid.DataContext = new ViewModel();
             //AgencySelectComboBox.IsEnabled = false;
-
+            
             //List<Models.DataGridTestItem> dataList = new List<Models.DataGridTestItem>();
             //MerchandiseDataGrid.ItemsSource = dataList;
 
@@ -88,14 +97,6 @@ namespace QuanLyDaiLy_Source.Windows
             MerchandiseDataGrid.Items.Refresh();
         }
 
-        private void DistrictSelectComboBox_Selected(object sender, RoutedEventArgs e)
-        {
 
-        }
-
-        private void AgencySelectComboBox_Selected(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }

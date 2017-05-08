@@ -70,6 +70,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\BusinessLogic\DaiLyManager.cs" />
+    <Compile Include="Models\BusinessLogic\Manager.cs" />
     <Compile Include="Models\DataGridTestItem.cs" />
     <Compile Include="Models\DefaultSettings.cs" />
     <Compile Include="Models\MenuItems.cs" />
@@ -246,6 +248,12 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataAccess\DAODLL.csproj">
+      <Project>{b9e86e97-7690-4f05-a623-d6fed79d447e}</Project>
+      <Name>DAODLL</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
