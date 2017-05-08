@@ -27,6 +27,8 @@ namespace QuanLyDaiLy_Source
         public MainWindow()
         {
             InitializeComponent();
+            this.Closing += MainWindow_Closing;
+
             GoBackButton.Visibility = Visibility.Hidden;
 
             App.Current.Properties[Models.DefaultSettings.ContentFrameTitle] = "Trang Chủ";
@@ -49,6 +51,22 @@ namespace QuanLyDaiLy_Source
 
             DanhSachDaiLy.pageLoaded += new EventHandler(PageLoadCompleted);
         }
+
+        /// <summary>
+        /// Handle events when closing this Main Window (also, closing this application)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            // Let user confirm one more time before actually closing the application
+            if (MessageBox.Show("Bạn có chắc chắn là muốn thoát khỏi chương trình?", "Tắt chương trình", MessageBoxButton.YesNo) 
+                != MessageBoxResult.Yes)
+            {
+                e.Cancel = true;
+            }
+        }
+
         public object NavigationService { get; private set; }
 
 

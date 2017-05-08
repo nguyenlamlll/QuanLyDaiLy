@@ -46,7 +46,13 @@ namespace QuanLyDaiLy_Source.Windows
 
         private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
-
+            MessageBoxResult result = MessageBox.Show("Bạn có muốn thoát?", "Thoát", MessageBoxButton.YesNo, MessageBoxImage.Question,
+               MessageBoxResult.Yes);
+            if (result == MessageBoxResult.Yes)
+            {
+                NavigationService ns = NavigationService.GetNavigationService(this);
+                ns.Navigate(new Uri("/QuanLyDaiLy-Source;component/Windows/BusinessHomePage.xaml", UriKind.Relative));
+            }
         }
     }
 }

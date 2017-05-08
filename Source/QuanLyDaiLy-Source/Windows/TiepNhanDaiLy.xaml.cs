@@ -137,6 +137,7 @@ namespace QuanLyDaiLy_Source.Windows
                 IDStatus.Visibility = Visibility.Hidden;
             }
         }
+
         private void TypeInputComboBox_FieldCheck(object sender, RoutedEventArgs e)
         {
             if (TypeInputComboBox.SelectedIndex == -1)
@@ -162,7 +163,7 @@ namespace QuanLyDaiLy_Source.Windows
             if (result == MessageBoxResult.Yes)
             {
                 NavigationService ns = NavigationService.GetNavigationService(this);
-                ns.Navigate(new Uri("/QuanLyDaiLy-Source;component/Windows/MainContent.xaml", UriKind.Relative));
+                ns.Navigate(new Uri("/QuanLyDaiLy-Source;component/Windows/BusinessHomePage.xaml", UriKind.Relative));
             }
         }
 

@@ -37,10 +37,11 @@ namespace QuanLyDaiLy_Source.Windows
         private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ListViewItem item = (ListViewItem)BusinessListView.SelectedItem;
-            Test.Text = item.Name;
+            //Test.Text = item.Name;
 
             string XuatHang = PhieuXuatHangListViewItem.Name.ToString();
             string ThuTien = PhieuThuTienListViewItem.Name.ToString();
+            string TiepNhan = TiepNhanDaiLyListViewItem.Name.ToString();
 
             if (item.Name.ToString() == XuatHang)
             {
@@ -59,6 +60,17 @@ namespace QuanLyDaiLy_Source.Windows
                 try
                 {
                     this.NavigationService.Navigate(new PhieuThuTien());
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
+            if (item.Name.ToString() == TiepNhan)
+            {
+                try
+                {
+                    this.NavigationService.Navigate(new TiepNhanDaiLy());
                 }
                 catch (Exception ex)
                 {

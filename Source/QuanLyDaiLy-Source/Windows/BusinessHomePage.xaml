@@ -33,7 +33,7 @@
                 </ItemsPanelTemplate>
             </ListView.ItemsPanel>
 
-            <ListViewItem>
+            <ListViewItem x:Name="TiepNhanDaiLyListViewItem">
                 <StackPanel Orientation="Vertical">
                     <Image Source="/QuanLyDaiLy-Source;component/Assets/Icons/contract.png"
                        Width="256" Height="256">
