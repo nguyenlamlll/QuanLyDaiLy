@@ -8,29 +8,34 @@ using System.Windows;
 
 namespace QuanLyDaiLy_Source.Models.BusinessLogic
 {
-    public class DaiLyManager: Manager<DAILY>
+    public class DaiLyManager : Manager<DAILY>
     {
-        public static void Insert(DAILY daiLy)
+        public override bool Insert(DAILY obj)
         {
             try
             {
-                DAODLL.DAOTiepNhanDaiLy.Instance.Insert(daiLy);
+                DAODLL.DAOTiepNhanDaiLy.Instance.Insert(obj);
+                return true;
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Không thể tham đại lý. Vui lòng kiểm tra lại.\n" + ex.ToString());
+                MessageBox.Show("Không thể thêm đại lý. Vui lòng kiểm tra lại.\n" + ex.ToString());
             }
-
-        }
-
-        public override bool Add(DAILY obj)
-        {
-            throw new NotImplementedException();
+            return false;
         }
 
         public override bool Delete(DAILY obj)
         {
-            throw new NotImplementedException();
+            try
+            {
+                DAODLL.DAOTiepNhanDaiLy.Instance.Delete(obj.MADL);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Không thể xóa đại lý. Vui lòng kiểm tra lại.\n" + ex.ToString());
+            }
+            return false;
         }
 
         public override DAILY Get(int id)

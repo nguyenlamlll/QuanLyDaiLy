@@ -17,7 +17,7 @@ namespace QuanLyDaiLy_Source.Models.BusinessLogic
         public abstract List<T> GetAll();
         public abstract T Get(int id);
 
-        public abstract bool Add(T obj);
+        public abstract bool Insert(T obj);
         public abstract bool Delete(T obj);
         public abstract bool Update(T obj);
     }

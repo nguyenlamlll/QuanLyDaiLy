@@ -48,5 +48,11 @@ namespace QuanLyDaiLy_Source.Windows
         {
             AdvancededSearch.Visibility = Visibility.Collapsed;
         }
+
+        private void MenuItemDelete_Click(object sender, RoutedEventArgs e)
+        {
+            if (AgencyListView.SelectedIndex == -1) return;
+            int index = AgencyListView.SelectedIndex;
+        }
     }
 }

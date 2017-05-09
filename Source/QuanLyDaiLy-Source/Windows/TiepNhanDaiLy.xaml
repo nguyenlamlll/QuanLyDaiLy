@@ -196,7 +196,7 @@
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
-                    <ComboBox x:Name="DistrictInputTextBox"
+                    <ComboBox x:Name="DistrictInputComboBox"
                               Style="{DynamicResource InputComboBox}"/>
                     <Image x:Name="DistrictStatus" Source="/QuanLyDaiLy-Source;component/Assets/Icons/exclamation-mark32.png"
                            Height="16" Width="16" Cursor="Help"
@@ -263,6 +263,7 @@
                     </Button>
 
                     <Button x:Name="SaveAndContinueButton" 
+                            Click="SaveAndContinueButton_Click"
                             Content="Lưu Và Tiếp Tục"
                             Style="{DynamicResource InputButton}"
                             Width="250">

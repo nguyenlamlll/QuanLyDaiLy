@@ -27,6 +27,8 @@ namespace QuanLyDaiLy_Source.Windows
         /// </summary>
         public static event EventHandler pageLoaded;
 
+        private Models.BusinessLogic.DaiLyManager daiLyManager = new Models.BusinessLogic.DaiLyManager();
+
         public TiepNhanDaiLy()
         {
             InitializeComponent();
@@ -40,7 +42,7 @@ namespace QuanLyDaiLy_Source.Windows
             PhoneNumberInputTextBox.LostFocus += PhoneNumberInputTextBox_FieldCheck;
             AddressNumberInputTextBox.LostFocus += AddressNumberInputTextBox_FieldCheck;
             StreetInputTextBox.LostFocus += StreetInputTextBox_FieldCheck;
-            DistrictInputTextBox.LostFocus += DistrictInputTextBox_FieldCheck;
+            DistrictInputComboBox.LostFocus += DistrictInputComboBox_FieldCheck;
             AcceptanceDateDatePicker.LostFocus += AcceptanceDateDatePicker_FieldCheck;
 
 
@@ -50,6 +52,24 @@ namespace QuanLyDaiLy_Source.Windows
         {
             App.Current.Properties[Models.DefaultSettings.ContentFrameTitle] = "Tiếp Nhận Đại lý";
             pageLoaded?.Invoke(this, e);
+
+            try
+            {
+                List<string> danhSachQuan = DAODLL.DAOView.Instance.GetAllQuanName();
+                List<string> danhSachLoaiDL = DAODLL.DAOView.Instance.GetAllLoaiDLName();
+                DistrictInputComboBox.Items.Clear();
+                TypeInputComboBox.Items.Clear();
+                DistrictInputComboBox.ItemsSource = danhSachQuan;
+                TypeInputComboBox.ItemsSource = danhSachLoaiDL;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+
+
+
+
         }
 
         private void AcceptanceDateDatePicker_FieldCheck(object sender, RoutedEventArgs e)
@@ -64,9 +84,9 @@ namespace QuanLyDaiLy_Source.Windows
             }
         }
 
-        private void DistrictInputTextBox_FieldCheck(object sender, RoutedEventArgs e)
+        private void DistrictInputComboBox_FieldCheck(object sender, RoutedEventArgs e)
         {
-            if (DistrictInputTextBox.SelectedIndex == -1)
+            if (DistrictInputComboBox.SelectedIndex == -1)
             {
                 DistrictStatus.Visibility = Visibility.Visible;
             }
@@ -159,16 +179,46 @@ namespace QuanLyDaiLy_Source.Windows
 
             DAODLL.DAILY daiLy = new DAODLL.DAILY();
 
-           
+            GetDaiLyInput(daiLy);
+
+            daiLyManager.Insert(daiLy);
+
+            NavigationService ns = NavigationService.GetNavigationService(this);
+            ns.Navigate(new Uri("/QuanLyDaiLy-Source;component/Windows/BusinessHomePage.xaml", UriKind.Relative));
+        }
+
+        private void GetDaiLyInput(DAODLL.DAILY daiLy)
+        {
             daiLy.MADL = int.Parse(IDInputTextBox.Text.ToString());
             daiLy.TENDL = NameInputTextBox.Text.ToString();
             daiLy.DIENTHOAI = PhoneNumberInputTextBox.Text.ToString();
-            daiLy.DIACHI = AddressNumberInputTextBox.Text.ToString() + StreetInputTextBox.Text.ToString();
+            daiLy.DIACHI = AddressNumberInputTextBox.Text.ToString() + ", "+ StreetInputTextBox.Text.ToString();
             daiLy.NGAYTIEPNHAN = AcceptanceDateDatePicker.SelectedDate;
-            daiLy.MAQUAN = int.Parse(DistrictInputTextBox.Text.ToString());
-            daiLy.LOAIDL = int.Parse(TypeInputComboBox.SelectedItem.ToString());
+            daiLy.MAQUAN = DistrictInputComboBox.SelectedIndex + 1;
+            daiLy.LOAIDL = TypeInputComboBox.SelectedIndex + 1;
+        }
 
-           
+        private void SaveAndContinueButton_Click(object sender, RoutedEventArgs e)
+        {
+            //var dataAccessObj = DAODLL.DAOTiepNhanDaiLy.Instance;
+
+            DAODLL.DAILY daiLy = new DAODLL.DAILY();
+
+            GetDaiLyInput(daiLy);
+
+            daiLyManager.Insert(daiLy);
+
+            MessageBox.Show("Đã thêm thành công.", "Thông Báo", MessageBoxButton.OK, MessageBoxImage.Information,
+                MessageBoxResult.OK);
+
+            NameInputTextBox.Text = "";
+            IDInputTextBox.Text = "";
+            TypeInputComboBox.SelectedIndex = -1;
+            PhoneNumberInputTextBox.Text = "";
+            AddressNumberInputTextBox.Text = "";
+            StreetInputTextBox.Text = "";
+            DistrictInputComboBox.SelectedIndex = -1;
+            AcceptanceDateDatePicker.SelectedDate = DateTime.Now;
         }
 
         private void ExitButton_Click(object sender, RoutedEventArgs e)
