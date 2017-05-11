@@ -94,7 +94,10 @@ namespace QuanLyDaiLy_Source
                     {
                         case MenuItemCategory.Homepage:
                             {
+                                Windows.ProgressBarWindow pbWindow = new Windows.ProgressBarWindow();
+                                pbWindow.Show();
                                 ContentFrame.Navigate(new TiepNhanDaiLy());
+                                //pbWindow.Close();
                                 break;
                             }
                         case MenuItemCategory.Lists:

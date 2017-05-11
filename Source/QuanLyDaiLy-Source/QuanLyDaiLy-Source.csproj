@@ -104,6 +104,9 @@
     <Compile Include="Windows\PhieuXuatHang.xaml.cs">
       <DependentUpon>PhieuXuatHang.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\ProgressBarWindow.xaml.cs">
+      <DependentUpon>ProgressBarWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\ReportHomePage.xaml.cs">
       <DependentUpon>ReportHomePage.xaml</DependentUpon>
     </Compile>
@@ -170,6 +173,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\PhieuXuatHang.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\ProgressBarWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
