@@ -70,12 +70,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Models\BusinessLogic\DaiLyManager.cs" />
-    <Compile Include="Models\BusinessLogic\Manager.cs" />
-    <Compile Include="Models\BusinessLogic\QuanManager.cs" />
-    <Compile Include="Models\DataGridTestItem.cs" />
-    <Compile Include="Models\DefaultSettings.cs" />
-    <Compile Include="Models\MenuItems.cs" />
+    <Compile Include="Commons\BusinessLogic\DaiLyManager.cs" />
+    <Compile Include="Commons\BusinessLogic\Manager.cs" />
+    <Compile Include="Commons\BusinessLogic\QuanManager.cs" />
+    <Compile Include="Commons\DataGridTestItem.cs" />
+    <Compile Include="Commons\DefaultSettings.cs" />
+    <Compile Include="Commons\MenuItems.cs" />
     <Compile Include="Utilities.cs" />
     <Compile Include="Windows\BaoCaoCongNo.xaml.cs">
       <DependentUpon>BaoCaoCongNo.xaml</DependentUpon>

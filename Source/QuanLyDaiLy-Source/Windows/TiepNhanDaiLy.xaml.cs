@@ -13,7 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using QuanLyDaiLy_Source;
-
+using DAODLL;
+using System.Collections.ObjectModel;
 
 namespace QuanLyDaiLy_Source.Windows
 {
@@ -35,7 +36,7 @@ namespace QuanLyDaiLy_Source.Windows
             Loaded += TiepNhanDaiLy_Loaded;
 
 
-            //Field Check EventHandlers
+            // Field Check EventHandlers
             NameInputTextBox.LostFocus += NameInput_FieldCheck;
             IDInputTextBox.LostFocus += IDInputTextBox_FieldCheck;
             TypeInputComboBox.LostFocus += TypeInputComboBox_FieldCheck;
@@ -53,10 +54,11 @@ namespace QuanLyDaiLy_Source.Windows
             App.Current.Properties[Models.DefaultSettings.ContentFrameTitle] = "Tiếp Nhận Đại lý";
             pageLoaded?.Invoke(this, e);
 
+            // Get Districts and Agency types from database.
             try
             {
-                List<string> danhSachQuan = DAODLL.DAOView.Instance.GetAllQuanName();
-                List<string> danhSachLoaiDL = DAODLL.DAOView.Instance.GetAllLoaiDLName();
+                ObservableCollection<QUAN> danhSachQuan = DAOView.Instance.GetAllQuan();
+                ObservableCollection<LOAIDL> danhSachLoaiDL = DAOView.Instance.GetAllLoaiDL();
                 DistrictInputComboBox.Items.Clear();
                 TypeInputComboBox.Items.Clear();
                 DistrictInputComboBox.ItemsSource = danhSachQuan;
@@ -66,10 +68,6 @@ namespace QuanLyDaiLy_Source.Windows
             {
                 MessageBox.Show(ex.ToString());
             }
-
-
-
-
         }
 
         private void AcceptanceDateDatePicker_FieldCheck(object sender, RoutedEventArgs e)
@@ -146,7 +144,6 @@ namespace QuanLyDaiLy_Source.Windows
             }
         }
 
-
         private void IDInputTextBox_FieldCheck(object sender, RoutedEventArgs e)
         {
             if (IDInputTextBox.Text == "")
@@ -172,6 +169,9 @@ namespace QuanLyDaiLy_Source.Windows
             }
         }
 
+        /// <summary>
+        /// Get all inputs, store into database, and navigate to homepage.
+        /// </summary>
         private void SaveAndExitButton_Click(object sender, RoutedEventArgs e)
         {
 
@@ -187,17 +187,9 @@ namespace QuanLyDaiLy_Source.Windows
             ns.Navigate(new Uri("/QuanLyDaiLy-Source;component/Windows/BusinessHomePage.xaml", UriKind.Relative));
         }
 
-        private void GetDaiLyInput(DAODLL.DAILY daiLy)
-        {
-            daiLy.MADL = int.Parse(IDInputTextBox.Text.ToString());
-            daiLy.TENDL = NameInputTextBox.Text.ToString();
-            daiLy.DIENTHOAI = PhoneNumberInputTextBox.Text.ToString();
-            daiLy.DIACHI = AddressNumberInputTextBox.Text.ToString() + ", "+ StreetInputTextBox.Text.ToString();
-            daiLy.NGAYTIEPNHAN = AcceptanceDateDatePicker.SelectedDate;
-            daiLy.MAQUAN = DistrictInputComboBox.SelectedIndex + 1;
-            daiLy.LOAIDL = TypeInputComboBox.SelectedIndex + 1;
-        }
-
+        /// <summary>
+        /// Get all inputs and store into database. Then clear all input fields.
+        /// </summary>
         private void SaveAndContinueButton_Click(object sender, RoutedEventArgs e)
         {
             //var dataAccessObj = DAODLL.DAOTiepNhanDaiLy.Instance;
@@ -221,6 +213,9 @@ namespace QuanLyDaiLy_Source.Windows
             AcceptanceDateDatePicker.SelectedDate = DateTime.Now;
         }
 
+        /// <summary>
+        /// Handle Exit event. Ask before navigating.
+        /// </summary>
         private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
             MessageBoxResult result = MessageBox.Show("Bạn có muốn thoát?", "Thoát", MessageBoxButton.YesNo, MessageBoxImage.Question,
@@ -232,6 +227,19 @@ namespace QuanLyDaiLy_Source.Windows
             }
         }
 
-
+        /// <summary>
+        /// Get all information from XAML.
+        /// </summary>
+        /// <param name="daiLy"></param>
+        private void GetDaiLyInput(DAODLL.DAILY daiLy)
+        {
+            daiLy.MADL = int.Parse(IDInputTextBox.Text.ToString());
+            daiLy.TENDL = NameInputTextBox.Text.ToString();
+            daiLy.DIENTHOAI = PhoneNumberInputTextBox.Text.ToString();
+            daiLy.DIACHI = AddressNumberInputTextBox.Text.ToString() + ", " + StreetInputTextBox.Text.ToString();
+            daiLy.NGAYTIEPNHAN = AcceptanceDateDatePicker.SelectedDate;
+            daiLy.MAQUAN = DistrictInputComboBox.SelectedIndex + 1;
+            daiLy.LOAIDL = TypeInputComboBox.SelectedIndex + 1;
+        }
     }
 }
