@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,7 +13,7 @@ namespace DAODLL
         /// Singleton tech for class DAOView
         /// </summary>
         private DAOView() { }
-        private static volatile DAOView instance;
+        public static volatile DAOView instance;
         public static DAOView Instance
         {
             get
@@ -27,61 +28,92 @@ namespace DAODLL
         /// Get all DaiLy's name and show upto ComboBox
         /// </summary>
         /// <returns></returns>
-        public List<string> GetAllDaiLyName()
+        public ObservableCollection<DAILY> GetAllDaiLy()
         {
-            List<string> li = new List<string>();
+            ObservableCollection<DAILY> li = new ObservableCollection<DAILY>();
             using (QLDLDataContext db = new QLDLDataContext())
             {
-                li = (db.DAILies.Select(p => p.TENDL)).ToList();
+                var l = db.DAILies.Select(p => p);
+                foreach (var item in l)
+                {
+                    li.Add(item as DAILY);
+                }
                 return li;
             }
-            return null;
         }
 
         /// <summary>
         /// Get all QUAN's name and show upto ComboBox
         /// </summary>
         /// <returns></returns>
-        public List<string> GetAllQuanName()
+        public ObservableCollection<QUAN> GetAllQuan()
         {
-            List<string> li = new List<string>();
-            using(QLDLDataContext db = new QLDLDataContext())
+            ObservableCollection<QUAN> li = new ObservableCollection<QUAN>();
+            using (QLDLDataContext db = new QLDLDataContext())
             {
-                li = (db.QUANs.Select(p => p.TENQUAN)).ToList();
+                var l = db.QUANs.Select(p => p);
+                foreach (var item in l)
+                {
+                    li.Add(item as QUAN);
+                }
                 return li;
             }
-            return null;
         }
 
         /// <summary>
         /// Get all LAOIDAILY's name and show upto ComboBox
         /// </summary>
         /// <returns></returns>
-        public List<string> GetAllLoaiDLName()
+        public ObservableCollection<LOAIDL> GetAllLoaiDL()
         {
-            List<string> li = new List<string>();
+            ObservableCollection<LOAIDL> li = new ObservableCollection<LOAIDL>();
             using (QLDLDataContext db = new QLDLDataContext())
             {
-                li = (db.LOAIDLs.Select(p => p.TENLOAI)).ToList();
+                var l = db.LOAIDLs.Select(p => p);
+                foreach (var item in l)
+                {
+                    li.Add(item as LOAIDL);
+                }
                 return li;
             }
-            return null;
+
         }
-        /*
+
         /// <summary>
         /// Get all DVT's name and show upto ComboBox
         /// </summary>
         /// <returns></returns>
-        public List<string> GetAllQuanName()
+        public ObservableCollection<DVT> GetAllDVT()
         {
-            List<string> li = new List<string>();
+            ObservableCollection<DVT> li = new ObservableCollection<DVT>();
             using (QLDLDataContext db = new QLDLDataContext())
             {
-                li = (db.DVTs.Select(p => p.DVT1)).ToList();
+                var l = db.DVTs.Select(p => p);
+                foreach (var item in l)
+                {
+                    li.Add(item as DVT);
+                }
                 return li;
             }
-            return null;
+
         }
-        */
+
+        /// <summary>
+        /// get all CHUC VU
+        /// </summary>
+        /// <returns></returns>
+        public ObservableCollection<CHUCVU> GetAllCV()
+        {
+            ObservableCollection<CHUCVU> li = new ObservableCollection<CHUCVU>();
+            using (QLDLDataContext db = new QLDLDataContext())
+            {
+                var l = db.CHUCVUs.Select(p => p);
+                foreach (var item in l)
+                {
+                    li.Add(item as CHUCVU);
+                }
+                return li;
+            }
+        }
     }
 }
