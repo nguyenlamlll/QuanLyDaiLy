@@ -37,11 +37,10 @@ namespace DAODLL
                 dl.TENLOAI = tenloai;
                 dl.SONOTOIDA = sonotoida;
                 db.LOAIDLs.InsertOnSubmit(dl);
+                db.SubmitChanges();
                 //insert suceed
                 return true;
             }
-            //insert false
-            return false;
         }
 
         /// <summary>
@@ -82,8 +81,6 @@ namespace DAODLL
                 //change succeed
                 return true;
             }
-            //change fail
-            return false;
         }
 
         /// <summary>
@@ -93,19 +90,18 @@ namespace DAODLL
         /// <param name="tendvt"></param>
         /// <param name="dongia"></param>
         /// <returns></returns>
-        public bool InsertMATHANG(string tenhang, string tendvt, int dongia)
+        public bool InsertMATHANG(string tenhang, int madvt, int dongia)
         {
-            using(QLDLDataContext db = new QLDLDataContext())
+            using (QLDLDataContext db = new QLDLDataContext())
             {
                 MATHANG mh = new MATHANG();
                 mh.TENHANG = tenhang;
-                mh.MADVT = db.DVTs.Single(p=>p.DVT1 == tendvt).MADVT;
+                mh.MADVT = madvt;
                 mh.DONGIA = dongia;
                 db.MATHANGs.InsertOnSubmit(mh);
                 db.SubmitChanges();
                 return true;
             }
-            return false;
         }
 
         /// <summary>
@@ -143,7 +139,6 @@ namespace DAODLL
                 db.SubmitChanges();
                 return true;
             }
-            return false;
         }
 
         /// <summary>
@@ -181,7 +176,6 @@ namespace DAODLL
                 db.SubmitChanges();
                 return true;
             }
-            return false;
         }
     }
 }

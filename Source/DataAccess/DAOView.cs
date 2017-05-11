@@ -41,6 +41,22 @@ namespace DAODLL
                 return li;
             }
         }
+        public ObservableCollection<DAILY> GetAllDaiLy(int maQuan)
+        {
+            ObservableCollection<DAILY> li = new ObservableCollection<DAILY>();
+            using (QLDLDataContext db = new QLDLDataContext())
+            {
+                //var l = db.DAILies.Select(p => p.MAQUAN == maQuan);
+                var l = (from dl in db.DAILies
+                         where dl.MAQUAN == maQuan
+                         select dl).ToList();
+                foreach (var item in l)
+                {
+                    li.Add(item as DAILY);
+                }
+                return li;
+            }
+        }
 
         /// <summary>
         /// Get all QUAN's name and show upto ComboBox

@@ -56,7 +56,7 @@ namespace DAODLL
         /// <param name="sotien"></param>
         /// <param name="ngaythu"></param>
         /// <returns></returns>
-        public bool Insert(string tendaily, string dienthoai, string diachi, int sotien, DateTime ngaythu)
+        public bool Insert(string tendaily, string dienthoai, string diachi, decimal? sotien, DateTime? ngaythu)
         {
             using (QLDLDataContext db = new QLDLDataContext())
             {

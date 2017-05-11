@@ -27,6 +27,8 @@ namespace QuanLyDaiLy_Source.Windows
             this.ResizeMode = ResizeMode.NoResize;
 
         }
+        public static event EventHandler Starting;
+        public static event EventHandler Finished;
 
         private const int GWL_STYLE = -16;
         private const int WS_SYSMENU = 0x80000;
@@ -52,6 +54,7 @@ namespace QuanLyDaiLy_Source.Windows
         /*
         private void Window_ContentRendered(object sender, EventArgs e)
         {
+
             BackgroundWorker worker = new BackgroundWorker();
             worker.WorkerReportsProgress = true;
             worker.DoWork += worker_DoWork;
@@ -65,7 +68,7 @@ namespace QuanLyDaiLy_Source.Windows
             for (int i = 0; i < 100; i++)
             {
                 (sender as BackgroundWorker).ReportProgress(i);
-                System.Threading.Thread.Sleep(100);
+                System.Threading.Thread.Sleep(300);
             }
         }
 

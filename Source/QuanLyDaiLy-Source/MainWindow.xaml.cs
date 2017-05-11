@@ -14,7 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using QuanLyDaiLy_Source.Models;
 using QuanLyDaiLy_Source.Windows;
-
+using System.Threading;
 
 namespace QuanLyDaiLy_Source
 {
@@ -52,6 +52,7 @@ namespace QuanLyDaiLy_Source
             DanhSachDaiLy.pageLoaded += new EventHandler(PageLoadCompleted);
         }
 
+        [STAThread]
         /// <summary>
         /// Handle events when closing this Main Window (also, closing this application)
         /// </summary>
@@ -60,11 +61,12 @@ namespace QuanLyDaiLy_Source
         private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             // Let user confirm one more time before actually closing the application
-            if (MessageBox.Show("Bạn có chắc chắn là muốn thoát khỏi chương trình?", "Tắt chương trình", MessageBoxButton.YesNo) 
+            if (MessageBox.Show("Bạn có chắc chắn là muốn thoát khỏi chương trình?", "Tắt chương trình", MessageBoxButton.YesNo)
                 != MessageBoxResult.Yes)
             {
                 e.Cancel = true;
             }
+
         }
 
         public object NavigationService { get; private set; }
@@ -94,10 +96,7 @@ namespace QuanLyDaiLy_Source
                     {
                         case MenuItemCategory.Homepage:
                             {
-                                Windows.ProgressBarWindow pbWindow = new Windows.ProgressBarWindow();
-                                pbWindow.Show();
                                 ContentFrame.Navigate(new TiepNhanDaiLy());
-                                //pbWindow.Close();
                                 break;
                             }
                         case MenuItemCategory.Lists:

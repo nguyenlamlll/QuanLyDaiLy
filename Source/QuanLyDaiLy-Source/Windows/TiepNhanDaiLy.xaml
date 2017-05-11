@@ -8,7 +8,12 @@
       d:DesignHeight="720" d:DesignWidth="1280"
       Title="TiepNhanDaiLy" WindowHeight="0">
     <Page.Resources>
-        <ResourceDictionary Source="/QuanLyDaiLy-Source;component/Styles/Styles.xaml"/>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/QuanLyDaiLy-Source;component/Styles/Styles.xaml"/>
+                <ResourceDictionary Source="/QuanLyDaiLy-Source;component/Styles/DataTemplate.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Page.Resources>
 
     <Grid Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}">
@@ -119,10 +124,8 @@
 
                 <StackPanel Orientation="Horizontal">
                     <ComboBox x:Name="TypeInputComboBox"
-                          Style="{DynamicResource InputComboBox}">
-                        <ComboBoxItem>1</ComboBoxItem>
-                        <ComboBoxItem>2</ComboBoxItem>
-                    </ComboBox>
+                              ItemTemplate="{StaticResource DataLoaiDL}" SelectedValuePath="MALOAI"
+                              Style="{DynamicResource InputComboBox}"/>
                     <Image x:Name="TypeStatus" Source="/QuanLyDaiLy-Source;component/Assets/Icons/exclamation-mark32.png"
                            Height="16" Width="16" Cursor="Help"
                            Visibility="Hidden">
@@ -197,6 +200,7 @@
 
                 <StackPanel Orientation="Horizontal">
                     <ComboBox x:Name="DistrictInputComboBox"
+                              ItemTemplate="{StaticResource DataQUAN}" SelectedValuePath="MAQUAN"
                               Style="{DynamicResource InputComboBox}"/>
                     <Image x:Name="DistrictStatus" Source="/QuanLyDaiLy-Source;component/Assets/Icons/exclamation-mark32.png"
                            Height="16" Width="16" Cursor="Help"

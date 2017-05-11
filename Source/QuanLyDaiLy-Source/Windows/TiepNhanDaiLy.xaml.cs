@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using QuanLyDaiLy_Source;
 using DAODLL;
 using System.Collections.ObjectModel;
+using QuanLyDaiLy_Source.Commons.BusinessLogic.BUS;
 
 namespace QuanLyDaiLy_Source.Windows
 {
@@ -57,12 +58,12 @@ namespace QuanLyDaiLy_Source.Windows
             // Get Districts and Agency types from database.
             try
             {
-                ObservableCollection<QUAN> danhSachQuan = DAOView.Instance.GetAllQuan();
-                ObservableCollection<LOAIDL> danhSachLoaiDL = DAOView.Instance.GetAllLoaiDL();
+                //ObservableCollection<QUAN> danhSachQuan = ViewManager.Instance.GetAllQuan();
+                //ObservableCollection<LOAIDL> danhSachLoaiDL = ViewManager.Instance.GetAllLoaiDL();
                 DistrictInputComboBox.Items.Clear();
                 TypeInputComboBox.Items.Clear();
-                DistrictInputComboBox.ItemsSource = danhSachQuan;
-                TypeInputComboBox.ItemsSource = danhSachLoaiDL;
+                DistrictInputComboBox.ItemsSource = ViewManager.Instance.GetAllQuan();
+                TypeInputComboBox.ItemsSource = ViewManager.Instance.GetAllLoaiDL();
             }
             catch (Exception ex)
             {

@@ -72,7 +72,10 @@
     </ApplicationDefinition>
     <Compile Include="Commons\BusinessLogic\DaiLyManager.cs" />
     <Compile Include="Commons\BusinessLogic\Manager.cs" />
+    <Compile Include="Commons\BusinessLogic\PhieuThuTienManager.cs" />
     <Compile Include="Commons\BusinessLogic\QuanManager.cs" />
+    <Compile Include="Commons\BusinessLogic\ThietLapQuyDinh.cs" />
+    <Compile Include="Commons\BusinessLogic\ViewManager.cs" />
     <Compile Include="Commons\DataGridTestItem.cs" />
     <Compile Include="Commons\DefaultSettings.cs" />
     <Compile Include="Commons\MenuItems.cs" />
@@ -137,6 +140,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Styles\Styles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\DataTemplate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
