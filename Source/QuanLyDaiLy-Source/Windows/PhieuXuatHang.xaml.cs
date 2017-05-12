@@ -16,14 +16,6 @@ using System.Windows.Shapes;
 
 namespace QuanLyDaiLy_Source.Windows
 {
-    class ViewModel
-    {
-        public ObservableCollection<Models.DataGridTestItem> Values
-        {
-            get;
-            set;
-        }
-    }
 
     /// <summary>
     /// Interaction logic for PhieuXuatHang.xaml
@@ -38,11 +30,9 @@ namespace QuanLyDaiLy_Source.Windows
         {
             InitializeComponent();
             Loaded += PhieuXuatHang_Loaded;
-            MerchandiseDataGrid.DataContext = new ViewModel();
             //AgencySelectComboBox.IsEnabled = false;
             
-            //List<Models.DataGridTestItem> dataList = new List<Models.DataGridTestItem>();
-            //MerchandiseDataGrid.ItemsSource = dataList;
+
 
         }
 
@@ -54,16 +44,7 @@ namespace QuanLyDaiLy_Source.Windows
 
         private void AddRowButton_Click(object sender, RoutedEventArgs e)
         {
-            Models.DataGridTestItem data1 = new Models.DataGridTestItem { Test1 = "AAA", Test2 = "BBB" };
-            Models.DataGridTestItem data2 = new Models.DataGridTestItem { Test1 = "111", Test2 = "222" };
-            List<Models.DataGridTestItem> list = new List<Models.DataGridTestItem>();
-            list.Add(data1);
-            list.Add(data2);
-            foreach (Models.DataGridTestItem item in list)
-            {
-                MerchandiseDataGrid.Items.Add(item);
-            }
-
+            //MerchandiseDataGrid.Items.Add(new M);
         }
 
         private void SaveAndExitButton_Click(object sender, RoutedEventArgs e)

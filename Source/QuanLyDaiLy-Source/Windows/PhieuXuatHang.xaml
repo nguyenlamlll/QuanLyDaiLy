@@ -88,7 +88,6 @@
                       CanUserResizeColumns="True"
                       Margin="42,15,38.2,0.2"
                       Height="240"
-                          ItemsSource="{Binding Path=Values}"
                       Style="{DynamicResource DataGridStyle}"
                       SelectionMode="Extended" SelectionUnit="Cell" 
                       ScrollViewer.CanContentScroll="True"
