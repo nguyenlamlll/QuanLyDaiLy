@@ -73,6 +73,9 @@ namespace DAODLL
                 ptt.NGAYTHUTIEN = ngaythu;
                 ptt.SOTIEN = sotien;
                 ptt.NGUOITHU = User.Instance.Manv;
+
+                dl.SONO = dl.SONO - ptt.SOTIEN;
+                
                 //insert phieuthutien into database
                 db.PHIEUTHUTIENs.InsertOnSubmit(ptt);
                 db.SubmitChanges();

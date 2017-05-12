@@ -65,6 +65,8 @@ namespace QuanLyDaiLy_Source
                 != MessageBoxResult.Yes)
             {
                 e.Cancel = true;
+                Environment.Exit(0);
+                
             }
 
         }
@@ -194,6 +196,7 @@ namespace QuanLyDaiLy_Source
             this.Hide();
             LoginWindow.LoginSucceed += new EventHandler(Window_LoginSucceed);
             LoginWindow loginWindow = new LoginWindow();
+            loginWindow.Owner = Window.GetWindow(this);
             loginWindow.Show();
         }
 

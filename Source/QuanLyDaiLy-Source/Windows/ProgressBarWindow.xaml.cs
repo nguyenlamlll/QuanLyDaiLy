@@ -28,8 +28,8 @@ namespace QuanLyDaiLy_Source.Windows
             this.ResizeMode = ResizeMode.NoResize;
 
         }
-        public static event EventHandler Starting;
-        public static event EventHandler Finished;
+        // public static event EventHandler Starting;
+        // public static event EventHandler Finished;
 
         private const int GWL_STYLE = -16;
         private const int WS_SYSMENU = 0x80000;

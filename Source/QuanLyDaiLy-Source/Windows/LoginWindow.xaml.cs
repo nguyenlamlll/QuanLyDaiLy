@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -83,6 +84,28 @@ namespace QuanLyDaiLy_Source.Windows
             ProgressBarWindow pbWindow = new ProgressBarWindow();
             pbWindow.Show();
             System.Windows.Threading.Dispatcher.Run();
+        }
+        private const int GWL_STYLE = -16;
+        private const int WS_SYSMENU = 0x80000;
+        [DllImport("user32.dll", SetLastError = true)]
+        private static extern int GetWindowLong(IntPtr hWnd, int nIndex);
+        [DllImport("user32.dll")]
+        private static extern int SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            // Hide this window's exit button
+            var hwnd = new System.Windows.Interop.WindowInteropHelper(this).Handle;
+            SetWindowLong(hwnd, GWL_STYLE, GetWindowLong(hwnd, GWL_STYLE) & ~WS_SYSMENU);
+
+            //StartCloseTimer();
+        }
+
+        private void ExitButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Owner.Close();
+            //this.Owner.Dispatcher.InvokeShutdown();
+            this.Close();
         }
     }
 }
