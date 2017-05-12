@@ -15,7 +15,7 @@ using System.Windows.Shapes;
 using QuanLyDaiLy_Source;
 using DAODLL;
 using System.Collections.ObjectModel;
-using QuanLyDaiLy_Source.Commons.BusinessLogic.BUS;
+using QuanLyDaiLy_Source.Commons.BusinessLogic;
 
 namespace QuanLyDaiLy_Source.Windows
 {
@@ -238,9 +238,9 @@ namespace QuanLyDaiLy_Source.Windows
             daiLy.TENDL = NameInputTextBox.Text.ToString();
             daiLy.DIENTHOAI = PhoneNumberInputTextBox.Text.ToString();
             daiLy.DIACHI = AddressNumberInputTextBox.Text.ToString() + ", " + StreetInputTextBox.Text.ToString();
-            daiLy.NGAYTIEPNHAN = AcceptanceDateDatePicker.SelectedDate;
-            daiLy.MAQUAN = DistrictInputComboBox.SelectedIndex + 1;
-            daiLy.LOAIDL = TypeInputComboBox.SelectedIndex + 1;
+            daiLy.NGAYTIEPNHAN = AcceptanceDateDatePicker.SelectedDate.Value;
+            daiLy.MAQUAN = (int)DistrictInputComboBox.SelectedValue;
+            daiLy.LOAIDL = (int)TypeInputComboBox.SelectedValue;
         }
     }
 }

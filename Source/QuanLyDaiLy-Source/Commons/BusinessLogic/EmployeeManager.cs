@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using DAODLL;
 using System.Collections.ObjectModel;
 
-namespace BUS
+namespace EmployeeManagerQuanLyDaiLy_Source.Models.BusinessLogic
 {
     public class EmployeeManager
     {

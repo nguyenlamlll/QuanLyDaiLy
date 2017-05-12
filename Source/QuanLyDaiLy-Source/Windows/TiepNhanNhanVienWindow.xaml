@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QuanLyDaiLy_Source.Windows"
         mc:Ignorable="d"
-        Title="Lưu Nhân Viên" Height="500" Width="650">
+        Title="Lưu Nhân Viên" Height="500" Width="650"
+        Loaded="Window_Loaded">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -43,9 +44,29 @@
                 <TextBlock Style="{DynamicResource InputTextBlock}">
                     Mật Khẩu:
                 </TextBlock>
-                <PasswordBox Name="txbPass" 
+                <Button FontFamily="Segoe MDL2 Assets"
+                        FontSize="7"
+                        Content="&#xE004;"
+                        Width="11" Height="11"
+                        HorizontalContentAlignment="Center"
+                        MouseDown="Button_MouseDown"
+                        MouseUp="Button_MouseUp">
+                    <Button.ToolTip>
+                        <StackPanel>
+                            <TextBlock>
+                                Hiện mật khẩu.
+                            </TextBlock>
+                        </StackPanel>
+                    </Button.ToolTip>
+                </Button>
+                <PasswordBox Name="PasswordTextBox" 
                              Style="{DynamicResource InputPasswordBox}"
-                             Width="300"/>
+                             Width="300" Visibility="Visible"
+                             />
+                <TextBlock x:Name="PasswordShowTextBox"
+                           Visibility="Collapsed"
+                           Style="{DynamicResource InputTextBlock}"
+                           />
             </StackPanel>
 
             <StackPanel Orientation="Horizontal"
@@ -53,7 +74,7 @@
                 <TextBlock Style="{DynamicResource InputTextBlock}">
                     Địa Chỉ:
                 </TextBlock>
-                <TextBox Name="txbDc"
+                <TextBox Name="AddressTextBox"
                          Style="{DynamicResource InputTextBox}"
                          Width="300"/>
             </StackPanel>
