@@ -71,6 +71,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Commons\BusinessLogic\DaiLyManager.cs" />
+    <Compile Include="Commons\BusinessLogic\EmployeeManager.cs" />
     <Compile Include="Commons\BusinessLogic\Manager.cs" />
     <Compile Include="Commons\BusinessLogic\PhieuThuTienManager.cs" />
     <Compile Include="Commons\BusinessLogic\QuanManager.cs" />
@@ -91,6 +92,9 @@
     </Compile>
     <Compile Include="Windows\DanhSachDaiLy.xaml.cs">
       <DependentUpon>DanhSachDaiLy.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\LoginWindow.xaml.cs">
+      <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\MainContent.xaml.cs">
       <DependentUpon>MainContent.xaml</DependentUpon>
@@ -160,6 +164,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\DanhSachDaiLy.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\LoginWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -265,7 +273,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DataAccess\DAODLL.csproj">
+    <ProjectReference Include="..\DAODLL\DAODLL.csproj">
       <Project>{b9e86e97-7690-4f05-a623-d6fed79d447e}</Project>
       <Name>DAODLL</Name>
     </ProjectReference>

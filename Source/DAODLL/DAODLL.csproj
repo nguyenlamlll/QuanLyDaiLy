@@ -40,13 +40,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DAOBaoCao.cs" />
     <Compile Include="DAOTiepNhanDaiLy.cs" />
     <Compile Include="DAOView.cs" />
     <Compile Include="DAOXuatHang.cs" />
-    <Compile Include="QLDL2.designer.cs">
-      <DependentUpon>QLDL.dbml</DependentUpon>
-      <DesignTime>True</DesignTime>
+    <Compile Include="DAOQLNhanVien.cs" />
+    <Compile Include="QLDL.designer.cs">
       <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QLDL.dbml</DependentUpon>
     </Compile>
     <Compile Include="User.cs" />
     <Compile Include="DAOThutien.cs" />
@@ -65,16 +67,18 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <None Include="QLDL.dbml">
-      <SubType>Designer</SubType>
       <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>QLDL2.designer.cs</LastGenOutput>
-    </None>
-    <None Include="QLDL.dbml.layout">
-      <DependentUpon>QLDL.dbml</DependentUpon>
+      <LastGenOutput>QLDL.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </None>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="QLDL.dbml.layout">
+      <DependentUpon>QLDL.dbml</DependentUpon>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

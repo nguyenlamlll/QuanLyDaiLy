@@ -81,8 +81,6 @@ namespace DAODLL
                 //insert succeed
                 return true;   
             }
-            //insert fail;
-            return false;
         }
 
         /// <summary>
@@ -103,8 +101,6 @@ namespace DAODLL
                     return true;
                 }
             }
-            //delete fail
-            return false;
         }
 
         /// <summary>
@@ -136,8 +132,6 @@ namespace DAODLL
                 //insert succeed
                 return true;
             }
-            //insert fail;
-            return false;
         }
     }
 }

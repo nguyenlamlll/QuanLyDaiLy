@@ -6,9 +6,9 @@
         xmlns:local="clr-namespace:QuanLyDaiLy_Source"
         xmlns:data="clr-namespace:QuanLyDaiLy_Source.Models"
         mc:Ignorable="d"
-        Title="Quản Lý Đại Lý" 
+        Title="Quản Lý Đại Lý"
         Height="1080" Width="1920"
-        MinHeight="720" MinWidth="1280">
+        MinHeight="720" MinWidth="1280" Loaded="Window_Loaded">
     <Window.Resources>
         <ResourceDictionary Source="Styles/Styles.xaml"/>
     </Window.Resources>

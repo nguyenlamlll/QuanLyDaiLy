@@ -51,18 +51,18 @@ namespace DAODLL
     partial void InsertNHANVIEN(NHANVIEN instance);
     partial void UpdateNHANVIEN(NHANVIEN instance);
     partial void DeleteNHANVIEN(NHANVIEN instance);
-    partial void InsertTAIKHOAN(TAIKHOAN instance);
-    partial void UpdateTAIKHOAN(TAIKHOAN instance);
-    partial void DeleteTAIKHOAN(TAIKHOAN instance);
-    partial void InsertQUAN(QUAN instance);
-    partial void UpdateQUAN(QUAN instance);
-    partial void DeleteQUAN(QUAN instance);
-    partial void InsertPHIEUXUATHANG(PHIEUXUATHANG instance);
-    partial void UpdatePHIEUXUATHANG(PHIEUXUATHANG instance);
-    partial void DeletePHIEUXUATHANG(PHIEUXUATHANG instance);
     partial void InsertPHIEUTHUTIEN(PHIEUTHUTIEN instance);
     partial void UpdatePHIEUTHUTIEN(PHIEUTHUTIEN instance);
     partial void DeletePHIEUTHUTIEN(PHIEUTHUTIEN instance);
+    partial void InsertPHIEUXUATHANG(PHIEUXUATHANG instance);
+    partial void UpdatePHIEUXUATHANG(PHIEUXUATHANG instance);
+    partial void DeletePHIEUXUATHANG(PHIEUXUATHANG instance);
+    partial void InsertQUAN(QUAN instance);
+    partial void UpdateQUAN(QUAN instance);
+    partial void DeleteQUAN(QUAN instance);
+    partial void InsertTAIKHOAN(TAIKHOAN instance);
+    partial void UpdateTAIKHOAN(TAIKHOAN instance);
+    partial void DeleteTAIKHOAN(TAIKHOAN instance);
     #endregion
 		
 		public QLDLDataContext() : 
@@ -151,19 +151,11 @@ namespace DAODLL
 			}
 		}
 		
-		public System.Data.Linq.Table<TAIKHOAN> TAIKHOANs
+		public System.Data.Linq.Table<PHIEUTHUTIEN> PHIEUTHUTIENs
 		{
 			get
 			{
-				return this.GetTable<TAIKHOAN>();
-			}
-		}
-		
-		public System.Data.Linq.Table<QUAN> QUANs
-		{
-			get
-			{
-				return this.GetTable<QUAN>();
+				return this.GetTable<PHIEUTHUTIEN>();
 			}
 		}
 		
@@ -175,11 +167,19 @@ namespace DAODLL
 			}
 		}
 		
-		public System.Data.Linq.Table<PHIEUTHUTIEN> PHIEUTHUTIENs
+		public System.Data.Linq.Table<QUAN> QUANs
 		{
 			get
 			{
-				return this.GetTable<PHIEUTHUTIEN>();
+				return this.GetTable<QUAN>();
+			}
+		}
+		
+		public System.Data.Linq.Table<TAIKHOAN> TAIKHOANs
+		{
+			get
+			{
+				return this.GetTable<TAIKHOAN>();
 			}
 		}
 		
@@ -188,6 +188,14 @@ namespace DAODLL
 			get
 			{
 				return this.GetTable<vwCHUCVU_NHANVIEN_TAIKHOAN>();
+			}
+		}
+		
+		public System.Data.Linq.Table<vwDAILY_LOAIDL_QUAN> vwDAILY_LOAIDL_QUANs
+		{
+			get
+			{
+				return this.GetTable<vwDAILY_LOAIDL_QUAN>();
 			}
 		}
 		
@@ -204,14 +212,6 @@ namespace DAODLL
 			get
 			{
 				return this.GetTable<vw_SEARCH_PHIEUXUATHANG>();
-			}
-		}
-		
-		public System.Data.Linq.Table<vwDAILY_LOAIDL_QUAN> vwDAILY_LOAIDL_QUANs
-		{
-			get
-			{
-				return this.GetTable<vwDAILY_LOAIDL_QUAN>();
 			}
 		}
 	}
@@ -546,9 +546,9 @@ namespace DAODLL
 		
 		private System.Nullable<int> _TINHTRANG;
 		
-		private EntityRef<PHIEUXUATHANG> _PHIEUXUATHANG;
-		
 		private EntitySet<PHIEUTHUTIEN> _PHIEUTHUTIENs;
+		
+		private EntityRef<PHIEUXUATHANG> _PHIEUXUATHANG;
 		
 		private EntityRef<LOAIDL> _LOAIDL1;
 		
@@ -580,8 +580,8 @@ namespace DAODLL
 		
 		public DAILY()
 		{
-			this._PHIEUXUATHANG = default(EntityRef<PHIEUXUATHANG>);
 			this._PHIEUTHUTIENs = new EntitySet<PHIEUTHUTIEN>(new Action<PHIEUTHUTIEN>(this.attach_PHIEUTHUTIENs), new Action<PHIEUTHUTIEN>(this.detach_PHIEUTHUTIENs));
+			this._PHIEUXUATHANG = default(EntityRef<PHIEUXUATHANG>);
 			this._LOAIDL1 = default(EntityRef<LOAIDL>);
 			this._QUAN = default(EntityRef<QUAN>);
 			OnCreated();
@@ -775,6 +775,19 @@ namespace DAODLL
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DAILY_PHIEUTHUTIEN", Storage="_PHIEUTHUTIENs", ThisKey="MADL", OtherKey="MADL")]
+		public EntitySet<PHIEUTHUTIEN> PHIEUTHUTIENs
+		{
+			get
+			{
+				return this._PHIEUTHUTIENs;
+			}
+			set
+			{
+				this._PHIEUTHUTIENs.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DAILY_PHIEUXUATHANG", Storage="_PHIEUXUATHANG", ThisKey="MADL", OtherKey="MAPHIEU", IsUnique=true, IsForeignKey=false)]
 		public PHIEUXUATHANG PHIEUXUATHANG
 		{
@@ -801,19 +814,6 @@ namespace DAODLL
 					}
 					this.SendPropertyChanged("PHIEUXUATHANG");
 				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DAILY_PHIEUTHUTIEN", Storage="_PHIEUTHUTIENs", ThisKey="MADL", OtherKey="MADL")]
-		public EntitySet<PHIEUTHUTIEN> PHIEUTHUTIENs
-		{
-			get
-			{
-				return this._PHIEUTHUTIENs;
-			}
-			set
-			{
-				this._PHIEUTHUTIENs.Assign(value);
 			}
 		}
 		
@@ -1389,11 +1389,11 @@ namespace DAODLL
 		
 		private int _MACHUCVU;
 		
-		private EntitySet<TAIKHOAN> _TAIKHOANs;
+		private EntitySet<PHIEUTHUTIEN> _PHIEUTHUTIENs;
 		
 		private EntitySet<PHIEUXUATHANG> _PHIEUXUATHANGs;
 		
-		private EntitySet<PHIEUTHUTIEN> _PHIEUTHUTIENs;
+		private EntitySet<TAIKHOAN> _TAIKHOANs;
 		
 		private EntityRef<CHUCVU> _CHUCVU;
 		
@@ -1415,9 +1415,9 @@ namespace DAODLL
 		
 		public NHANVIEN()
 		{
-			this._TAIKHOANs = new EntitySet<TAIKHOAN>(new Action<TAIKHOAN>(this.attach_TAIKHOANs), new Action<TAIKHOAN>(this.detach_TAIKHOANs));
-			this._PHIEUXUATHANGs = new EntitySet<PHIEUXUATHANG>(new Action<PHIEUXUATHANG>(this.attach_PHIEUXUATHANGs), new Action<PHIEUXUATHANG>(this.detach_PHIEUXUATHANGs));
 			this._PHIEUTHUTIENs = new EntitySet<PHIEUTHUTIEN>(new Action<PHIEUTHUTIEN>(this.attach_PHIEUTHUTIENs), new Action<PHIEUTHUTIEN>(this.detach_PHIEUTHUTIENs));
+			this._PHIEUXUATHANGs = new EntitySet<PHIEUXUATHANG>(new Action<PHIEUXUATHANG>(this.attach_PHIEUXUATHANGs), new Action<PHIEUXUATHANG>(this.detach_PHIEUXUATHANGs));
+			this._TAIKHOANs = new EntitySet<TAIKHOAN>(new Action<TAIKHOAN>(this.attach_TAIKHOANs), new Action<TAIKHOAN>(this.detach_TAIKHOANs));
 			this._CHUCVU = default(EntityRef<CHUCVU>);
 			OnCreated();
 		}
@@ -1526,16 +1526,16 @@ namespace DAODLL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="NHANVIEN_TAIKHOAN", Storage="_TAIKHOANs", ThisKey="MANV", OtherKey="MANV")]
-		public EntitySet<TAIKHOAN> TAIKHOANs
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="NHANVIEN_PHIEUTHUTIEN", Storage="_PHIEUTHUTIENs", ThisKey="MANV", OtherKey="NGUOITHU")]
+		public EntitySet<PHIEUTHUTIEN> PHIEUTHUTIENs
 		{
 			get
 			{
-				return this._TAIKHOANs;
+				return this._PHIEUTHUTIENs;
 			}
 			set
 			{
-				this._TAIKHOANs.Assign(value);
+				this._PHIEUTHUTIENs.Assign(value);
 			}
 		}
 		
@@ -1552,16 +1552,16 @@ namespace DAODLL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="NHANVIEN_PHIEUTHUTIEN", Storage="_PHIEUTHUTIENs", ThisKey="MANV", OtherKey="NGUOITHU")]
-		public EntitySet<PHIEUTHUTIEN> PHIEUTHUTIENs
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="NHANVIEN_TAIKHOAN", Storage="_TAIKHOANs", ThisKey="MANV", OtherKey="MANV")]
+		public EntitySet<TAIKHOAN> TAIKHOANs
 		{
 			get
 			{
-				return this._PHIEUTHUTIENs;
+				return this._TAIKHOANs;
 			}
 			set
 			{
-				this._PHIEUTHUTIENs.Assign(value);
+				this._TAIKHOANs.Assign(value);
 			}
 		}
 		
@@ -1619,13 +1619,13 @@ namespace DAODLL
 			}
 		}
 		
-		private void attach_TAIKHOANs(TAIKHOAN entity)
+		private void attach_PHIEUTHUTIENs(PHIEUTHUTIEN entity)
 		{
 			this.SendPropertyChanging();
 			entity.NHANVIEN = this;
 		}
 		
-		private void detach_TAIKHOANs(TAIKHOAN entity)
+		private void detach_PHIEUTHUTIENs(PHIEUTHUTIEN entity)
 		{
 			this.SendPropertyChanging();
 			entity.NHANVIEN = null;
@@ -1643,32 +1643,36 @@ namespace DAODLL
 			entity.NHANVIEN = null;
 		}
 		
-		private void attach_PHIEUTHUTIENs(PHIEUTHUTIEN entity)
+		private void attach_TAIKHOANs(TAIKHOAN entity)
 		{
 			this.SendPropertyChanging();
 			entity.NHANVIEN = this;
 		}
 		
-		private void detach_PHIEUTHUTIENs(PHIEUTHUTIEN entity)
+		private void detach_TAIKHOANs(TAIKHOAN entity)
 		{
 			this.SendPropertyChanging();
 			entity.NHANVIEN = null;
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TAIKHOAN")]
-	public partial class TAIKHOAN : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.PHIEUTHUTIEN")]
+	public partial class PHIEUTHUTIEN : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _MATK;
+		private int _MAPHIEU;
 		
-		private string _TENDANGNHAP;
+		private System.Nullable<int> _MADL;
 		
-		private string _PASSWORD;
+		private System.Nullable<System.DateTime> _NGAYTHUTIEN;
 		
-		private System.Nullable<int> _MANV;
+		private System.Nullable<decimal> _SOTIEN;
+		
+		private System.Nullable<int> _NGUOITHU;
+		
+		private EntityRef<DAILY> _DAILY;
 		
 		private EntityRef<NHANVIEN> _NHANVIEN;
 		
@@ -1676,107 +1680,168 @@ namespace DAODLL
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnMATKChanging(int value);
-    partial void OnMATKChanged();
-    partial void OnTENDANGNHAPChanging(string value);
-    partial void OnTENDANGNHAPChanged();
-    partial void OnPASSWORDChanging(string value);
-    partial void OnPASSWORDChanged();
-    partial void OnMANVChanging(System.Nullable<int> value);
-    partial void OnMANVChanged();
+    partial void OnMAPHIEUChanging(int value);
+    partial void OnMAPHIEUChanged();
+    partial void OnMADLChanging(System.Nullable<int> value);
+    partial void OnMADLChanged();
+    partial void OnNGAYTHUTIENChanging(System.Nullable<System.DateTime> value);
+    partial void OnNGAYTHUTIENChanged();
+    partial void OnSOTIENChanging(System.Nullable<decimal> value);
+    partial void OnSOTIENChanged();
+    partial void OnNGUOITHUChanging(System.Nullable<int> value);
+    partial void OnNGUOITHUChanged();
     #endregion
 		
-		public TAIKHOAN()
+		public PHIEUTHUTIEN()
 		{
+			this._DAILY = default(EntityRef<DAILY>);
 			this._NHANVIEN = default(EntityRef<NHANVIEN>);
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MATK", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int MATK
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MAPHIEU", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int MAPHIEU
 		{
 			get
 			{
-				return this._MATK;
+				return this._MAPHIEU;
 			}
 			set
 			{
-				if ((this._MATK != value))
+				if ((this._MAPHIEU != value))
 				{
-					this.OnMATKChanging(value);
+					this.OnMAPHIEUChanging(value);
 					this.SendPropertyChanging();
-					this._MATK = value;
-					this.SendPropertyChanged("MATK");
-					this.OnMATKChanged();
+					this._MAPHIEU = value;
+					this.SendPropertyChanged("MAPHIEU");
+					this.OnMAPHIEUChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TENDANGNHAP", DbType="NChar(20)")]
-		public string TENDANGNHAP
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MADL", DbType="Int")]
+		public System.Nullable<int> MADL
 		{
 			get
 			{
-				return this._TENDANGNHAP;
+				return this._MADL;
 			}
 			set
 			{
-				if ((this._TENDANGNHAP != value))
+				if ((this._MADL != value))
 				{
-					this.OnTENDANGNHAPChanging(value);
+					if (this._DAILY.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnMADLChanging(value);
 					this.SendPropertyChanging();
-					this._TENDANGNHAP = value;
-					this.SendPropertyChanged("TENDANGNHAP");
-					this.OnTENDANGNHAPChanged();
+					this._MADL = value;
+					this.SendPropertyChanged("MADL");
+					this.OnMADLChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PASSWORD", DbType="Text", UpdateCheck=UpdateCheck.Never)]
-		public string PASSWORD
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NGAYTHUTIEN", DbType="Date")]
+		public System.Nullable<System.DateTime> NGAYTHUTIEN
 		{
 			get
 			{
-				return this._PASSWORD;
+				return this._NGAYTHUTIEN;
 			}
 			set
 			{
-				if ((this._PASSWORD != value))
+				if ((this._NGAYTHUTIEN != value))
 				{
-					this.OnPASSWORDChanging(value);
+					this.OnNGAYTHUTIENChanging(value);
 					this.SendPropertyChanging();
-					this._PASSWORD = value;
-					this.SendPropertyChanged("PASSWORD");
-					this.OnPASSWORDChanged();
+					this._NGAYTHUTIEN = value;
+					this.SendPropertyChanged("NGAYTHUTIEN");
+					this.OnNGAYTHUTIENChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MANV", DbType="Int")]
-		public System.Nullable<int> MANV
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SOTIEN", DbType="Decimal(18,0)")]
+		public System.Nullable<decimal> SOTIEN
 		{
 			get
 			{
-				return this._MANV;
+				return this._SOTIEN;
 			}
 			set
 			{
-				if ((this._MANV != value))
+				if ((this._SOTIEN != value))
+				{
+					this.OnSOTIENChanging(value);
+					this.SendPropertyChanging();
+					this._SOTIEN = value;
+					this.SendPropertyChanged("SOTIEN");
+					this.OnSOTIENChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NGUOITHU", DbType="Int")]
+		public System.Nullable<int> NGUOITHU
+		{
+			get
+			{
+				return this._NGUOITHU;
+			}
+			set
+			{
+				if ((this._NGUOITHU != value))
 				{
 					if (this._NHANVIEN.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
-					this.OnMANVChanging(value);
+					this.OnNGUOITHUChanging(value);
 					this.SendPropertyChanging();
-					this._MANV = value;
-					this.SendPropertyChanged("MANV");
-					this.OnMANVChanged();
+					this._NGUOITHU = value;
+					this.SendPropertyChanged("NGUOITHU");
+					this.OnNGUOITHUChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="NHANVIEN_TAIKHOAN", Storage="_NHANVIEN", ThisKey="MANV", OtherKey="MANV", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DAILY_PHIEUTHUTIEN", Storage="_DAILY", ThisKey="MADL", OtherKey="MADL", IsForeignKey=true)]
+		public DAILY DAILY
+		{
+			get
+			{
+				return this._DAILY.Entity;
+			}
+			set
+			{
+				DAILY previousValue = this._DAILY.Entity;
+				if (((previousValue != value) 
+							|| (this._DAILY.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._DAILY.Entity = null;
+						previousValue.PHIEUTHUTIENs.Remove(this);
+					}
+					this._DAILY.Entity = value;
+					if ((value != null))
+					{
+						value.PHIEUTHUTIENs.Add(this);
+						this._MADL = value.MADL;
+					}
+					else
+					{
+						this._MADL = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("DAILY");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="NHANVIEN_PHIEUTHUTIEN", Storage="_NHANVIEN", ThisKey="NGUOITHU", OtherKey="MANV", IsForeignKey=true)]
 		public NHANVIEN NHANVIEN
 		{
 			get
@@ -1793,17 +1858,17 @@ namespace DAODLL
 					if ((previousValue != null))
 					{
 						this._NHANVIEN.Entity = null;
-						previousValue.TAIKHOANs.Remove(this);
+						previousValue.PHIEUTHUTIENs.Remove(this);
 					}
 					this._NHANVIEN.Entity = value;
 					if ((value != null))
 					{
-						value.TAIKHOANs.Add(this);
-						this._MANV = value.MANV;
+						value.PHIEUTHUTIENs.Add(this);
+						this._NGUOITHU = value.MANV;
 					}
 					else
 					{
-						this._MANV = default(Nullable<int>);
+						this._NGUOITHU = default(Nullable<int>);
 					}
 					this.SendPropertyChanged("NHANVIEN");
 				}
@@ -1828,144 +1893,6 @@ namespace DAODLL
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.QUAN")]
-	public partial class QUAN : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _MAQUAN;
-		
-		private string _TENQUAN;
-		
-		private System.Nullable<int> _SODLTOIDA;
-		
-		private EntitySet<DAILY> _DAILies;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnMAQUANChanging(int value);
-    partial void OnMAQUANChanged();
-    partial void OnTENQUANChanging(string value);
-    partial void OnTENQUANChanged();
-    partial void OnSODLTOIDAChanging(System.Nullable<int> value);
-    partial void OnSODLTOIDAChanged();
-    #endregion
-		
-		public QUAN()
-		{
-			this._DAILies = new EntitySet<DAILY>(new Action<DAILY>(this.attach_DAILies), new Action<DAILY>(this.detach_DAILies));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MAQUAN", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int MAQUAN
-		{
-			get
-			{
-				return this._MAQUAN;
-			}
-			set
-			{
-				if ((this._MAQUAN != value))
-				{
-					this.OnMAQUANChanging(value);
-					this.SendPropertyChanging();
-					this._MAQUAN = value;
-					this.SendPropertyChanged("MAQUAN");
-					this.OnMAQUANChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TENQUAN", DbType="NVarChar(50)")]
-		public string TENQUAN
-		{
-			get
-			{
-				return this._TENQUAN;
-			}
-			set
-			{
-				if ((this._TENQUAN != value))
-				{
-					this.OnTENQUANChanging(value);
-					this.SendPropertyChanging();
-					this._TENQUAN = value;
-					this.SendPropertyChanged("TENQUAN");
-					this.OnTENQUANChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SODLTOIDA", DbType="Int")]
-		public System.Nullable<int> SODLTOIDA
-		{
-			get
-			{
-				return this._SODLTOIDA;
-			}
-			set
-			{
-				if ((this._SODLTOIDA != value))
-				{
-					this.OnSODLTOIDAChanging(value);
-					this.SendPropertyChanging();
-					this._SODLTOIDA = value;
-					this.SendPropertyChanged("SODLTOIDA");
-					this.OnSODLTOIDAChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="QUAN_DAILY", Storage="_DAILies", ThisKey="MAQUAN", OtherKey="MAQUAN")]
-		public EntitySet<DAILY> DAILies
-		{
-			get
-			{
-				return this._DAILies;
-			}
-			set
-			{
-				this._DAILies.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_DAILies(DAILY entity)
-		{
-			this.SendPropertyChanging();
-			entity.QUAN = this;
-		}
-		
-		private void detach_DAILies(DAILY entity)
-		{
-			this.SendPropertyChanging();
-			entity.QUAN = null;
 		}
 	}
 	
@@ -2285,23 +2212,157 @@ namespace DAODLL
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.PHIEUTHUTIEN")]
-	public partial class PHIEUTHUTIEN : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.QUAN")]
+	public partial class QUAN : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _MAPHIEU;
+		private int _MAQUAN;
 		
-		private System.Nullable<int> _MADL;
+		private string _TENQUAN;
 		
-		private System.Nullable<System.DateTime> _NGAYTHUTIEN;
+		private System.Nullable<int> _SODLTOIDA;
 		
-		private System.Nullable<decimal> _SOTIEN;
+		private EntitySet<DAILY> _DAILies;
 		
-		private System.Nullable<int> _NGUOITHU;
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnMAQUANChanging(int value);
+    partial void OnMAQUANChanged();
+    partial void OnTENQUANChanging(string value);
+    partial void OnTENQUANChanged();
+    partial void OnSODLTOIDAChanging(System.Nullable<int> value);
+    partial void OnSODLTOIDAChanged();
+    #endregion
 		
-		private EntityRef<DAILY> _DAILY;
+		public QUAN()
+		{
+			this._DAILies = new EntitySet<DAILY>(new Action<DAILY>(this.attach_DAILies), new Action<DAILY>(this.detach_DAILies));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MAQUAN", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int MAQUAN
+		{
+			get
+			{
+				return this._MAQUAN;
+			}
+			set
+			{
+				if ((this._MAQUAN != value))
+				{
+					this.OnMAQUANChanging(value);
+					this.SendPropertyChanging();
+					this._MAQUAN = value;
+					this.SendPropertyChanged("MAQUAN");
+					this.OnMAQUANChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TENQUAN", DbType="NVarChar(50)")]
+		public string TENQUAN
+		{
+			get
+			{
+				return this._TENQUAN;
+			}
+			set
+			{
+				if ((this._TENQUAN != value))
+				{
+					this.OnTENQUANChanging(value);
+					this.SendPropertyChanging();
+					this._TENQUAN = value;
+					this.SendPropertyChanged("TENQUAN");
+					this.OnTENQUANChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SODLTOIDA", DbType="Int")]
+		public System.Nullable<int> SODLTOIDA
+		{
+			get
+			{
+				return this._SODLTOIDA;
+			}
+			set
+			{
+				if ((this._SODLTOIDA != value))
+				{
+					this.OnSODLTOIDAChanging(value);
+					this.SendPropertyChanging();
+					this._SODLTOIDA = value;
+					this.SendPropertyChanged("SODLTOIDA");
+					this.OnSODLTOIDAChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="QUAN_DAILY", Storage="_DAILies", ThisKey="MAQUAN", OtherKey="MAQUAN")]
+		public EntitySet<DAILY> DAILies
+		{
+			get
+			{
+				return this._DAILies;
+			}
+			set
+			{
+				this._DAILies.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_DAILies(DAILY entity)
+		{
+			this.SendPropertyChanging();
+			entity.QUAN = this;
+		}
+		
+		private void detach_DAILies(DAILY entity)
+		{
+			this.SendPropertyChanging();
+			entity.QUAN = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TAIKHOAN")]
+	public partial class TAIKHOAN : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _MATK;
+		
+		private string _TENDANGNHAP;
+		
+		private string _PASSWORD;
+		
+		private System.Nullable<int> _MANV;
 		
 		private EntityRef<NHANVIEN> _NHANVIEN;
 		
@@ -2309,168 +2370,107 @@ namespace DAODLL
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnMAPHIEUChanging(int value);
-    partial void OnMAPHIEUChanged();
-    partial void OnMADLChanging(System.Nullable<int> value);
-    partial void OnMADLChanged();
-    partial void OnNGAYTHUTIENChanging(System.Nullable<System.DateTime> value);
-    partial void OnNGAYTHUTIENChanged();
-    partial void OnSOTIENChanging(System.Nullable<decimal> value);
-    partial void OnSOTIENChanged();
-    partial void OnNGUOITHUChanging(System.Nullable<int> value);
-    partial void OnNGUOITHUChanged();
+    partial void OnMATKChanging(int value);
+    partial void OnMATKChanged();
+    partial void OnTENDANGNHAPChanging(string value);
+    partial void OnTENDANGNHAPChanged();
+    partial void OnPASSWORDChanging(string value);
+    partial void OnPASSWORDChanged();
+    partial void OnMANVChanging(System.Nullable<int> value);
+    partial void OnMANVChanged();
     #endregion
 		
-		public PHIEUTHUTIEN()
+		public TAIKHOAN()
 		{
-			this._DAILY = default(EntityRef<DAILY>);
 			this._NHANVIEN = default(EntityRef<NHANVIEN>);
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MAPHIEU", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int MAPHIEU
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MATK", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int MATK
 		{
 			get
 			{
-				return this._MAPHIEU;
+				return this._MATK;
 			}
 			set
 			{
-				if ((this._MAPHIEU != value))
+				if ((this._MATK != value))
 				{
-					this.OnMAPHIEUChanging(value);
+					this.OnMATKChanging(value);
 					this.SendPropertyChanging();
-					this._MAPHIEU = value;
-					this.SendPropertyChanged("MAPHIEU");
-					this.OnMAPHIEUChanged();
+					this._MATK = value;
+					this.SendPropertyChanged("MATK");
+					this.OnMATKChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MADL", DbType="Int")]
-		public System.Nullable<int> MADL
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TENDANGNHAP", DbType="NChar(20)")]
+		public string TENDANGNHAP
 		{
 			get
 			{
-				return this._MADL;
+				return this._TENDANGNHAP;
 			}
 			set
 			{
-				if ((this._MADL != value))
+				if ((this._TENDANGNHAP != value))
 				{
-					if (this._DAILY.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnMADLChanging(value);
+					this.OnTENDANGNHAPChanging(value);
 					this.SendPropertyChanging();
-					this._MADL = value;
-					this.SendPropertyChanged("MADL");
-					this.OnMADLChanged();
+					this._TENDANGNHAP = value;
+					this.SendPropertyChanged("TENDANGNHAP");
+					this.OnTENDANGNHAPChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NGAYTHUTIEN", DbType="Date")]
-		public System.Nullable<System.DateTime> NGAYTHUTIEN
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PASSWORD", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		public string PASSWORD
 		{
 			get
 			{
-				return this._NGAYTHUTIEN;
+				return this._PASSWORD;
 			}
 			set
 			{
-				if ((this._NGAYTHUTIEN != value))
+				if ((this._PASSWORD != value))
 				{
-					this.OnNGAYTHUTIENChanging(value);
+					this.OnPASSWORDChanging(value);
 					this.SendPropertyChanging();
-					this._NGAYTHUTIEN = value;
-					this.SendPropertyChanged("NGAYTHUTIEN");
-					this.OnNGAYTHUTIENChanged();
+					this._PASSWORD = value;
+					this.SendPropertyChanged("PASSWORD");
+					this.OnPASSWORDChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SOTIEN", DbType="Decimal(18,0)")]
-		public System.Nullable<decimal> SOTIEN
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MANV", DbType="Int")]
+		public System.Nullable<int> MANV
 		{
 			get
 			{
-				return this._SOTIEN;
+				return this._MANV;
 			}
 			set
 			{
-				if ((this._SOTIEN != value))
-				{
-					this.OnSOTIENChanging(value);
-					this.SendPropertyChanging();
-					this._SOTIEN = value;
-					this.SendPropertyChanged("SOTIEN");
-					this.OnSOTIENChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NGUOITHU", DbType="Int")]
-		public System.Nullable<int> NGUOITHU
-		{
-			get
-			{
-				return this._NGUOITHU;
-			}
-			set
-			{
-				if ((this._NGUOITHU != value))
+				if ((this._MANV != value))
 				{
 					if (this._NHANVIEN.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
-					this.OnNGUOITHUChanging(value);
+					this.OnMANVChanging(value);
 					this.SendPropertyChanging();
-					this._NGUOITHU = value;
-					this.SendPropertyChanged("NGUOITHU");
-					this.OnNGUOITHUChanged();
+					this._MANV = value;
+					this.SendPropertyChanged("MANV");
+					this.OnMANVChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DAILY_PHIEUTHUTIEN", Storage="_DAILY", ThisKey="MADL", OtherKey="MADL", IsForeignKey=true)]
-		public DAILY DAILY
-		{
-			get
-			{
-				return this._DAILY.Entity;
-			}
-			set
-			{
-				DAILY previousValue = this._DAILY.Entity;
-				if (((previousValue != value) 
-							|| (this._DAILY.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._DAILY.Entity = null;
-						previousValue.PHIEUTHUTIENs.Remove(this);
-					}
-					this._DAILY.Entity = value;
-					if ((value != null))
-					{
-						value.PHIEUTHUTIENs.Add(this);
-						this._MADL = value.MADL;
-					}
-					else
-					{
-						this._MADL = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("DAILY");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="NHANVIEN_PHIEUTHUTIEN", Storage="_NHANVIEN", ThisKey="NGUOITHU", OtherKey="MANV", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="NHANVIEN_TAIKHOAN", Storage="_NHANVIEN", ThisKey="MANV", OtherKey="MANV", IsForeignKey=true)]
 		public NHANVIEN NHANVIEN
 		{
 			get
@@ -2487,17 +2487,17 @@ namespace DAODLL
 					if ((previousValue != null))
 					{
 						this._NHANVIEN.Entity = null;
-						previousValue.PHIEUTHUTIENs.Remove(this);
+						previousValue.TAIKHOANs.Remove(this);
 					}
 					this._NHANVIEN.Entity = value;
 					if ((value != null))
 					{
-						value.PHIEUTHUTIENs.Add(this);
-						this._NGUOITHU = value.MANV;
+						value.TAIKHOANs.Add(this);
+						this._MANV = value.MANV;
 					}
 					else
 					{
-						this._NGUOITHU = default(Nullable<int>);
+						this._MANV = default(Nullable<int>);
 					}
 					this.SendPropertyChanged("NHANVIEN");
 				}
@@ -2619,6 +2619,213 @@ namespace DAODLL
 				if ((this._PASSWORD != value))
 				{
 					this._PASSWORD = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.[vwDAILY-LOAIDL-QUAN]")]
+	public partial class vwDAILY_LOAIDL_QUAN
+	{
+		
+		private int _MADL;
+		
+		private string _TENDL;
+		
+		private string _DIENTHOAI;
+		
+		private string _DIACHI;
+		
+		private System.Nullable<System.DateTime> _NGAYTIEPNHAN;
+		
+		private System.Nullable<decimal> _SONO;
+		
+		private System.Nullable<int> _TINHTRANG;
+		
+		private string _TENLOAI;
+		
+		private string _TENQUAN;
+		
+		private System.Nullable<int> _MAQUAN;
+		
+		private System.Nullable<int> _LOAIDL;
+		
+		public vwDAILY_LOAIDL_QUAN()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MADL", DbType="Int NOT NULL")]
+		public int MADL
+		{
+			get
+			{
+				return this._MADL;
+			}
+			set
+			{
+				if ((this._MADL != value))
+				{
+					this._MADL = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TENDL", DbType="NVarChar(50)")]
+		public string TENDL
+		{
+			get
+			{
+				return this._TENDL;
+			}
+			set
+			{
+				if ((this._TENDL != value))
+				{
+					this._TENDL = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DIENTHOAI", DbType="NVarChar(50)")]
+		public string DIENTHOAI
+		{
+			get
+			{
+				return this._DIENTHOAI;
+			}
+			set
+			{
+				if ((this._DIENTHOAI != value))
+				{
+					this._DIENTHOAI = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DIACHI", DbType="NVarChar(50)")]
+		public string DIACHI
+		{
+			get
+			{
+				return this._DIACHI;
+			}
+			set
+			{
+				if ((this._DIACHI != value))
+				{
+					this._DIACHI = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NGAYTIEPNHAN", DbType="Date")]
+		public System.Nullable<System.DateTime> NGAYTIEPNHAN
+		{
+			get
+			{
+				return this._NGAYTIEPNHAN;
+			}
+			set
+			{
+				if ((this._NGAYTIEPNHAN != value))
+				{
+					this._NGAYTIEPNHAN = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SONO", DbType="Decimal(18,0)")]
+		public System.Nullable<decimal> SONO
+		{
+			get
+			{
+				return this._SONO;
+			}
+			set
+			{
+				if ((this._SONO != value))
+				{
+					this._SONO = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TINHTRANG", DbType="Int")]
+		public System.Nullable<int> TINHTRANG
+		{
+			get
+			{
+				return this._TINHTRANG;
+			}
+			set
+			{
+				if ((this._TINHTRANG != value))
+				{
+					this._TINHTRANG = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TENLOAI", DbType="NVarChar(10)")]
+		public string TENLOAI
+		{
+			get
+			{
+				return this._TENLOAI;
+			}
+			set
+			{
+				if ((this._TENLOAI != value))
+				{
+					this._TENLOAI = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TENQUAN", DbType="NVarChar(50)")]
+		public string TENQUAN
+		{
+			get
+			{
+				return this._TENQUAN;
+			}
+			set
+			{
+				if ((this._TENQUAN != value))
+				{
+					this._TENQUAN = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MAQUAN", DbType="Int")]
+		public System.Nullable<int> MAQUAN
+		{
+			get
+			{
+				return this._MAQUAN;
+			}
+			set
+			{
+				if ((this._MAQUAN != value))
+				{
+					this._MAQUAN = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LOAIDL", DbType="Int")]
+		public System.Nullable<int> LOAIDL
+		{
+			get
+			{
+				return this._LOAIDL;
+			}
+			set
+			{
+				if ((this._LOAIDL != value))
+				{
+					this._LOAIDL = value;
 				}
 			}
 		}
@@ -2871,213 +3078,6 @@ namespace DAODLL
 				if ((this._TENDL != value))
 				{
 					this._TENDL = value;
-				}
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.[vwDAILY-LOAIDL-QUAN]")]
-	public partial class vwDAILY_LOAIDL_QUAN
-	{
-		
-		private int _MADL;
-		
-		private string _TENDL;
-		
-		private string _DIENTHOAI;
-		
-		private string _DIACHI;
-		
-		private System.Nullable<System.DateTime> _NGAYTIEPNHAN;
-		
-		private System.Nullable<decimal> _SONO;
-		
-		private System.Nullable<int> _TINHTRANG;
-		
-		private string _TENLOAI;
-		
-		private string _TENQUAN;
-		
-		private System.Nullable<int> _MAQUAN;
-		
-		private System.Nullable<int> _LOAIDL;
-		
-		public vwDAILY_LOAIDL_QUAN()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MADL", DbType="Int NOT NULL")]
-		public int MADL
-		{
-			get
-			{
-				return this._MADL;
-			}
-			set
-			{
-				if ((this._MADL != value))
-				{
-					this._MADL = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TENDL", DbType="NVarChar(50)")]
-		public string TENDL
-		{
-			get
-			{
-				return this._TENDL;
-			}
-			set
-			{
-				if ((this._TENDL != value))
-				{
-					this._TENDL = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DIENTHOAI", DbType="NVarChar(50)")]
-		public string DIENTHOAI
-		{
-			get
-			{
-				return this._DIENTHOAI;
-			}
-			set
-			{
-				if ((this._DIENTHOAI != value))
-				{
-					this._DIENTHOAI = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DIACHI", DbType="NVarChar(50)")]
-		public string DIACHI
-		{
-			get
-			{
-				return this._DIACHI;
-			}
-			set
-			{
-				if ((this._DIACHI != value))
-				{
-					this._DIACHI = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NGAYTIEPNHAN", DbType="Date")]
-		public System.Nullable<System.DateTime> NGAYTIEPNHAN
-		{
-			get
-			{
-				return this._NGAYTIEPNHAN;
-			}
-			set
-			{
-				if ((this._NGAYTIEPNHAN != value))
-				{
-					this._NGAYTIEPNHAN = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SONO", DbType="Decimal(18,0)")]
-		public System.Nullable<decimal> SONO
-		{
-			get
-			{
-				return this._SONO;
-			}
-			set
-			{
-				if ((this._SONO != value))
-				{
-					this._SONO = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TINHTRANG", DbType="Int")]
-		public System.Nullable<int> TINHTRANG
-		{
-			get
-			{
-				return this._TINHTRANG;
-			}
-			set
-			{
-				if ((this._TINHTRANG != value))
-				{
-					this._TINHTRANG = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TENLOAI", DbType="NVarChar(10)")]
-		public string TENLOAI
-		{
-			get
-			{
-				return this._TENLOAI;
-			}
-			set
-			{
-				if ((this._TENLOAI != value))
-				{
-					this._TENLOAI = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TENQUAN", DbType="NVarChar(50)")]
-		public string TENQUAN
-		{
-			get
-			{
-				return this._TENQUAN;
-			}
-			set
-			{
-				if ((this._TENQUAN != value))
-				{
-					this._TENQUAN = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MAQUAN", DbType="Int")]
-		public System.Nullable<int> MAQUAN
-		{
-			get
-			{
-				return this._MAQUAN;
-			}
-			set
-			{
-				if ((this._MAQUAN != value))
-				{
-					this._MAQUAN = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LOAIDL", DbType="Int")]
-		public System.Nullable<int> LOAIDL
-		{
-			get
-			{
-				return this._LOAIDL;
-			}
-			set
-			{
-				if ((this._LOAIDL != value))
-				{
-					this._LOAIDL = value;
 				}
 			}
 		}

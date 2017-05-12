@@ -27,8 +27,8 @@
       <Column Name="NGAYTIEPNHAN" Type="System.DateTime" DbType="Date" CanBeNull="true" />
       <Column Name="SONO" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
       <Column Name="TINHTRANG" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="DAILY_PHIEUXUATHANG" Member="PHIEUXUATHANG" ThisKey="MADL" OtherKey="MAPHIEU" Type="PHIEUXUATHANG" Cardinality="One" />
       <Association Name="DAILY_PHIEUTHUTIEN" Member="PHIEUTHUTIENs" ThisKey="MADL" OtherKey="MADL" Type="PHIEUTHUTIEN" />
+      <Association Name="DAILY_PHIEUXUATHANG" Member="PHIEUXUATHANG" ThisKey="MADL" OtherKey="MAPHIEU" Type="PHIEUXUATHANG" Cardinality="One" />
       <Association Name="LOAIDL_DAILY" Member="LOAIDL1" ThisKey="LOAIDL" OtherKey="MALOAI" Type="LOAIDL" IsForeignKey="true" />
       <Association Name="QUAN_DAILY" Member="QUAN" ThisKey="MAQUAN" OtherKey="MAQUAN" Type="QUAN" IsForeignKey="true" />
     </Type>
@@ -65,27 +65,21 @@
       <Column Name="NGAYSINH" Type="System.DateTime" DbType="Date" CanBeNull="true" />
       <Column Name="DIACHI" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="MACHUCVU" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="NHANVIEN_TAIKHOAN" Member="TAIKHOANs" ThisKey="MANV" OtherKey="MANV" Type="TAIKHOAN" />
-      <Association Name="NHANVIEN_PHIEUXUATHANG" Member="PHIEUXUATHANGs" ThisKey="MANV" OtherKey="NGUOIXUAT" Type="PHIEUXUATHANG" />
       <Association Name="NHANVIEN_PHIEUTHUTIEN" Member="PHIEUTHUTIENs" ThisKey="MANV" OtherKey="NGUOITHU" Type="PHIEUTHUTIEN" />
+      <Association Name="NHANVIEN_PHIEUXUATHANG" Member="PHIEUXUATHANGs" ThisKey="MANV" OtherKey="NGUOIXUAT" Type="PHIEUXUATHANG" />
+      <Association Name="NHANVIEN_TAIKHOAN" Member="TAIKHOANs" ThisKey="MANV" OtherKey="MANV" Type="TAIKHOAN" />
       <Association Name="CHUCVU_NHANVIEN" Member="CHUCVU" ThisKey="MACHUCVU" OtherKey="MACHUCVU" Type="CHUCVU" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.TAIKHOAN" Member="TAIKHOANs">
-    <Type Name="TAIKHOAN">
-      <Column Name="MATK" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="TENDANGNHAP" Type="System.String" DbType="NChar(20)" CanBeNull="true" />
-      <Column Name="PASSWORD" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
-      <Column Name="MANV" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="NHANVIEN_TAIKHOAN" Member="NHANVIEN" ThisKey="MANV" OtherKey="MANV" Type="NHANVIEN" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.QUAN" Member="QUANs">
-    <Type Name="QUAN">
-      <Column Name="MAQUAN" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="TENQUAN" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="SODLTOIDA" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="QUAN_DAILY" Member="DAILies" ThisKey="MAQUAN" OtherKey="MAQUAN" Type="DAILY" />
+  <Table Name="dbo.PHIEUTHUTIEN" Member="PHIEUTHUTIENs">
+    <Type Name="PHIEUTHUTIEN">
+      <Column Name="MAPHIEU" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="MADL" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NGAYTHUTIEN" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="SOTIEN" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="NGUOITHU" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="DAILY_PHIEUTHUTIEN" Member="DAILY" ThisKey="MADL" OtherKey="MADL" Type="DAILY" IsForeignKey="true" />
+      <Association Name="NHANVIEN_PHIEUTHUTIEN" Member="NHANVIEN" ThisKey="NGUOITHU" OtherKey="MANV" Type="NHANVIEN" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.PHIEUXUATHANG" Member="PHIEUXUATHANGs">
@@ -102,15 +96,21 @@
       <Association Name="NHANVIEN_PHIEUXUATHANG" Member="NHANVIEN" ThisKey="NGUOIXUAT" OtherKey="MANV" Type="NHANVIEN" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.PHIEUTHUTIEN" Member="PHIEUTHUTIENs">
-    <Type Name="PHIEUTHUTIEN">
-      <Column Name="MAPHIEU" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="MADL" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="NGAYTHUTIEN" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Column Name="SOTIEN" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
-      <Column Name="NGUOITHU" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="DAILY_PHIEUTHUTIEN" Member="DAILY" ThisKey="MADL" OtherKey="MADL" Type="DAILY" IsForeignKey="true" />
-      <Association Name="NHANVIEN_PHIEUTHUTIEN" Member="NHANVIEN" ThisKey="NGUOITHU" OtherKey="MANV" Type="NHANVIEN" IsForeignKey="true" />
+  <Table Name="dbo.QUAN" Member="QUANs">
+    <Type Name="QUAN">
+      <Column Name="MAQUAN" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TENQUAN" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="SODLTOIDA" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="QUAN_DAILY" Member="DAILies" ThisKey="MAQUAN" OtherKey="MAQUAN" Type="DAILY" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TAIKHOAN" Member="TAIKHOANs">
+    <Type Name="TAIKHOAN">
+      <Column Name="MATK" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TENDANGNHAP" Type="System.String" DbType="NChar(20)" CanBeNull="true" />
+      <Column Name="PASSWORD" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="MANV" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="NHANVIEN_TAIKHOAN" Member="NHANVIEN" ThisKey="MANV" OtherKey="MANV" Type="NHANVIEN" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.[vwCHUCVU-NHANVIEN-TAIKHOAN]" Member="vwCHUCVU_NHANVIEN_TAIKHOANs">
@@ -120,6 +120,21 @@
       <Column Name="MANV" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="TENDANGNHAP" Type="System.String" DbType="NChar(20)" CanBeNull="true" />
       <Column Name="PASSWORD" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+    </Type>
+  </Table>
+  <Table Name="dbo.[vwDAILY-LOAIDL-QUAN]" Member="vwDAILY_LOAIDL_QUANs">
+    <Type Name="vwDAILY_LOAIDL_QUAN">
+      <Column Name="MADL" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TENDL" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="DIENTHOAI" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="DIACHI" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="NGAYTIEPNHAN" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="SONO" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="TINHTRANG" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TENLOAI" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="TENQUAN" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="MAQUAN" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="LOAIDL" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.[vwDAILY-PHIEUTHUTIEN-NHANVIEN]" Member="vwDAILY_PHIEUTHUTIEN_NHANVIENs">
@@ -141,21 +156,6 @@
       <Column Name="NGAYLAP" Type="System.DateTime" DbType="Date" CanBeNull="true" />
       <Column Name="TENQUAN" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="TENDL" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.[vwDAILY-LOAIDL-QUAN]" Member="vwDAILY_LOAIDL_QUANs">
-    <Type Name="vwDAILY_LOAIDL_QUAN">
-      <Column Name="MADL" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="TENDL" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="DIENTHOAI" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="DIACHI" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="NGAYTIEPNHAN" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Column Name="SONO" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
-      <Column Name="TINHTRANG" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="TENLOAI" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
-      <Column Name="TENQUAN" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="MAQUAN" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="LOAIDL" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </Type>
   </Table>
 </Database>

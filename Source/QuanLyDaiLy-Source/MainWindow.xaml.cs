@@ -185,5 +185,24 @@ namespace QuanLyDaiLy_Source
             string currentTitle = App.Current.Properties[Models.DefaultSettings.ContentFrameTitle].ToString();
             ContentFrameTitle.Text = currentTitle;
         }
+
+        /// <summary>
+        /// Hide this main Window until user enters correct credentials.
+        /// </summary>
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.Hide();
+            LoginWindow.LoginSucceed += new EventHandler(Window_LoginSucceed);
+            LoginWindow loginWindow = new LoginWindow();
+            loginWindow.Show();
+        }
+
+        /// <summary>
+        /// User successfully log in. Return the main window to the surface.
+        /// </summary>
+        private void Window_LoginSucceed(object sender, EventArgs e)
+        {
+            this.Show();
+        }
     }
 }

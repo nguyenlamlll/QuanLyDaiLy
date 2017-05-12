@@ -92,7 +92,7 @@ namespace DAODLL
         /// <returns></returns>
         public bool InsertMATHANG(string tenhang, int madvt, int dongia)
         {
-            using (QLDLDataContext db = new QLDLDataContext())
+            using(QLDLDataContext db = new QLDLDataContext())
             {
                 MATHANG mh = new MATHANG();
                 mh.TENHANG = tenhang;

@@ -50,7 +50,6 @@ namespace DAODLL
                 return true;
 
             }
-            return false;
         }
         /// <summary>
         /// Delete DAILy
@@ -99,7 +98,6 @@ namespace DAODLL
             }
 
         }
-        
         /// <summary>
         /// Search DAILY from database and display it to GUI
         /// Load if DAILY search condition equal empty string 
@@ -115,6 +113,6 @@ namespace DAODLL
             }
             return li;
         }
-        
+
     }
 }

@@ -41,22 +41,6 @@ namespace DAODLL
                 return li;
             }
         }
-        public ObservableCollection<DAILY> GetAllDaiLy(int maQuan)
-        {
-            ObservableCollection<DAILY> li = new ObservableCollection<DAILY>();
-            using (QLDLDataContext db = new QLDLDataContext())
-            {
-                //var l = db.DAILies.Select(p => p.MAQUAN == maQuan);
-                var l = (from dl in db.DAILies
-                         where dl.MAQUAN == maQuan
-                         select dl).ToList();
-                foreach (var item in l)
-                {
-                    li.Add(item as DAILY);
-                }
-                return li;
-            }
-        }
 
         /// <summary>
         /// Get all QUAN's name and show upto ComboBox
@@ -65,7 +49,7 @@ namespace DAODLL
         public ObservableCollection<QUAN> GetAllQuan()
         {
             ObservableCollection<QUAN> li = new ObservableCollection<QUAN>();
-            using (QLDLDataContext db = new QLDLDataContext())
+            using(QLDLDataContext db = new QLDLDataContext())
             {
                 var l = db.QUANs.Select(p => p);
                 foreach (var item in l)
@@ -92,7 +76,7 @@ namespace DAODLL
                 }
                 return li;
             }
-
+            
         }
 
         /// <summary>
@@ -111,7 +95,7 @@ namespace DAODLL
                 }
                 return li;
             }
-
+           
         }
 
         /// <summary>
@@ -123,11 +107,11 @@ namespace DAODLL
             ObservableCollection<CHUCVU> li = new ObservableCollection<CHUCVU>();
             using (QLDLDataContext db = new QLDLDataContext())
             {
-                var l = db.CHUCVUs.Select(p => p);
-                foreach (var item in l)
-                {
-                    li.Add(item as CHUCVU);
-                }
+                 var l = db.CHUCVUs.Select(p=>p);
+                foreach(var item in l)
+                 {
+                     li.Add(item as CHUCVU);
+                 }
                 return li;
             }
         }

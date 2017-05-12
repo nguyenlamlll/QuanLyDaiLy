@@ -55,8 +55,8 @@ namespace DAODLL
         {
             using (QLDLDataContext db = new QLDLDataContext())
             {
-                vwCHUCVU_NHANVIEN_TAIKHOAN nv = db.vwCHUCVU_NHANVIEN_TAIKHOANs.Where(p => p.TENDANGNHAP == acc 
-                    && p.PASSWORD == pass).Single();
+                vwCHUCVU_NHANVIEN_TAIKHOAN nv = db.vwCHUCVU_NHANVIEN_TAIKHOANs.Where(p => p.TENDANGNHAP.Contains(acc) 
+                    && p.PASSWORD.Contains(pass)).Single();
                 if (nv != null)
                 {
                     ten = nv.TENNV;
