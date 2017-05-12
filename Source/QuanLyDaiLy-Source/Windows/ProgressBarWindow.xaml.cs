@@ -13,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace QuanLyDaiLy_Source.Windows
 {
@@ -42,6 +43,8 @@ namespace QuanLyDaiLy_Source.Windows
             // Hide this window's exit button
             var hwnd = new System.Windows.Interop.WindowInteropHelper(this).Handle;
             SetWindowLong(hwnd, GWL_STYLE, GetWindowLong(hwnd, GWL_STYLE) & ~WS_SYSMENU);
+
+            //StartCloseTimer();
         }
 
         private void Window_Closing(object sender, CancelEventArgs e)
@@ -77,6 +80,22 @@ namespace QuanLyDaiLy_Source.Windows
             ProgressBar.Value = e.ProgressPercentage;
         }
         */
+
+        private void StartCloseTimer()
+        {
+            DispatcherTimer timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromSeconds(4d);
+            timer.Tick += TimerTick;
+            timer.Start();
+        }
+
+        private void TimerTick(object sender, EventArgs e)
+        {
+            DispatcherTimer timer = (DispatcherTimer)sender;
+            timer.Stop();
+            timer.Tick -= TimerTick;
+            Close();
+        }
     }
 
 }

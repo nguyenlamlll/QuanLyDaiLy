@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QuanLyDaiLy_Source.Windows"
         mc:Ignorable="d" KeyDown="Window_KeyDown"
-        Title="Đăng Nhập" Height="250" Width="700">
+        Title="Đăng Nhập" Height="250" Width="700"
+        WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
