@@ -13,4 +13,7 @@
     <DataTemplate x:Key="DataDaiLy">
         <TextBlock Text="{Binding TENDL}"></TextBlock>
     </DataTemplate>
+    <DataTemplate x:Key="DataCHUCVU">
+        <TextBlock Text="{Binding TENCHUCVU}"></TextBlock>
+    </DataTemplate>
 </ResourceDictionary>

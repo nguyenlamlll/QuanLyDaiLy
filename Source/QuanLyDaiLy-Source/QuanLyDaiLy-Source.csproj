@@ -123,6 +123,9 @@
     <Compile Include="Windows\TiepNhanDaiLy.xaml.cs">
       <DependentUpon>TiepNhanDaiLy.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\TiepNhanNhanVienWindow.xaml.cs">
+      <DependentUpon>TiepNhanNhanVienWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -204,6 +207,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\TiepNhanDaiLy.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\TiepNhanNhanVienWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
