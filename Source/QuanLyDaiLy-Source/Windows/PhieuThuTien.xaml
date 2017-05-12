@@ -117,7 +117,26 @@
                     </Image.ToolTip>
                 </Image>
             </StackPanel>
-
+            <StackPanel x:Name="DebtStackPanel" Orientation="Horizontal" HorizontalAlignment="Right">
+                <TextBlock Style="{DynamicResource InputTextBlock}">
+                           Số nợ:
+                </TextBlock>
+                <TextBox x:Name="DebtTextBox" Style="{DynamicResource InputTextBox}" IsEnabled="False"/>
+                <Image x:Name="DebtImage" Source="/QuanLyDaiLy-Source;component/Assets/Icons/exclamation-mark32.png"
+                           Height="16" Width="16" Cursor="Help"
+                           Visibility="Hidden">
+                    <Image.ToolTip>
+                        <StackPanel Background="#FFFFA0A0">
+                            <TextBlock FontWeight="Bold" FontSize="14" Margin="0,0,0,5">
+                                    Số nợ
+                            </TextBlock>
+                            <TextBlock>
+                                   Số nợ của đại lý đã chọn
+                            </TextBlock>
+                        </StackPanel>
+                    </Image.ToolTip>
+                </Image>
+            </StackPanel>
             <StackPanel x:Name="MoneyStackPanel" Orientation="Horizontal" HorizontalAlignment="Right">
                 <TextBlock Style="{DynamicResource InputTextBlock}">
                            Số Tiền Thu:
@@ -177,7 +196,16 @@
                 </Image>
             </StackPanel>
 
-
+            
+            <TextBlock x:Name="DebtNotificationTextBlock" Margin="0,5,0,0" 
+                       FontStyle="Italic"
+                       Foreground="Red"
+                       Style="{DynamicResource InputTextBlock}"
+                       HorizontalAlignment="Center"
+                       Visibility="Collapsed">
+                Đại lý hiện không có nợ.
+            </TextBlock>
+            
             <!--#endregion-->
 
             

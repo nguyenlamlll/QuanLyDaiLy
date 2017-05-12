@@ -156,11 +156,25 @@ namespace QuanLyDaiLy_Source.Windows
 
         }
 
+        /// <summary>
+        /// After user chose an option. Display its relating information onto the screen.
+        /// </summary>
         private void AgencyComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             DAILY daiLy = (DAILY)AgencyComboBox.SelectedItem;
             PhoneNumberTextBox.Text = daiLy.DIENTHOAI;
             AddressTextBox.Text = daiLy.DIACHI;
+
+            decimal? debt = daiLy.SONO;
+            if (debt <= 0 || debt == null) debt = 0;
+            DebtTextBox.Text = debt.ToString();
+            
+            if (debt <= 0)
+            {
+                MoneyTextBox.IsEnabled = false;
+                DateDatePicker.IsEnabled = false;
+                DebtNotificationTextBlock.Visibility = Visibility.Visible;
+            }
         }
     }
 }
