@@ -42,6 +42,29 @@ namespace DAODLL
             }
         }
 
+
+        /// <summary>
+        /// Get All Agencies of 1 District
+        /// </summary>
+        /// <param name="maQuan"></param>
+        /// <returns></returns>
+        public ObservableCollection<DAILY> GetAllDaiLy(int maQuan)
+        {
+            ObservableCollection<DAILY> li = new ObservableCollection<DAILY>();
+            using (QLDLDataContext db = new QLDLDataContext())
+            {
+                var daiLy = (from records in db.DAILies
+                             where records.MAQUAN == maQuan
+                             select records);
+                foreach (DAILY dl in daiLy)
+                {
+                    li.Add(dl);
+                }
+                return li;
+            }
+        }
+
+
         /// <summary>
         /// Get all QUAN's name and show upto ComboBox
         /// </summary>
@@ -59,6 +82,7 @@ namespace DAODLL
                 return li;
             }
         }
+
 
         /// <summary>
         /// Get all LAOIDAILY's name and show upto ComboBox
@@ -219,5 +243,7 @@ namespace DAODLL
                 return num;
             }
         }
+
+
     }
 }

@@ -14,6 +14,7 @@ namespace QuanLyDaiLy_Source.Models.BusinessLogic
         {
             try
             {
+                // Check maximum constraint
                 int max = DAOView.Instance.GetSoDlToiDa(obj.MAQUAN.Value);
                 int currentNum = DAOView.Instance.CountSoDaiLy(obj.MAQUAN.Value);
                 if (currentNum >= max) return false;

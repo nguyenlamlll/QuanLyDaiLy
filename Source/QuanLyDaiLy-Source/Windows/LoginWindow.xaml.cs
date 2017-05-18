@@ -29,9 +29,20 @@ namespace QuanLyDaiLy_Source.Windows
 
         private void LogInButton_Click(object sender, RoutedEventArgs e)
         {
-            LoadingWindowHandler(this, e);
+            //LoadingWindowHandler(this, e);
             string username = UsernameTextBox.Text.ToString();
+            //for (int i = 1; i <= (20 - UsernameTextBox.Text.Count()); i++)
+            //{
+            //    username += " ";
+            //}
             string password = PasswordTextBox.Text.ToString();
+            if (username == "" || password == "" ||
+                 username == null || password == null)
+            {
+                MessageBox.Show("Vui lòng nhập thông tin đăng nhập.", "Đăng Nhập Thất Bại",
+                               MessageBoxButton.OK, MessageBoxImage.Asterisk);
+                return;
+            }
             try
             {
                 bool isLoginSucceed = DAODLL.User.Instance.Dangnhap(username, password);
@@ -42,20 +53,24 @@ namespace QuanLyDaiLy_Source.Windows
                 }
                 else
                 {
-                    MessageBox.Show("Bạn vui lòng kiểm tra lại tên đăng nhập hoặc mật khẩu rồi thử lại.", "Đăng Nhập Thất Bại", MessageBoxButton.OK, MessageBoxImage.Asterisk);
+                    MessageBox.Show("Bạn vui lòng kiểm tra lại tên đăng nhập hoặc mật khẩu rồi thử lại.", "Đăng Nhập Thất Bại", 
+                        MessageBoxButton.OK, MessageBoxImage.Asterisk);
+                    //LoggingStatus.Visibility = Visibility.Visible;
+
                     UsernameTextBox.Text = "";
                     PasswordTextBox.Text = "";
+                    UsernameTextBox.Focus();
                 }
             }
             catch (Exception)
             {
-                MessageBox.Show("Bạn vui lòng kiểm tra lại tên đăng nhập hoặc mật khẩu rồi thử lại.", "Đăng Nhập Thất Bại",
-                    MessageBoxButton.OK, MessageBoxImage.Asterisk);
+                //MessageBox.Show("Bạn vui lòng kiểm tra lại tên đăng nhập hoặc mật khẩu rồi thử lại.", "Đăng Nhập Thất Bại",
+                //    MessageBoxButton.OK, MessageBoxImage.Asterisk);
             }
-            finally
-            {
-                AbortLoadingWindow();
-            }
+            //finally
+            //{
+            //    AbortLoadingWindow();
+            //}
 
         }
 
@@ -73,7 +88,7 @@ namespace QuanLyDaiLy_Source.Windows
             newWindowThread.SetApartmentState(ApartmentState.STA);
             newWindowThread.IsBackground = true;
             newWindowThread.Start();
-           
+
         }
         private void AbortLoadingWindow()
         {

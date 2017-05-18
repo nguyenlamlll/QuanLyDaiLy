@@ -8,7 +8,8 @@
         mc:Ignorable="d"
         Title="Quản Lý Đại Lý"
         Height="1080" Width="1920"
-        MinHeight="720" MinWidth="1280" Loaded="Window_Loaded">
+        MinHeight="720" MinWidth="1280" Loaded="Window_Loaded"
+        WindowStartupLocation="CenterScreen" WindowState="Maximized">
     <Window.Resources>
         <ResourceDictionary Source="Styles/Styles.xaml"/>
     </Window.Resources>

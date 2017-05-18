@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Linq.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace DAODLL
 {
@@ -61,15 +63,22 @@ namespace DAODLL
                 try
                 {
                     nv = (from account in db.TAIKHOANs
-                                  //join employee in db.NHANVIENs on account.MANV equals employee.MANV
-                                  //join position in db.CHUCVUs on employee.MACHUCVU equals position.MACHUCVU
-                              where account.TENDANGNHAP.Contains(acc)
+                              //join employee in db.NHANVIENs on account.MANV equals employee.MANV
+                              //join position in db.CHUCVUs on employee.MACHUCVU equals position.MACHUCVU
+                          where account.TENDANGNHAP.Contains(acc)
                               && account.PASSWORD.Contains(pass)
-                              select account).Single();
+                          select account).Single();
+                    // To remove all spaces of NChar type. (This NChar type is bullshit to deal with).
+                    if (nv != null)
+                    {
+                        nv.TENDANGNHAP = nv.TENDANGNHAP.Trim();
+                        if (nv.TENDANGNHAP != acc || nv.PASSWORD != pass) nv = null;
+                    }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    nv = null;
+                    //MessageBox.Show(ex.ToString());
+                    //nv = null;
                 }
 
                 if (nv != null)
@@ -83,8 +92,8 @@ namespace DAODLL
                     manv = (int)nv.MANV;
 
                     var query = (from position in db.CHUCVUs
-                                where nv.NHANVIEN.MACHUCVU == position.MACHUCVU
-                                select position.TENCHUCVU).Single();
+                                 where nv.NHANVIEN.MACHUCVU == position.MACHUCVU
+                                 select position.TENCHUCVU).Single();
                     chucvu = query;
 
                     //Login suceed

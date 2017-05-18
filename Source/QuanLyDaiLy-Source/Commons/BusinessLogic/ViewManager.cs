@@ -71,6 +71,16 @@ namespace QuanLyDaiLy_Source.Commons.BusinessLogic
         {
             return DAOView.Instance.GetQuan(maQuan);
         }
+
+        /// <summary>
+        /// Get All DaiLy that belongs to QUAN (maQuan)
+        /// </summary>
+        /// <param name="maQuan">Mã Quận cần lấy tât cả đại lý</param>
+        /// <returns></returns>
+        public ObservableCollection<DAILY> GetAllDaiLy(int maQuan)
+        {
+            return DAOView.Instance.GetAllDaiLy(maQuan);
+        }
     }
 
 

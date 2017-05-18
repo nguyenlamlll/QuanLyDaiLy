@@ -5,9 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QuanLyDaiLy_Source.Windows"
         mc:Ignorable="d" KeyDown="Window_KeyDown"
-        Title="Đăng Nhập" Height="250" Width="700"
+        Title="Đăng Nhập" 
+        Height="250"
+        Width="700"
         WindowStartupLocation="CenterScreen"
-        Loaded="Window_Loaded" FocusManager.FocusedElement="{Binding ElementName=UsernameTextBox}">
+        Loaded="Window_Loaded" 
+        FocusManager.FocusedElement="{Binding ElementName=UsernameTextBox}"
+        ResizeMode="NoResize"
+        WindowStyle="ThreeDBorderWindow">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -15,7 +20,7 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-    <Grid>
+    <Grid x:Name="MainGrid">
         <StackPanel Orientation="Vertical"
                     Margin="10,20,30,0">
             <StackPanel Orientation="Horizontal"
@@ -38,7 +43,12 @@
                          Style="{DynamicResource InputTextBox}"
                          Width="400"/>
             </StackPanel>
-
+            <TextBlock x:Name="LoggingStatus" Style="{DynamicResource InputTextBlock}"
+                       FontSize="18" FontStyle="Italic"
+                       HorizontalAlignment="Center"
+                       Visibility="Collapsed">
+                Đăng nhập thất bại. Vui lòng kiểm tra lại tên đăng nhập và mật khẩu
+            </TextBlock>
             <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Right">
                 <Button x:Name="LogInButton" 

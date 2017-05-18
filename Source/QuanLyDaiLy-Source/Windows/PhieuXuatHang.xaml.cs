@@ -79,14 +79,19 @@ namespace QuanLyDaiLy_Source.Windows
             try
             {
                 int maQuan = (int)DistrictSelectComboBox.SelectedValue;
-                ViewManager.Instance.GetQuan(maQuan);
+                QUAN selected = ViewManager.Instance.GetQuan(maQuan);
+                ObservableCollection<DAILY> listDaiLy = ViewManager.Instance.GetAllDaiLy(selected.MAQUAN);
+
+                AgencySelectComboBox.ClearValue(ItemsControl.ItemsSourceProperty);
+                AgencySelectComboBox.Items.Clear();
+                AgencySelectComboBox.ItemsSource = listDaiLy;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
             }
         }
-        
+
 
         private void AddRowButton_Click(object sender, RoutedEventArgs e)
         {
@@ -222,17 +227,53 @@ namespace QuanLyDaiLy_Source.Windows
         /// <param name="e"></param>
         private void SaveEditButton_Click(object sender, RoutedEventArgs e)
         {
-            MATHANG selected = (MATHANG)MatHangComboBox.SelectedItem;
-            XuatHangGrid item = new XuatHangGrid
+            try
             {
-                MatHang = selected.TENHANG,
-                DonViTinh = ViewManager.Instance.GetDonViTinh(selected.MAHANG),
-                SoLuong = int.Parse(SoLuongTextBox.Text),
-                DonGia = selected.DONGIA.Value,
-                ThanhTien = decimal.Parse(ThanhTienTextBox.Text)
-            };
-            //MessageBox.Show(item.MatHang.ToString());
-            MerchandiseDataGrid.Items.Add(item);
+                MATHANG selected = (MATHANG)MatHangComboBox.SelectedItem;
+                XuatHangGrid item = new XuatHangGrid
+                {
+                    MatHang = selected.TENHANG,
+                    DonViTinh = ViewManager.Instance.GetDonViTinh(selected.MAHANG),
+                    SoLuong = int.Parse(SoLuongTextBox.Text),
+                    DonGia = selected.DONGIA.Value,
+                    ThanhTien = decimal.Parse(ThanhTienTextBox.Text)
+                };
+                if (MerchandiseDataGrid.Items.Add(item) == -1) // The item couldn't be added
+                {
+                    return;
+                }
+                else // The item is added successfully
+                {
+                    SoLuongTextBox.Text = string.Empty;
+                    ThanhTienTextBox.Text = string.Empty;
+
+                    // Update Sum Money for PhieuXuatHang
+                    decimal sum = 0;
+                    for (int i = 0; i < MerchandiseDataGrid.Items.Count; i++)
+                    {
+                        try
+                        {
+                            //DataGridRow row = (DataGridRow)MerchandiseDataGrid.ItemContainerGenerator.ContainerFromIndex(i);
+                            //var cell = DataGridHelper.GetCell(MerchandiseDataGrid, row, 4);
+
+                            DataGridCell cell = DataGridHelper.GetCell(MerchandiseDataGrid, i, 4);
+                            TextBlock tb = cell.Content as TextBlock;
+                            decimal money = decimal.Parse(tb.Text.ToString());
+                            sum += money;
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.ToString());
+                        }
+                    }
+                    SumTextBox.Text = sum.ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+
         }
 
         private void MinimizeDockPanelButton_Click(object sender, RoutedEventArgs e)
@@ -240,8 +281,8 @@ namespace QuanLyDaiLy_Source.Windows
             if (MinimizeDockPanelButton.Content.ToString() == "\uE015") //If the dock panel is up
             {
                 MinimizeDockPanelToolTip.Text = "Phóng to";
-                MinimizeDockPanelButton.Content = "\uE014"; 
-                MerchandiseStackPanel.Margin = new Thickness(0, 220, 0, 0  ); // Margin="0,220,0,0"
+                MinimizeDockPanelButton.Content = "\uE014";
+                MerchandiseStackPanel.Margin = new Thickness(0, 220, 0, 0); // Margin="0,220,0,0"
             }
             else //If the dock panel is hiden
             {
@@ -249,9 +290,36 @@ namespace QuanLyDaiLy_Source.Windows
                 MinimizeDockPanelButton.Content = "\uE015";
                 MerchandiseStackPanel.Margin = new Thickness(0, 0, 0, 0);
             }
-            
+
         }
 
+        /// <summary>
+        /// Update the current editing row to  MerchandiseDataGrid
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void UpdateButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        /*
+        private void MerchandiseDataGrid_AddingNewItem(object sender, AddingNewItemEventArgs e)
+        {
+            foreach (System.Data.DataRowView row in MerchandiseDataGrid.Items)
+            {
+                //Sum up all "Thanh Tien"
+                try
+                {
+                    SumTextBox.Text += (double)row.Row.ItemArray[4];
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
+        }
+        */
 
 
         /*
@@ -270,6 +338,10 @@ namespace QuanLyDaiLy_Source.Windows
 
 
     }
+
+    /// <summary>
+    /// A template class for a grid with columns as its property
+    /// </summary>
     public class XuatHangGrid
     {
         public string MatHang { get; set; }

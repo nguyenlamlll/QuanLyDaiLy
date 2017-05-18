@@ -93,6 +93,7 @@
     <Compile Include="Commons\MenuItems.cs" />
     <Compile Include="Commons\PhieuXuatHang_ViewModel.cs" />
     <Compile Include="Helper\DataGridComboBoxColumnWithBindingHack.cs" />
+    <Compile Include="Helper\DataGridHelper.cs" />
     <Compile Include="Helper\FieldChecker.cs" />
     <Compile Include="Helper\Utilities.cs" />
     <Compile Include="Windows\BaoCaoCongNo.xaml.cs">
