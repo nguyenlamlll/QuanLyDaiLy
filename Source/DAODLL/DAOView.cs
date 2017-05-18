@@ -49,7 +49,7 @@ namespace DAODLL
         public ObservableCollection<QUAN> GetAllQuan()
         {
             ObservableCollection<QUAN> li = new ObservableCollection<QUAN>();
-            using(QLDLDataContext db = new QLDLDataContext())
+            using (QLDLDataContext db = new QLDLDataContext())
             {
                 var l = db.QUANs.Select(p => p);
                 foreach (var item in l)
@@ -76,7 +76,7 @@ namespace DAODLL
                 }
                 return li;
             }
-            
+
         }
 
         /// <summary>
@@ -95,8 +95,9 @@ namespace DAODLL
                 }
                 return li;
             }
-           
+
         }
+
 
         /// <summary>
         /// get all CHUC VU
@@ -107,14 +108,73 @@ namespace DAODLL
             ObservableCollection<CHUCVU> li = new ObservableCollection<CHUCVU>();
             using (QLDLDataContext db = new QLDLDataContext())
             {
-                 var l = db.CHUCVUs.Select(p=>p);
-                foreach(var item in l)
-                 {
-                     li.Add(item as CHUCVU);
-                 }
+                var l = db.CHUCVUs.Select(p => p);
+                foreach (var item in l)
+                {
+                    li.Add(item as CHUCVU);
+                }
                 return li;
             }
         }
 
+        public ObservableCollection<CTPX> GetAllCTPX()
+        {
+            ObservableCollection<CTPX> li = new ObservableCollection<CTPX>();
+            using (QLDLDataContext db = new QLDLDataContext())
+            {
+                var l = db.CTPXes.Select(p => p);
+                foreach (var item in l)
+                {
+                    li.Add(item as CTPX);
+                }
+                return li;
+            }
+        }
+
+        public ObservableCollection<MATHANG> GetAllMatHang()
+        {
+            ObservableCollection<MATHANG> matHang = new ObservableCollection<MATHANG>();
+            using (QLDLDataContext db = new QLDLDataContext())
+            {
+                var l = db.MATHANGs.Select(p => p);
+                foreach (var item in l)
+                {
+                    matHang.Add(item as MATHANG);
+                }
+            }
+            return matHang;
+        }
+
+
+        /// <summary>
+        /// Get unit of a product, using its ID
+        /// </summary>
+        /// <param name="maHang"></param>
+        /// <returns>Return the display name of that unit</returns>
+        public string GetDonViTinh(int maHang)
+        {
+            string donVi = null;
+            using (QLDLDataContext db = new QLDLDataContext())
+            {
+                var product = (from products in db.MATHANGs
+                                 where products.MAHANG == maHang
+                                 select products).Single();
+                donVi = (from records in db.DVTs
+                         where records.MADVT == product.MADVT
+                         select records.DVT1).Single();
+                return donVi;
+            }
+        }
+
+        public decimal GetDonGia(int maHang)
+        {
+            using (QLDLDataContext db = new QLDLDataContext())
+            {
+                var product = (from products in db.MATHANGs
+                               where products.MAHANG == maHang
+                               select products).Single();
+                return product.DONGIA.Value;
+            }
+        }
     }
 }

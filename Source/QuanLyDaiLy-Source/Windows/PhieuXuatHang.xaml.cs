@@ -1,4 +1,7 @@
-﻿using System;
+﻿using DAODLL;
+using QuanLyDaiLy_Source.Commons;
+using QuanLyDaiLy_Source.Commons.BusinessLogic;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -13,6 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using QuanLyDaiLy_Source.Helper;
 
 namespace QuanLyDaiLy_Source.Windows
 {
@@ -22,6 +26,9 @@ namespace QuanLyDaiLy_Source.Windows
     /// </summary>
     public partial class PhieuXuatHang : Page
     {
+        MatHangManager matHangManager = new MatHangManager();
+        public ObservableCollection<MATHANG> dummyMatHang { get; set; }
+
         /// <summary>
         /// Invoke changes within the page loaded event.
         /// </summary>
@@ -31,7 +38,10 @@ namespace QuanLyDaiLy_Source.Windows
             InitializeComponent();
             Loaded += PhieuXuatHang_Loaded;
             //AgencySelectComboBox.IsEnabled = false;
-            
+
+            //DataContext = new PhieuXuatHang_ViewModel();
+            //dummyMatHang = matHangManager.GetMatHang();
+            //MerchandiseDataGrid.ItemsSource = dummyMatHang;
 
 
         }
@@ -40,17 +50,30 @@ namespace QuanLyDaiLy_Source.Windows
         {
             App.Current.Properties[Models.DefaultSettings.ContentFrameTitle] = "Phiếu Xuất Hàng";
             pageLoaded?.Invoke(this, e);
+            try
+            {
+                MatHangComboBox.Items.Clear();
+                MatHangComboBox.ItemsSource = DAOView.Instance.GetAllMatHang();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
 
         private void AddRowButton_Click(object sender, RoutedEventArgs e)
         {
-            //MerchandiseDataGrid.Items.Add(new M);
+            //MerchandiseDataGrid.Items.Add();
         }
 
         private void SaveAndExitButton_Click(object sender, RoutedEventArgs e)
         {
             // Save
-
+            double sumMoney = 0;
+            foreach (System.Data.DataRowView row in MerchandiseDataGrid.Items)
+            {
+                sumMoney = (double)row.Row.ItemArray[4];
+            }
             // Clear all input fields
 
             //Exit
@@ -78,6 +101,150 @@ namespace QuanLyDaiLy_Source.Windows
             MerchandiseDataGrid.Items.Refresh();
         }
 
+        private void EditButton_Click(object sender, RoutedEventArgs e)
+        {
 
+        }
+
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        /// <summary>
+        /// After user selects Product. Load all relating information of that product.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MatHangComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            int maHang = (int)MatHangComboBox.SelectedValue;
+            DonViTinhTextBox.Text = ViewManager.Instance.GetDonViTinh(maHang);
+            DonGiaTextBox.Text = ViewManager.Instance.GetDonGia(maHang).ToString();
+            SoLuongTextBox.IsEnabled = true;
+        }
+
+
+        /// <summary>
+        /// Validate its input and update relating information
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SoLuongTextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            string soLuong = SoLuongTextBox.Text;
+
+            if (!FieldChecker.IsTextBoxFilled(SoLuongTextBox))
+                SoLuongTextBlock_Status.Visibility = Visibility.Visible;
+            else
+            {
+                if (!Utilities.IsDigitsOnly(soLuong))
+                    SoLuongTextBlock_Status.Visibility = Visibility.Visible;
+                else
+                {
+                    SoLuongTextBlock_Status.Visibility = Visibility.Collapsed;
+                    try
+                    {
+                        decimal thanhTien = int.Parse(soLuong) * decimal.Parse(DonGiaTextBox.Text);
+                        ThanhTienTextBox.Text = thanhTien.ToString();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.ToString());
+                    }
+                }
+            }
+        }
+
+
+        /// <summary>
+        /// Validate its input and update relating information right after user enters.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SoLuongTextBox_PreviewKeyUp(object sender, KeyEventArgs e)
+        {
+            string soLuong = SoLuongTextBox.Text;
+
+            if (!FieldChecker.IsTextBoxFilled(SoLuongTextBox))
+                SoLuongTextBlock_Status.Visibility = Visibility.Visible;
+            else
+            {
+                if (!Utilities.IsDigitsOnly(soLuong))
+                    SoLuongTextBlock_Status.Visibility = Visibility.Visible;
+                else
+                {
+                    SoLuongTextBlock_Status.Visibility = Visibility.Collapsed;
+                    try
+                    {
+                        decimal thanhTien = int.Parse(soLuong) * decimal.Parse(DonGiaTextBox.Text);
+                        ThanhTienTextBox.Text = thanhTien.ToString();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.ToString());
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Add a product to the order from details dock panel.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SaveEditButton_Click(object sender, RoutedEventArgs e)
+        {
+            MATHANG selected = (MATHANG)MatHangComboBox.SelectedItem;
+            XuatHangGrid item = new XuatHangGrid
+            {
+                MatHang = selected.TENHANG,
+                DonViTinh = ViewManager.Instance.GetDonViTinh(selected.MAHANG),
+                SoLuong = int.Parse(SoLuongTextBox.Text),
+                DonGia = selected.DONGIA.Value,
+                ThanhTien = decimal.Parse(ThanhTienTextBox.Text)
+            };
+            //MessageBox.Show(item.MatHang.ToString());
+            MerchandiseDataGrid.Items.Add(item);
+        }
+
+        private void MinimizeDockPanelButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (MinimizeDockPanelButton.Content.ToString() == "\uE015")
+            {
+                MinimizeDockPanelButton.Content = "\uE014";
+                MerchandiseStackPanel.Margin = new Thickness(0, 220, 0, 0); // Margin="0,220,0,0"
+            }
+            else
+            {
+                MinimizeDockPanelButton.Content = "\uE015";
+                MerchandiseStackPanel.Margin = new Thickness(0, 0, 0, 0);
+            }
+            
+        }
+
+        /*
+        private void MerchandiseDataGrid_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
+        {
+            if (this.MerchandiseDataGrid.SelectedItem != null)
+            {
+                (sender as DataGrid).RowEditEnding -= MerchandiseDataGrid_RowEditEnding;
+                (sender as DataGrid).CommitEdit();
+                (sender as DataGrid).Items.Refresh();
+                (sender as DataGrid).RowEditEnding += MerchandiseDataGrid_RowEditEnding;
+            }
+            else return;
+        }
+        */
+
+
+    }
+    public class XuatHangGrid
+    {
+        public string MatHang { get; set; }
+        public string DonViTinh { get; set; }
+        public int SoLuong { get; set; }
+        public decimal DonGia { get; set; }
+        public decimal ThanhTien { get; set; }
     }
 }

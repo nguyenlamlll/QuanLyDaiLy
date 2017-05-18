@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections;
+using System.Collections.ObjectModel;
 
 namespace DAODLL
 {
@@ -132,6 +133,21 @@ namespace DAODLL
                 //insert succeed
                 return true;
             }
+        }
+
+
+        public ObservableCollection<MATHANG> GetMatHang()
+        {
+            ObservableCollection<MATHANG> matHang = new ObservableCollection<MATHANG>();
+            using (QLDLDataContext db = new QLDLDataContext())
+            {
+                var l = db.MATHANGs.Select(p => p);
+                foreach (var item in l)
+                {
+                    matHang.Add(item as MATHANG);
+                }
+            }
+            return matHang;
         }
     }
 }

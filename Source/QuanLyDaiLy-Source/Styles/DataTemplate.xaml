@@ -16,4 +16,7 @@
     <DataTemplate x:Key="DataCHUCVU">
         <TextBlock Text="{Binding TENCHUCVU}"></TextBlock>
     </DataTemplate>
+    <DataTemplate x:Key="DataMatHang">
+        <TextBlock Text="{Binding TENHANG}"></TextBlock>
+    </DataTemplate>
 </ResourceDictionary>

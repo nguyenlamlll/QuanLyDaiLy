@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace QuanLyDaiLy_Source
+namespace QuanLyDaiLy_Source.Helper
 {
     public static partial class Utilities
     {

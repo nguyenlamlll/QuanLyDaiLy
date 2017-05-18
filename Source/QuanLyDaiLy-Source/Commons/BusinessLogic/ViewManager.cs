@@ -51,6 +51,22 @@ namespace QuanLyDaiLy_Source.Commons.BusinessLogic
         {
             return DAOView.Instance.GetAllCV();
         }
+
+        public ObservableCollection<CTPX> GetAllCTPX()
+        {
+            return DAOView.Instance.GetAllCTPX();
+        }
+
+        public string GetDonViTinh(int maHang)
+        {
+            return DAOView.Instance.GetDonViTinh(maHang);
+        }
+
+        public decimal GetDonGia(int maHang)
+        {
+            return DAOView.Instance.GetDonGia(maHang);
+        }
+
     }
 
 

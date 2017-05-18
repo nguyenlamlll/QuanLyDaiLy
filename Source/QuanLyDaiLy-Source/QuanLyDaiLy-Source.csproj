@@ -50,8 +50,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="LiveCharts, Version=0.9.6.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>packages\LiveCharts.0.9.6\lib\net45\LiveCharts.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="LiveCharts.Wpf, Version=0.9.6.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>packages\LiveCharts.Wpf.0.9.6\lib\net45\LiveCharts.Wpf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -73,14 +82,19 @@
     <Compile Include="Commons\BusinessLogic\DaiLyManager.cs" />
     <Compile Include="Commons\BusinessLogic\EmployeeManager.cs" />
     <Compile Include="Commons\BusinessLogic\Manager.cs" />
+    <Compile Include="Commons\BusinessLogic\MatHangManager.cs" />
     <Compile Include="Commons\BusinessLogic\PhieuThuTienManager.cs" />
     <Compile Include="Commons\BusinessLogic\QuanManager.cs" />
     <Compile Include="Commons\BusinessLogic\ThietLapQuyDinh.cs" />
     <Compile Include="Commons\BusinessLogic\ViewManager.cs" />
     <Compile Include="Commons\DataGridTestItem.cs" />
     <Compile Include="Commons\DefaultSettings.cs" />
+    <Compile Include="Commons\GenericError.cs" />
     <Compile Include="Commons\MenuItems.cs" />
-    <Compile Include="Utilities.cs" />
+    <Compile Include="Commons\PhieuXuatHang_ViewModel.cs" />
+    <Compile Include="Helper\DataGridComboBoxColumnWithBindingHack.cs" />
+    <Compile Include="Helper\FieldChecker.cs" />
+    <Compile Include="Helper\Utilities.cs" />
     <Compile Include="Windows\BaoCaoCongNo.xaml.cs">
       <DependentUpon>BaoCaoCongNo.xaml</DependentUpon>
     </Compile>
@@ -233,6 +247,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
