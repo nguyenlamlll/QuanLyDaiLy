@@ -157,8 +157,8 @@ namespace DAODLL
             using (QLDLDataContext db = new QLDLDataContext())
             {
                 var product = (from products in db.MATHANGs
-                                 where products.MAHANG == maHang
-                                 select products).Single();
+                               where products.MAHANG == maHang
+                               select products).Single();
                 donVi = (from records in db.DVTs
                          where records.MADVT == product.MADVT
                          select records.DVT1).Single();
@@ -185,6 +185,38 @@ namespace DAODLL
                                 where districts.MAQUAN == maQuan
                                 select districts).Single();
                 return district;
+            }
+        }
+
+        /// <summary>
+        /// Lay so dai ly toi da cua mot quan.
+        /// </summary>
+        /// <param name="maQuan">So quan can xem so dai ly toi da</param>
+        /// <returns></returns>
+        public int GetSoDlToiDa(int maQuan)
+        {
+            using (QLDLDataContext db = new QLDLDataContext())
+            {
+                var max = (from records in db.QUANs
+                           where records.MAQUAN == maQuan
+                           select records).Single();
+                return max.SODLTOIDA.Value;
+            }
+        }
+
+        /// <summary>
+        /// Dem so luong dai ly hien co trong quan, voi tinh trang dang hoat dong (TINHTRANG = 1)
+        /// </summary>
+        /// <param name="maQuan"></param>
+        /// <returns></returns>
+        public int CountSoDaiLy(int maQuan)
+        {
+            using (QLDLDataContext db = new QLDLDataContext())
+            {
+                int num = (from daily in db.DAILies
+                           where daily.MAQUAN == maQuan && daily.TINHTRANG == 1
+                           select daily).Count();
+                return num;
             }
         }
     }

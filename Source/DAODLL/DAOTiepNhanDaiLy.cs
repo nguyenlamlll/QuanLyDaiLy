@@ -36,6 +36,8 @@ namespace DAODLL
             {
                 if (db.DAILies.Where(p => p.MADL == dl.MADL).Count() > 0)
                     return false;
+                if (db.DAILies.Where(p => p.TENDL == dl.TENDL).Count() > 0)
+                    return false;
 
                 DAILY DL = new DAILY();
                 DL.MADL = dl.MADL;

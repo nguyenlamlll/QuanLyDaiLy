@@ -178,14 +178,24 @@ namespace QuanLyDaiLy_Source.Windows
 
             //var dataAccessObj = DAODLL.DAOTiepNhanDaiLy.Instance;
 
-            DAODLL.DAILY daiLy = new DAODLL.DAILY();
+            DAILY daiLy = new DAILY();
 
             GetDaiLyInput(daiLy);
+            if (daiLyManager.Insert(daiLy))
+            {
+                MessageBox.Show("Đã thêm thành công.", "Thông Báo",
+                    MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK);
 
-            daiLyManager.Insert(daiLy);
+                NavigationService ns = NavigationService.GetNavigationService(this);
+                ns.Navigate(new Uri("/QuanLyDaiLy-Source;component/Windows/BusinessHomePage.xaml", UriKind.Relative));
+            }
+            else
+            {
+                MessageBox.Show(Commons.GenericError.MaximumErrorContent, Commons.GenericError.MaximumError,
+                    MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK);
+            }
 
-            NavigationService ns = NavigationService.GetNavigationService(this);
-            ns.Navigate(new Uri("/QuanLyDaiLy-Source;component/Windows/BusinessHomePage.xaml", UriKind.Relative));
+            
         }
 
         /// <summary>
@@ -198,11 +208,17 @@ namespace QuanLyDaiLy_Source.Windows
             DAODLL.DAILY daiLy = new DAODLL.DAILY();
 
             GetDaiLyInput(daiLy);
+            if (daiLyManager.Insert(daiLy))
+            {
+                MessageBox.Show("Đã thêm thành công.", "Thông Báo",
+                    MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK);
+            }
+            else
+            {
+                MessageBox.Show(Commons.GenericError.MaximumErrorContent, Commons.GenericError.MaximumError,
+                    MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK);
+            }
 
-            daiLyManager.Insert(daiLy);
-
-            MessageBox.Show("Đã thêm thành công.", "Thông Báo", MessageBoxButton.OK, MessageBoxImage.Information,
-                MessageBoxResult.OK);
 
             NameInputTextBox.Text = "";
             IDInputTextBox.Text = "";

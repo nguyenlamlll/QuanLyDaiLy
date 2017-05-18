@@ -14,6 +14,10 @@ namespace QuanLyDaiLy_Source.Models.BusinessLogic
         {
             try
             {
+                int max = DAOView.Instance.GetSoDlToiDa(obj.MAQUAN.Value);
+                int currentNum = DAOView.Instance.CountSoDaiLy(obj.MAQUAN.Value);
+                if (currentNum >= max) return false;
+
                 DAODLL.DAOTiepNhanDaiLy.Instance.Insert(obj);
                 return true;
             }
