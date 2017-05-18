@@ -17,6 +17,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using QuanLyDaiLy_Source.Helper;
+using QuanLyDaiLy_Source.Models.BusinessLogic;
 
 namespace QuanLyDaiLy_Source.Windows
 {
@@ -27,6 +28,7 @@ namespace QuanLyDaiLy_Source.Windows
     public partial class PhieuXuatHang : Page
     {
         MatHangManager matHangManager = new MatHangManager();
+        DaiLyManager daiLyManager = new DaiLyManager();
         public ObservableCollection<MATHANG> dummyMatHang { get; set; }
 
         /// <summary>
@@ -52,6 +54,12 @@ namespace QuanLyDaiLy_Source.Windows
             pageLoaded?.Invoke(this, e);
             try
             {
+                DistrictSelectComboBox.Items.Clear();
+                DistrictSelectComboBox.ItemsSource = ViewManager.Instance.GetAllQuan();
+
+                AgencySelectComboBox.Items.Clear();
+                AgencySelectComboBox.ItemsSource = ViewManager.Instance.GetAllDaiLy();
+
                 MatHangComboBox.Items.Clear();
                 MatHangComboBox.ItemsSource = DAOView.Instance.GetAllMatHang();
             }
@@ -60,6 +68,25 @@ namespace QuanLyDaiLy_Source.Windows
                 MessageBox.Show(ex.ToString());
             }
         }
+
+        /// <summary>
+        /// After user selects what district the agency is in, narrow down the search in Agency List.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DistrictSelectComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                int maQuan = (int)DistrictSelectComboBox.SelectedValue;
+                ViewManager.Instance.GetQuan(maQuan);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+        
 
         private void AddRowButton_Click(object sender, RoutedEventArgs e)
         {
@@ -210,18 +237,22 @@ namespace QuanLyDaiLy_Source.Windows
 
         private void MinimizeDockPanelButton_Click(object sender, RoutedEventArgs e)
         {
-            if (MinimizeDockPanelButton.Content.ToString() == "\uE015")
+            if (MinimizeDockPanelButton.Content.ToString() == "\uE015") //If the dock panel is up
             {
-                MinimizeDockPanelButton.Content = "\uE014";
-                MerchandiseStackPanel.Margin = new Thickness(0, 220, 0, 0); // Margin="0,220,0,0"
+                MinimizeDockPanelToolTip.Text = "Phóng to";
+                MinimizeDockPanelButton.Content = "\uE014"; 
+                MerchandiseStackPanel.Margin = new Thickness(0, 220, 0, 0  ); // Margin="0,220,0,0"
             }
-            else
+            else //If the dock panel is hiden
             {
+                MinimizeDockPanelToolTip.Text = "Thu nhỏ";
                 MinimizeDockPanelButton.Content = "\uE015";
                 MerchandiseStackPanel.Margin = new Thickness(0, 0, 0, 0);
             }
             
         }
+
+
 
         /*
         private void MerchandiseDataGrid_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)

@@ -176,5 +176,16 @@ namespace DAODLL
                 return product.DONGIA.Value;
             }
         }
+
+        public QUAN GetQuan(int maQuan)
+        {
+            using (QLDLDataContext db = new QLDLDataContext())
+            {
+                var district = (from districts in db.QUANs
+                                where districts.MAQUAN == maQuan
+                                select districts).Single();
+                return district;
+            }
+        }
     }
 }

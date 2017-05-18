@@ -45,11 +45,11 @@
                     Quận
                         </TextBlock>
                         <ComboBox x:Name="DistrictSelectComboBox"
-
+                                  ItemTemplate="{StaticResource DataQUAN}"
+                                  SelectedValuePath="MAQUAN"
                                   Width="350"
-                                  Style="{DynamicResource InputComboBox}">
-                            <ComboBoxItem>1</ComboBoxItem>
-                            <ComboBoxItem>2</ComboBoxItem>
+                                  Style="{DynamicResource InputComboBox}"
+                                  SelectionChanged="DistrictSelectComboBox_SelectionChanged">
                         </ComboBox>
                     </StackPanel>
 
@@ -60,11 +60,10 @@
                     Đại Lý
                         </TextBlock>
                         <ComboBox x:Name="AgencySelectComboBox"
-
+                                  ItemTemplate="{StaticResource DataDaiLy}"
+                                  SelectedValuePath="MALOAI"
                                   Style="{DynamicResource InputComboBox}"
                                   Width="350">
-                            <ComboBoxItem>DL 1</ComboBoxItem>
-                            <ComboBoxItem>DL 2</ComboBoxItem>
                         </ComboBox>
                     </StackPanel>
 
@@ -261,6 +260,16 @@
                             </StackPanel>
                         </Button.ToolTip>
                     </Button>
+
+                    <Button Visibility="Hidden" x:Name="Dummy1"
+                            Style="{DynamicResource InputButton}"
+                            Width="250"
+                            HorizontalAlignment="Right"/>
+                    
+                    <Button Visibility="Hidden" x:Name="Dummy2"
+                            Style="{DynamicResource InputButton}"
+                            Width="250"
+                            HorizontalAlignment="Right"/>
                 </StackPanel>
                 <!--#endregion-->
 
@@ -280,7 +289,14 @@
                         Content="&#xE015;"
                         Margin="0,3,3,0"
                         HorizontalAlignment="Right"
-                        VerticalAlignment="Top"/>
+                        VerticalAlignment="Top">
+                    <Button.ToolTip>
+                        <TextBlock x:Name="MinimizeDockPanelToolTip">
+                            Thu nhỏ
+                        </TextBlock>
+                    </Button.ToolTip>
+                </Button>
+                
                 <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Center"
                         Margin="200,10,0,0">
