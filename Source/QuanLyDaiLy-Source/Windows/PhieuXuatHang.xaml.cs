@@ -312,6 +312,32 @@ namespace QuanLyDaiLy_Source.Windows
         }
 
         /// <summary>
+        /// Kiểm tra tính hợp lệ của mặt hàng trước khi thêm vào phiếu xuất hàng
+        /// </summary>
+        /// <returns></returns>
+        private bool IsDataGridItemValid()
+        {
+            // Field input checks
+            if (MatHangComboBox.SelectedIndex == -1) return false;
+            if (SoLuongTextBox.IsEnabled == false) return false;
+            if (SoLuongTextBox.Text == "" || SoLuongTextBox.Text == string.Empty) return false;
+            if (!Utilities.IsDigitsOnly(SoLuongTextBox.Text)) return false;
+
+            // Logical checks
+            System.Collections.ArrayList list = this.GetAllMaHang();
+            MATHANG selected = (MATHANG)MatHangComboBox.SelectedItem;
+            foreach (var item in list)
+            {
+                if (selected.MAHANG == (int)item)
+                {
+                    MessageBox.Show("Mặt hàng này đã có trong phiếu xuất hàng", "Lỗi");
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        /// <summary>
         /// Add a product to the order from details dock panel.
         /// </summary>
         /// <param name="sender"></param>
@@ -320,6 +346,8 @@ namespace QuanLyDaiLy_Source.Windows
         {
             try
             {
+                if (!IsDataGridItemValid()) return;
+
                 MATHANG selected = (MATHANG)MatHangComboBox.SelectedItem;
                 XuatHangGrid item = new XuatHangGrid
                 {
@@ -448,6 +476,33 @@ namespace QuanLyDaiLy_Source.Windows
 
             }
         }
+
+        #region Inside-DataGrid Buttons
+
+        /// <summary>
+        /// Increase SoLuong of the row by one unit.
+        /// </summary>
+        private void IncreaseButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Set Item in Edit Dock Panel
+            string tenHang = DataGridHelper.GetCellContentAsString(MerchandiseDataGrid, 0);
+            int maHang = ViewManager.Instance.GetMaHang(tenHang);
+            MatHangComboBox.SelectedIndex = maHang - 1;  // ComboBox's index begins at 0 while database's one begins at 1.
+                                                         // As MatHang is neither deleted nor modified, this is usable. If it can be deleted -> bug. 
+            SaveEditButton_Click(sender, e);
+        }
+
+        /// <summary>
+        /// Decrease SoLuong of the row by one unit
+        /// </summary>
+        private void DecreaseButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+
+        #endregion
+
 
         /*
         private void MerchandiseDataGrid_AddingNewItem(object sender, AddingNewItemEventArgs e)

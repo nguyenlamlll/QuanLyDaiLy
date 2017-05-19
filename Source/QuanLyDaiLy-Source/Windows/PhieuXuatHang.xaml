@@ -1,4 +1,4 @@
-﻿ <Page x:Class="QuanLyDaiLy_Source.Windows.PhieuXuatHang"
+﻿<Page x:Class="QuanLyDaiLy_Source.Windows.PhieuXuatHang"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -15,6 +15,17 @@
                 <ResourceDictionary Source="/QuanLyDaiLy-Source;component/Styles/PhieuXuatHangStyles.xaml"/>
                 <ResourceDictionary Source="/QuanLyDaiLy-Source;component/Styles/DataTemplate.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+            <Style x:Key="DataGridButton" TargetType="Button">
+                <Setter Property="Margin" Value="6"/>
+                <Setter Property="Width" Value="20"/>
+                <Setter Property="Height" Value="20"/>
+                <Setter Property="FontSize" Value="13"/>
+                <Setter Property="FontFamily" Value="Segoe MDL2 Assets"/>
+                <Setter Property="FontStretch" Value="UltraExpanded"/>
+                <Setter Property="Foreground" Value="#FF1C3A00"/>
+                <Setter Property="Background" Value="#FFCEF470"/>
+                <Setter Property="BorderBrush" Value="#FFCEF470"/>
+            </Style>
         </ResourceDictionary>
     </Page.Resources>
 
@@ -91,6 +102,28 @@
                           Style="{DynamicResource DataGridStyle}"
                           SelectionMode="Single" SelectionUnit="FullRow" 
                           ScrollViewer.CanContentScroll="True" SelectionChanged="MerchandiseDataGrid_SelectionChanged">
+                    
+                    <DataGrid.CellStyle>
+                        <Style TargetType="DataGridCell">
+                            <Style.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Background" Value="White" />
+                                    <Setter Property="Foreground" Value="Black" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGrid.CellStyle>
+                    
+                    <DataGrid.RowStyle>
+                        <Style TargetType="DataGridRow">
+                            <Style.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="BorderBrush" Value="Aqua" />
+                                    <Setter Property="BorderThickness" Value="1" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGrid.RowStyle>
 
                     <DataGrid.Columns>
                         <!--
@@ -128,12 +161,29 @@
                         <DataGridTextColumn Header="Đơn Vị Tính" 
                                             Binding="{Binding Path=DonViTinh}"
                                             IsReadOnly="True" Width="0.3*"/>
-
+                        <!--
                         <DataGridTextColumn x:Name="SoLuong" 
                                             Binding="{Binding Path=SoLuong}"
                                             Header="Số Lượng"
                                             IsReadOnly="True"
                                             Width="0.35*"/>
+-->
+                        <DataGridTemplateColumn Header="Số Lượng" IsReadOnly="True" Width="0.2*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal"
+                                                HorizontalAlignment="Center">
+                                        <Button x:Name="IncreaseButton" Click="IncreaseButton_Click"
+                                                Style="{DynamicResource DataGridButton}"
+                                                Content="&#xE109;" Background="#FFBFEA57"/>
+                                        <TextBlock x:Name="SoLuongTextBlock" Text="{Binding Path=SoLuong}"/>
+                                        <Button x:Name="DecreaseButton" Click="DecreaseButton_Click"
+                                                Style="{DynamicResource DataGridButton}"
+                                                Content="&#xE108;"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
 
                         <DataGridTextColumn x:Name="DonGia" 
                                             Binding="{Binding Path=DonGia}"
@@ -144,7 +194,7 @@
                                             Binding="{Binding Path=ThanhTien}"
                                             Header="Thành Tiền"
                                             Width="0.35*"/>
-<!--
+                        <!--
                         <DataGridTemplateColumn Header="Sửa" Width="0.2*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
@@ -166,7 +216,7 @@
                 </DataGrid>
 
 
-                <StackPanel Orientation="Vertical"
+                <StackPanel Orientation="Horizontal"
                         Grid.Row="2"
                         HorizontalAlignment="Right"
                         Margin="10,0,50,0">
@@ -204,7 +254,7 @@
                 </StackPanel>
 
                 <!--#region Save, Navigation Buttons-->
-                <StackPanel Grid.Row="3" Orientation="Vertical"
+                <StackPanel Grid.Row="3" Orientation="Horizontal"
                             HorizontalAlignment="Right"
                             Margin="0,0,38,0">
                     <Button x:Name="SaveAndExitButton" 
@@ -277,15 +327,6 @@
                         </Button.ToolTip>
                     </Button>
 
-                    <Button Visibility="Hidden" x:Name="Dummy1"
-                            Style="{DynamicResource InputButton}"
-                            Width="250"
-                            HorizontalAlignment="Right"/>
-                    
-                    <Button Visibility="Hidden" x:Name="Dummy2"
-                            Style="{DynamicResource InputButton}"
-                            Width="250"
-                            HorizontalAlignment="Right"/>
                 </StackPanel>
                 <!--#endregion-->
 
@@ -312,14 +353,14 @@
                         </TextBlock>
                     </Button.ToolTip>
                 </Button>
-                
+
                 <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Center"
                         Margin="0,10,0,0">
                     <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center">
-<!--
+                        <!--
                         <StackPanel Orientation="Vertical" Margin="40,20,20,30">
 
                             <Border BorderBrush="Black" BorderThickness="1">
@@ -483,6 +524,6 @@
 
             </StackPanel>
         </DockPanel>
-        
+
     </Grid>
 </Page>

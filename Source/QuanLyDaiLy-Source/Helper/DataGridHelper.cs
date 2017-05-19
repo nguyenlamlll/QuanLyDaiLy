@@ -73,5 +73,21 @@ namespace QuanLyDaiLy_Source.Helper
             DataGridRow rowContainer = grid.GetRow(row);
             return grid.GetCell(rowContainer, column);
         }
+
+        /// <summary>
+        /// Get and convert the content of the currently selected cell into a string.
+        /// </summary>
+        /// <param name="grid"></param>
+        /// <param name="column"></param>
+        /// <returns>Content of selected cell in a string.</returns>
+        public static string GetCellContentAsString(this DataGrid grid, int column)
+        {
+            DataGridRow row = GetSelectedRow(grid);
+            if (row == null) return null;
+            DataGridCell cell = GetCell(grid, row, column);
+            TextBlock tb = cell.Content as TextBlock;
+            string text = tb.Text;
+            return text;
+        }
     }
 }
