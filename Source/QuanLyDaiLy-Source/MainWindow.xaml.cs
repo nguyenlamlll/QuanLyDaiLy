@@ -65,7 +65,7 @@ namespace QuanLyDaiLy_Source
                 != MessageBoxResult.Yes)
             {
                 e.Cancel = true;
-                Environment.Exit(0);
+                //Environment.Exit(0);
                 
             }
 

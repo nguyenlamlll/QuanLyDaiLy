@@ -87,6 +87,7 @@
     <Compile Include="Commons\BusinessLogic\QuanManager.cs" />
     <Compile Include="Commons\BusinessLogic\ThietLapQuyDinh.cs" />
     <Compile Include="Commons\BusinessLogic\ViewManager.cs" />
+    <Compile Include="Commons\BusinessLogic\XuatHangManager.cs" />
     <Compile Include="Commons\DataGridTestItem.cs" />
     <Compile Include="Commons\DefaultSettings.cs" />
     <Compile Include="Commons\GenericError.cs" />

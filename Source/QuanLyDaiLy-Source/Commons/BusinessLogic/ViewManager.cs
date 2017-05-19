@@ -81,6 +81,14 @@ namespace QuanLyDaiLy_Source.Commons.BusinessLogic
         {
             return DAOView.Instance.GetAllDaiLy(maQuan);
         }
+
+
+        public int GetMaHang(string ten)
+        {
+            return DAOView.Instance.GetMaHang(ten);
+        }
+
+
     }
 
 

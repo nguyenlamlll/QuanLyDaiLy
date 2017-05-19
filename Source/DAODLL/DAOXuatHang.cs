@@ -17,11 +17,11 @@ namespace DAODLL
         private static volatile DAOXuatHang instance;
         public static DAOXuatHang Instance
         {
-            get 
+            get
             {
                 if (instance == null)
                     instance = new DAOXuatHang();
-                return DAOXuatHang.instance; 
+                return DAOXuatHang.instance;
             }
         }
 
@@ -29,10 +29,10 @@ namespace DAODLL
         /// Search PHIEUTHUTIEN from database and display it to GUI
         /// Load PHIEUTHUTIEN if search condition equal empty string 
         /// </summary>
-        public List<vw_SEARCH_PHIEUXUATHANG> Search(string tendl="", string tenquan="")
+        public List<vw_SEARCH_PHIEUXUATHANG> Search(string tendl = "", string tenquan = "")
         {
             List<vw_SEARCH_PHIEUXUATHANG> li = new List<vw_SEARCH_PHIEUXUATHANG>();
-            using(QLDLDataContext db = new QLDLDataContext())
+            using (QLDLDataContext db = new QLDLDataContext())
             {
                 li = (db.vw_SEARCH_PHIEUXUATHANGs.Where(p => p.TENDL.Contains(tendl)
                     && p.TENQUAN.Contains(tenquan))).ToList();
@@ -60,7 +60,7 @@ namespace DAODLL
                 px.MADL = madl;
                 px.NGAYLAP = ngay;
                 px.TONGTIEN = tong;
-                px.SOTIENTRA=tra;
+                px.SOTIENTRA = tra;
                 px.CONLAI = conlai;
                 px.NGUOIXUAT = User.Instance.Manv;
                 //insert PHIEUXUATHANG into database
@@ -68,19 +68,23 @@ namespace DAODLL
                 db.SubmitChanges();
 
                 //Get MAPX 
-                int mapx=db.PHIEUXUATHANGs.Single(p=>p.MADL==madl && p.NGAYLAP==ngay).MAPHIEU;
+                int mapx = px.MAPHIEU;
+                //int mapx=db.PHIEUXUATHANGs.Single(p=>p.MADL==madl && p.NGAYLAP==ngay).MAPHIEU;
 
                 //insert into ctphieuxaut
-                for(int i=0;i< mahang.Count;i++)
+                for (int i = 0; i < mahang.Count; i++)
                 {
                     CTPX ctpx = new CTPX();
                     ctpx.MAPHIEU = mapx;
                     ctpx.MAHANG = (int)mahang[i];
                     ctpx.SOLUONG = (int)sl[i];
+
+                    db.CTPXes.InsertOnSubmit(ctpx);
+                    db.SubmitChanges();
                 }
-                
+
                 //insert succeed
-                return true;   
+                return true;
             }
         }
 
@@ -93,11 +97,12 @@ namespace DAODLL
         {
             using (QLDLDataContext db = new QLDLDataContext())
             {
-                if(db.CTPXes.Where(p=> p.MAPHIEU == id).Count()>0) return false;
-                else{
-                    PHIEUXUATHANG px = db.PHIEUXUATHANGs.Where(p=>p.MAPHIEU == id).First();
+                if (db.CTPXes.Where(p => p.MAPHIEU == id).Count() > 0) return false;
+                else
+                {
+                    PHIEUXUATHANG px = db.PHIEUXUATHANGs.Where(p => p.MAPHIEU == id).First();
                     db.PHIEUXUATHANGs.DeleteOnSubmit(px);
-                     db.SubmitChanges();
+                    db.SubmitChanges();
                     //delete sucees;
                     return true;
                 }
@@ -114,7 +119,7 @@ namespace DAODLL
             using (QLDLDataContext db = new QLDLDataContext())
             {
                 //update from PHIEUXUATHANG
-                PHIEUXUATHANG px = db.PHIEUXUATHANGs.Single(p=>p.MAPHIEU == maphieu);
+                PHIEUXUATHANG px = db.PHIEUXUATHANGs.Single(p => p.MAPHIEU == maphieu);
                 px.MADL = madl;
                 px.NGAYLAP = ngay;
                 px.TONGTIEN = tong;
@@ -126,7 +131,7 @@ namespace DAODLL
                 //update from ctphieuxaut
                 for (int i = 0; i < mahang.Count; i++)
                 {
-                    CTPX ctpx = db.CTPXes.Where(p=>p.MAPHIEU == maphieu && p.MAHANG == (int)mahang[i]).First();
+                    CTPX ctpx = db.CTPXes.Where(p => p.MAPHIEU == maphieu && p.MAHANG == (int)mahang[i]).First();
                     ctpx.SOLUONG = (int)sl[i];
                 }
 

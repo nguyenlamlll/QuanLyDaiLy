@@ -169,6 +169,17 @@ namespace DAODLL
             return matHang;
         }
 
+        public int GetMaHang(string ten)
+        {
+            using (QLDLDataContext db = new QLDLDataContext())
+            {
+                int maHang = (from records in db.MATHANGs
+                             where records.TENHANG == ten
+                             select records.MAHANG).Single();
+                return maHang;
+            }
+        }
+
 
         /// <summary>
         /// Get unit of a product, using its ID

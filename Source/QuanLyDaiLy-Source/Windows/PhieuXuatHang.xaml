@@ -61,7 +61,7 @@
                         </TextBlock>
                         <ComboBox x:Name="AgencySelectComboBox"
                                   ItemTemplate="{StaticResource DataDaiLy}"
-                                  SelectedValuePath="MALOAI"
+                                  SelectedValuePath="MADL"
                                   Style="{DynamicResource InputComboBox}"
                                   MinWidth="350" Width="Auto">
                         </ComboBox>
@@ -90,7 +90,7 @@
                           Height="240"
                           Style="{DynamicResource DataGridStyle}"
                           SelectionMode="Single" SelectionUnit="FullRow" 
-                          ScrollViewer.CanContentScroll="True">
+                          ScrollViewer.CanContentScroll="True" SelectionChanged="MerchandiseDataGrid_SelectionChanged">
 
                     <DataGrid.Columns>
                         <!--
@@ -120,7 +120,7 @@
                              SelectedValuePath="MAHANG"
                              DisplayMemberPath="TENHANG"
                              ItemsSource="{Binding RelativeSource={RelativeSource Findancestor, AncestorType={x:Type Page}}, Path=DataContext.MatHangs}"/>
-                        -->
+-->
                         <DataGridTextColumn Header="Mặt Hàng" 
                                             Binding="{Binding Path=MatHang}"
                                             IsReadOnly="True" Width="0.35*"/>
@@ -179,8 +179,20 @@
 
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                         <TextBlock Style="{DynamicResource InputTextBlock}">Số Trả:</TextBlock>
+                        <Image x:Name="PaidStatus" Source="/QuanLyDaiLy-Source;component/Assets/Icons/exclamation-mark32.png"
+                           Height="16" Width="16" Cursor="Help"
+                           Visibility="Collapsed">
+                            <Image.ToolTip>
+                                <StackPanel Background="#FFFFA0A0">
+                                    <TextBlock>
+                                    Số tiền trả phải nhỏ hơn hoặc bằng tổng giá trị phiếu xuất hàng.
+                                    </TextBlock>
+                                </StackPanel>
+                            </Image.ToolTip>
+                        </Image>
                         <TextBox x:Name="PaidTextBox" Style="{DynamicResource InputTextBox}" 
-                                 MinWidth="200" Width="Auto"/>
+                                 MinWidth="200" Width="Auto"
+                                 LostFocus="PaidTextBox_LostFocus"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">

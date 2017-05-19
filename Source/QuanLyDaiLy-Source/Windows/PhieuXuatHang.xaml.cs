@@ -29,6 +29,8 @@ namespace QuanLyDaiLy_Source.Windows
     {
         MatHangManager matHangManager = new MatHangManager();
         DaiLyManager daiLyManager = new DaiLyManager();
+        XuatHangManager xuatHangManager = new XuatHangManager();
+
         public ObservableCollection<MATHANG> dummyMatHang { get; set; }
 
         /// <summary>
@@ -98,15 +100,78 @@ namespace QuanLyDaiLy_Source.Windows
             //MerchandiseDataGrid.Items.Add();
         }
 
+        private System.Collections.ArrayList GetAllMaHang()
+        {
+            System.Collections.ArrayList listMaHang = new System.Collections.ArrayList();
+            for (int i = 0; i < MerchandiseDataGrid.Items.Count; i++)
+            {
+                try
+                {
+                    // Get Mã Hàng from Tên Hàng
+                    DataGridCell cell = DataGridHelper.GetCell(MerchandiseDataGrid, i, 0);
+                    TextBlock tb = cell.Content as TextBlock;
+                    int maHang = ViewManager.Instance.GetMaHang(tb.Text);
+                    listMaHang.Add(maHang);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
+            return listMaHang;
+        }
+        private System.Collections.ArrayList GetAllSoLuongHang()
+        {
+            System.Collections.ArrayList listSoLuong = new System.Collections.ArrayList();
+            for (int i = 0; i < MerchandiseDataGrid.Items.Count; i++)
+            {
+                try
+                {
+                    // Get Số Lượng
+                    DataGridCell cell = DataGridHelper.GetCell(MerchandiseDataGrid, i, 2);
+                    TextBlock tb = cell.Content as TextBlock;
+                    int soLuong = int.Parse(tb.Text);
+                    listSoLuong.Add(soLuong);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
+            return listSoLuong;
+        }
+        private PHIEUXUATHANG GetCurrentPhieuXuatHang()
+        {
+            PHIEUXUATHANG phieu = new PHIEUXUATHANG();
+            try
+            {
+                phieu.MADL = (int)AgencySelectComboBox.SelectedValue;
+
+                phieu.SOTIENTRA = decimal.Parse(PaidTextBox.Text);
+                phieu.TONGTIEN = decimal.Parse(SumTextBox.Text);
+                phieu.CONLAI = decimal.Parse(RemainderTextBox.Text);
+
+                phieu.NGAYLAP = DateTime.Now;
+            }
+            catch
+            {
+
+            }
+            return phieu;
+        }
+
         private void SaveAndExitButton_Click(object sender, RoutedEventArgs e)
         {
             // Save
-            double sumMoney = 0;
-            foreach (System.Data.DataRowView row in MerchandiseDataGrid.Items)
+            try
             {
-                sumMoney = (double)row.Row.ItemArray[4];
+                xuatHangManager.Insert(GetCurrentPhieuXuatHang(), GetAllMaHang(), GetAllSoLuongHang());
+                MessageBox.Show("Thêm Thành Công", "Thành Công");
             }
-            // Clear all input fields
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
 
             //Exit
             NavigationService ns = NavigationService.GetNavigationService(this);
@@ -127,10 +192,28 @@ namespace QuanLyDaiLy_Source.Windows
         private void SaveAndContinueButton_Click(object sender, RoutedEventArgs e)
         {
             // Save
-
+            try
+            {
+                xuatHangManager.Insert(GetCurrentPhieuXuatHang(), GetAllMaHang(), GetAllSoLuongHang());
+                MessageBox.Show("Thêm Thành Công", "Thành Công");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
             // Clear all input fields
             MerchandiseDataGrid.Items.Clear();
             MerchandiseDataGrid.Items.Refresh();
+
+            SumTextBox.Text = string.Empty;
+            PaidTextBox.Text = string.Empty;
+            RemainderTextBox.Text = string.Empty;
+
+            MatHangComboBox.SelectedIndex = -1;
+            DonViTinhTextBox.Text = string.Empty;
+            DonGiaTextBox.Text = string.Empty;
+            SoLuongTextBox.Text = string.Empty;
+            ThanhTienTextBox.Text = string.Empty;
         }
 
         private void EditButton_Click(object sender, RoutedEventArgs e)
@@ -150,10 +233,18 @@ namespace QuanLyDaiLy_Source.Windows
         /// <param name="e"></param>
         private void MatHangComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            int maHang = (int)MatHangComboBox.SelectedValue;
-            DonViTinhTextBox.Text = ViewManager.Instance.GetDonViTinh(maHang);
-            DonGiaTextBox.Text = ViewManager.Instance.GetDonGia(maHang).ToString();
-            SoLuongTextBox.IsEnabled = true;
+            try
+            {
+                int maHang = (int)MatHangComboBox.SelectedValue;
+                DonViTinhTextBox.Text = ViewManager.Instance.GetDonViTinh(maHang);
+                DonGiaTextBox.Text = ViewManager.Instance.GetDonGia(maHang).ToString();
+                ThanhTienTextBox.Text = string.Empty;
+                SoLuongTextBox.IsEnabled = true;
+            }
+            catch
+            {
+
+            }
         }
 
 
@@ -301,6 +392,61 @@ namespace QuanLyDaiLy_Source.Windows
         private void UpdateButton_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        /// <summary>
+        /// Nếu người dùng đã nhập số tiền đại lý trả thì cập nhật số dư còn lại vào
+        /// RemainderTextBox.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void PaidTextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (PaidTextBox.Text == null || PaidTextBox.Text == "") return;
+            if (SumTextBox.Text == null || SumTextBox.Text == "") return;
+            int sum = 0, paid = 0, remainder = 0;
+            try
+            {
+                sum = int.Parse(SumTextBox.Text);
+                paid = int.Parse(PaidTextBox.Text);
+                remainder = sum - paid;
+            }
+            catch
+            {
+
+            }
+            if (remainder < 0) PaidStatus.Visibility = Visibility.Visible;
+            else PaidStatus.Visibility = Visibility.Collapsed;
+
+            RemainderTextBox.Text = remainder.ToString();
+        }
+
+        private void MerchandiseDataGrid_GotFocus(object sender, RoutedEventArgs e)
+        {
+            DataGridRow selected = DataGridHelper.GetSelectedRow(MerchandiseDataGrid);
+            if (selected == null) return;
+            else
+            {
+                DataGridCell cell = DataGridHelper.GetCell(MerchandiseDataGrid, selected, 0);
+                TextBlock tb = cell.Content as TextBlock;
+                int maHang = ViewManager.Instance.GetMaHang(tb.Text);
+                MatHangComboBox.SelectedIndex = maHang - 1; //As MatHang is never deleted, this is usable. If it can be deleted -> bug.
+
+            }
+        }
+
+        private void MerchandiseDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            DataGridRow selected = DataGridHelper.GetSelectedRow(MerchandiseDataGrid);
+            if (selected == null) return;
+            else
+            {
+                DataGridCell cell = DataGridHelper.GetCell(MerchandiseDataGrid, selected, 0);
+                TextBlock tb = cell.Content as TextBlock;
+                int maHang = ViewManager.Instance.GetMaHang(tb.Text);
+                MatHangComboBox.SelectedIndex = maHang - 1; //As MatHang is never deleted, this is usable. If it can be deleted -> bug.
+
+            }
         }
 
         /*
