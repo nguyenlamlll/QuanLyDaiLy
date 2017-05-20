@@ -93,10 +93,10 @@
                     </Button>
                 </StackPanel>
 
-                <DataGrid x:Name="MerchandiseDataGrid" ItemsSource="{Binding XuatHangGrid}"
+                <DataGrid x:Name="MerchandiseDataGrid" ItemsSource="{Binding XuatHangGrid}" IsReadOnly="True"
                           Grid.Row="1"
                           AutoGenerateColumns="False"
-                          CanUserAddRows="True" CanUserDeleteRows="True" 
+                          CanUserAddRows="False" CanUserDeleteRows="False" 
                           Margin="42,15,38.2,0.2"
                           Height="240"
                           Style="{DynamicResource DataGridStyle}"
@@ -161,13 +161,13 @@
                         <DataGridTextColumn Header="Đơn Vị Tính" 
                                             Binding="{Binding Path=DonViTinh}"
                                             IsReadOnly="True" Width="0.3*"/>
-                        <!--
-                        <DataGridTextColumn x:Name="SoLuong" 
+
+                        <DataGridTextColumn x:Name="DummySoLuong" 
                                             Binding="{Binding Path=SoLuong}"
                                             Header="Số Lượng"
-                                            IsReadOnly="True"
-                                            Width="0.35*"/>
--->
+                                            IsReadOnly="True" Visibility="Visible"
+                                            Width="0.05*"/>
+
                         <DataGridTemplateColumn Header="Số Lượng" IsReadOnly="True" Width="0.2*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>

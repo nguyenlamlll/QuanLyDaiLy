@@ -18,6 +18,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using QuanLyDaiLy_Source.Helper;
 using QuanLyDaiLy_Source.Models.BusinessLogic;
+using System.ComponentModel;
 
 namespace QuanLyDaiLy_Source.Windows
 {
@@ -31,7 +32,7 @@ namespace QuanLyDaiLy_Source.Windows
         DaiLyManager daiLyManager = new DaiLyManager();
         XuatHangManager xuatHangManager = new XuatHangManager();
 
-        public ObservableCollection<MATHANG> dummyMatHang { get; set; }
+        private ObservableCollection<XuatHangGrid> myDataItems = new ObservableCollection<XuatHangGrid>();
 
         /// <summary>
         /// Invoke changes within the page loaded event.
@@ -45,7 +46,7 @@ namespace QuanLyDaiLy_Source.Windows
 
             //DataContext = new PhieuXuatHang_ViewModel();
             //dummyMatHang = matHangManager.GetMatHang();
-            //MerchandiseDataGrid.ItemsSource = dummyMatHang;
+            MerchandiseDataGrid.ItemsSource = myDataItems;
 
 
         }
@@ -337,6 +338,9 @@ namespace QuanLyDaiLy_Source.Windows
             return true;
         }
 
+        private bool IsIncreasing = false;
+        private bool IsDecreasing = false;
+
         /// <summary>
         /// Add a product to the order from details dock panel.
         /// </summary>
@@ -346,8 +350,14 @@ namespace QuanLyDaiLy_Source.Windows
         {
             try
             {
-                if (!IsDataGridItemValid()) return;
+                //if (IsIncreasing)
+                //{
+                //    DataGridRow selectedRow = MerchandiseDataGrid.GetSelectedRow();
 
+                //}
+                if (IsIncreasing) goto SkipCheck;
+                if (!IsDataGridItemValid()) return;
+                SkipCheck:
                 MATHANG selected = (MATHANG)MatHangComboBox.SelectedItem;
                 XuatHangGrid item = new XuatHangGrid
                 {
@@ -357,40 +367,47 @@ namespace QuanLyDaiLy_Source.Windows
                     DonGia = selected.DONGIA.Value,
                     ThanhTien = decimal.Parse(ThanhTienTextBox.Text)
                 };
-                if (MerchandiseDataGrid.Items.Add(item) == -1) // The item couldn't be added
-                {
-                    return;
-                }
-                else // The item is added successfully
-                {
-                    SoLuongTextBox.Text = string.Empty;
-                    ThanhTienTextBox.Text = string.Empty;
+                myDataItems.Add(item);
+                if (IsIncreasing) myDataItems.Move(myDataItems.Count - 1, IncreasingIndex);
+                //if (MerchandiseDataGrid.Items.Add(item) == -1) // The item couldn't be added
+                //{
+                //    return;
+                //}
+                //else // The item is added successfully
+                //{
+                SoLuongTextBox.Text = string.Empty;
+                ThanhTienTextBox.Text = string.Empty;
 
-                    // Update Sum Money for PhieuXuatHang
-                    decimal sum = 0;
-                    for (int i = 0; i < MerchandiseDataGrid.Items.Count; i++)
+                // Update Sum Money for PhieuXuatHang
+                decimal sum = 0;
+                for (int i = 0; i < MerchandiseDataGrid.Items.Count; i++)
+                {
+                    try
                     {
-                        try
-                        {
-                            //DataGridRow row = (DataGridRow)MerchandiseDataGrid.ItemContainerGenerator.ContainerFromIndex(i);
-                            //var cell = DataGridHelper.GetCell(MerchandiseDataGrid, row, 4);
+                        //DataGridRow row = (DataGridRow)MerchandiseDataGrid.ItemContainerGenerator.ContainerFromIndex(i);
+                        //var cell = DataGridHelper.GetCell(MerchandiseDataGrid, row, 5);
 
-                            DataGridCell cell = DataGridHelper.GetCell(MerchandiseDataGrid, i, 4);
-                            TextBlock tb = cell.Content as TextBlock;
-                            decimal money = decimal.Parse(tb.Text.ToString());
-                            sum += money;
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show(ex.ToString());
-                        }
+                        DataGridCell cell = DataGridHelper.GetCell(MerchandiseDataGrid, i, 5);
+                        TextBlock tb = cell.Content as TextBlock;
+                        decimal money = decimal.Parse(tb.Text.ToString());
+                        sum += money;
                     }
-                    SumTextBox.Text = sum.ToString();
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.ToString());
+                    }
                 }
+                SumTextBox.Text = sum.ToString();
+                //}
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
+            }
+            finally
+            {
+                // Finished Increasing/Decreasing.
+                if (IsIncreasing == true) IsIncreasing = false;
             }
 
         }
@@ -478,18 +495,69 @@ namespace QuanLyDaiLy_Source.Windows
         }
 
         #region Inside-DataGrid Buttons
-
+        int IncreasingIndex = 0;
         /// <summary>
         /// Increase SoLuong of the row by one unit.
         /// </summary>
         private void IncreaseButton_Click(object sender, RoutedEventArgs e)
         {
+            IsIncreasing = true;
+            DataGridRow selectedRow = MerchandiseDataGrid.GetSelectedRow();
+            var selectedIndex = MerchandiseDataGrid.SelectedIndex;
+            IncreasingIndex = MerchandiseDataGrid.SelectedIndex;
+
             // Set Item in Edit Dock Panel
-            string tenHang = DataGridHelper.GetCellContentAsString(MerchandiseDataGrid, 0);
-            int maHang = ViewManager.Instance.GetMaHang(tenHang);
-            MatHangComboBox.SelectedIndex = maHang - 1;  // ComboBox's index begins at 0 while database's one begins at 1.
-                                                         // As MatHang is neither deleted nor modified, this is usable. If it can be deleted -> bug. 
-            SaveEditButton_Click(sender, e);
+            string selectedTenHang = DataGridHelper.GetCellContentAsString(MerchandiseDataGrid, 0);
+            int selectedMaHang = ViewManager.Instance.GetMaHang(selectedTenHang);
+
+            System.Collections.ArrayList listMaHang = GetAllMaHang();
+            System.Collections.ArrayList listSoLuong = GetAllSoLuongHang();
+            int selectedSoLuong = 0;
+            for (int i = 0; i < listMaHang.Count; i++)
+            {
+                if (selectedMaHang.ToString() == listMaHang[i].ToString())
+                {
+                    selectedSoLuong = (int)listSoLuong[i];
+                    break;
+                }
+            }
+
+
+
+            for (int i = 0; i < MatHangComboBox.Items.Count; i++)
+            {
+                MATHANG item = (MATHANG)MatHangComboBox.Items[i];
+                string itemContent = (string)item.TENHANG;
+                if (selectedTenHang == itemContent) // Found the exact MatHang to work with
+                {
+                    // Load current settings
+                    MatHangComboBox.SelectedIndex = i;
+                    SoLuongTextBox.Text = selectedSoLuong.ToString();
+                    SoLuongTextBox_PreviewKeyUp(sender, null);
+                    // Delete the old one
+                    myDataItems.RemoveAt(selectedIndex);
+                    //ObservableCollection<XuatHangGrid> copyingItems = myDataItems;
+                    //for (int j = 0; j < listMaHang.Count; j++) //Remove entire DataGrid's item list
+                    //{
+                    //    myDataItems.RemoveAt(j);
+                    //}
+
+                    // Update the settings
+                    SoLuongTextBox.Text = (++selectedSoLuong).ToString();
+                    MatHangComboBox_SelectionChanged(sender, null);
+
+                    // Increase SoLuong, Update ThanhTien
+                    SoLuongTextBox_PreviewKeyUp(sender, null);
+
+                    // Update DataGrid
+                    SaveEditButton_Click(sender, e);
+
+                }
+            }
+
+            //MatHangComboBox.SelectedIndex = maHang - 1;  // ComboBox's index begins at 0 while database's one begins at 1.
+            //                                             // As MatHang is neither deleted nor modified, this is usable. If it can be deleted -> bug. 
+
         }
 
         /// <summary>
@@ -504,51 +572,28 @@ namespace QuanLyDaiLy_Source.Windows
         #endregion
 
 
-        /*
-        private void MerchandiseDataGrid_AddingNewItem(object sender, AddingNewItemEventArgs e)
-        {
-            foreach (System.Data.DataRowView row in MerchandiseDataGrid.Items)
-            {
-                //Sum up all "Thanh Tien"
-                try
-                {
-                    SumTextBox.Text += (double)row.Row.ItemArray[4];
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.ToString());
-                }
-            }
-        }
-        */
-
-
-        /*
-        private void MerchandiseDataGrid_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
-        {
-            if (this.MerchandiseDataGrid.SelectedItem != null)
-            {
-                (sender as DataGrid).RowEditEnding -= MerchandiseDataGrid_RowEditEnding;
-                (sender as DataGrid).CommitEdit();
-                (sender as DataGrid).Items.Refresh();
-                (sender as DataGrid).RowEditEnding += MerchandiseDataGrid_RowEditEnding;
-            }
-            else return;
-        }
-        */
-
-
     }
 
     /// <summary>
     /// A template class for a grid with columns as its property
     /// </summary>
-    public class XuatHangGrid
+    public class XuatHangGrid : INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public string MatHang { get; set; }
         public string DonViTinh { get; set; }
         public int SoLuong { get; set; }
         public decimal DonGia { get; set; }
         public decimal ThanhTien { get; set; }
+
+        protected void OnPropertyChanged(string name)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null)
+            {
+                handler(this, new PropertyChangedEventArgs(name));
+            }
+        }
     }
 }
