@@ -480,17 +480,30 @@ namespace QuanLyDaiLy_Source.Windows
             }
         }
 
+        /// <summary>
+        /// Update EditDockPanel (For an unified visual experience).
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MerchandiseDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             DataGridRow selected = DataGridHelper.GetSelectedRow(MerchandiseDataGrid);
             if (selected == null) return;
             else
             {
-                DataGridCell cell = DataGridHelper.GetCell(MerchandiseDataGrid, selected, 0);
-                TextBlock tb = cell.Content as TextBlock;
-                int maHang = ViewManager.Instance.GetMaHang(tb.Text);
-                MatHangComboBox.SelectedIndex = maHang - 1; //As MatHang is never deleted, this is usable. If it can be deleted -> bug.
-
+                //DataGridCell cell = DataGridHelper.GetCell(MerchandiseDataGrid, selected, 0);
+                //TextBlock tb = cell.Content as TextBlock;
+                string selectedTenHang = DataGridHelper.GetCellContentAsString(MerchandiseDataGrid, 0);
+                for (int i = 0; i < MatHangComboBox.Items.Count; i++)
+                {
+                    MATHANG item = (MATHANG)MatHangComboBox.Items[i];
+                    string itemContent = (string)item.TENHANG;
+                    if (selectedTenHang == itemContent) // Found the exact MatHang to work with
+                    {
+                        // Load current settings
+                        MatHangComboBox.SelectedIndex = i;
+                    }
+                }
             }
         }
 
@@ -554,9 +567,6 @@ namespace QuanLyDaiLy_Source.Windows
 
                 }
             }
-
-            //MatHangComboBox.SelectedIndex = maHang - 1;  // ComboBox's index begins at 0 while database's one begins at 1.
-            //                                             // As MatHang is neither deleted nor modified, this is usable. If it can be deleted -> bug. 
 
         }
 
