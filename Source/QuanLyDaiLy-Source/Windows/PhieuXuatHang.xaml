@@ -164,9 +164,13 @@
 
                         <DataGridTextColumn x:Name="DummySoLuong" 
                                             Binding="{Binding Path=SoLuong}"
-                                            Header="Số Lượng"
                                             IsReadOnly="True" Visibility="Visible"
-                                            Width="0.05*"/>
+                                            CanUserReorder="False" CanUserResize="False" 
+                                            MaxWidth="0"
+                                            MinWidth="0"
+                                            Width="0">
+
+                        </DataGridTextColumn>
 
                         <DataGridTemplateColumn Header="Số Lượng" IsReadOnly="True" Width="0.2*">
                             <DataGridTemplateColumn.CellTemplate>
@@ -242,7 +246,7 @@
                         </Image>
                         <TextBox x:Name="PaidTextBox" Style="{DynamicResource InputTextBox}" 
                                  MinWidth="200" Width="Auto"
-                                 LostFocus="PaidTextBox_LostFocus"/>
+                                 PreviewKeyUp="PaidTextBox_PreviewKeyUp"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
@@ -474,7 +478,8 @@
                                     HorizontalAlignment="Center"
                                     Style="{DynamicResource DetailsButton}"
                                     Width="Auto"
-                                    Content="Cập Nhật">
+                                    Content="Cập Nhật"
+                                    Visibility="Collapsed">
                                 <Button.ToolTip>
                                     <StackPanel>
                                         <TextBlock FontWeight="Bold" FontSize="14" Margin="0,0,0,5">Lưu Mặt Hàng</TextBlock>

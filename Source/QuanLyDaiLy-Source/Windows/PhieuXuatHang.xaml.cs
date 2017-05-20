@@ -166,8 +166,8 @@ namespace QuanLyDaiLy_Source.Windows
             // Save
             try
             {
-                xuatHangManager.Insert(GetCurrentPhieuXuatHang(), GetAllMaHang(), GetAllSoLuongHang());
-                MessageBox.Show("Thêm Thành Công", "Thành Công");
+                if (xuatHangManager.Insert(GetCurrentPhieuXuatHang(), GetAllMaHang(), GetAllSoLuongHang()))
+                    MessageBox.Show("Thêm Thành Công", "Thành Công");
             }
             catch (Exception ex)
             {
@@ -195,16 +195,17 @@ namespace QuanLyDaiLy_Source.Windows
             // Save
             try
             {
-                xuatHangManager.Insert(GetCurrentPhieuXuatHang(), GetAllMaHang(), GetAllSoLuongHang());
-                MessageBox.Show("Thêm Thành Công", "Thành Công");
+                if (xuatHangManager.Insert(GetCurrentPhieuXuatHang(), GetAllMaHang(), GetAllSoLuongHang()))
+                    MessageBox.Show("Thêm Thành Công", "Thành Công");
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
             }
             // Clear all input fields
-            MerchandiseDataGrid.Items.Clear();
-            MerchandiseDataGrid.Items.Refresh();
+            //MerchandiseDataGrid.Items.Clear();
+            //MerchandiseDataGrid.Items.Refresh();
+            myDataItems.Clear();
 
             SumTextBox.Text = string.Empty;
             PaidTextBox.Text = string.Empty;
@@ -408,6 +409,7 @@ namespace QuanLyDaiLy_Source.Windows
             {
                 // Finished Increasing/Decreasing.
                 if (IsIncreasing == true) IsIncreasing = false;
+                if (IsDecreasing == true) IsDecreasing = false;
             }
 
         }
@@ -439,6 +441,7 @@ namespace QuanLyDaiLy_Source.Windows
 
         }
 
+        /*
         /// <summary>
         /// Nếu người dùng đã nhập số tiền đại lý trả thì cập nhật số dư còn lại vào
         /// RemainderTextBox.
@@ -465,6 +468,7 @@ namespace QuanLyDaiLy_Source.Windows
 
             RemainderTextBox.Text = remainder.ToString();
         }
+        */
 
         private void MerchandiseDataGrid_GotFocus(object sender, RoutedEventArgs e)
         {
@@ -523,8 +527,11 @@ namespace QuanLyDaiLy_Source.Windows
             string selectedTenHang = DataGridHelper.GetCellContentAsString(MerchandiseDataGrid, 0);
             int selectedMaHang = ViewManager.Instance.GetMaHang(selectedTenHang);
 
+
             System.Collections.ArrayList listMaHang = GetAllMaHang();
             System.Collections.ArrayList listSoLuong = GetAllSoLuongHang();
+
+
             int selectedSoLuong = 0;
             for (int i = 0; i < listMaHang.Count; i++)
             {
@@ -549,11 +556,6 @@ namespace QuanLyDaiLy_Source.Windows
                     SoLuongTextBox_PreviewKeyUp(sender, null);
                     // Delete the old one
                     myDataItems.RemoveAt(selectedIndex);
-                    //ObservableCollection<XuatHangGrid> copyingItems = myDataItems;
-                    //for (int j = 0; j < listMaHang.Count; j++) //Remove entire DataGrid's item list
-                    //{
-                    //    myDataItems.RemoveAt(j);
-                    //}
 
                     // Update the settings
                     SoLuongTextBox.Text = (++selectedSoLuong).ToString();
@@ -567,7 +569,6 @@ namespace QuanLyDaiLy_Source.Windows
 
                 }
             }
-
         }
 
         /// <summary>
@@ -575,13 +576,89 @@ namespace QuanLyDaiLy_Source.Windows
         /// </summary>
         private void DecreaseButton_Click(object sender, RoutedEventArgs e)
         {
+            IsDecreasing = true;
+            DataGridRow selectedRow = MerchandiseDataGrid.GetSelectedRow();
+            var selectedIndex = MerchandiseDataGrid.SelectedIndex;
+            IncreasingIndex = MerchandiseDataGrid.SelectedIndex;
 
+            // Set Item in Edit Dock Panel
+            string selectedTenHang = DataGridHelper.GetCellContentAsString(MerchandiseDataGrid, 0);
+            int selectedMaHang = ViewManager.Instance.GetMaHang(selectedTenHang);
+
+
+            System.Collections.ArrayList listMaHang = GetAllMaHang();
+            System.Collections.ArrayList listSoLuong = GetAllSoLuongHang();
+
+
+            int selectedSoLuong = 0;
+            for (int i = 0; i < listMaHang.Count; i++)
+            {
+                if (selectedMaHang.ToString() == listMaHang[i].ToString())
+                {
+                    selectedSoLuong = (int)listSoLuong[i];
+                    break;
+                }
+            }
+
+
+
+            for (int i = 0; i < MatHangComboBox.Items.Count; i++)
+            {
+                MATHANG item = (MATHANG)MatHangComboBox.Items[i];
+                string itemContent = (string)item.TENHANG;
+                if (selectedTenHang == itemContent) // Found the exact MatHang to work with
+                {
+                    // Load current settings
+                    MatHangComboBox.SelectedIndex = i;
+                    SoLuongTextBox.Text = selectedSoLuong.ToString();
+                    SoLuongTextBox_PreviewKeyUp(sender, null);
+                    // Delete the old one
+                    myDataItems.RemoveAt(selectedIndex);
+
+                    // Update the settings
+                    SoLuongTextBox.Text = (--selectedSoLuong).ToString();
+                    MatHangComboBox_SelectionChanged(sender, null);
+
+                    // Increase SoLuong, Update ThanhTien
+                    SoLuongTextBox_PreviewKeyUp(sender, null);
+
+                    // Update DataGrid
+                    SaveEditButton_Click(sender, e);
+
+                }
+            }
         }
+
 
 
         #endregion
 
+        /// <summary>
+        /// Nếu người dùng đã nhập số tiền đại lý trả thì cập nhật số dư còn lại vào
+        /// RemainderTextBox.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void PaidTextBox_PreviewKeyUp(object sender, KeyEventArgs e)
+        {
+            if (PaidTextBox.Text == null || PaidTextBox.Text == "") return;
+            if (SumTextBox.Text == null || SumTextBox.Text == "") return;
+            int sum = 0, paid = 0, remainder = 0;
+            try
+            {
+                sum = int.Parse(SumTextBox.Text);
+                paid = int.Parse(PaidTextBox.Text);
+                remainder = sum - paid;
+            }
+            catch
+            {
 
+            }
+            if (remainder < 0) PaidStatus.Visibility = Visibility.Visible;
+            else PaidStatus.Visibility = Visibility.Collapsed;
+
+            RemainderTextBox.Text = remainder.ToString();
+        }
     }
 
     /// <summary>

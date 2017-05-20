@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace QuanLyDaiLy_Source.Commons.BusinessLogic
 {
@@ -40,8 +41,27 @@ namespace QuanLyDaiLy_Source.Commons.BusinessLogic
         /// <returns></returns>
         public bool Insert(PHIEUXUATHANG obj, ArrayList maHang, ArrayList soLuong)
         {
-            return DAOXuatHang.Instance.Insert(obj.MADL.Value, obj.NGAYLAP.Value, (int)obj.TONGTIEN.Value, (int)obj.SOTIENTRA.Value,
-                (int)obj.CONLAI.Value, maHang, soLuong);
+            DaiLyManager daiLyManager = new DaiLyManager();
+            DAILY daiLy = daiLyManager.Get(obj.MADL.Value);
+            decimal soNoToiDa = ViewManager.Instance.GetSoNoDaiLy(daiLy.LOAIDL.Value);
+            if (daiLy.SONO.Value >= soNoToiDa || (daiLy.SONO.Value + obj.CONLAI.Value) >= soNoToiDa) return false;
+
+            if ((int)obj.CONLAI.Value < 0)
+            {
+                return false;
+            }
+
+            // Add PhieuXuatHang into PHIEUXUATHANG
+            if (DAOXuatHang.Instance.Insert(obj.MADL.Value, obj.NGAYLAP.Value,
+                (int)obj.TONGTIEN.Value, (int)obj.SOTIENTRA.Value,
+                (int)obj.CONLAI.Value, maHang, soLuong))
+            {
+                //Update SoNo in DAILY
+                daiLy.SONO = daiLy.SONO + obj.CONLAI.Value;
+                if (daiLyManager.Update(daiLy))
+                    return true;
+            }
+            return false;
         }
 
         public override bool Update(PHIEUXUATHANG obj)

@@ -64,6 +64,22 @@ namespace DAODLL
             }
         }
 
+        /// <summary>
+        /// Return a DAILY of MaDL parameter.
+        /// </summary>
+        /// <param name="MaDL"></param>
+        /// <returns></returns>
+        public DAILY GetDaiLy(int maDL)
+        {
+            DAILY daiLy = new DAILY();
+            using (QLDLDataContext db = new QLDLDataContext())
+            {
+                daiLy = (from records in db.DAILies
+                         where records.MADL == maDL
+                         select records).Single();
+                return daiLy;
+            }
+        }
 
         /// <summary>
         /// Get all QUAN's name and show upto ComboBox
@@ -255,6 +271,21 @@ namespace DAODLL
             }
         }
 
+        /// <summary>
+        /// Lấy số nợ tối đa của một loại đại lý nào đó từ bảng LOAIDL.
+        /// </summary>
+        /// <param name="maLoai">Mã loại đại lý cần lấy số nợ tối đa (trong bảng LOAIDL).</param>
+        /// <returns>Số nợ tối đa của loại đại lý truyền vào.</returns>
+        public decimal GetSoNoDaiLy(int maLoai)
+        {
+            using (QLDLDataContext db = new QLDLDataContext())
+            {
+                decimal soNO = (from records in db.LOAIDLs
+                            where records.MALOAI == maLoai
+                            select records.SONOTOIDA.Value).Single();
+                return soNO;
+            }
 
+        }
     }
 }

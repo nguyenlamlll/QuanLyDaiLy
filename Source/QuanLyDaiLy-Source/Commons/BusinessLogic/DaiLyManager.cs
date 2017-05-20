@@ -45,7 +45,7 @@ namespace QuanLyDaiLy_Source.Models.BusinessLogic
 
         public override DAILY Get(int id)
         {
-            throw new NotImplementedException();
+            return DAOView.Instance.GetDaiLy(id);
         }
 
         public override List<DAILY> GetAll()
@@ -53,9 +53,14 @@ namespace QuanLyDaiLy_Source.Models.BusinessLogic
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Update a DaiLy in database
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public override bool Update(DAILY obj)
         {
-            throw new NotImplementedException();
+            return DAOTiepNhanDaiLy.Instance.Update(obj);
         }
     }
 }

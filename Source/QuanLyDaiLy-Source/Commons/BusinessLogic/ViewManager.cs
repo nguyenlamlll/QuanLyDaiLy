@@ -88,7 +88,10 @@ namespace QuanLyDaiLy_Source.Commons.BusinessLogic
             return DAOView.Instance.GetMaHang(ten);
         }
 
-
+        public decimal GetSoNoDaiLy(int maLoai)
+        {
+            return DAOView.Instance.GetSoNoDaiLy(maLoai);
+        }
     }
 
 

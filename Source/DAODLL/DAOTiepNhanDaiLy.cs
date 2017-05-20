@@ -91,6 +91,8 @@ namespace DAODLL
                 DL.NGAYTIEPNHAN = dl.NGAYTIEPNHAN;
                 DL.MAQUAN = dl.MAQUAN;
                 DL.LOAIDL = dl.LOAIDL;
+                DL.SONO = dl.SONO;
+                DL.TINHTRANG = dl.TINHTRANG;
                 try
                 {
                     db.SubmitChanges();
