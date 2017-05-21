@@ -5,15 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace QuanLyDaiLy_Source
+namespace QuanLyDaiLy_Source.Helper
 {
-    public partial class Utilities
+    public static partial class Utilities
     {
-        private bool isUtilityUsed = false;
-        public Utilities()
-        {
-            isUtilityUsed = true;
-        }
         static public void SetAccentColor(System.Windows.Window win)
         {
             win.Background = SystemParameters.WindowGlassBrush;
@@ -21,6 +16,15 @@ namespace QuanLyDaiLy_Source
         static public void SetAccentColor(System.Windows.Shapes.Rectangle rect)
         {
             rect.Fill = SystemParameters.WindowGlassBrush;
+        }
+        static public bool IsDigitsOnly(string str)
+        {
+            foreach (char c in str)
+            {
+                if (c < '0' || c > '9')
+                    return false;
+            }
+            return true;
         }
     }
 }

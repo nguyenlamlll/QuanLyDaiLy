@@ -14,7 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using QuanLyDaiLy_Source.Models;
 using QuanLyDaiLy_Source.Windows;
-
+using System.Threading;
 
 namespace QuanLyDaiLy_Source
 {
@@ -27,9 +27,11 @@ namespace QuanLyDaiLy_Source
         public MainWindow()
         {
             InitializeComponent();
+            this.Closing += MainWindow_Closing;
+
             GoBackButton.Visibility = Visibility.Hidden;
 
-            App.Current.Properties["ContentFrameTitle"] = "Trang Chủ";
+            App.Current.Properties[Models.DefaultSettings.ContentFrameTitle] = "Trang Chủ";
 
             ContentFrame.Navigate(new DanhSachDaiLy());
             //ContentFrame.Navigate(typeof(Windows.Page1)); //Host some placeholder page - work as a MainContents page
@@ -38,8 +40,37 @@ namespace QuanLyDaiLy_Source
             NavigationListView.ItemsSource = MenuItems;
 
 
+            BusinessHomePage.pageLoaded += new EventHandler(PageLoadCompleted);
+            PhieuThuTien.pageLoaded += new EventHandler(PageLoadCompleted);
+            PhieuXuatHang.pageLoaded += new EventHandler(PageLoadCompleted);
+            TiepNhanDaiLy.pageLoaded += new EventHandler(PageLoadCompleted);
+
+            ReportHomePage.pageLoaded += new EventHandler(PageLoadCompleted);
+            BaoCaoCongNo.pageLoaded += new EventHandler(PageLoadCompleted);
+            BaoCaoDoanhThu.pageLoaded += new EventHandler(PageLoadCompleted);
+
+            DanhSachDaiLy.pageLoaded += new EventHandler(PageLoadCompleted);
+        }
+
+        [STAThread]
+        /// <summary>
+        /// Handle events when closing this Main Window (also, closing this application)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            // Let user confirm one more time before actually closing the application
+            if (MessageBox.Show("Bạn có chắc chắn là muốn thoát khỏi chương trình?", "Tắt chương trình", MessageBoxButton.YesNo)
+                != MessageBoxResult.Yes)
+            {
+                e.Cancel = true;
+                //Environment.Exit(0);
+                
+            }
 
         }
+
         public object NavigationService { get; private set; }
 
 
@@ -93,11 +124,11 @@ namespace QuanLyDaiLy_Source
                     }
                 }
             }
-           
+
         }
 
         /// <summary>
-        /// 
+        /// Open or close Navigation bar
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -147,10 +178,34 @@ namespace QuanLyDaiLy_Source
 
         private void ContentFrame_LoadCompleted(object sender, NavigationEventArgs e)
         {
-            string currentTitle = App.Current.Properties["ContentFrameTitle"].ToString();
+            //string currentTitle = App.Current.Properties[Models.DefaultSettings.ContentFrameTitle].ToString();
+            //ContentFrameTitle.Text = currentTitle;
+        }
+
+        public void PageLoadCompleted(object sender, EventArgs e)
+        {
+            string currentTitle = App.Current.Properties[Models.DefaultSettings.ContentFrameTitle].ToString();
             ContentFrameTitle.Text = currentTitle;
         }
 
+        /// <summary>
+        /// Hide this main Window until user enters correct credentials.
+        /// </summary>
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.Hide();
+            LoginWindow.LoginSucceed += new EventHandler(Window_LoginSucceed);
+            LoginWindow loginWindow = new LoginWindow();
+            loginWindow.Owner = Window.GetWindow(this);
+            loginWindow.Show();
+        }
 
+        /// <summary>
+        /// User successfully log in. Return the main window to the surface.
+        /// </summary>
+        private void Window_LoginSucceed(object sender, EventArgs e)
+        {
+            this.Show();
+        }
     }
 }

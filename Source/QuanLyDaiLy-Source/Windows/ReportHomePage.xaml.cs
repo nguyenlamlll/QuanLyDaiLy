@@ -20,9 +20,21 @@ namespace QuanLyDaiLy_Source.Windows
     /// </summary>
     public partial class ReportHomePage : Page
     {
+        /// <summary>
+        /// Invoke changes within the page loaded event.
+        /// </summary>
+        public static event EventHandler pageLoaded;
+
         public ReportHomePage()
         {
             InitializeComponent();
+            Loaded += ReportHomePage_Loaded;
+        }
+
+        private void ReportHomePage_Loaded(object sender, RoutedEventArgs e)
+        {
+            App.Current.Properties[Models.DefaultSettings.ContentFrameTitle] = "Lập Báo Cáo";
+            pageLoaded?.Invoke(this, e);
         }
 
         private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -45,7 +57,7 @@ namespace QuanLyDaiLy_Source.Windows
                 }
             }
             */
-            
+
             if (item.Name.ToString() == ThuTien)
             {
                 try

@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace QuanLyDaiLy_Source.Models
 {
+
     class DataGridTestItem
     {
         public string Test1 { get; set; }

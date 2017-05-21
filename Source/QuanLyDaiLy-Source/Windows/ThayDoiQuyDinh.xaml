@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:QuanLyDaiLy_Source.Windows"
       mc:Ignorable="d" 
       d:DesignHeight="720" d:DesignWidth="1280"
-      Title="ThayDoiQuyDinh" Loaded="Page_Loaded">
+      Title="ThayDoiQuyDinh">
     <Page.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

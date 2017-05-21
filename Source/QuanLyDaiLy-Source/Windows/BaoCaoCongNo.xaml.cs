@@ -23,7 +23,17 @@ namespace QuanLyDaiLy_Source.Windows
         public BaoCaoCongNo()
         {
             InitializeComponent();
-            App.Current.Properties["ContentFrameTitle"] = "Báo Cáo Công Nợ";
+            Loaded += BaoCaoCongNo_Loaded;
+
+        }
+        /// <summary>
+        /// Invoke changes within the page loaded event.
+        /// </summary>
+        public static event EventHandler pageLoaded;
+        private void BaoCaoCongNo_Loaded(object sender, RoutedEventArgs e)
+        {
+            App.Current.Properties[Models.DefaultSettings.ContentFrameTitle] = "Báo Cáo Công Nợ";
+            pageLoaded?.Invoke(this, e);
         }
     }
 }

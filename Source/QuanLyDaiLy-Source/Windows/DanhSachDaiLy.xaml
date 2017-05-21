@@ -77,24 +77,18 @@
 
 
 
-            <DataGrid x:Name="AgencyDataGrid"
-                      AutoGenerateColumns="False"
-                      CanUserAddRows="False" CanUserDeleteRows="False" 
-                      CanUserResizeColumns="True"
+            <ListView x:Name="AgencyListView"
                       Margin="40,25,40,0"
                       Height="300"
-                      Style="{DynamicResource DataGridStyle}"
-                      SelectionMode="Extended" SelectionUnit="Cell" 
-                      ScrollViewer.CanContentScroll="True"
-                      >
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="STT" Width="0.2*" IsReadOnly="True"/>
-                    <DataGridTextColumn Header="Đại Lý" Width="0.9*" IsReadOnly="True"/>
-                    <DataGridTextColumn Header="Loại" Width="0.5*" IsReadOnly="True"/>
-                    <DataGridTextColumn Header="Quận" Width="0.5*" IsReadOnly="True"/>
-                    <DataGridTextColumn Header="Tiền Nợ" Width="0.6*" IsReadOnly="True"/>
-                </DataGrid.Columns>
-            </DataGrid>
+                      Style="{DynamicResource ListViewStyle}"
+                      ScrollViewer.CanContentScroll="True">
+                <ListBox.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Chỉnh Sửa"/>
+                        <MenuItem x:Name="DeleteMenuItem" Header="Xóa" Click="MenuItemDelete_Click"/>
+                    </ContextMenu>
+                </ListBox.ContextMenu>
+            </ListView>
 
         </StackPanel>
 
