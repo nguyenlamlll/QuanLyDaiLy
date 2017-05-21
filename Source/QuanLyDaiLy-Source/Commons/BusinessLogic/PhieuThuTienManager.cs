@@ -34,9 +34,21 @@ namespace QuanLyDaiLy_Source.Commons.BusinessLogic
         {
             try
             {
-                DAOThutien.Instance.Insert(obj.DAILY.TENDL, obj.DAILY.DIENTHOAI, obj.DAILY.DIACHI,
-                    obj.SOTIEN, obj.NGAYTHUTIEN);
-                return true;
+                //Check SoNo
+                DaiLyManager daiLyManager = new DaiLyManager();
+                DAILY daiLy = daiLyManager.Get(obj.MADL.Value);
+                if (daiLy.SONO.Value < obj.SOTIEN) return false;
+                // Insert PhieuThuTien first. If succeed, proceed to update SoNo of DaiLy in DAILY table.
+                if (DAOThutien.Instance.Insert(obj.DAILY.TENDL, obj.DAILY.DIENTHOAI, obj.DAILY.DIACHI,
+                    obj.SOTIEN, obj.NGAYTHUTIEN))
+                {
+
+                    return true;
+                }
+                else
+                {
+                    MessageBox.Show("Không thể thêm phiếu thu tiền.", "Lỗi");
+                }
             }
             catch (Exception ex)
             {

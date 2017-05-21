@@ -48,7 +48,7 @@ namespace DAODLL
         }
 
         /// <summary>
-        /// Insert one PhieuThuTien into database
+        /// Insert one PhieuThuTien into database and update SoNo of DaiLy,
         /// </summary>
         /// <param name="tendaily"></param>
         /// <param name="dienthoai"></param>

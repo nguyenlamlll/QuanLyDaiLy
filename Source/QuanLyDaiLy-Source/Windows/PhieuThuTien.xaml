@@ -36,7 +36,8 @@
                             Quận:
                 </TextBlock>
                 <ComboBox x:Name="DistrictComboBox" Style="{DynamicResource InputComboBox}"
-                          ItemTemplate="{StaticResource DataQUAN}" SelectedValuePath="MAQUAN"/>
+                          ItemTemplate="{StaticResource DataQUAN}" SelectedValuePath="MAQUAN"
+                          SelectionChanged="DistrictComboBox_SelectionChanged"/>
                 <Image x:Name="DistrictStatus" Source="/QuanLyDaiLy-Source;component/Assets/Icons/exclamation-mark32.png"
                            Height="16" Width="16" Cursor="Help"
                            Visibility="Hidden">
@@ -141,7 +142,9 @@
                 <TextBlock Style="{DynamicResource InputTextBlock}">
                            Số Tiền Thu:
                 </TextBlock>
-                <TextBox x:Name="MoneyTextBox" Style="{DynamicResource InputTextBox}"/>
+                <TextBox x:Name="MoneyTextBox" 
+                         Style="{DynamicResource InputTextBox}"
+                         PreviewKeyUp="MoneyTextBox_PreviewKeyUp"/>
                 <Image x:Name="MoneyStatus" Source="/QuanLyDaiLy-Source;component/Assets/Icons/exclamation-mark32.png"
                            Height="16" Width="16" Cursor="Help"
                            Visibility="Hidden">
