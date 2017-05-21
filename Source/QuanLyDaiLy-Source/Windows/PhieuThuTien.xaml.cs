@@ -177,6 +177,7 @@ namespace QuanLyDaiLy_Source.Windows
 
             if (MoneyTextBox.Text == "") return false;
             if (!Utilities.IsDigitsOnly(MoneyTextBox.Text.ToString())) return false;
+            if (!IsCollectMoneyLowerOrEqualDebt()) return false;
 
             if (DateDatePicker.SelectedDate == null) return false;
 
@@ -273,19 +274,26 @@ namespace QuanLyDaiLy_Source.Windows
             {
                 if (!FieldChecker.IsTextBoxFilled(MoneyTextBox)) return;
                 if (!FieldChecker.IsTextBoxFilled(DebtTextBox)) return;
-                if (decimal.Parse(DebtTextBox.Text) < decimal.Parse(MoneyTextBox.Text))
+                if (IsCollectMoneyLowerOrEqualDebt())
                 {
-                    MoneyStatus.Visibility = Visibility.Visible;
+                    MoneyStatus.Visibility = Visibility.Hidden;
                 }
                 else
                 {
-                    MoneyStatus.Visibility = Visibility.Hidden;
+                    MoneyStatus.Visibility = Visibility.Visible;
+                   
                 }
             }
             catch
             {
 
             }
+        }
+
+        private bool IsCollectMoneyLowerOrEqualDebt()
+        {
+            if (decimal.Parse(DebtTextBox.Text) < decimal.Parse(MoneyTextBox.Text)) return false;
+            return true;
         }
     }
 }
