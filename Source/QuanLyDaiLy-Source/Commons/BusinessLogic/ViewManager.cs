@@ -92,6 +92,98 @@ namespace QuanLyDaiLy_Source.Commons.BusinessLogic
         {
             return DAOView.Instance.GetSoNoDaiLy(maLoai);
         }
+
+        /// <summary>
+        /// Enable condition checkNo or checkKoNo or both are disable
+        /// </summary>
+        /// <param name="src"></param>
+        /// <param name="des"></param>
+        /// <param name="check"></param>
+        /// <returns></returns>
+        public ObservableCollection<vwDAILY_LOAIDL_QUAN> Test(ObservableCollection<vwDAILY_LOAIDL_QUAN> src, ObservableCollection<vwDAILY_LOAIDL_QUAN> des, int check)
+        {
+            if (src != null)
+            {
+                if (check == 1)
+                {
+                    foreach (vwDAILY_LOAIDL_QUAN dl in src)
+                    {
+                        if (dl.SONO > 0)
+                            des.Add(dl);
+                    }
+                    return des;
+                }
+                else if (check == 0)
+                {
+                    foreach (vwDAILY_LOAIDL_QUAN dl in src)
+                    {
+                        if (dl.SONO == 0 || dl.SONO == null)
+                            des.Add(dl);
+                    }
+                    return des;
+                }
+                else
+                {
+                    return src;
+                }
+            }
+            return null;
+        }
+
+        #region Tìm đại lí theo tên
+        /// <summary>
+        /// Get All DaiLy that belongs to QUAN (maQuan)
+        /// </summary>
+        /// <param name="maQuan">Mã Quận cần lấy tât cả đại lý</param>
+        /// <returns></returns>
+        public ObservableCollection<vwDAILY_LOAIDL_QUAN> SearchByQuan(string name, int check)
+        {
+            ObservableCollection<vwDAILY_LOAIDL_QUAN> dailiSrc = DAOView.Instance.SearchByQuan(name);
+            ObservableCollection<vwDAILY_LOAIDL_QUAN> dailiDes = new ObservableCollection<vwDAILY_LOAIDL_QUAN>();
+            return Test(dailiSrc, dailiDes, check);
+        }
+
+        /// <summary>
+        /// Get All DaiLy that belongs according LOAIDL (maQuan)
+        /// </summary>
+        /// <param name="maLoai">Mã Loại cần lấy tât cả đại lý</param>
+        /// <returns></returns>
+        public ObservableCollection<vwDAILY_LOAIDL_QUAN> SearchByLoai(string name, int check)
+        {
+            ObservableCollection<vwDAILY_LOAIDL_QUAN> dailiSrc = DAOView.Instance.SearchByLoai(name);
+            ObservableCollection<vwDAILY_LOAIDL_QUAN> dailiDes = new ObservableCollection<vwDAILY_LOAIDL_QUAN>();
+            return Test(dailiSrc, dailiDes, check);
+        }
+
+        /// <summary>
+        /// Get All DaiLy that belongs according LOAIDL (maQuan)
+        /// </summary>
+        /// <param name="maLoai">Mã Loại cần lấy tât cả đại lý</param>
+        /// <returns></returns>
+        public ObservableCollection<vwDAILY_LOAIDL_QUAN> SearchByDaiLy(string name, int check)
+        {
+            ObservableCollection<vwDAILY_LOAIDL_QUAN> dailiSrc = DAOView.Instance.SearchByDaiLy(name);
+            ObservableCollection<vwDAILY_LOAIDL_QUAN> dailiDes = new ObservableCollection<vwDAILY_LOAIDL_QUAN>();
+            return Test(dailiSrc, dailiDes, check);
+        }
+        #endregion
+
+        /// <summary>
+        /// Get All DaiLy that belongs according LOAIDL (maQuan)
+        /// </summary>
+        /// <param name="maLoai">Mã Loại cần lấy tât cả đại lý</param>
+        /// <returns></returns>
+        public ObservableCollection<vwDAILY_LOAIDL_QUAN> GetAllDaiLyAccordingLoai(int maLoai)
+        {
+            return DAOView.Instance.GetMultipleByLoai(maLoai);
+        }
+
+        public ObservableCollection<vwDAILY_LOAIDL> GetAllDaiLyWithLoaiDaiLy(int maQuan)
+        {
+            return DAOView.Instance.GetAllDaiLyWithLoaiDaiLy(maQuan);
+        }
+
+
     }
 
 

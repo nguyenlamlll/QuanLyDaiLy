@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="QLDL" Class="QLDLDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=DESKTOP-6QE5JP6;Initial Catalog=QLDL;Integrated Security=True" SettingsObjectName="DAODLL.Properties.Settings" SettingsPropertyName="QLDLConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=LENOVO-PC\LAM;Initial Catalog=QLDL;Integrated Security=True" SettingsObjectName="DAODLL.Properties.Settings" SettingsPropertyName="QLDLConnectionString1" Provider="System.Data.SqlClient" />
   <Table Name="dbo.CHUCVU" Member="CHUCVUs">
     <Type Name="CHUCVU">
       <Column Name="MACHUCVU" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -134,7 +134,7 @@
       <Column Name="TENLOAI" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
       <Column Name="TENQUAN" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="MAQUAN" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="LOAIDL" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MALOAI" Storage="_LOAIDL" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.[vwDAILY-PHIEUTHUTIEN-NHANVIEN]" Member="vwDAILY_PHIEUTHUTIEN_NHANVIENs">
@@ -156,6 +156,22 @@
       <Column Name="NGAYLAP" Type="System.DateTime" DbType="Date" CanBeNull="true" />
       <Column Name="TENQUAN" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="TENDL" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.[vwDAILY-LOAIDL]" Member="vwDAILY_LOAIDLs">
+    <Type Name="vwDAILY_LOAIDL">
+      <Column Name="TENDL" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="MADL" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="LOAIDL" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DIENTHOAI" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="DIACHI" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="MAQUAN" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NGAYTIEPNHAN" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="SONO" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="TINHTRANG" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TENLOAI" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="MALOAI" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="SONOTOIDA" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
     </Type>
   </Table>
 </Database>

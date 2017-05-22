@@ -66,7 +66,7 @@ namespace DAODLL
     #endregion
 		
 		public QLDLDataContext() : 
-				base(global::DAODLL.Properties.Settings.Default.QLDLConnectionString, mappingSource)
+				base(global::DAODLL.Properties.Settings.Default.QLDLConnectionString1, mappingSource)
 		{
 			OnCreated();
 		}
@@ -212,6 +212,14 @@ namespace DAODLL
 			get
 			{
 				return this.GetTable<vw_SEARCH_PHIEUXUATHANG>();
+			}
+		}
+		
+		public System.Data.Linq.Table<vwDAILY_LOAIDL> vwDAILY_LOAIDLs
+		{
+			get
+			{
+				return this.GetTable<vwDAILY_LOAIDL>();
 			}
 		}
 	}
@@ -2815,7 +2823,7 @@ namespace DAODLL
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LOAIDL", DbType="Int")]
-		public System.Nullable<int> LOAIDL
+		public System.Nullable<int> MALOAI
 		{
 			get
 			{
@@ -3078,6 +3086,231 @@ namespace DAODLL
 				if ((this._TENDL != value))
 				{
 					this._TENDL = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.[vwDAILY-LOAIDL]")]
+	public partial class vwDAILY_LOAIDL
+	{
+		
+		private string _TENDL;
+		
+		private int _MADL;
+		
+		private System.Nullable<int> _LOAIDL;
+		
+		private string _DIENTHOAI;
+		
+		private string _DIACHI;
+		
+		private System.Nullable<int> _MAQUAN;
+		
+		private System.Nullable<System.DateTime> _NGAYTIEPNHAN;
+		
+		private System.Nullable<decimal> _SONO;
+		
+		private System.Nullable<int> _TINHTRANG;
+		
+		private string _TENLOAI;
+		
+		private int _MALOAI;
+		
+		private System.Nullable<decimal> _SONOTOIDA;
+		
+		public vwDAILY_LOAIDL()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TENDL", DbType="NVarChar(50)")]
+		public string TENDL
+		{
+			get
+			{
+				return this._TENDL;
+			}
+			set
+			{
+				if ((this._TENDL != value))
+				{
+					this._TENDL = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MADL", DbType="Int NOT NULL")]
+		public int MADL
+		{
+			get
+			{
+				return this._MADL;
+			}
+			set
+			{
+				if ((this._MADL != value))
+				{
+					this._MADL = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LOAIDL", DbType="Int")]
+		public System.Nullable<int> LOAIDL
+		{
+			get
+			{
+				return this._LOAIDL;
+			}
+			set
+			{
+				if ((this._LOAIDL != value))
+				{
+					this._LOAIDL = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DIENTHOAI", DbType="NVarChar(50)")]
+		public string DIENTHOAI
+		{
+			get
+			{
+				return this._DIENTHOAI;
+			}
+			set
+			{
+				if ((this._DIENTHOAI != value))
+				{
+					this._DIENTHOAI = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DIACHI", DbType="NVarChar(50)")]
+		public string DIACHI
+		{
+			get
+			{
+				return this._DIACHI;
+			}
+			set
+			{
+				if ((this._DIACHI != value))
+				{
+					this._DIACHI = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MAQUAN", DbType="Int")]
+		public System.Nullable<int> MAQUAN
+		{
+			get
+			{
+				return this._MAQUAN;
+			}
+			set
+			{
+				if ((this._MAQUAN != value))
+				{
+					this._MAQUAN = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NGAYTIEPNHAN", DbType="Date")]
+		public System.Nullable<System.DateTime> NGAYTIEPNHAN
+		{
+			get
+			{
+				return this._NGAYTIEPNHAN;
+			}
+			set
+			{
+				if ((this._NGAYTIEPNHAN != value))
+				{
+					this._NGAYTIEPNHAN = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SONO", DbType="Decimal(18,0)")]
+		public System.Nullable<decimal> SONO
+		{
+			get
+			{
+				return this._SONO;
+			}
+			set
+			{
+				if ((this._SONO != value))
+				{
+					this._SONO = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TINHTRANG", DbType="Int")]
+		public System.Nullable<int> TINHTRANG
+		{
+			get
+			{
+				return this._TINHTRANG;
+			}
+			set
+			{
+				if ((this._TINHTRANG != value))
+				{
+					this._TINHTRANG = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TENLOAI", DbType="NVarChar(10)")]
+		public string TENLOAI
+		{
+			get
+			{
+				return this._TENLOAI;
+			}
+			set
+			{
+				if ((this._TENLOAI != value))
+				{
+					this._TENLOAI = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MALOAI", DbType="Int NOT NULL")]
+		public int MALOAI
+		{
+			get
+			{
+				return this._MALOAI;
+			}
+			set
+			{
+				if ((this._MALOAI != value))
+				{
+					this._MALOAI = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SONOTOIDA", DbType="Decimal(18,0)")]
+		public System.Nullable<decimal> SONOTOIDA
+		{
+			get
+			{
+				return this._SONOTOIDA;
+			}
+			set
+			{
+				if ((this._SONOTOIDA != value))
+				{
+					this._SONOTOIDA = value;
 				}
 			}
 		}

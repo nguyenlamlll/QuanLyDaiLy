@@ -39,11 +39,9 @@ namespace QuanLyDaiLy_Source.Windows
             InitializeComponent();
             Loaded += PhieuThuTien_Loaded;
 
-
-
+            // Add Check methods 
             DistrictComboBox.LostFocus += DistrictComboBox_FieldCheck;
             AgencyComboBox.LostFocus += AgencyComboBox_FieldCheck;
-            //MoneyTextBox.LostFocus += MoneyTextBox_FieldCheck;
             DateDatePicker.LostFocus += DateDatePicker_FieldCheck;
         }
 
@@ -58,20 +56,6 @@ namespace QuanLyDaiLy_Source.Windows
                 DateStatus.Visibility = Visibility.Hidden;
             }
         }
-
-        /*
-        private void MoneyTextBox_FieldCheck(object sender, RoutedEventArgs e)
-        {
-            if (MoneyTextBox.Text == "")
-            {
-                MoneyStatus.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                MoneyStatus.Visibility = Visibility.Hidden;
-            }
-        }
-        */
 
         private void AgencyComboBox_FieldCheck(object sender, RoutedEventArgs e)
         {
@@ -97,6 +81,9 @@ namespace QuanLyDaiLy_Source.Windows
             }
         }
 
+        /// <summary>
+        /// Invoke Loaded event of the page and load default settings.
+        /// </summary>
         private void PhieuThuTien_Loaded(object sender, RoutedEventArgs e)
         {
             App.Current.Properties[Models.DefaultSettings.ContentFrameTitle] = "Phiếu Thu Tiền";
