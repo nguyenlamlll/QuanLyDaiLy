@@ -79,6 +79,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Commons\BusinessLogic\BaoCaoCongNoManager.cs" />
     <Compile Include="Commons\BusinessLogic\DaiLyManager.cs" />
     <Compile Include="Commons\BusinessLogic\EmployeeManager.cs" />
     <Compile Include="Commons\BusinessLogic\Manager.cs" />

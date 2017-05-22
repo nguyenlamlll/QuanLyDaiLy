@@ -23,18 +23,18 @@
                 <ComboBox x:Name="MonthComboBox"
                           Style="{DynamicResource InputComboBox}"
                           Width="300">
-                    <ComboBoxItem>Tháng Một</ComboBoxItem>
-                    <ComboBoxItem>Tháng Hai</ComboBoxItem>
-                    <ComboBoxItem>Tháng Ba</ComboBoxItem>
-                    <ComboBoxItem>Tháng Bốn</ComboBoxItem>
-                    <ComboBoxItem>Tháng Năm</ComboBoxItem>
-                    <ComboBoxItem>Tháng Sáu</ComboBoxItem>
-                    <ComboBoxItem>Tháng Bảy</ComboBoxItem>
-                    <ComboBoxItem>Tháng Tám</ComboBoxItem>
-                    <ComboBoxItem>Tháng Chín</ComboBoxItem>
-                    <ComboBoxItem>Tháng Mười</ComboBoxItem>
-                    <ComboBoxItem>Tháng Mười Một</ComboBoxItem>
-                    <ComboBoxItem>Tháng Mười Hai</ComboBoxItem>
+                    <ComboBoxItem x:Name="comboBoxItem_January">Tháng Một</ComboBoxItem>
+                    <ComboBoxItem x:Name="comboBoxItem_February">Tháng Hai</ComboBoxItem>
+                    <ComboBoxItem x:Name="comboBoxItem_March">Tháng Ba</ComboBoxItem>
+                    <ComboBoxItem x:Name="comboBoxItem_April">Tháng Bốn</ComboBoxItem>
+                    <ComboBoxItem x:Name="comboBoxItem_May">Tháng Năm</ComboBoxItem>
+                    <ComboBoxItem x:Name="comboBoxItem_June">Tháng Sáu</ComboBoxItem>
+                    <ComboBoxItem x:Name="comboBoxItem_July">Tháng Bảy</ComboBoxItem>
+                    <ComboBoxItem x:Name="comboBoxItem_August">Tháng Tám</ComboBoxItem>
+                    <ComboBoxItem x:Name="comboBoxItem_September">Tháng Chín</ComboBoxItem>
+                    <ComboBoxItem x:Name="comboBoxItem_October">Tháng Mười</ComboBoxItem>
+                    <ComboBoxItem x:Name="comboBoxItem_November">Tháng Mười Một</ComboBoxItem>
+                    <ComboBoxItem x:Name="comboBoxItem_December">Tháng Mười Hai</ComboBoxItem>
                 </ComboBox>
             </StackPanel>
 
@@ -70,7 +70,7 @@
                       Margin="40,25,40,0"
                       Height="300"
                       Style="{DynamicResource DataGridStyle}"
-                      SelectionMode="Extended" SelectionUnit="Cell" 
+                      SelectionMode="Single" SelectionUnit="FullRow" 
                       ScrollViewer.CanContentScroll="True"
                       >
                 <DataGrid.Columns>

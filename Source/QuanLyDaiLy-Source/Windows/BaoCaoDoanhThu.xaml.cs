@@ -34,5 +34,15 @@ namespace QuanLyDaiLy_Source.Windows
             App.Current.Properties[Models.DefaultSettings.ContentFrameTitle] = "Báo Cáo Doanh Số";
             pageLoaded?.Invoke(this, e);
         }
+
+        private void TypeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void DistrictComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

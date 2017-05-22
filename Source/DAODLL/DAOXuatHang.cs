@@ -154,5 +154,27 @@ namespace DAODLL
             }
             return matHang;
         }
+
+        /// <summary>
+        /// Get all PhieuXuatHang before a month
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns></returns>
+        public ObservableCollection<PHIEUXUATHANG> GetPhieuXuatHangBeforeAMonth(DateTime date)
+        {
+            ObservableCollection<PHIEUXUATHANG> list = new ObservableCollection<PHIEUXUATHANG>();
+            using (QLDLDataContext db = new QLDLDataContext())
+            {
+                var query = (from phieu in db.PHIEUXUATHANGs
+                             where phieu.NGAYLAP.Value.Month <= date.Month
+                             && phieu.NGAYLAP.Value.Year <= date.Year
+                             select phieu);
+                foreach (var item in query)
+                {
+                    list.Add(query as PHIEUXUATHANG);
+                }
+                return list;
+            }
+        }
     }
 }

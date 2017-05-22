@@ -55,5 +55,14 @@ namespace DAODLL
             }
             return li;
         }*/
+
+        public int GetSoNoDauKy(DateTime date)
+        {
+            int soNo = 0;
+            using (QLDLDataContext db = new QLDLDataContext())
+            {
+                return soNo;
+            }
+        }
     }
 }
