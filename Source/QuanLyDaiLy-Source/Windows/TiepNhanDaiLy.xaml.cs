@@ -39,7 +39,7 @@ namespace QuanLyDaiLy_Source.Windows
 
             // Field Check EventHandlers
             NameInputTextBox.LostFocus += NameInput_FieldCheck;
-            IDInputTextBox.LostFocus += IDInputTextBox_FieldCheck;
+            //IDInputTextBox.LostFocus += IDInputTextBox_FieldCheck;
             TypeInputComboBox.LostFocus += TypeInputComboBox_FieldCheck;
             PhoneNumberInputTextBox.LostFocus += PhoneNumberInputTextBox_FieldCheck;
             AddressNumberInputTextBox.LostFocus += AddressNumberInputTextBox_FieldCheck;
@@ -145,6 +145,7 @@ namespace QuanLyDaiLy_Source.Windows
             }
         }
 
+        /*
         private void IDInputTextBox_FieldCheck(object sender, RoutedEventArgs e)
         {
             if (IDInputTextBox.Text == "")
@@ -156,6 +157,7 @@ namespace QuanLyDaiLy_Source.Windows
                 IDStatus.Visibility = Visibility.Hidden;
             }
         }
+        */
 
         private void TypeInputComboBox_FieldCheck(object sender, RoutedEventArgs e)
         {
@@ -221,7 +223,7 @@ namespace QuanLyDaiLy_Source.Windows
 
 
             NameInputTextBox.Text = "";
-            IDInputTextBox.Text = "";
+            //IDInputTextBox.Text = "";
             TypeInputComboBox.SelectedIndex = -1;
             PhoneNumberInputTextBox.Text = "";
             AddressNumberInputTextBox.Text = "";
@@ -250,7 +252,7 @@ namespace QuanLyDaiLy_Source.Windows
         /// <param name="daiLy"></param>
         private void GetDaiLyInput(DAODLL.DAILY daiLy)
         {
-            daiLy.MADL = int.Parse(IDInputTextBox.Text.ToString());
+            //daiLy.MADL = int.Parse(IDInputTextBox.Text.ToString());
             daiLy.TENDL = NameInputTextBox.Text.ToString();
             daiLy.DIENTHOAI = PhoneNumberInputTextBox.Text.ToString();
             daiLy.DIACHI = AddressNumberInputTextBox.Text.ToString() + ", " + StreetInputTextBox.Text.ToString();

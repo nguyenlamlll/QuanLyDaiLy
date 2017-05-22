@@ -42,10 +42,12 @@
                            Style="{DynamicResource InputTextBlock}">
                     Tên:
                 </TextBlock>
+                <!--
                 <TextBlock x:Name="IDInputTextBlock"
-                           Style="{DynamicResource InputTextBlock}">
+                           Style="{DynamicResource InputTextBlock}"
+                           >
                     Mã Đại Lý:
-                </TextBlock>
+                </TextBlock>-->
                 <TextBlock x:Name="TypeInputTextBlock"
                            Style="{DynamicResource InputTextBlock}">
                     Loại Đại Lý:
@@ -97,8 +99,9 @@
                         </Image.ToolTip>
                     </Image>
                 </StackPanel>
-
+                <!--
                 <StackPanel Orientation="Horizontal">
+         
                     <TextBox x:Name="IDInputTextBox"
                              Style="{DynamicResource InputTextBox}"
                              />
@@ -121,7 +124,7 @@
                         </Image.ToolTip>
                     </Image>
                 </StackPanel>
-
+-->
                 <StackPanel Orientation="Horizontal">
                     <ComboBox x:Name="TypeInputComboBox"
                               ItemTemplate="{StaticResource DataLoaiDL}" SelectedValuePath="MALOAI"
