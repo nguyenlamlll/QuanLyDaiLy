@@ -175,8 +175,8 @@ namespace QuanLyDaiLy_Source.Commons.BusinessLogic
         /// <returns></returns>
         public ObservableCollection<vwDAILY_LOAIDL_QUAN> GetAllDaiLyAccordingLoai(int maLoai)
         {
-            if (maLoai == 0) return DAOView.Instance.GetMultipleByLoai();
-            return DAOView.Instance.GetMultipleByLoai(maLoai);
+            if (maLoai == 0) return DAOView.Instance.GetMultipleViewByLoai();
+            return DAOView.Instance.GetMultipleViewByLoai(maLoai);
         }
 
         public ObservableCollection<vwDAILY_LOAIDL> GetAllDaiLyWithLoaiDaiLy(int maQuan)
@@ -188,7 +188,15 @@ namespace QuanLyDaiLy_Source.Commons.BusinessLogic
             return DAOView.Instance.GetAllDaiLyWithLoaiDaiLy(maQuan);
         }
 
+        public ObservableCollection<DAILY> GetAllDaiLyByMaLoai(int maLoai)
+        {
+            return DAOView.Instance.GetAllDaiLyByMaLoai(maLoai);
+        }
 
+        public ObservableCollection<DAILY> GetAllDaiLy(int maQuan, int maLoai)
+        {
+            return DAOView.Instance.GetAllDaiLy(maQuan, maLoai);
+        }
     }
 
 

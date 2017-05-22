@@ -137,18 +137,43 @@ namespace DAODLL
         /// </summary>
         /// <param name="date"></param>
         /// <returns></returns>
-        public ObservableCollection<PHIEUTHUTIEN> GetPhieuThuTienBeforeAMonth(DateTime date)
+        public ObservableCollection<PHIEUTHUTIEN> GetPhieuThuTienBeforeAMonth(DateTime date, int maDL)
         {
             ObservableCollection<PHIEUTHUTIEN> list = new ObservableCollection<PHIEUTHUTIEN>();
             using (QLDLDataContext db = new QLDLDataContext())
             {
                 var query = (from phieu in db.PHIEUTHUTIENs
-                             where phieu.NGAYTHUTIEN.Value.Month <= date.Month
+                             where phieu.NGAYTHUTIEN.Value.Month < date.Month
                              && phieu.NGAYTHUTIEN.Value.Year <= date.Year
+                             && phieu.MADL == maDL
+                             select phieu);
+
+                foreach (var item in query)
+                {
+                    list.Add(item);
+                }
+                return list;
+            }
+        }
+
+        /// <summary>
+        /// Get all PhieuThuTien in a month
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns></returns>
+        public ObservableCollection<PHIEUTHUTIEN> GetPhieuThuTienInAMonth(DateTime date, int maDL)
+        {
+            ObservableCollection<PHIEUTHUTIEN> list = new ObservableCollection<PHIEUTHUTIEN>();
+            using (QLDLDataContext db = new QLDLDataContext())
+            {
+                var query = (from phieu in db.PHIEUTHUTIENs
+                             where phieu.NGAYTHUTIEN.Value.Month == date.Month
+                             && phieu.NGAYTHUTIEN.Value.Year == date.Year
+                             && phieu.MADL == maDL
                              select phieu);
                 foreach (var item in query)
                 {
-                    list.Add(query as PHIEUTHUTIEN);
+                    list.Add(item);
                 }
                 return list;
             }

@@ -102,6 +102,50 @@ namespace DAODLL
         }
 
         /// <summary>
+        /// Get All DaiLy using maQuan and maLoai.
+        /// </summary>
+        /// <param name="maQuan">Mã Quận dùng để lọc records trong bảng DAILY</param>
+        /// <param name="maLoai">Mã Loại dùng để lọc records trong bảng DAILY</param>
+        /// <returns>Trả về một collection các DAILY thuộc maQuan và maLoai.</returns>
+        public ObservableCollection<DAILY> GetAllDaiLy(int maQuan, int maLoai)
+        {
+            ObservableCollection<DAILY> li = new ObservableCollection<DAILY>();
+            using (QLDLDataContext db = new QLDLDataContext())
+            {
+                var daiLy = (from records in db.DAILies
+                             where records.MAQUAN == maQuan && records.LOAIDL == maLoai
+                             select records);
+                foreach (DAILY dl in daiLy)
+                {
+                    li.Add(dl);
+                }
+                return li;
+            }
+        }
+
+
+        /// <summary>
+        /// Get All DaiLy of a LoaiDaiLy
+        /// </summary>
+        /// <param name="maLoai">Mã loại cần lấy tất cả đại lý</param>
+        /// <returns></returns>
+        public ObservableCollection<DAILY> GetAllDaiLyByMaLoai(int maLoai)
+        {
+            ObservableCollection<DAILY> li = new ObservableCollection<DAILY>();
+            using (QLDLDataContext db = new QLDLDataContext())
+            {
+                var daiLy = (from records in db.DAILies
+                             where records.LOAIDL == maLoai
+                             select records);
+                foreach (DAILY dl in daiLy)
+                {
+                    li.Add(dl);
+                }
+                return li;
+            }
+        }
+
+        /// <summary>
         /// Return a DAILY of MaDL parameter.
         /// </summary>
         /// <param name="MaDL"></param>
@@ -347,11 +391,11 @@ namespace DAODLL
         }
 
         /// <summary>
-        /// Get All Agencies according Loai
+        /// Get All viewDAILY_LOAIDL_QUAN according Loai
         /// </summary>
-        /// <param name="maLoai"></param>
+        /// <param name="maLoai">Mã loại để lọc record trong bảng viewDAILY_LOAIDL_QUAN.</param>
         /// <returns></returns>
-        public ObservableCollection<vwDAILY_LOAIDL_QUAN> GetMultipleByLoai(int maLoai)
+        public ObservableCollection<vwDAILY_LOAIDL_QUAN> GetMultipleViewByLoai(int maLoai)
         {
             ObservableCollection<vwDAILY_LOAIDL_QUAN> li = new ObservableCollection<vwDAILY_LOAIDL_QUAN>();
             using (QLDLDataContext db = new QLDLDataContext())
@@ -367,7 +411,7 @@ namespace DAODLL
             }
         }
 
-        public ObservableCollection<vwDAILY_LOAIDL_QUAN> GetMultipleByLoai()
+        public ObservableCollection<vwDAILY_LOAIDL_QUAN> GetMultipleViewByLoai()
         {
             ObservableCollection<vwDAILY_LOAIDL_QUAN> li = new ObservableCollection<vwDAILY_LOAIDL_QUAN>();
             using (QLDLDataContext db = new QLDLDataContext())

@@ -149,7 +149,7 @@ namespace DAODLL
                 var l = db.MATHANGs.Select(p => p);
                 foreach (var item in l)
                 {
-                    matHang.Add(item as MATHANG);
+                    matHang.Add(item);
                 }
             }
             return matHang;
@@ -160,18 +160,43 @@ namespace DAODLL
         /// </summary>
         /// <param name="date"></param>
         /// <returns></returns>
-        public ObservableCollection<PHIEUXUATHANG> GetPhieuXuatHangBeforeAMonth(DateTime date)
+        public ObservableCollection<PHIEUXUATHANG> GetPhieuXuatHangBeforeAMonth(DateTime date, int maDL)
         {
             ObservableCollection<PHIEUXUATHANG> list = new ObservableCollection<PHIEUXUATHANG>();
             using (QLDLDataContext db = new QLDLDataContext())
             {
                 var query = (from phieu in db.PHIEUXUATHANGs
-                             where phieu.NGAYLAP.Value.Month <= date.Month
+                             where phieu.NGAYLAP.Value.Month < date.Month
                              && phieu.NGAYLAP.Value.Year <= date.Year
+                             && phieu.MADL == maDL
+                             select phieu);
+
+                foreach (var item in query)
+                {
+                    list.Add(item);
+                }
+                return list;
+            }
+        }
+
+        /// <summary>
+        /// Get all PhieuXuatHang of a month
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns></returns>
+        public ObservableCollection<PHIEUXUATHANG> GetPhieuXuatHangInAMonth(DateTime date, int maDL)
+        {
+            ObservableCollection<PHIEUXUATHANG> list = new ObservableCollection<PHIEUXUATHANG>();
+            using (QLDLDataContext db = new QLDLDataContext())
+            {
+                var query = (from phieu in db.PHIEUXUATHANGs
+                             where phieu.NGAYLAP.Value.Month == date.Month
+                             && phieu.NGAYLAP.Value.Year == date.Year
+                             && phieu.MADL == maDL
                              select phieu);
                 foreach (var item in query)
                 {
-                    list.Add(query as PHIEUXUATHANG);
+                    list.Add(item);
                 }
                 return list;
             }
