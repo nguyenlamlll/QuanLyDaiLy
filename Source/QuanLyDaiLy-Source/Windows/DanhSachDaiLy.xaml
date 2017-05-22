@@ -76,9 +76,11 @@
 
             <ListView x:Name="AgencyListView"
                       Margin="40,25,40,0"
+                      Width="Auto"
                       Height="300"
                       Style="{DynamicResource ListViewStyle}"
-                      ScrollViewer.CanContentScroll="True">
+                      ScrollViewer.CanContentScroll="True"
+                      >
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Tên đại lí">

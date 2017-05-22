@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Collections.ObjectModel;
 
 namespace QuanLyDaiLy_Source.Windows
 {
@@ -62,13 +63,22 @@ namespace QuanLyDaiLy_Source.Windows
         {
             if (((TargetSearchComboBox.SelectedItem) as ComboBoxItem).Content.ToString() == "Loại")
             {
-                SearchComboBox.ItemsSource = ViewManager.Instance.GetAllLoaiDL();
+                ObservableCollection<DAODLL.LOAIDL> DaiLyList = new ObservableCollection<DAODLL.LOAIDL>();
+                DaiLyList = ViewManager.Instance.GetAllLoaiDL();
+                DaiLyList.Add(new DAODLL.LOAIDL() { MALOAI = 0, TENLOAI = "Tất Cả" });
+                DaiLyList.Move(DaiLyList.Count - 1, 0);
+                SearchComboBox.ItemsSource = DaiLyList;
+                //SearchComboBox.ItemsSource = ViewManager.Instance.GetAllLoaiDL();
                 SearchComboBox.DisplayMemberPath = "TENLOAI";
                 SearchComboBox.SelectedValuePath = "MALOAI";
             }
             else
             {
-                SearchComboBox.ItemsSource = ViewManager.Instance.GetAllQuan();
+                ObservableCollection<DAODLL.QUAN> QuanList = new ObservableCollection<DAODLL.QUAN>();
+                QuanList = ViewManager.Instance.GetAllQuan();
+                QuanList.Add(new DAODLL.QUAN() { MAQUAN = 0, TENQUAN = "Tất Cả" });
+                QuanList.Move(QuanList.Count - 1, 0);
+                SearchComboBox.ItemsSource = QuanList;
                 SearchComboBox.DisplayMemberPath = "TENQUAN";
                 SearchComboBox.SelectedValuePath = "MAQUAN";
             }

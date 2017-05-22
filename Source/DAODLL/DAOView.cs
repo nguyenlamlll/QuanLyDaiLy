@@ -45,6 +45,21 @@ namespace DAODLL
             }
         }
 
+        public ObservableCollection<vwDAILY_LOAIDL> GetAllDaiLyWithLoaiDaiLy()
+        {
+            ObservableCollection<vwDAILY_LOAIDL> list = new ObservableCollection<DAODLL.vwDAILY_LOAIDL>();
+            using (QLDLDataContext db = new QLDLDataContext())
+            {
+                var query = (from records in db.vwDAILY_LOAIDLs
+                             select records);
+                foreach (vwDAILY_LOAIDL item in query)
+                {
+                    list.Add(item);
+                }
+                return list;
+            }
+        }
+
         /// <summary>
         /// Get all DaiLy's name and show upto ComboBox
         /// </summary>
@@ -343,6 +358,21 @@ namespace DAODLL
             {
                 var daiLy = (from records in db.vwDAILY_LOAIDL_QUANs
                              where records.MALOAI == maLoai
+                             select records);
+                foreach (vwDAILY_LOAIDL_QUAN dl in daiLy)
+                {
+                    li.Add(dl);
+                }
+                return li;
+            }
+        }
+
+        public ObservableCollection<vwDAILY_LOAIDL_QUAN> GetMultipleByLoai()
+        {
+            ObservableCollection<vwDAILY_LOAIDL_QUAN> li = new ObservableCollection<vwDAILY_LOAIDL_QUAN>();
+            using (QLDLDataContext db = new QLDLDataContext())
+            {
+                var daiLy = (from records in db.vwDAILY_LOAIDL_QUANs
                              select records);
                 foreach (vwDAILY_LOAIDL_QUAN dl in daiLy)
                 {
