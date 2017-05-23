@@ -94,6 +94,7 @@
     <Compile Include="Commons\GenericError.cs" />
     <Compile Include="Commons\MenuItems.cs" />
     <Compile Include="Commons\PhieuXuatHang_ViewModel.cs" />
+    <Compile Include="Helper\CustomScrollViewer.cs" />
     <Compile Include="Helper\DataGridComboBoxColumnWithBindingHack.cs" />
     <Compile Include="Helper\DataGridHelper.cs" />
     <Compile Include="Helper\FieldChecker.cs" />

@@ -7,7 +7,8 @@
       xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
       mc:Ignorable="d" 
       d:DesignHeight="720" d:DesignWidth="1280"
-      Title="BaoCaoCongNo">
+      Title="BaoCaoCongNo"
+      KeyboardNavigation.TabNavigation="Cycle">
     <Page.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -16,7 +17,7 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Page.Resources>
-    <ScrollViewer>
+    <ScrollViewer x:Name="MyScrollViewer">
 
 
         <Grid Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}">
@@ -26,8 +27,9 @@
                         VerticalAlignment="Center" HorizontalAlignment="Center">
                     <TextBlock Style="{DynamicResource InputTextBlock}">Tháng: &#160;</TextBlock>
                     <ComboBox x:Name="MonthComboBox"
-                          Style="{DynamicResource InputComboBox}"
-                          Width="300">
+                              Style="{DynamicResource InputComboBox}"
+                              Width="300"
+                              TabIndex="1">
                         <ComboBoxItem x:Name="comboBoxItem_January">Tháng Một</ComboBoxItem>
                         <ComboBoxItem x:Name="comboBoxItem_February">Tháng Hai</ComboBoxItem>
                         <ComboBoxItem x:Name="comboBoxItem_March">Tháng Ba</ComboBoxItem>
@@ -52,7 +54,8 @@
                           Style="{DynamicResource InputComboBox}"
                           Width="300" 
                           SelectedIndex="0"
-                          Margin="0,0,50,0">
+                          Margin="0,0,50,0"
+                              TabIndex="2">
                     </ComboBox>
 
                     <TextBlock Style="{DynamicResource InputTextBlock}">Quận: &#160;</TextBlock>
@@ -61,7 +64,8 @@
                           SelectedValuePath="MAQUAN"
                           Style="{DynamicResource InputComboBox}"
                           Width="300"
-                          SelectedIndex="0">
+                          SelectedIndex="0"
+                              TabIndex="3">
                     </ComboBox>
                 </StackPanel>
                 
@@ -70,7 +74,9 @@
 
                     <Button x:Name="GetBaoCaoButton" 
                            Content="Lập Báo Cáo"
-                           Style="{DynamicResource InputButton}" Width="Auto">
+                           Style="{DynamicResource InputButton}" 
+                            Width="Auto"
+                            TabIndex="4">
                         <Button.ToolTip>
                             <StackPanel>
                                 <TextBlock FontWeight="Bold" FontSize="14" Margin="0,0,0,5">Lưu Đại Lý</TextBlock>
@@ -92,7 +98,8 @@
                         Click="ChartButton_Click"
                     Content="Lập Biểu Đồ" Width="Auto"
                     Style="{DynamicResource InputButton}"
-                    HorizontalAlignment="Center">
+                    HorizontalAlignment="Center"
+                            TabIndex="5">
                         <Button.ToolTip>
                             <StackPanel>
                                 <TextBlock FontWeight="Bold" FontSize="14" Margin="0,0,0,5">Lưu Đại Lý</TextBlock>
@@ -112,15 +119,15 @@
                 </StackPanel>
                
                 <DataGrid x:Name="SalesDataGrid"
-                      AutoGenerateColumns="False"
-                      CanUserAddRows="False" CanUserDeleteRows="False" 
-                      CanUserResizeColumns="True"
-                      Margin="40,15,40,0"
-                      Height="300"
-                      Style="{DynamicResource DataGridStyle}"
-                      SelectionMode="Extended" SelectionUnit="Cell" 
-                      ScrollViewer.CanContentScroll="True"
-                      >
+                          AutoGenerateColumns="False"
+                          CanUserAddRows="False" CanUserDeleteRows="False" 
+                          CanUserResizeColumns="True"
+                          Margin="40,15,40,0"
+                          Height="300"
+                          Style="{DynamicResource DataGridStyle}"
+                          SelectionMode="Extended" SelectionUnit="Cell" 
+                          ScrollViewer.CanContentScroll="True"
+                          KeyboardNavigation.IsTabStop="False">
 
                     <DataGrid.CellStyle>
                         <Style TargetType="DataGridCell">
@@ -171,13 +178,15 @@
 
                 <Border BorderThickness="0,2,0,0"
                         BorderBrush="Gray"
-                        Margin="20"/>
+                        Margin="20"
+                        KeyboardNavigation.IsTabStop="False"/>
 
-                <lvc:CartesianChart x:Name="CartesianChart_Line" 
+                <lvc:CartesianChart x:Name="CartesianChart_Line"
                                     Margin="10,20,10,0"
                                     Series="{Binding SeriesCollection}" 
                                     LegendLocation="Right" 
-                                    Height="500">
+                                    Height="500"
+                                    TabIndex="6">
                     <lvc:CartesianChart.AxisY>
                         <lvc:Axis Title="Nợ" LabelFormatter="{Binding YFormatter}"></lvc:Axis>
                     </lvc:CartesianChart.AxisY>

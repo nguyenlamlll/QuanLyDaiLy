@@ -53,6 +53,8 @@ namespace QuanLyDaiLy_Source.Windows
             InitializeComponent();
             Loaded += BaoCaoCongNo_Loaded;
 
+            //this.PreviewKeyDown += BaoCaoCongNo_PreviewKeyDown;
+
             SalesDataGrid.ItemsSource = myDataItems;
 
             GetBaoCaoButton.Click += SearchQueryChanged;
@@ -64,6 +66,25 @@ namespace QuanLyDaiLy_Source.Windows
             YFormatter = value => value.ToString();
             DataContext = this;
         }
+
+        /*
+        private void BaoCaoCongNo_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Escape)
+            {
+                this.Focus();
+            }
+
+            if (e.Key == Key.Up)
+            {
+                if (MyScrollViewer.ScrollableHeight > 0 && MyScrollViewer.VerticalOffset > 0)
+                {
+                    MyScrollViewer.ScrollToHorizontalOffset(MyScrollViewer.HorizontalOffset - 5);
+                }
+
+            }
+        }
+        */
 
         /// <summary>
         /// Validate query options before excuting it.
@@ -239,6 +260,11 @@ namespace QuanLyDaiLy_Source.Windows
 
         private void ChartButton_Click(object sender, RoutedEventArgs e)
         {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                Mouse.OverrideCursor = Cursors.Wait;
+            });
+
             SeriesCollection.Clear();
             
             ObservableCollection<DAILY> listDaiLy = new ObservableCollection<DAILY>();
@@ -277,6 +303,11 @@ namespace QuanLyDaiLy_Source.Windows
                 });
                 
             }
+
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                Mouse.OverrideCursor = null;
+            });
         }
     }
 
