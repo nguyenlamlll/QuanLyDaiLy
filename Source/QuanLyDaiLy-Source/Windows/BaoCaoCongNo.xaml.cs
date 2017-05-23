@@ -17,6 +17,7 @@ using DAODLL;
 using QuanLyDaiLy_Source.Commons.BusinessLogic;
 using LiveCharts;
 using LiveCharts.Wpf;
+using LiveCharts.Defaults;
 
 namespace QuanLyDaiLy_Source.Windows
 {
@@ -26,9 +27,19 @@ namespace QuanLyDaiLy_Source.Windows
     public partial class BaoCaoCongNo : Page
     {
 
+        /// <summary>
+        /// Series Container of the chart.
+        /// </summary>
         public SeriesCollection SeriesCollection { get; set; }
 
+        /// <summary>
+        /// Label of the chart.
+        /// </summary>
         public string[] Labels { get; set; }
+
+        /// <summary>
+        /// Y Axis Formatter. Convert a double variable to a string variable in order to display it on the chart.
+        /// </summary>
         public Func<double, string> YFormatter { get; set; }
 
         BaoCaoCongNoManager baoCaoCongNoManager = new BaoCaoCongNoManager();
@@ -44,24 +55,13 @@ namespace QuanLyDaiLy_Source.Windows
 
             SalesDataGrid.ItemsSource = myDataItems;
 
-            // Query-related methods
-            //TypeComboBox.SelectionChanged += SearchQueryChanged;
-            //DistrictComboBox.SelectionChanged += SearchQueryChanged;
-            //MonthComboBox.SelectionChanged += SearchQueryChanged;
             GetBaoCaoButton.Click += SearchQueryChanged;
 
+            // Line Chart settings
             SeriesCollection = new SeriesCollection();
-            SeriesCollection.Add(new LineSeries
-            {
-                Title = "Test",
-                Values = new ChartValues<double> { 5, 3, 2, 4, 10, 15, 20, 23, 05, 10, 11, 12},
-                LineSmoothness = 0, //0: straight lines, 1: really smooth lines
-            });
-            // Linr Chart settings
             Labels = new[] { "Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7",
                 "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12" };
-            YFormatter = value => value.ToString("C");
-
+            YFormatter = value => value.ToString();
             DataContext = this;
         }
 
@@ -156,17 +156,21 @@ namespace QuanLyDaiLy_Source.Windows
             return time;
         }
 
+        /// <summary>
+        /// This method is invoked when user clicks LapBaoCao button.
+        /// Check fir required input fields and get BaoCao.
+        /// </summary>
         private void SearchQueryChanged(object sender, RoutedEventArgs e)
         {
             if (IsQuerySuitable())
             {
                 try
                 {
-
                     int selectedMaLoaiDaiLy = (int)TypeComboBox.SelectedValue;
                     int selectedMaQuan = (int)DistrictComboBox.SelectedValue;
                     DateTime selectedDate = GetDateTime(out selectedDate);
 
+                    //Get the scope of DaiLy needed to get reports.
                     ObservableCollection<DAILY> listDaiLy = new ObservableCollection<DAILY>();
                     if (selectedMaLoaiDaiLy == 0 && selectedMaQuan == 0)
                         listDaiLy = ViewManager.Instance.GetAllDaiLy();
@@ -191,7 +195,6 @@ namespace QuanLyDaiLy_Source.Windows
                                 NoPhatSinh = _NoCuoi,
                                 NoCuoi = Math.Abs(_NoDau + _NoCuoi),
                             };
-
                             myDataItems.Add(item);
 
                         }
@@ -237,23 +240,30 @@ namespace QuanLyDaiLy_Source.Windows
         private void ChartButton_Click(object sender, RoutedEventArgs e)
         {
             SeriesCollection.Clear();
-            ObservableCollection<DAILY> listDaiLy = ViewManager.Instance.GetAllDaiLy();
+            
+            ObservableCollection<DAILY> listDaiLy = new ObservableCollection<DAILY>();
             int selectedMaLoaiDaiLy = (int)TypeComboBox.SelectedValue;
             int selectedMaQuan = (int)DistrictComboBox.SelectedValue;
 
-            DateTime time = new DateTime(DateTime.Now.Year, 1, 1);
+            if (selectedMaLoaiDaiLy == 0 && selectedMaQuan == 0)
+                listDaiLy = ViewManager.Instance.GetAllDaiLy();
+            else if (selectedMaLoaiDaiLy != 0 && selectedMaQuan == 0)
+                listDaiLy = ViewManager.Instance.GetAllDaiLyByMaLoai(selectedMaLoaiDaiLy);
+            else if (selectedMaLoaiDaiLy == 0 && selectedMaQuan != 0)
+                listDaiLy = ViewManager.Instance.GetAllDaiLy(selectedMaQuan);
+            else if (selectedMaLoaiDaiLy != 0 && selectedMaQuan != 0)
+                listDaiLy = ViewManager.Instance.GetAllDaiLy(selectedMaQuan, selectedMaLoaiDaiLy);
 
-            ChartValues<double> listSoNoDau = new ChartValues<double>();
-            //ChartValues<double> listSoNoCuoi = new ChartValues<double>();
+
+            DateTime time = new DateTime(DateTime.Now.Year, 1, 1);
 
             foreach (DAILY daiLy in listDaiLy)
             {
+                ChartValues<ObservableValue> listSoNoDau = new ChartValues<ObservableValue>();
                 for (int i = 0; i <= 11; i++)
                 {
                     double _NoDau = (double)baoCaoCongNoManager.GetSoNoDauKy(time, daiLy.MADL);
-                    // _NoCuoi = baoCaoCongNoManager.GetSoNoPhatSinh(time, daiLy.MADL);
-                    listSoNoDau.Add(_NoDau);
-                    //listSoNoCuoi.Add(_NoCuoi);
+                    listSoNoDau.Add(new ObservableValue(_NoDau));
                     time = time.AddMonths(1);
                 }
 
@@ -265,21 +275,8 @@ namespace QuanLyDaiLy_Source.Windows
                     PointGeometry = DefaultGeometries.Square,
                     PointGeometrySize = 5
                 });
-                listSoNoDau.Clear();
+                
             }
-            /*
-            foreach (BaoCaoCongNoItem item in myDataItems)
-            {
-                LineSeries line = new LineSeries()
-                {
-                    Title = item.TenDaiLy,
-                    Values = new ChartValues<decimal> { 4, 2, 7, 2, 7 },
-                    PointGeometry = DefaultGeometries.Square,
-                    PointGeometrySize = 15
-                };
-
-            }
-            */
         }
     }
 

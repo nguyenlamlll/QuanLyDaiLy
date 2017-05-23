@@ -168,6 +168,10 @@ namespace QuanLyDaiLy_Source.Windows
             {
                 if (xuatHangManager.Insert(GetCurrentPhieuXuatHang(), GetAllMaHang(), GetAllSoLuongHang()))
                     MessageBox.Show("Thêm Thành Công", "Thành Công");
+                else
+                {
+                    return;
+                }
             }
             catch (Exception ex)
             {
@@ -197,6 +201,10 @@ namespace QuanLyDaiLy_Source.Windows
             {
                 if (xuatHangManager.Insert(GetCurrentPhieuXuatHang(), GetAllMaHang(), GetAllSoLuongHang()))
                     MessageBox.Show("Thêm Thành Công", "Thành Công");
+                else
+                {
+                    return;
+                }
             }
             catch (Exception ex)
             {
@@ -658,6 +666,21 @@ namespace QuanLyDaiLy_Source.Windows
             else PaidStatus.Visibility = Visibility.Collapsed;
 
             RemainderTextBox.Text = remainder.ToString();
+
+            int maDL = (int)AgencySelectComboBox.SelectedValue;
+            if (!xuatHangManager.IsMoreDebtsAllowed(remainder, maDL))
+            {
+                ConLaiStatus.Visibility = Visibility.Visible;
+
+                DAILY daiLy = daiLyManager.Get(maDL);
+                DebtInformation_ConLaiStatus.Text += "\nSố nợ hiện tại: ";
+                DebtInformation_ConLaiStatus.Text += ViewManager.Instance.GetSoNoDaiLy(daiLy.LOAIDL.Value);
+            }
+            else
+            {
+                ConLaiStatus.Visibility = Visibility.Collapsed;
+            }
+            DebtInformation_ConLaiStatus.Text = "Số nợ hiện tại của đại lý không cho phép thực hiện phiếu xuất hàng này.";
         }
     }
 
