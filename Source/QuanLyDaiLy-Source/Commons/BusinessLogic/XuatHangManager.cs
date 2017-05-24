@@ -3,6 +3,7 @@ using QuanLyDaiLy_Source.Models.BusinessLogic;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -90,6 +91,11 @@ namespace QuanLyDaiLy_Source.Commons.BusinessLogic
         public override bool Update(PHIEUXUATHANG obj)
         {
             throw new NotImplementedException();
+        }
+
+        public ObservableCollection<PHIEUXUATHANG> GetAllPhieuXuatHang(int maDL)
+        {
+            return DAOXuatHang.Instance.GetAllPhieuXuatHang(maDL);
         }
     }
 }

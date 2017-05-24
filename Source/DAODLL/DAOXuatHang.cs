@@ -140,7 +140,10 @@ namespace DAODLL
             }
         }
 
-
+        /// <summary>
+        /// Get all MatHang from database.
+        /// </summary>
+        /// <returns></returns>
         public ObservableCollection<MATHANG> GetMatHang()
         {
             ObservableCollection<MATHANG> matHang = new ObservableCollection<MATHANG>();
@@ -153,6 +156,26 @@ namespace DAODLL
                 }
             }
             return matHang;
+        }
+
+        /// <summary>
+        /// Get all PhieuXuatHang of a DaiLy stored in database.
+        /// </summary>
+        /// <returns></returns>
+        public ObservableCollection<PHIEUXUATHANG> GetAllPhieuXuatHang(int maDL)
+        {
+            ObservableCollection<PHIEUXUATHANG> list = new ObservableCollection<PHIEUXUATHANG>();
+            using (QLDLDataContext db = new QLDLDataContext())
+            {
+                var query = (from records in db.PHIEUXUATHANGs
+                             where records.MADL == maDL
+                             select records);
+                foreach (PHIEUXUATHANG phieu in query)
+                {
+                    list.Add(phieu);
+                }
+                return list;
+            }
         }
 
         /// <summary>
