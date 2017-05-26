@@ -47,5 +47,11 @@ namespace QuanLyDaiLy_Source.Windows
 
         }
 
+        private void DonViTinhWindowButton_Click(object sender, RoutedEventArgs e)
+        {
+            TDQD_ThemDonViTinhWindow themDVTWindow = new TDQD_ThemDonViTinhWindow();
+            themDVTWindow.Owner = Window.GetWindow(this);
+            themDVTWindow.ShowDialog();
+        }
     }
 }
