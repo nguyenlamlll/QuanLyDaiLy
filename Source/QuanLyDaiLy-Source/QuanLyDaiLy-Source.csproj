@@ -91,6 +91,7 @@
     <Compile Include="Commons\BusinessLogic\XuatHangManager.cs" />
     <Compile Include="Commons\DataGridTestItem.cs" />
     <Compile Include="Commons\DefaultSettings.cs" />
+    <Compile Include="Commons\Exceptions\InvalidPrivilegeException.cs" />
     <Compile Include="Commons\GenericError.cs" />
     <Compile Include="Commons\MenuItems.cs" />
     <Compile Include="Commons\PhieuXuatHang_ViewModel.cs" />
@@ -134,6 +135,9 @@
     </Compile>
     <Compile Include="Windows\ReportHomePage.xaml.cs">
       <DependentUpon>ReportHomePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\TDQD-SoDaiLyToiDaWindow.xaml.cs">
+      <DependentUpon>TDQD-SoDaiLyToiDaWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\TDQD-ThemDonViTinhWindow.xaml.cs">
       <DependentUpon>TDQD-ThemDonViTinhWindow.xaml</DependentUpon>
@@ -223,6 +227,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\ReportHomePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\TDQD-SoDaiLyToiDaWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

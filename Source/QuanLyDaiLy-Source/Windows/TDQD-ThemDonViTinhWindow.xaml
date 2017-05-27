@@ -16,58 +16,72 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-    
-    <StackPanel Orientation="Vertical"
+    <TabControl>
+        <TabItem Header="Thêm"
+                 FontSize="20">
+            <StackPanel Orientation="Vertical"
                 VerticalAlignment="Center">
-        <StackPanel Orientation="Horizontal" 
+                <StackPanel Orientation="Horizontal" 
                     HorizontalAlignment="Left" 
                     VerticalAlignment="Top">
-            <TextBlock Text="Tên đơn vị tính"
+                    <TextBlock Text="Tên đơn vị tính"
                        Style="{StaticResource InputTextBlock}"/>
-            <TextBox Name="txbTenDVT"
+                    <TextBox Name="txbTenDVT"
                      Style="{StaticResource InputTextBox}"
                      Width="250" FontStyle="Italic"/>
-            <Button Name="btnLuuDVT" Content="Lưu"
+                    <Button Name="btnLuuDVT" Content="Lưu"
                     Style="{StaticResource InputButton}"
                     Click="btnLuuDVT_Click" 
                     ToolTip="Lưu đơn vị tính đã nhập vào kho dữ liệu">
-            </Button>
-        </StackPanel>
+                    </Button>
+                </StackPanel>
 
-        <DataGrid x:Name="DonViTinhDataGrid" 
+                <DataGrid x:Name="DonViTinhDataGrid" 
                   Margin="25"
                   HorizontalAlignment="Center"
                   AutoGenerateColumns="False"
                   CanUserReorderColumns="False"
                   Height="200" Width="Auto"
                   Style="{StaticResource DataGridStyle}">
-            <DataGrid.CellStyle>
-                <Style TargetType="DataGridCell">
-                    <Style.Triggers>
-                        <Trigger Property="IsSelected" Value="True">
-                            <Setter Property="Background" Value="White" />
-                            <Setter Property="Foreground" Value="Black" />
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </DataGrid.CellStyle>
-            <DataGrid.RowStyle>
-                <Style TargetType="DataGridRow">
-                    <Style.Triggers>
-                        <Trigger Property="IsSelected" Value="True">
-                            <Setter Property="BorderBrush" Value="Aqua" />
-                            <Setter Property="BorderThickness" Value="1" />
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </DataGrid.RowStyle>
+                    <DataGrid.CellStyle>
+                        <Style TargetType="DataGridCell">
+                            <Style.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Background" Value="White" />
+                                    <Setter Property="Foreground" Value="Black" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGrid.CellStyle>
+                    <DataGrid.RowStyle>
+                        <Style TargetType="DataGridRow">
+                            <Style.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="BorderBrush" Value="Aqua" />
+                                    <Setter Property="BorderThickness" Value="1" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGrid.RowStyle>
 
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Mã ĐVT" Binding="{Binding Path=MADVT}"/>
-                <DataGridTextColumn Header="Tên Đơn Vị Tính" Binding="{Binding Path=DVT1}"/>
-            </DataGrid.Columns>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Mã ĐVT" Binding="{Binding Path=MADVT}"/>
+                        <DataGridTextColumn Header="Tên Đơn Vị Tính" Binding="{Binding Path=DVT1}"/>
+                    </DataGrid.Columns>
+
+                </DataGrid>
+            </StackPanel>
+        </TabItem>
+        
+        <TabItem Header="Xóa"
+                 FontSize="20">
             
-        </DataGrid>
-    </StackPanel>
-     
+        </TabItem>
+
+        <TabItem Header="Chỉnh sửa"
+                 FontSize="20">
+            
+        </TabItem>
+        
+    </TabControl>
 </Window>

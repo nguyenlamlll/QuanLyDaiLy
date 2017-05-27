@@ -66,19 +66,15 @@
                         <TextBlock Style="{DynamicResource InputTextBlock}">
                         Số Đại Lý Tối Đa Trong Một Quận:
                         </TextBlock>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBox Style="{DynamicResource InputTextBox}"
-                              Width="250">
-                            </TextBox>
-                            <Button Style="{DynamicResource InputButton}"
-                                    Width="Auto">
-                                Lưu
-                            </Button>
-                            <Button Style="{DynamicResource InputButton}"
-                                    Width="Auto">
-                                Tùy chỉnh...
-                            </Button>
-                        </StackPanel>
+                        <TextBlock Style="{DynamicResource SubtitleInputTextBlock}">
+                        Thay đổi số đại lý tối đa trong một quận.
+                        </TextBlock>
+                        <Button x:Name="SoDLToiDaWindowButton" 
+                                Click="SoDLToiDaWindowButton_Click"
+                                Style="{DynamicResource InputButton}"
+                                Width="Auto">
+                            Tùy chỉnh...
+                        </Button>
 
                     </StackPanel>
                 </Border>
@@ -98,7 +94,7 @@
                         Mặt Hàng
                         </TextBlock>
                         <TextBlock Style="{DynamicResource SubtitleInputTextBlock}">
-                        Xem các loại mặt hàng hiện có hoặc thêm mới vào cơ sở dữ liệu
+                        Xem các loại mặt hàng hiện có hoặc thêm mới vào cơ sở dữ liệu.
                         </TextBlock>
                         <Button x:Name="MatHangWindowButton" 
                                 Click="MatHangWindowButton_Click"
@@ -115,7 +111,7 @@
                         Đơn Vị Tính
                         </TextBlock>
                         <TextBlock Style="{DynamicResource SubtitleInputTextBlock}">
-                        Xem các đơn vị hiện có hoặc thêm các đơn vị tính mới vào cơ sở dữ liệu
+                        Xem các đơn vị hiện có hoặc thêm các đơn vị tính mới vào cơ sở dữ liệu.
                         </TextBlock>
                         <Button x:Name="DonViTinhWindowButton" 
                                 Click="DonViTinhWindowButton_Click"
