@@ -138,6 +138,9 @@
     <Compile Include="Windows\TDQD-ThemDonViTinhWindow.xaml.cs">
       <DependentUpon>TDQD-ThemDonViTinhWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\TDQD-ThemMatHangWindow.xaml.cs">
+      <DependentUpon>TDQD-ThemMatHangWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\ThayDoiQuyDinh.xaml.cs">
       <DependentUpon>ThayDoiQuyDinh.xaml</DependentUpon>
     </Compile>
@@ -224,6 +227,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\TDQD-ThemDonViTinhWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\TDQD-ThemMatHangWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

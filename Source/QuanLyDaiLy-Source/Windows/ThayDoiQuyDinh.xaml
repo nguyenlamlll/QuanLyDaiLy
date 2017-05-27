@@ -59,7 +59,7 @@
                                 Tùy chỉnh...
                             </Button>
                         </StackPanel>
-                        
+
                         <Border BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" 
                             BorderThickness="1"
                             Margin="10,0,10,0"/>
@@ -82,8 +82,10 @@
 
                     </StackPanel>
                 </Border>
-                
-                <ToggleButton  Style="{DynamicResource ToggleButtonStyle}"
+
+                <ToggleButton  x:Name="ToggleButton_QuyDinhMatHang" 
+                               Click="ToggleButton_QuyDinhMatHang_Click"
+                               Style="{DynamicResource ToggleButtonStyle}"
                                Margin="0,20,0,0"
                                HorizontalAlignment="Left">
                     Quy Định Mặt Hàng
@@ -93,43 +95,35 @@
                     <StackPanel Orientation="Vertical">
 
                         <TextBlock Style="{DynamicResource InputTextBlock}">
-                        Số Mặt Hàng:
+                        Mặt Hàng
                         </TextBlock>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBox Style="{DynamicResource InputTextBox}"
-                              Width="250">
-                            </TextBox>
-                            <Button Style="{DynamicResource InputButton}"
-                                    Width="Auto">
-                                Lưu
-                            </Button>
-                            <Button Style="{DynamicResource InputButton}"
-                                    Width="Auto">
-                                Tùy chỉnh...
-                            </Button>
-                        </StackPanel>
+                        <TextBlock Style="{DynamicResource SubtitleInputTextBlock}">
+                        Xem các loại mặt hàng hiện có hoặc thêm mới vào cơ sở dữ liệu
+                        </TextBlock>
+                        <Button x:Name="MatHangWindowButton" 
+                                Click="MatHangWindowButton_Click"
+                                Style="{DynamicResource InputButton}"
+                                Width="Auto">
+                            Tùy chỉnh...
+                        </Button>
+
 
                         <Border BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" 
                             BorderThickness="1"
                             Margin="10,0,10,0"/>
                         <TextBlock Style="{DynamicResource InputTextBlock}">
-                        Số Đơn Vị Tính:
+                        Đơn Vị Tính
                         </TextBlock>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBox Style="{DynamicResource InputTextBox}"
-                              Width="250">
-                            </TextBox>
-                            <Button Style="{DynamicResource InputButton}"
-                                    Width="Auto">
-                                Lưu
-                            </Button>
-                            <Button x:Name="DonViTinhWindowButton" 
-                                    Click="DonViTinhWindowButton_Click"
-                                    Style="{DynamicResource InputButton}"
-                                    Width="Auto">
-                                Tùy chỉnh...
-                            </Button>
-                        </StackPanel>
+                        <TextBlock Style="{DynamicResource SubtitleInputTextBlock}">
+                        Xem các đơn vị hiện có hoặc thêm các đơn vị tính mới vào cơ sở dữ liệu
+                        </TextBlock>
+                        <Button x:Name="DonViTinhWindowButton" 
+                                Click="DonViTinhWindowButton_Click"
+                                Style="{DynamicResource InputButton}"
+                                Width="Auto">
+                            Tùy chỉnh...
+                        </Button>
+
 
                     </StackPanel>
                 </Border>

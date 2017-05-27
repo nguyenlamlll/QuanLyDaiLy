@@ -27,6 +27,11 @@ namespace QuanLyDaiLy_Source.Commons.BusinessLogic
         }
 
 
+        public ObservableCollection<MATHANG> GetAllMatHang()
+        {
+            return DAOView.Instance.GetAllMatHang();
+        }
+
         public ObservableCollection<DAILY> GetAllDaiLy()
         {
             return DAOView.Instance.GetAllDaiLy();

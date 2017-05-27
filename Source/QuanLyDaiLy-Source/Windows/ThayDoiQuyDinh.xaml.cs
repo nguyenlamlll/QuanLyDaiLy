@@ -49,9 +49,46 @@ namespace QuanLyDaiLy_Source.Windows
 
         private void DonViTinhWindowButton_Click(object sender, RoutedEventArgs e)
         {
-            TDQD_ThemDonViTinhWindow themDVTWindow = new TDQD_ThemDonViTinhWindow();
-            themDVTWindow.Owner = Window.GetWindow(this);
-            themDVTWindow.ShowDialog();
+            try
+            {
+                TDQD_ThemDonViTinhWindow themDVTWindow = new TDQD_ThemDonViTinhWindow();
+                themDVTWindow.Owner = Window.GetWindow(this);
+                themDVTWindow.ShowDialog();
+            }
+            catch (InvalidOperationException)
+            {
+                MessageBox.Show("Không thể mở. Cửa sổ chính hiện tại đã đóng.", "Lỗi");
+            }
+            catch (ArgumentNullException)
+            {
+                MessageBox.Show("Vui lòng khởi động lại chương trình.", "Lỗi");
+            }
+        }
+
+        private void MatHangWindowButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                TDQD_ThemMatHangWindow matHangWindow = new TDQD_ThemMatHangWindow();
+                matHangWindow.Owner = Window.GetWindow(this);
+                matHangWindow.ShowDialog();
+            }
+            catch (InvalidOperationException)
+            {
+                MessageBox.Show("Không thể mở. Cửa sổ chính hiện tại đã đóng.", "Lỗi");
+            }
+            catch (ArgumentNullException)
+            {
+                MessageBox.Show("Vui lòng khởi động lại chương trình.", "Lỗi");
+            }
+        }
+
+        private void ToggleButton_QuyDinhMatHang_Click(object sender, RoutedEventArgs e)
+        {
+            if (MerchandiseRulesBorder.Visibility == Visibility.Visible)
+                MerchandiseRulesBorder.Visibility = Visibility.Collapsed;
+            else
+                MerchandiseRulesBorder.Visibility = Visibility.Visible;
         }
     }
 }
