@@ -38,15 +38,6 @@ namespace QuanLyDaiLy_Source.Windows
             pageLoaded?.Invoke(this, e);
         }
 
-        private void AngecyRulesToggleButton_Checked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void AngecyRulesToggleButton_Unchecked(object sender, RoutedEventArgs e)
-        {
-
-        }
 
         private void DonViTinhWindowButton_Click(object sender, RoutedEventArgs e)
         {
@@ -143,6 +134,14 @@ namespace QuanLyDaiLy_Source.Windows
         private void LoaiDaiLyWindowButton_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void ToggleButton_AngecyRules_Click(object sender, RoutedEventArgs e)
+        {
+            if (AgencyRulesBorder.Visibility == Visibility.Visible)
+                AgencyRulesBorder.Visibility = Visibility.Collapsed;
+            else
+                AgencyRulesBorder.Visibility = Visibility.Visible;
         }
     }
 }

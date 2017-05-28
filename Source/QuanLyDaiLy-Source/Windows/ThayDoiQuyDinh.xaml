@@ -18,10 +18,10 @@
         <ScrollViewer>
             <StackPanel Orientation="Vertical"
                     HorizontalAlignment="Center" VerticalAlignment="Center">
-                <ToggleButton  x:Name="AngecyRulesToggleButton" Style="{DynamicResource ToggleButtonStyle}"
-                               HorizontalAlignment="Left" 
-                               Checked="AngecyRulesToggleButton_Checked"
-                               Unchecked="AngecyRulesToggleButton_Unchecked">
+                <ToggleButton  x:Name="ToggleButton_AngecyRules"
+                               Click="ToggleButton_AngecyRules_Click"
+                               Style="{DynamicResource ToggleButtonStyle}"
+                               HorizontalAlignment="Left" >
                     Quy Định Đại Lý
                 </ToggleButton>
                 <Border x:Name="AgencyRulesBorder" BorderThickness="1" 
@@ -32,7 +32,7 @@
                         Loại Đại Lý
                         </TextBlock>
                         <TextBlock Style="{DynamicResource SubtitleInputTextBlock}">
-                        Thay đổi số đại lý tối đa trong một quận hoặc đổi tên quận.
+                        Thêm loại đại lý hoặc thay đổi số nợ tối đa của từng loại.
                         </TextBlock>
                         
                         <Button x:Name="LoaiDaiLyWindowButton" 

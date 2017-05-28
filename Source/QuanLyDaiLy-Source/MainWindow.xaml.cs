@@ -50,6 +50,7 @@ namespace QuanLyDaiLy_Source
             BaoCaoDoanhThu.pageLoaded += new EventHandler(PageLoadCompleted);
 
             DanhSachDaiLy.pageLoaded += new EventHandler(PageLoadCompleted);
+            ThayDoiQuyDinh.pageLoaded += new EventHandler(PageLoadCompleted);
         }
 
         [STAThread]
@@ -182,6 +183,11 @@ namespace QuanLyDaiLy_Source
             //ContentFrameTitle.Text = currentTitle;
         }
 
+        /// <summary>
+        /// Change the title each time a new page is successfully loaded.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void PageLoadCompleted(object sender, EventArgs e)
         {
             string currentTitle = App.Current.Properties[Models.DefaultSettings.ContentFrameTitle].ToString();
