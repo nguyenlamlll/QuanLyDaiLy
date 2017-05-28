@@ -139,5 +139,10 @@ namespace QuanLyDaiLy_Source.Windows
                 MessageBox.Show("Vui lòng khởi động lại chương trình.", "Lỗi");
             }
         }
+
+        private void LoaiDaiLyWindowButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

@@ -29,45 +29,27 @@
                     <StackPanel Orientation="Vertical">
 
                         <TextBlock Style="{DynamicResource InputTextBlock}">
-                        Loại Đại Lý:
+                        Loại Đại Lý
                         </TextBlock>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBox Style="{DynamicResource InputTextBox}"
-                              Width="250">
-                            </TextBox>
-                            <Button Style="{DynamicResource InputButton}"
-                                    Width="Auto">
-                                Lưu
-                                <Button.ToolTip>
-                                    <StackPanel>
-                                        <TextBlock FontWeight="Bold" FontSize="14" Margin="0,0,0,5">
-                                            Lưu
-                                        </TextBlock>
-                                        <TextBlock>
-                                        </TextBlock>
-                                        <Border BorderBrush="Silver" BorderThickness="0,1,0,0" Margin="0,8" />
-                                        <WrapPanel>
-                                            <Image Style="{StaticResource ImageIcon}"
-                                           Source="/QuanLyDaiLy-Source;component/Assets/Icons/question.png"/>
-                                            <TextBlock FontStyle="Italic">Bấm F1 để hiển thị mục Trợ Giúp</TextBlock>
-                                        </WrapPanel>
-                                    </StackPanel>
-                                </Button.ToolTip>
-                            </Button>
-                            <Button Style="{DynamicResource InputButton}"
-                                    Width="Auto">
-                                Tùy chỉnh...
-                            </Button>
-                        </StackPanel>
+                        <TextBlock Style="{DynamicResource SubtitleInputTextBlock}">
+                        Thay đổi số đại lý tối đa trong một quận hoặc đổi tên quận.
+                        </TextBlock>
+                        
+                        <Button x:Name="LoaiDaiLyWindowButton" 
+                                Click="LoaiDaiLyWindowButton_Click"
+                                Style="{DynamicResource InputButton}"
+                                Width="Auto">
+                            Tùy chỉnh...
+                        </Button>
 
                         <Border BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" 
                             BorderThickness="1"
                             Margin="10,0,10,0"/>
                         <TextBlock Style="{DynamicResource InputTextBlock}">
-                        Số Đại Lý Tối Đa Trong Một Quận:
+                        Quận và Số Đại Lý Trong Quận
                         </TextBlock>
                         <TextBlock Style="{DynamicResource SubtitleInputTextBlock}">
-                        Thay đổi số đại lý tối đa trong một quận.
+                        Thay đổi số đại lý tối đa trong một quận hoặc đổi tên quận.
                         </TextBlock>
                         <Button x:Name="SoDLToiDaWindowButton" 
                                 Click="SoDLToiDaWindowButton_Click"

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:QuanLyDaiLy_Source.Windows"
         mc:Ignorable="d"
         Title="TDQD_SoDaiLyToiDaWindow" 
-        Height="450" MaxHeight="450"
+        Height="500" MaxHeight="500"
         Width="650" MaxWidth="650" ResizeMode="NoResize" ShowInTaskbar="False" WindowStartupLocation="CenterOwner">
     <Window.Resources>
         <ResourceDictionary>
@@ -16,66 +16,76 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-    
-    <StackPanel>
-        <StackPanel Orientation="Horizontal" 
+    <TabControl FontSize="20">
+        <TabItem Header="Số Đại Lý">
+            <StackPanel>
+                <StackPanel Orientation="Horizontal" 
                     HorizontalAlignment="Center" 
                     VerticalAlignment="Top">
-            <TextBlock Text="Số đại lý tối đa: "
+                    <TextBlock Text="Số đại lý tối đa: "
                        Style="{StaticResource InputTextBlock}"/>
-            <TextBox Name="txbTenDVT"
+                    <TextBox Name="SoDLTextBox"
                      Style="{StaticResource InputTextBox}"
                      IsEnabled="False"
                      Width="250" FontStyle="Italic"/>
-        </StackPanel>
-        <StackPanel Orientation="Horizontal" 
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" 
                     HorizontalAlignment="Center" 
                     VerticalAlignment="Top">
-            <TextBlock Text="Quận: "
+                    <TextBlock Text="Quận: "
                        Style="{StaticResource InputTextBlock}"/>
-            <ComboBox Name="cbBoxQuan" 
+                    <ComboBox Name="cbBoxQuan" 
+                              SelectionChanged="cbBoxQuan_SelectionChanged"
                       Width="250"
                       Style="{StaticResource InputComboBox}"
                       ItemTemplate="{StaticResource DataQUAN}" SelectedValuePath="MAQUAN"/>
-            <Button Name="btnLuu" Content="Lưu"
+                    <Button Name="btnLuu" Content="Lưu"
                     Style="{StaticResource InputButton}"
                     Click="btnLuu_Click" 
                     ToolTip="Lưu đơn vị tính đã nhập vào kho dữ liệu">
-            </Button>
-        </StackPanel>
-        <DataGrid x:Name="DaiLyToiDaDataGrid" 
-                  Margin="25"
-                  HorizontalAlignment="Center"
-                  AutoGenerateColumns="False"
-                  CanUserReorderColumns="False"
-                  Height="250" Width="Auto"
-                  Style="{StaticResource DataGridStyle}">
-            <DataGrid.CellStyle>
-                <Style TargetType="DataGridCell">
-                    <Style.Triggers>
-                        <Trigger Property="IsSelected" Value="True">
-                            <Setter Property="Background" Value="White" />
-                            <Setter Property="Foreground" Value="Black" />
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </DataGrid.CellStyle>
-            <DataGrid.RowStyle>
-                <Style TargetType="DataGridRow">
-                    <Style.Triggers>
-                        <Trigger Property="IsSelected" Value="True">
-                            <Setter Property="BorderBrush" Value="Aqua" />
-                            <Setter Property="BorderThickness" Value="1" />
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </DataGrid.RowStyle>
+                    </Button>
+                </StackPanel>
+                <DataGrid x:Name="DaiLyToiDaDataGrid" 
+                          Margin="20"
+                          SelectionMode="Single" SelectionUnit="FullRow"
+                          HorizontalAlignment="Center"
+                          AutoGenerateColumns="False"
+                          CanUserReorderColumns="False"
+                          Height="250" Width="Auto"
+                          Style="{StaticResource DataGridStyle}">
+                    <DataGrid.CellStyle>
+                        <Style TargetType="DataGridCell">
+                            <Style.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Background" Value="White" />
+                                    <Setter Property="Foreground" Value="Black" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGrid.CellStyle>
+                    <DataGrid.RowStyle>
+                        <Style TargetType="DataGridRow">
+                            <Style.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="BorderBrush" Value="Aqua" />
+                                    <Setter Property="BorderThickness" Value="1" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGrid.RowStyle>
 
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Quận" Binding="{Binding Path=TENQUAN}"/>
-                <DataGridTextColumn Header="Số Đại Lý Tối Đa" Binding="{Binding Path=SODLTOIDA}"/>
-            </DataGrid.Columns>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Quận" Binding="{Binding Path=TENQUAN}"/>
+                        <DataGridTextColumn Header="Số Đại Lý Tối Đa" Binding="{Binding Path=SODLTOIDA}"/>
+                    </DataGrid.Columns>
 
-        </DataGrid>
-    </StackPanel>
+                </DataGrid>
+            </StackPanel>
+        </TabItem>
+
+        <TabItem Header="Quận">
+            
+        </TabItem>
+    </TabControl>
+
 </Window>

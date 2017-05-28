@@ -202,6 +202,17 @@ namespace QuanLyDaiLy_Source.Commons.BusinessLogic
         {
             return DAOView.Instance.GetAllDaiLy(maQuan, maLoai);
         }
+
+        /// <summary>
+        /// Lấy số đại lý tối đa của một quận (mã quận).
+        /// </summary>
+        /// <param name="maQuan">Mã quận cần lấy số đại lý tối đa</param>
+        /// <returns>Số đại lý tối đa.</returns>
+        public int GetSoDlToiDa(int maQuan)
+        {
+            return DAOView.Instance.GetSoDlToiDa(maQuan);
+        }
+
     }
 
 
