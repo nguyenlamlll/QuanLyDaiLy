@@ -58,7 +58,11 @@ namespace QuanLyDaiLy_Source.Windows
             try
             {
                 DistrictSelectComboBox.Items.Clear();
-                DistrictSelectComboBox.ItemsSource = ViewManager.Instance.GetAllQuan();
+                ObservableCollection<QUAN> QuanList = new ObservableCollection<QUAN>();
+                QuanList = ViewManager.Instance.GetAllQuan();
+                QuanList.Add(new QUAN() { MAQUAN = 0, TENQUAN = "Tất Cả" });
+                QuanList.Move(QuanList.Count - 1, 0);
+                DistrictSelectComboBox.ItemsSource = QuanList; //ViewManager.Instance.GetAllQuan();
 
                 AgencySelectComboBox.Items.Clear();
                 AgencySelectComboBox.ItemsSource = ViewManager.Instance.GetAllDaiLy();
@@ -83,6 +87,14 @@ namespace QuanLyDaiLy_Source.Windows
             try
             {
                 int maQuan = (int)DistrictSelectComboBox.SelectedValue;
+                if (maQuan == 0)
+                {
+                    ObservableCollection<DAILY> list = ViewManager.Instance.GetAllDaiLy();
+                    AgencySelectComboBox.ClearValue(ItemsControl.ItemsSourceProperty);
+                    AgencySelectComboBox.Items.Clear();
+                    AgencySelectComboBox.ItemsSource = list;
+                    return;
+                }
                 QUAN selected = ViewManager.Instance.GetQuan(maQuan);
                 ObservableCollection<DAILY> listDaiLy = ViewManager.Instance.GetAllDaiLy(selected.MAQUAN);
 
