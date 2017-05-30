@@ -6,8 +6,7 @@
       xmlns:local="clr-namespace:QuanLyDaiLy_Source.Windows"
       mc:Ignorable="d" 
       d:DesignHeight="720" d:DesignWidth="1280"
-      Title="PhieuThuTien"
-      Loaded="Page_Loaded">
+      Title="PhieuThuTien">
 
     <Page.Resources>
         <ResourceDictionary>

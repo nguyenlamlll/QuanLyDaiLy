@@ -4,84 +4,198 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:QuanLyDaiLy_Source.Windows"
+      xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
       mc:Ignorable="d" 
       d:DesignHeight="720" d:DesignWidth="1280"
-      Title="BaoCaoCongNo">
+      Title="BaoCaoCongNo"
+      KeyboardNavigation.TabNavigation="Cycle">
     <Page.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/QuanLyDaiLy-Source;component/Styles/Styles.xaml"/>
+                <ResourceDictionary Source="/QuanLyDaiLy-Source;component/Styles/DataTemplate.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Page.Resources>
-    <Grid Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}">
-        <StackPanel Orientation="Vertical" 
-                    VerticalAlignment="Center" HorizontalAlignment="Center">
-            <StackPanel Orientation="Horizontal"
-                        VerticalAlignment="Center" HorizontalAlignment="Center">
-                <TextBlock Style="{DynamicResource InputTextBlock}">Tháng: &#160;</TextBlock>
-                <ComboBox x:Name="MonthComboBox"
-                          Style="{DynamicResource InputComboBox}"
-                          Width="300">
-                    <ComboBoxItem>Tháng Một</ComboBoxItem>
-                    <ComboBoxItem>Tháng Hai</ComboBoxItem>
-                    <ComboBoxItem>Tháng Ba</ComboBoxItem>
-                    <ComboBoxItem>Tháng Bốn</ComboBoxItem>
-                    <ComboBoxItem>Tháng Năm</ComboBoxItem>
-                    <ComboBoxItem>Tháng Sáu</ComboBoxItem>
-                    <ComboBoxItem>Tháng Bảy</ComboBoxItem>
-                    <ComboBoxItem>Tháng Tám</ComboBoxItem>
-                    <ComboBoxItem>Tháng Chín</ComboBoxItem>
-                    <ComboBoxItem>Tháng Mười</ComboBoxItem>
-                    <ComboBoxItem>Tháng Mười Một</ComboBoxItem>
-                    <ComboBoxItem>Tháng Mười Hai</ComboBoxItem>
-                </ComboBox>
-            </StackPanel>
+    <ScrollViewer x:Name="MyScrollViewer">
 
-            <StackPanel Orientation="Horizontal"
+
+        <Grid Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}">
+            <StackPanel Orientation="Vertical" 
+                    VerticalAlignment="Center" HorizontalAlignment="Center">
+                <StackPanel Orientation="Horizontal"
                         VerticalAlignment="Center" HorizontalAlignment="Center">
-                <TextBlock Style="{DynamicResource InputTextBlock}">Loại Đại Lý: &#160;</TextBlock>
-                <ComboBox x:Name="TypeComboBox"
+                    <TextBlock Style="{DynamicResource InputTextBlock}">Tháng: &#160;</TextBlock>
+                    <ComboBox x:Name="MonthComboBox"
+                              Style="{DynamicResource InputComboBox}"
+                              Width="300"
+                              TabIndex="1">
+                        <ComboBoxItem x:Name="comboBoxItem_January">Tháng Một</ComboBoxItem>
+                        <ComboBoxItem x:Name="comboBoxItem_February">Tháng Hai</ComboBoxItem>
+                        <ComboBoxItem x:Name="comboBoxItem_March">Tháng Ba</ComboBoxItem>
+                        <ComboBoxItem x:Name="comboBoxItem_April">Tháng Bốn</ComboBoxItem>
+                        <ComboBoxItem x:Name="comboBoxItem_May">Tháng Năm</ComboBoxItem>
+                        <ComboBoxItem x:Name="comboBoxItem_June">Tháng Sáu</ComboBoxItem>
+                        <ComboBoxItem x:Name="comboBoxItem_July">Tháng Bảy</ComboBoxItem>
+                        <ComboBoxItem x:Name="comboBoxItem_August">Tháng Tám</ComboBoxItem>
+                        <ComboBoxItem x:Name="comboBoxItem_September">Tháng Chín</ComboBoxItem>
+                        <ComboBoxItem x:Name="comboBoxItem_October">Tháng Mười</ComboBoxItem>
+                        <ComboBoxItem x:Name="comboBoxItem_November">Tháng Mười Một</ComboBoxItem>
+                        <ComboBoxItem x:Name="comboBoxItem_December">Tháng Mười Hai</ComboBoxItem>
+                    </ComboBox>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal"
+                        VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <TextBlock Style="{DynamicResource InputTextBlock}">Loại Đại Lý: &#160;</TextBlock>
+                    <ComboBox x:Name="TypeComboBox"
+                          ItemTemplate="{StaticResource DataLoaiDL}"
+                          SelectedValuePath="MALOAI"
                           Style="{DynamicResource InputComboBox}"
                           Width="300" 
                           SelectedIndex="0"
-                          Margin="0,0,50,0">
-                    <ComboBoxItem>Tất Cả</ComboBoxItem>
-                    <ComboBoxItem>Một</ComboBoxItem>
-                    <ComboBoxItem>Hai</ComboBoxItem>
-                </ComboBox>
+                          Margin="0,0,50,0"
+                              TabIndex="2">
+                    </ComboBox>
 
-                <TextBlock Style="{DynamicResource InputTextBlock}">Quận: &#160;</TextBlock>
-                <ComboBox x:Name="DistrictComboBox"
+                    <TextBlock Style="{DynamicResource InputTextBlock}">Quận: &#160;</TextBlock>
+                    <ComboBox x:Name="DistrictComboBox"
+                          ItemTemplate="{StaticResource DataQUAN}"
+                          SelectedValuePath="MAQUAN"
                           Style="{DynamicResource InputComboBox}"
                           Width="300"
-                          SelectedIndex="0">
-                    <ComboBoxItem>Tất Cả</ComboBoxItem>
-                    <ComboBoxItem>Một</ComboBoxItem>
-                    <ComboBoxItem>Hai</ComboBoxItem>
-                    <ComboBoxItem>Ba</ComboBoxItem>
-                </ComboBox>
+                          SelectedIndex="0"
+                              TabIndex="3">
+                    </ComboBox>
+                </StackPanel>
+                
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Center">
+
+                    <Button x:Name="GetBaoCaoButton" 
+                           Content="Lập Báo Cáo"
+                           Style="{DynamicResource InputButton}" 
+                            Width="Auto"
+                            TabIndex="4">
+                        <Button.ToolTip>
+                            <StackPanel>
+                                <TextBlock FontWeight="Bold" FontSize="14" Margin="0,0,0,5">Lưu Đại Lý</TextBlock>
+                                <TextBlock>
+                                    Lập báo cáo công nợ với các thông số đã chọn.
+                                    <LineBreak/>
+                                    Vui lòng chọn loại đại lý, quận và tháng cần lập báo cáo.
+                                </TextBlock>
+                                <Border BorderBrush="Silver" BorderThickness="0,1,0,0" Margin="0,8" />
+                                <WrapPanel>
+                                    <Image Style="{StaticResource ImageIcon}"
+                                           Source="/QuanLyDaiLy-Source;component/Assets/Icons/question.png"/>
+                                    <TextBlock FontStyle="Italic">Bấm F1 để hiển thị mục Trợ Giúp</TextBlock>
+                                </WrapPanel>
+                            </StackPanel>
+                        </Button.ToolTip>
+                    </Button>
+                    <Button x:Name="ChartButton" 
+                        Click="ChartButton_Click"
+                    Content="Lập Biểu Đồ" Width="Auto"
+                    Style="{DynamicResource InputButton}"
+                    HorizontalAlignment="Center"
+                            TabIndex="5">
+                        <Button.ToolTip>
+                            <StackPanel>
+                                <TextBlock FontWeight="Bold" FontSize="14" Margin="0,0,0,5">Lưu Đại Lý</TextBlock>
+                                <TextBlock>
+                                    Hiển thị biểu đồ.
+                                </TextBlock>
+                                <Border BorderBrush="Silver" BorderThickness="0,1,0,0" Margin="0,8" />
+                                <WrapPanel>
+                                    <Image Style="{StaticResource ImageIcon}"
+                                           Source="/QuanLyDaiLy-Source;component/Assets/Icons/question.png"/>
+                                    <TextBlock FontStyle="Italic">Bấm F1 để hiển thị mục Trợ Giúp</TextBlock>
+                                </WrapPanel>
+                            </StackPanel>
+                        </Button.ToolTip>
+                    </Button>
+
+                </StackPanel>
+               
+                <DataGrid x:Name="SalesDataGrid"
+                          AutoGenerateColumns="False"
+                          CanUserAddRows="False" CanUserDeleteRows="False" 
+                          CanUserResizeColumns="True"
+                          Margin="40,15,40,0"
+                          Height="300"
+                          Style="{DynamicResource DataGridStyle}"
+                          SelectionMode="Extended" SelectionUnit="Cell" 
+                          ScrollViewer.CanContentScroll="True"
+                          KeyboardNavigation.IsTabStop="False">
+
+                    <DataGrid.CellStyle>
+                        <Style TargetType="DataGridCell">
+                            <Style.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Background" Value="White" />
+                                    <Setter Property="Foreground" Value="Black" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGrid.CellStyle>
+
+                    <DataGrid.RowStyle>
+                        <Style TargetType="DataGridRow">
+                            <Style.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="BorderBrush" Value="Aqua" />
+                                    <Setter Property="BorderThickness" Value="1" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGrid.RowStyle>
+
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Đại Lý"
+                                        Binding="{Binding Path=TenDaiLy}"
+                                        Width="0.8*" 
+                                        IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Nợ Đầu"
+                                        Binding="{Binding Path=NoDau}"
+                                        Width="0.6*" 
+                                        IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Nợ Phát Sinh" 
+                                        Binding="{Binding Path=NoPhatSinh}"
+                                        Width="0.7*"
+                                        IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Nợ Cuối " 
+                                        Binding="{Binding Path=NoCuoi}"
+                                        Width="0.4*" 
+                                        IsReadOnly="True"/>
+                    </DataGrid.Columns>
+                    <DataGrid.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Lập biểu đồ"/>
+                        </ContextMenu>
+                    </DataGrid.ContextMenu>
+                </DataGrid>
+
+                <Border BorderThickness="0,2,0,0"
+                        BorderBrush="Gray"
+                        Margin="20"
+                        KeyboardNavigation.IsTabStop="False"/>
+
+                <lvc:CartesianChart x:Name="CartesianChart_Line"
+                                    Margin="10,20,10,0"
+                                    Series="{Binding SeriesCollection}" 
+                                    LegendLocation="Right" 
+                                    Height="500"
+                                    TabIndex="6">
+                    <lvc:CartesianChart.AxisY>
+                        <lvc:Axis Title="Nợ" LabelFormatter="{Binding YFormatter}"></lvc:Axis>
+                    </lvc:CartesianChart.AxisY>
+                    <lvc:CartesianChart.AxisX>
+                        <lvc:Axis Title="Tháng" Labels="{Binding Labels}"></lvc:Axis>
+                    </lvc:CartesianChart.AxisX>
+                </lvc:CartesianChart>
+
             </StackPanel>
-
-            <DataGrid x:Name="SalesDataGrid"
-                      AutoGenerateColumns="False"
-                      CanUserAddRows="False" CanUserDeleteRows="False" 
-                      CanUserResizeColumns="True"
-                      Margin="40,25,40,0"
-                      Height="300"
-                      Style="{DynamicResource DataGridStyle}"
-                      SelectionMode="Extended" SelectionUnit="Cell" 
-                      ScrollViewer.CanContentScroll="True"
-                      >
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="STT" Width="0.2*" IsReadOnly="True"/>
-                    <DataGridTextColumn Header="Đại Lý" Width="0.8*" IsReadOnly="True"/>
-                    <DataGridTextColumn Header="Nợ Đầu" Width="0.6*" IsReadOnly="True"/>
-                    <DataGridTextColumn Header="Nợ Phát Sinh" Width="0.7*" IsReadOnly="True"/>
-                    <DataGridTextColumn Header="Nợ Cuối " Width="0.4*" IsReadOnly="True"/>
-                </DataGrid.Columns>
-            </DataGrid>
-        </StackPanel>
-
-    </Grid>
+        </Grid>
+    </ScrollViewer>
 </Page>

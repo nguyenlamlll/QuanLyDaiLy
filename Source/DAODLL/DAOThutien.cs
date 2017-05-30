@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -127,6 +128,54 @@ namespace DAODLL
                 db.SubmitChanges();
                 //update succeed
                 return true;
+            }
+        }
+
+
+        /// <summary>
+        /// Get all PhieuThuTien before a month
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns></returns>
+        public ObservableCollection<PHIEUTHUTIEN> GetPhieuThuTienBeforeAMonth(DateTime date, int maDL)
+        {
+            ObservableCollection<PHIEUTHUTIEN> list = new ObservableCollection<PHIEUTHUTIEN>();
+            using (QLDLDataContext db = new QLDLDataContext())
+            {
+                var query = (from phieu in db.PHIEUTHUTIENs
+                             where phieu.NGAYTHUTIEN.Value.Month < date.Month
+                             && phieu.NGAYTHUTIEN.Value.Year <= date.Year
+                             && phieu.MADL == maDL
+                             select phieu);
+
+                foreach (var item in query)
+                {
+                    list.Add(item);
+                }
+                return list;
+            }
+        }
+
+        /// <summary>
+        /// Get all PhieuThuTien in a month
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns></returns>
+        public ObservableCollection<PHIEUTHUTIEN> GetPhieuThuTienInAMonth(DateTime date, int maDL)
+        {
+            ObservableCollection<PHIEUTHUTIEN> list = new ObservableCollection<PHIEUTHUTIEN>();
+            using (QLDLDataContext db = new QLDLDataContext())
+            {
+                var query = (from phieu in db.PHIEUTHUTIENs
+                             where phieu.NGAYTHUTIEN.Value.Month == date.Month
+                             && phieu.NGAYTHUTIEN.Value.Year == date.Year
+                             && phieu.MADL == maDL
+                             select phieu);
+                foreach (var item in query)
+                {
+                    list.Add(item);
+                }
+                return list;
             }
         }
     }

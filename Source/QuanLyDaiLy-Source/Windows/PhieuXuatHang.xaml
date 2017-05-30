@@ -251,6 +251,17 @@
 
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                         <TextBlock Style="{DynamicResource InputTextBlock}">Còn Lại:</TextBlock>
+                        <Image x:Name="ConLaiStatus" Source="/QuanLyDaiLy-Source;component/Assets/Icons/exclamation-mark32.png"
+                           Height="16" Width="16" Cursor="Help"
+                           Visibility="Collapsed">
+                            <Image.ToolTip>
+                                <StackPanel Background="#FFFFA0A0">
+                                    <TextBlock x:Name="DebtInformation_ConLaiStatus">
+                                    Số nợ hiện tại của đại lý không cho phép thực hiện phiếu xuất hàng này.
+                                    </TextBlock>
+                                </StackPanel>
+                            </Image.ToolTip>
+                        </Image>
                         <TextBox x:Name="RemainderTextBox" Style="{DynamicResource InputTextBox}" 
                                  MinWidth="200" Width="Auto"
                                  IsReadOnly="True"/>

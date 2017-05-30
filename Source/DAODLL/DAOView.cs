@@ -24,6 +24,43 @@ namespace DAODLL
             }
         }
 
+
+        /// <summary>
+        /// Get All DaiLy with details about LoaiDaiLy
+        /// </summary>
+        /// <param name="maQuan">Ma Quan can lay tat ca dai ly</param>
+        /// <returns>A view table of DaiLy table and LoaiDaiLy table</returns>
+        public ObservableCollection<vwDAILY_LOAIDL> GetAllDaiLyWithLoaiDaiLy(int maQuan)
+        {
+            ObservableCollection<vwDAILY_LOAIDL> list = new ObservableCollection<DAODLL.vwDAILY_LOAIDL>();
+            using (QLDLDataContext db = new QLDLDataContext())
+            {
+                var query = (from records in db.vwDAILY_LOAIDLs
+                             where records.MAQUAN == maQuan
+                             select records);
+                foreach (vwDAILY_LOAIDL item in query)
+                {
+                    list.Add(item);
+                }
+                return list;
+            }
+        }
+
+        public ObservableCollection<vwDAILY_LOAIDL> GetAllDaiLyWithLoaiDaiLy()
+        {
+            ObservableCollection<vwDAILY_LOAIDL> list = new ObservableCollection<DAODLL.vwDAILY_LOAIDL>();
+            using (QLDLDataContext db = new QLDLDataContext())
+            {
+                var query = (from records in db.vwDAILY_LOAIDLs
+                             select records);
+                foreach (vwDAILY_LOAIDL item in query)
+                {
+                    list.Add(item);
+                }
+                return list;
+            }
+        }
+
         /// <summary>
         /// Get all DaiLy's name and show upto ComboBox
         /// </summary>
@@ -42,6 +79,7 @@ namespace DAODLL
             }
         }
 
+       
 
         /// <summary>
         /// Get All Agencies of 1 District
@@ -55,6 +93,50 @@ namespace DAODLL
             {
                 var daiLy = (from records in db.DAILies
                              where records.MAQUAN == maQuan
+                             select records);
+                foreach (DAILY dl in daiLy)
+                {
+                    li.Add(dl);
+                }
+                return li;
+            }
+        }
+
+        /// <summary>
+        /// Get All DaiLy using maQuan and maLoai.
+        /// </summary>
+        /// <param name="maQuan">Mã Quận dùng để lọc records trong bảng DAILY</param>
+        /// <param name="maLoai">Mã Loại dùng để lọc records trong bảng DAILY</param>
+        /// <returns>Trả về một collection các DAILY thuộc maQuan và maLoai.</returns>
+        public ObservableCollection<DAILY> GetAllDaiLy(int maQuan, int maLoai)
+        {
+            ObservableCollection<DAILY> li = new ObservableCollection<DAILY>();
+            using (QLDLDataContext db = new QLDLDataContext())
+            {
+                var daiLy = (from records in db.DAILies
+                             where records.MAQUAN == maQuan && records.LOAIDL == maLoai
+                             select records);
+                foreach (DAILY dl in daiLy)
+                {
+                    li.Add(dl);
+                }
+                return li;
+            }
+        }
+
+
+        /// <summary>
+        /// Get All DaiLy of a LoaiDaiLy
+        /// </summary>
+        /// <param name="maLoai">Mã loại cần lấy tất cả đại lý</param>
+        /// <returns></returns>
+        public ObservableCollection<DAILY> GetAllDaiLyByMaLoai(int maLoai)
+        {
+            ObservableCollection<DAILY> li = new ObservableCollection<DAILY>();
+            using (QLDLDataContext db = new QLDLDataContext())
+            {
+                var daiLy = (from records in db.DAILies
+                             where records.LOAIDL == maLoai
                              select records);
                 foreach (DAILY dl in daiLy)
                 {
@@ -287,5 +369,125 @@ namespace DAODLL
             }
 
         }
+
+        /// <summary>
+        /// Get All Agencies of 1 District
+        /// </summary>
+        /// <param name="maQuan"></param>
+        /// <returns></returns>
+        public ObservableCollection<vwDAILY_LOAIDL_QUAN> GetMultipleByQuan(int maQuan)
+        {
+            ObservableCollection<vwDAILY_LOAIDL_QUAN> li = new ObservableCollection<vwDAILY_LOAIDL_QUAN>();
+            using (QLDLDataContext db = new QLDLDataContext())
+            {
+                var daiLy = (from records in db.vwDAILY_LOAIDL_QUANs
+                             where records.MAQUAN == maQuan
+                             select records);
+                foreach (vwDAILY_LOAIDL_QUAN dl in daiLy)
+                {
+                    li.Add(dl);
+                }
+                return li;
+            }
+        }
+
+        /// <summary>
+        /// Get All viewDAILY_LOAIDL_QUAN according Loai
+        /// </summary>
+        /// <param name="maLoai">Mã loại để lọc record trong bảng viewDAILY_LOAIDL_QUAN.</param>
+        /// <returns></returns>
+        public ObservableCollection<vwDAILY_LOAIDL_QUAN> GetMultipleViewByLoai(int maLoai)
+        {
+            ObservableCollection<vwDAILY_LOAIDL_QUAN> li = new ObservableCollection<vwDAILY_LOAIDL_QUAN>();
+            using (QLDLDataContext db = new QLDLDataContext())
+            {
+                var daiLy = (from records in db.vwDAILY_LOAIDL_QUANs
+                             where records.MALOAI == maLoai
+                             select records);
+                foreach (vwDAILY_LOAIDL_QUAN dl in daiLy)
+                {
+                    li.Add(dl);
+                }
+                return li;
+            }
+        }
+
+        public ObservableCollection<vwDAILY_LOAIDL_QUAN> GetMultipleViewByLoai()
+        {
+            ObservableCollection<vwDAILY_LOAIDL_QUAN> li = new ObservableCollection<vwDAILY_LOAIDL_QUAN>();
+            using (QLDLDataContext db = new QLDLDataContext())
+            {
+                var daiLy = (from records in db.vwDAILY_LOAIDL_QUANs
+                             select records);
+                foreach (vwDAILY_LOAIDL_QUAN dl in daiLy)
+                {
+                    li.Add(dl);
+                }
+                return li;
+            }
+        }
+
+        #region Tìm đại lí theo tên
+        /// <summary>
+        /// Get All Agencies according Quan's name
+        /// </summary>
+        /// <param name="maLoai"></param>
+        /// <returns></returns>
+        public ObservableCollection<vwDAILY_LOAIDL_QUAN> SearchByQuan(string name)
+        {
+            ObservableCollection<vwDAILY_LOAIDL_QUAN> li = new ObservableCollection<vwDAILY_LOAIDL_QUAN>();
+            using (QLDLDataContext db = new QLDLDataContext())
+            {
+                var daiLy = (from records in db.vwDAILY_LOAIDL_QUANs
+                             where records.TENQUAN.Contains(name)
+                             select records);
+                foreach (vwDAILY_LOAIDL_QUAN dl in daiLy)
+                {
+                    li.Add(dl);
+                }
+                return li;
+            }
+        }
+        /// <summary>
+        /// Get All Agencies according Quan's name
+        /// </summary>
+        /// <param name="maLoai"></param>
+        /// <returns></returns>
+        public ObservableCollection<vwDAILY_LOAIDL_QUAN> SearchByLoai(string name)
+        {
+            ObservableCollection<vwDAILY_LOAIDL_QUAN> li = new ObservableCollection<vwDAILY_LOAIDL_QUAN>();
+            using (QLDLDataContext db = new QLDLDataContext())
+            {
+                var daiLy = (from records in db.vwDAILY_LOAIDL_QUANs
+                             where records.TENLOAI.Contains(name)
+                             select records);
+                foreach (vwDAILY_LOAIDL_QUAN dl in daiLy)
+                {
+                    li.Add(dl);
+                }
+                return li;
+            }
+        }
+        /// <summary>
+        /// Get All Agencies according Loai's name
+        /// </summary>
+        /// <param name="maLoai"></param>
+        /// <returns></returns>
+        public ObservableCollection<vwDAILY_LOAIDL_QUAN> SearchByDaiLy(string name)
+        {
+            ObservableCollection<vwDAILY_LOAIDL_QUAN> li = new ObservableCollection<vwDAILY_LOAIDL_QUAN>();
+            using (QLDLDataContext db = new QLDLDataContext())
+            {
+                var daiLy = (from records in db.vwDAILY_LOAIDL_QUANs
+                             where records.TENDL.Contains(name)
+                             select records);
+                foreach (vwDAILY_LOAIDL_QUAN dl in daiLy)
+                {
+                    li.Add(dl);
+                }
+                return li;
+            }
+        }
+        #endregion
     }
 }

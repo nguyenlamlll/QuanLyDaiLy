@@ -13,5 +13,6 @@ namespace QuanLyDaiLy_Source.Commons
 
         public static readonly string MaximumError = "Đã Đầy";
         public static readonly string MaximumErrorContent = "Đã đủ số lượng cho phép. Không thể tiếp nhận.";
+
     }
 }

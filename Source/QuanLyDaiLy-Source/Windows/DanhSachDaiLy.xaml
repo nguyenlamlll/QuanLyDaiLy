@@ -15,24 +15,23 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Page.Resources>
-
     <Grid Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}">
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center"
                     Orientation="Vertical">
-            
+
             <StackPanel Orientation="Horizontal"
                          VerticalAlignment="Center" HorizontalAlignment="Center">
-                <TextBlock Style="{DynamicResource InputTextBlock}">Xem Danh Sách </TextBlock>
+                <TextBlock Style="{DynamicResource InputTextBlock}">Xem Danh Sách</TextBlock>
                 <ComboBox x:Name="TargetSearchComboBox" Style="{DynamicResource InputComboBox}"
-                          Width="110" SelectedIndex="0">
+                          Width="110" SelectionChanged="TargetSearchComboBox_SelectionChanged">
                     <ComboBoxItem>Quận</ComboBoxItem>
                     <ComboBoxItem>Loại</ComboBoxItem>
                 </ComboBox>
                 <ComboBox x:Name="SearchComboBox" Style="{DynamicResource InputComboBox}"
-                          Width="250"></ComboBox>
+                          Width="250" SelectionChanged="SearchComboBox_SelectionChanged"></ComboBox>
                 <ToggleButton Style="{DynamicResource ToggleButtonStyle}" Checked="ToggleButton_Checked" Unchecked="ToggleButton_Unchecked">Nâng Cao</ToggleButton>
             </StackPanel>
-            
+
             <Border x:Name="AdvancededSearch" BorderThickness="1" 
                     Background="{DynamicResource {x:Static SystemColors.GradientActiveCaptionBrushKey}}"
                     Margin="20,20,20,0">
@@ -44,7 +43,7 @@
                 Tìm Kiếm: &#160;
                         </TextBlock>
                         <TextBox Style="{DynamicResource InputTextBox}"
-                         Width="350"/>
+                         Width="350" Name="txbSearch"/>
                         <ComboBox x:Name="AdvancedSearchKeyComboBox" 
                           Text="- Chọn khóa -" IsEditable="True" IsReadOnly="True"
                           FontStyle="Italic"
@@ -56,7 +55,7 @@
                         </ComboBox>
                         <Button Style="{DynamicResource InputButton}"
                                 FontFamily="Segoe MDL2 Assets"
-                                Content="&#xE094;"/>
+                                Content="&#xE094;" Click="Button_Click"/>
 
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" 
@@ -64,24 +63,77 @@
                         <Viewbox Height="Auto">
                             <RadioButton GroupName="Debt" Content="Không Nợ" 
                                      Margin="3"
-                                     Style="{DynamicResource InputRadioButton}"/>
+                                     Style="{DynamicResource InputRadioButton}" Name="rbKoNo"/>
                         </Viewbox>
 
                         <RadioButton GroupName="Debt" Content="Có Nợ"
                                      Margin="3"
-                                     Style="{DynamicResource InputRadioButton}"/>
+                                     Style="{DynamicResource InputRadioButton}" Name="rbCoNo"/>
                     </StackPanel>
                 </StackPanel>
             </Border>
 
 
-
-
             <ListView x:Name="AgencyListView"
                       Margin="40,25,40,0"
+                      Width="Auto"
                       Height="300"
                       Style="{DynamicResource ListViewStyle}"
-                      ScrollViewer.CanContentScroll="True">
+                      ScrollViewer.CanContentScroll="True"
+                      >
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Tên đại lí">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding TENDL}"></TextBlock>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Loại đại lí">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding TENLOAI}"></TextBlock>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Điện thoại">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding DIENTHOAI}"></TextBlock>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Địa chỉ">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding DIACHI}"></TextBlock>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Ngày tiếp nhận">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding NGAYTIEPNHAN}"></TextBlock>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Số nợ">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding SONO}"></TextBlock>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Tình trạng">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding TINHTRANG}"></TextBlock>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
                 <ListBox.ContextMenu>
                     <ContextMenu>
                         <MenuItem Header="Chỉnh Sửa"/>

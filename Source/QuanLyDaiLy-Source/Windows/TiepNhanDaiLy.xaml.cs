@@ -39,7 +39,7 @@ namespace QuanLyDaiLy_Source.Windows
 
             // Field Check EventHandlers
             NameInputTextBox.LostFocus += NameInput_FieldCheck;
-            IDInputTextBox.LostFocus += IDInputTextBox_FieldCheck;
+            //IDInputTextBox.LostFocus += IDInputTextBox_FieldCheck;
             TypeInputComboBox.LostFocus += TypeInputComboBox_FieldCheck;
             PhoneNumberInputTextBox.LostFocus += PhoneNumberInputTextBox_FieldCheck;
             AddressNumberInputTextBox.LostFocus += AddressNumberInputTextBox_FieldCheck;
@@ -145,6 +145,7 @@ namespace QuanLyDaiLy_Source.Windows
             }
         }
 
+        /*
         private void IDInputTextBox_FieldCheck(object sender, RoutedEventArgs e)
         {
             if (IDInputTextBox.Text == "")
@@ -156,6 +157,7 @@ namespace QuanLyDaiLy_Source.Windows
                 IDStatus.Visibility = Visibility.Hidden;
             }
         }
+        */
 
         private void TypeInputComboBox_FieldCheck(object sender, RoutedEventArgs e)
         {
@@ -195,7 +197,7 @@ namespace QuanLyDaiLy_Source.Windows
                     MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK);
             }
 
-            
+
         }
 
         /// <summary>
@@ -221,7 +223,7 @@ namespace QuanLyDaiLy_Source.Windows
 
 
             NameInputTextBox.Text = "";
-            IDInputTextBox.Text = "";
+            //IDInputTextBox.Text = "";
             TypeInputComboBox.SelectedIndex = -1;
             PhoneNumberInputTextBox.Text = "";
             AddressNumberInputTextBox.Text = "";
@@ -235,12 +237,13 @@ namespace QuanLyDaiLy_Source.Windows
         /// </summary>
         private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show("Bạn có muốn thoát?", "Thoát", MessageBoxButton.YesNo, MessageBoxImage.Question,
+            MessageBoxResult result = MessageBox.Show("Bạn có muốn quay lại trang Nghiệp Vụ?", "Thoát", MessageBoxButton.YesNo, MessageBoxImage.Question,
                 MessageBoxResult.Yes);
             if (result == MessageBoxResult.Yes)
             {
                 NavigationService ns = NavigationService.GetNavigationService(this);
-                ns.Navigate(new Uri("/QuanLyDaiLy-Source;component/Windows/BusinessHomePage.xaml", UriKind.Relative));
+                Commons.NavigationState state = new Commons.NavigationState() { WillNavigatingMethodOfParentsBeSkipped = true }; // Custom Exit Button. No need to normally check upon navigating.
+                ns.Navigate(new Uri("/QuanLyDaiLy-Source;component/Windows/BusinessHomePage.xaml", UriKind.Relative), state);
             }
         }
 
@@ -250,7 +253,7 @@ namespace QuanLyDaiLy_Source.Windows
         /// <param name="daiLy"></param>
         private void GetDaiLyInput(DAODLL.DAILY daiLy)
         {
-            daiLy.MADL = int.Parse(IDInputTextBox.Text.ToString());
+            //daiLy.MADL = int.Parse(IDInputTextBox.Text.ToString());
             daiLy.TENDL = NameInputTextBox.Text.ToString();
             daiLy.DIENTHOAI = PhoneNumberInputTextBox.Text.ToString();
             daiLy.DIACHI = AddressNumberInputTextBox.Text.ToString() + ", " + StreetInputTextBox.Text.ToString();

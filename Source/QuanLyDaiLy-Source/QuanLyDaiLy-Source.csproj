@@ -79,6 +79,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Commons\BusinessLogic\BaoCaoCongNoManager.cs" />
     <Compile Include="Commons\BusinessLogic\DaiLyManager.cs" />
     <Compile Include="Commons\BusinessLogic\EmployeeManager.cs" />
     <Compile Include="Commons\BusinessLogic\Manager.cs" />
@@ -88,15 +89,21 @@
     <Compile Include="Commons\BusinessLogic\ThietLapQuyDinh.cs" />
     <Compile Include="Commons\BusinessLogic\ViewManager.cs" />
     <Compile Include="Commons\BusinessLogic\XuatHangManager.cs" />
+    <Compile Include="Commons\Commands\MenuCommands.cs" />
     <Compile Include="Commons\DataGridTestItem.cs" />
     <Compile Include="Commons\DefaultSettings.cs" />
+    <Compile Include="Commons\Exceptions\InvalidPrivilegeException.cs" />
     <Compile Include="Commons\GenericError.cs" />
     <Compile Include="Commons\MenuItems.cs" />
+    <Compile Include="Commons\NavigationState.cs" />
     <Compile Include="Commons\PhieuXuatHang_ViewModel.cs" />
+    <Compile Include="Commons\ViewModel\LoaiDaiLy-DataItem.cs" />
+    <Compile Include="Helper\CustomScrollViewer.cs" />
     <Compile Include="Helper\DataGridComboBoxColumnWithBindingHack.cs" />
     <Compile Include="Helper\DataGridHelper.cs" />
     <Compile Include="Helper\FieldChecker.cs" />
     <Compile Include="Helper\Utilities.cs" />
+    <Compile Include="Helper\VisualChildren.cs" />
     <Compile Include="Windows\BaoCaoCongNo.xaml.cs">
       <DependentUpon>BaoCaoCongNo.xaml</DependentUpon>
     </Compile>
@@ -132,6 +139,18 @@
     </Compile>
     <Compile Include="Windows\ReportHomePage.xaml.cs">
       <DependentUpon>ReportHomePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\SettingWindows\TDQD-LoaiDaiLyWindow.xaml.cs">
+      <DependentUpon>TDQD-LoaiDaiLyWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\SettingWindows\TDQD-SoDaiLyToiDaWindow.xaml.cs">
+      <DependentUpon>TDQD-SoDaiLyToiDaWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\SettingWindows\TDQD-ThemDonViTinhWindow.xaml.cs">
+      <DependentUpon>TDQD-ThemDonViTinhWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\SettingWindows\TDQD-ThemMatHangWindow.xaml.cs">
+      <DependentUpon>TDQD-ThemMatHangWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\ThayDoiQuyDinh.xaml.cs">
       <DependentUpon>ThayDoiQuyDinh.xaml</DependentUpon>
@@ -215,6 +234,22 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\ReportHomePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\SettingWindows\TDQD-LoaiDaiLyWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\SettingWindows\TDQD-SoDaiLyToiDaWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\SettingWindows\TDQD-ThemDonViTinhWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\SettingWindows\TDQD-ThemMatHangWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

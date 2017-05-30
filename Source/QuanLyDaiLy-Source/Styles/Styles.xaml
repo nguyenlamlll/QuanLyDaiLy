@@ -24,6 +24,14 @@
         
     </Style>
 
+    <Style x:Key="SubtitleInputTextBlock" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="23"/>
+        <Setter Property="Margin" Value="10,5,0,5"/>
+        <Setter Property="Foreground" Value="{x:Static SystemColors.MenuTextBrush}"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+
+    </Style>
+
     <Style x:Key="InputTextBox" TargetType="TextBox">
         <Setter Property="Width" Value="600"/>
         <Setter Property="FontSize" Value="30"/>

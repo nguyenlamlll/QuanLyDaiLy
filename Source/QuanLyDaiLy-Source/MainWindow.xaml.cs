@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using QuanLyDaiLy_Source.Models;
 using QuanLyDaiLy_Source.Windows;
 using System.Threading;
+using QuanLyDaiLy_Source.Commons;
 
 namespace QuanLyDaiLy_Source
 {
@@ -23,18 +24,22 @@ namespace QuanLyDaiLy_Source
     /// </summary>
     public partial class MainWindow : Window
     {
+        /// <summary>
+        /// View model for Navigation ListView.
+        /// </summary>
         private List<Models.MenuItem> MenuItems;
+
         public MainWindow()
         {
             InitializeComponent();
             this.Closing += MainWindow_Closing;
+
 
             GoBackButton.Visibility = Visibility.Hidden;
 
             App.Current.Properties[Models.DefaultSettings.ContentFrameTitle] = "Trang Chủ";
 
             ContentFrame.Navigate(new DanhSachDaiLy());
-            //ContentFrame.Navigate(typeof(Windows.Page1)); //Host some placeholder page - work as a MainContents page
 
             MenuItems = MenuItemManager.GetMenuItems(); //ItemSource for NavigationListView
             NavigationListView.ItemsSource = MenuItems;
@@ -50,6 +55,7 @@ namespace QuanLyDaiLy_Source
             BaoCaoDoanhThu.pageLoaded += new EventHandler(PageLoadCompleted);
 
             DanhSachDaiLy.pageLoaded += new EventHandler(PageLoadCompleted);
+            ThayDoiQuyDinh.pageLoaded += new EventHandler(PageLoadCompleted);
         }
 
         [STAThread]
@@ -66,16 +72,23 @@ namespace QuanLyDaiLy_Source
             {
                 e.Cancel = true;
                 //Environment.Exit(0);
-                
+
             }
 
         }
 
         public object NavigationService { get; private set; }
 
-
+        /// <summary>
+        /// Check either mouse is clicked or not.
+        /// </summary>
         bool mouseClicked = false;
-        bool enterPressed = false;
+
+        /// <summary>
+        /// Check either user pressed enter or not.
+        /// </summary>
+        bool IsEnterPressed = false;
+
         private void NavigationListView_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left) mouseClicked = true;
@@ -88,7 +101,7 @@ namespace QuanLyDaiLy_Source
 
         private void NavigationListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (mouseClicked || enterPressed)
+            if (mouseClicked || IsEnterPressed)
             {
                 Models.MenuItem item = (Models.MenuItem)NavigationListView.SelectedItem;
                 //MenuItemCategory category = (Models.MenuItemCategory)item;
@@ -182,6 +195,11 @@ namespace QuanLyDaiLy_Source
             //ContentFrameTitle.Text = currentTitle;
         }
 
+        /// <summary>
+        /// Change the title each time a new page is successfully loaded.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void PageLoadCompleted(object sender, EventArgs e)
         {
             string currentTitle = App.Current.Properties[Models.DefaultSettings.ContentFrameTitle].ToString();
@@ -206,6 +224,115 @@ namespace QuanLyDaiLy_Source
         private void Window_LoginSucceed(object sender, EventArgs e)
         {
             this.Show();
+        }
+
+
+        /// <summary>
+        /// Excute the command: Go to HomePage.
+        /// </summary>
+        private void CommandBinding_TrangChu_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            ContentFrame.Navigate(new TiepNhanDaiLy());
+        }
+
+        /// <summary>
+        /// Excute the command: Go to DanhSachDaiLy page.
+        /// </summary>
+        private void CommandBinding_DanhSach_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            ContentFrame.Navigate(new DanhSachDaiLy());
+        }
+
+        /// <summary>
+        /// Excute the command: Go to BusinessHomePage.
+        /// </summary>
+        private void CommandBinding_NghiepVu_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            ContentFrame.Navigate(new BusinessHomePage());
+        }
+
+        /// <summary>
+        /// Excute the command: Go to ReportHomePage.
+        /// </summary>
+        private void CommandBinding_BaoCao_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            ContentFrame.Navigate(new ReportHomePage());
+        }
+
+        /// <summary>
+        /// Excute the command: Go to Settings page.
+        /// </summary>
+        private void CommandBinding_CaiDat_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            ContentFrame.Navigate(new ThayDoiQuyDinh());
+        }
+
+
+        private bool IsAltPressed = false;
+        /// <summary>
+        /// If user presses Alt to use shortcuts for MenuItem, underline all the command letters.
+        /// If not, turn off those underlines.
+        /// </summary>
+        private void CheckAltCommandsInvocation()
+        {
+            if (IsAltPressed)
+            {
+                foreach (var textBlock in Helper.VisualChildren.FindVisualChildren<TextBlock>(NavigationListView))
+                {
+                    if (textBlock.Name == "TextBlock_CommandLetter")
+                    {
+                        textBlock.TextDecorations = TextDecorations.Underline;
+                    }
+                }
+            }
+            else //Alt key isn't pressed
+            {
+                foreach (var textBlock in Helper.VisualChildren.FindVisualChildren<TextBlock>(NavigationListView))
+                {
+                    if (textBlock.Name == "TextBlock_CommandLetter")
+                    {
+                        textBlock.TextDecorations = null;
+                    }
+                }
+            }
+        }
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            Key key = (e.Key == Key.System ? e.SystemKey : e.Key);
+            if (key == Key.LeftAlt || key == Key.RightAlt)
+            {
+                IsAltPressed = true;
+            }
+            if (e.Key == Key.Enter)
+            {
+                IsEnterPressed = true;
+            }
+            CheckAltCommandsInvocation();
+        }
+
+        private void Window_KeyUp(object sender, KeyEventArgs e)
+        {
+            IsAltPressed = false;
+
+            IsEnterPressed = false;
+
+            CheckAltCommandsInvocation();
+        }
+
+        private void ContentFrame_Navigating(object sender, NavigatingCancelEventArgs e)
+        {
+            NavigationState state = e.ExtraData as NavigationState;
+            if (state != null && state.WillNavigatingMethodOfParentsBeSkipped == true) return;
+            Page page = ContentFrame.Content as Page;
+            if (page == null) return;
+            if (page.Title == "TiepNhanDaiLy" || page.Title == "PhieuXuatHang" || page.Title == "PhieuThuTien" ||
+                page.Title == "BaoCaoCongNo" || page.Title == "BaoCaoDoanhThu" || page.Title == "DanhSachDaiLy")
+                if (MessageBox.Show("Bạn có chắc chắn là muốn thoát khỏi tác vụ hiện tại?", "Thoát tác vụ hiện tại", MessageBoxButton.YesNo)
+                    != MessageBoxResult.Yes)
+                {
+                    e.Cancel = true;
+                }
         }
     }
 }

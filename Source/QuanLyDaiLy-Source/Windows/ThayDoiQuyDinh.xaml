@@ -18,10 +18,10 @@
         <ScrollViewer>
             <StackPanel Orientation="Vertical"
                     HorizontalAlignment="Center" VerticalAlignment="Center">
-                <ToggleButton  x:Name="AngecyRulesToggleButton" Style="{DynamicResource ToggleButtonStyle}"
-                               HorizontalAlignment="Left" 
-                               Checked="AngecyRulesToggleButton_Checked"
-                               Unchecked="AngecyRulesToggleButton_Unchecked">
+                <ToggleButton  x:Name="ToggleButton_AngecyRules"
+                               Click="ToggleButton_AngecyRules_Click"
+                               Style="{DynamicResource ToggleButtonStyle}"
+                               HorizontalAlignment="Left" >
                     Quy Định Đại Lý
                 </ToggleButton>
                 <Border x:Name="AgencyRulesBorder" BorderThickness="1" 
@@ -29,61 +29,41 @@
                     <StackPanel Orientation="Vertical">
 
                         <TextBlock Style="{DynamicResource InputTextBlock}">
-                        Loại Đại Lý:
+                        Loại Đại Lý
                         </TextBlock>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBox Style="{DynamicResource InputTextBox}"
-                              Width="250">
-                            </TextBox>
-                            <Button Style="{DynamicResource InputButton}"
-                                    Width="Auto">
-                                Lưu
-                                <Button.ToolTip>
-                                    <StackPanel>
-                                        <TextBlock FontWeight="Bold" FontSize="14" Margin="0,0,0,5">
-                                            Lưu
-                                        </TextBlock>
-                                        <TextBlock>
-                                        </TextBlock>
-                                        <Border BorderBrush="Silver" BorderThickness="0,1,0,0" Margin="0,8" />
-                                        <WrapPanel>
-                                            <Image Style="{StaticResource ImageIcon}"
-                                           Source="/QuanLyDaiLy-Source;component/Assets/Icons/question.png"/>
-                                            <TextBlock FontStyle="Italic">Bấm F1 để hiển thị mục Trợ Giúp</TextBlock>
-                                        </WrapPanel>
-                                    </StackPanel>
-                                </Button.ToolTip>
-                            </Button>
-                            <Button Style="{DynamicResource InputButton}"
-                                    Width="Auto">
-                                Tùy chỉnh...
-                            </Button>
-                        </StackPanel>
+                        <TextBlock Style="{DynamicResource SubtitleInputTextBlock}">
+                        Thêm loại đại lý hoặc thay đổi số nợ tối đa của từng loại.
+                        </TextBlock>
                         
+                        <Button x:Name="LoaiDaiLyWindowButton" 
+                                Click="LoaiDaiLyWindowButton_Click"
+                                Style="{DynamicResource InputButton}"
+                                Width="Auto">
+                            Tùy chỉnh...
+                        </Button>
+
                         <Border BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" 
                             BorderThickness="1"
                             Margin="10,0,10,0"/>
                         <TextBlock Style="{DynamicResource InputTextBlock}">
-                        Số Đại Lý Tối Đa Trong Một Quận:
+                        Quận và Số Đại Lý Trong Quận
                         </TextBlock>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBox Style="{DynamicResource InputTextBox}"
-                              Width="250">
-                            </TextBox>
-                            <Button Style="{DynamicResource InputButton}"
-                                    Width="Auto">
-                                Lưu
-                            </Button>
-                            <Button Style="{DynamicResource InputButton}"
-                                    Width="Auto">
-                                Tùy chỉnh...
-                            </Button>
-                        </StackPanel>
+                        <TextBlock Style="{DynamicResource SubtitleInputTextBlock}">
+                        Thay đổi số đại lý tối đa trong một quận hoặc đổi tên quận.
+                        </TextBlock>
+                        <Button x:Name="SoDLToiDaWindowButton" 
+                                Click="SoDLToiDaWindowButton_Click"
+                                Style="{DynamicResource InputButton}"
+                                Width="Auto">
+                            Tùy chỉnh...
+                        </Button>
 
                     </StackPanel>
                 </Border>
-                
-                <ToggleButton  Style="{DynamicResource ToggleButtonStyle}"
+
+                <ToggleButton  x:Name="ToggleButton_QuyDinhMatHang" 
+                               Click="ToggleButton_QuyDinhMatHang_Click"
+                               Style="{DynamicResource ToggleButtonStyle}"
                                Margin="0,20,0,0"
                                HorizontalAlignment="Left">
                     Quy Định Mặt Hàng
@@ -93,41 +73,35 @@
                     <StackPanel Orientation="Vertical">
 
                         <TextBlock Style="{DynamicResource InputTextBlock}">
-                        Số Mặt Hàng:
+                        Mặt Hàng
                         </TextBlock>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBox Style="{DynamicResource InputTextBox}"
-                              Width="250">
-                            </TextBox>
-                            <Button Style="{DynamicResource InputButton}"
-                                    Width="Auto">
-                                Lưu
-                            </Button>
-                            <Button Style="{DynamicResource InputButton}"
-                                    Width="Auto">
-                                Tùy chỉnh...
-                            </Button>
-                        </StackPanel>
+                        <TextBlock Style="{DynamicResource SubtitleInputTextBlock}">
+                        Xem các loại mặt hàng hiện có hoặc thêm mới vào cơ sở dữ liệu.
+                        </TextBlock>
+                        <Button x:Name="MatHangWindowButton" 
+                                Click="MatHangWindowButton_Click"
+                                Style="{DynamicResource InputButton}"
+                                Width="Auto">
+                            Tùy chỉnh...
+                        </Button>
+
 
                         <Border BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" 
                             BorderThickness="1"
                             Margin="10,0,10,0"/>
                         <TextBlock Style="{DynamicResource InputTextBlock}">
-                        Số Đơn Vị Tính:
+                        Đơn Vị Tính
                         </TextBlock>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBox Style="{DynamicResource InputTextBox}"
-                              Width="250">
-                            </TextBox>
-                            <Button Style="{DynamicResource InputButton}"
-                                    Width="Auto">
-                                Lưu
-                            </Button>
-                            <Button Style="{DynamicResource InputButton}"
-                                    Width="Auto">
-                                Tùy chỉnh...
-                            </Button>
-                        </StackPanel>
+                        <TextBlock Style="{DynamicResource SubtitleInputTextBlock}">
+                        Xem các đơn vị hiện có hoặc thêm các đơn vị tính mới vào cơ sở dữ liệu.
+                        </TextBlock>
+                        <Button x:Name="DonViTinhWindowButton" 
+                                Click="DonViTinhWindowButton_Click"
+                                Style="{DynamicResource InputButton}"
+                                Width="Auto">
+                            Tùy chỉnh...
+                        </Button>
+
 
                     </StackPanel>
                 </Border>

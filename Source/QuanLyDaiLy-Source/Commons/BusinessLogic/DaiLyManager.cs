@@ -18,7 +18,8 @@ namespace QuanLyDaiLy_Source.Models.BusinessLogic
                 int max = DAOView.Instance.GetSoDlToiDa(obj.MAQUAN.Value);
                 int currentNum = DAOView.Instance.CountSoDaiLy(obj.MAQUAN.Value);
                 if (currentNum >= max) return false;
-
+                obj.TINHTRANG = 1; // Set current state is active (1: active, 2:inactive)
+                obj.SONO = 0;
                 DAODLL.DAOTiepNhanDaiLy.Instance.Insert(obj);
                 return true;
             }

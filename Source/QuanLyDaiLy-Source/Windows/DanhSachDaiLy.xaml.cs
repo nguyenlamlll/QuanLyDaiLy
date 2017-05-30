@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QuanLyDaiLy_Source.Commons.BusinessLogic;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Collections.ObjectModel;
 
 namespace QuanLyDaiLy_Source.Windows
 {
@@ -39,6 +41,8 @@ namespace QuanLyDaiLy_Source.Windows
             pageLoaded?.Invoke(this, e); //if (pageLoaded != null)
         }
 
+
+
         private void ToggleButton_Checked(object sender, RoutedEventArgs e)
         {
             AdvancededSearch.Visibility = Visibility.Visible;
@@ -53,6 +57,80 @@ namespace QuanLyDaiLy_Source.Windows
         {
             if (AgencyListView.SelectedIndex == -1) return;
             int index = AgencyListView.SelectedIndex;
+        }
+
+        private void TargetSearchComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (((TargetSearchComboBox.SelectedItem) as ComboBoxItem).Content.ToString() == "Loại")
+            {
+                ObservableCollection<DAODLL.LOAIDL> DaiLyList = new ObservableCollection<DAODLL.LOAIDL>();
+                DaiLyList = ViewManager.Instance.GetAllLoaiDL();
+                DaiLyList.Add(new DAODLL.LOAIDL() { MALOAI = 0, TENLOAI = "Tất Cả" });
+                DaiLyList.Move(DaiLyList.Count - 1, 0);
+                SearchComboBox.ItemsSource = DaiLyList;
+                //SearchComboBox.ItemsSource = ViewManager.Instance.GetAllLoaiDL();
+                SearchComboBox.DisplayMemberPath = "TENLOAI";
+                SearchComboBox.SelectedValuePath = "MALOAI";
+            }
+            else
+            {
+                ObservableCollection<DAODLL.QUAN> QuanList = new ObservableCollection<DAODLL.QUAN>();
+                QuanList = ViewManager.Instance.GetAllQuan();
+                QuanList.Add(new DAODLL.QUAN() { MAQUAN = 0, TENQUAN = "Tất Cả" });
+                QuanList.Move(QuanList.Count - 1, 0);
+                SearchComboBox.ItemsSource = QuanList;
+                SearchComboBox.DisplayMemberPath = "TENQUAN";
+                SearchComboBox.SelectedValuePath = "MAQUAN";
+            }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (AdvancedSearchKeyComboBox.Text == "- Chọn khóa -")
+            {
+                MessageBox.Show("Vui lòng chọn khóa");
+            }
+            else
+            {
+                int checkNo = -1;
+                if (rbCoNo.IsChecked == true)
+                    checkNo = 1;
+                if (rbKoNo.IsChecked == true)
+                    checkNo = 0;
+                if (((AdvancedSearchKeyComboBox.SelectedItem) as ComboBoxItem).Content.ToString() == "Quận")
+                {
+                    AgencyListView.ItemsSource = ViewManager.Instance.SearchByQuan(txbSearch.Text, checkNo);
+                }
+                else if (((AdvancedSearchKeyComboBox.SelectedItem) as ComboBoxItem).Content.ToString() == "Loại Đại Lý")
+                {
+                    AgencyListView.ItemsSource = ViewManager.Instance.SearchByLoai(txbSearch.Text, checkNo);
+                }
+                else if (((AdvancedSearchKeyComboBox.SelectedItem) as ComboBoxItem).Content.ToString() == "Tên Đại Lý")
+                {
+                    AgencyListView.ItemsSource = ViewManager.Instance.SearchByDaiLy(txbSearch.Text, checkNo);
+                }
+            }
+            if (rbCoNo.IsChecked == true)
+                rbCoNo.IsChecked = false;
+            if (rbKoNo.IsChecked == true)
+                rbKoNo.IsChecked = false;
+        }
+
+        private void SearchComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (SearchComboBox.SelectedValue != null)
+            {
+                if (((TargetSearchComboBox.SelectedItem) as ComboBoxItem).Content.ToString() == "Quận")
+                {
+                    AgencyListView.ItemsSource = ViewManager.Instance.GetAllDaiLyWithLoaiDaiLy((int)SearchComboBox.SelectedValue);
+                    
+                }
+                else
+                {
+                    AgencyListView.ItemsSource = ViewManager.Instance.GetAllDaiLyAccordingLoai((int)SearchComboBox.SelectedValue);
+                }
+            }
+            else AgencyListView.ItemsSource = null;
         }
     }
 }

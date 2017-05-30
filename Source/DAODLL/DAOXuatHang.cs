@@ -140,7 +140,10 @@ namespace DAODLL
             }
         }
 
-
+        /// <summary>
+        /// Get all MatHang from database.
+        /// </summary>
+        /// <returns></returns>
         public ObservableCollection<MATHANG> GetMatHang()
         {
             ObservableCollection<MATHANG> matHang = new ObservableCollection<MATHANG>();
@@ -149,10 +152,77 @@ namespace DAODLL
                 var l = db.MATHANGs.Select(p => p);
                 foreach (var item in l)
                 {
-                    matHang.Add(item as MATHANG);
+                    matHang.Add(item);
                 }
             }
             return matHang;
+        }
+
+        /// <summary>
+        /// Get all PhieuXuatHang of a DaiLy stored in database.
+        /// </summary>
+        /// <returns></returns>
+        public ObservableCollection<PHIEUXUATHANG> GetAllPhieuXuatHang(int maDL)
+        {
+            ObservableCollection<PHIEUXUATHANG> list = new ObservableCollection<PHIEUXUATHANG>();
+            using (QLDLDataContext db = new QLDLDataContext())
+            {
+                var query = (from records in db.PHIEUXUATHANGs
+                             where records.MADL == maDL
+                             select records);
+                foreach (PHIEUXUATHANG phieu in query)
+                {
+                    list.Add(phieu);
+                }
+                return list;
+            }
+        }
+
+        /// <summary>
+        /// Get all PhieuXuatHang before a month
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns></returns>
+        public ObservableCollection<PHIEUXUATHANG> GetPhieuXuatHangBeforeAMonth(DateTime date, int maDL)
+        {
+            ObservableCollection<PHIEUXUATHANG> list = new ObservableCollection<PHIEUXUATHANG>();
+            using (QLDLDataContext db = new QLDLDataContext())
+            {
+                var query = (from phieu in db.PHIEUXUATHANGs
+                             where phieu.NGAYLAP.Value.Month < date.Month
+                             && phieu.NGAYLAP.Value.Year <= date.Year
+                             && phieu.MADL == maDL
+                             select phieu);
+
+                foreach (var item in query)
+                {
+                    list.Add(item);
+                }
+                return list;
+            }
+        }
+
+        /// <summary>
+        /// Get all PhieuXuatHang of a month
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns></returns>
+        public ObservableCollection<PHIEUXUATHANG> GetPhieuXuatHangInAMonth(DateTime date, int maDL)
+        {
+            ObservableCollection<PHIEUXUATHANG> list = new ObservableCollection<PHIEUXUATHANG>();
+            using (QLDLDataContext db = new QLDLDataContext())
+            {
+                var query = (from phieu in db.PHIEUXUATHANGs
+                             where phieu.NGAYLAP.Value.Month == date.Month
+                             && phieu.NGAYLAP.Value.Year == date.Year
+                             && phieu.MADL == maDL
+                             select phieu);
+                foreach (var item in query)
+                {
+                    list.Add(item);
+                }
+                return list;
+            }
         }
     }
 }
