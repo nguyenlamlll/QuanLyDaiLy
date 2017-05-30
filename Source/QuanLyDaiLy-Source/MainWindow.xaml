@@ -5,14 +5,36 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QuanLyDaiLy_Source"
         xmlns:data="clr-namespace:QuanLyDaiLy_Source.Models"
+        xmlns:commands="clr-namespace:QuanLyDaiLy_Source.Commons.Commands"
         mc:Ignorable="d"
         Title="Quản Lý Đại Lý"
         Height="1080" Width="1920"
         MinHeight="720" MinWidth="1280" Loaded="Window_Loaded"
-        WindowStartupLocation="CenterScreen" WindowState="Maximized">
+        WindowStartupLocation="CenterScreen" WindowState="Maximized"
+        KeyDown="Window_KeyDown"
+        KeyUp="Window_KeyUp">
     <Window.Resources>
         <ResourceDictionary Source="Styles/Styles.xaml"/>
     </Window.Resources>
+
+    <Window.CommandBindings>
+        <CommandBinding Command="commands:MenuCommands.TrangChu"
+                        Executed="CommandBinding_TrangChu_Executed"/>
+        <CommandBinding Command="commands:MenuCommands.DanhSach"
+                        Executed="CommandBinding_DanhSach_Executed"/>
+    </Window.CommandBindings>
+    <Window.InputBindings>
+        <KeyBinding Key="T" Modifiers="Alt"
+                    Command="commands:MenuCommands.TrangChu"/>
+        <KeyBinding Key="D" Modifiers="Alt"
+                    Command="commands:MenuCommands.DanhSach"/>
+        <KeyBinding Key="B" Modifiers="Alt"
+                    Command="commands:MenuCommands.BaoCao"/>
+        <KeyBinding Key="N" Modifiers="Alt"
+                    Command="commands:MenuCommands.NghiepVu"/>
+        <KeyBinding Key="C" Modifiers="Alt"
+                    Command="commands:MenuCommands.CaiDat"/>
+    </Window.InputBindings>
 
     <Grid x:Name="MainGrid">
         <Grid.RowDefinitions>
@@ -79,7 +101,7 @@
                       SelectionMode="Single"
                       SelectionChanged="NavigationListView_SelectionChanged" Background="{x:Null}" BorderBrush="{x:Null}" PreviewMouseDown="NavigationListView_PreviewMouseDown" PreviewMouseUp="NavigationListView_PreviewMouseUp">
                     <ListView.ItemTemplate>
-                        <DataTemplate DataType="data:MenuItem">
+                        <DataTemplate x:Name="MenuDataTemplate" DataType="data:MenuItem">
                             <StackPanel Orientation="Vertical" Width="250" Background="{x:Null}">
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
                                     <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center"
@@ -89,7 +111,13 @@
                                                 Foreground="{DynamicResource {x:Static SystemColors.MenuTextBrushKey}}"
                                                 Text="{Binding IconFile}"
                                                 Height="50" Width="50" Background="{x:Null}"/>
-
+                                    
+                                    <TextBlock x:Name="TextBlock_CommandLetter" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                               Foreground="{DynamicResource {x:Static SystemColors.MenuTextBrushKey}}"
+                                               Margin="5,0,0,0"
+                                               Style="{DynamicResource NavigationTextBlock}"
+                                               Text="{Binding CommandLetter}"/>
+                                    
                                     <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
                                                Foreground="{DynamicResource {x:Static SystemColors.MenuTextBrushKey}}"
                                                Margin="0,0,0,0"

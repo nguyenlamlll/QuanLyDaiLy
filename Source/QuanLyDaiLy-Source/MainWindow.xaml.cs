@@ -23,7 +23,11 @@ namespace QuanLyDaiLy_Source
     /// </summary>
     public partial class MainWindow : Window
     {
+        /// <summary>
+        /// View model for Navigation ListView.
+        /// </summary>
         private List<Models.MenuItem> MenuItems;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -34,7 +38,6 @@ namespace QuanLyDaiLy_Source
             App.Current.Properties[Models.DefaultSettings.ContentFrameTitle] = "Trang Chủ";
 
             ContentFrame.Navigate(new DanhSachDaiLy());
-            //ContentFrame.Navigate(typeof(Windows.Page1)); //Host some placeholder page - work as a MainContents page
 
             MenuItems = MenuItemManager.GetMenuItems(); //ItemSource for NavigationListView
             NavigationListView.ItemsSource = MenuItems;
@@ -67,16 +70,23 @@ namespace QuanLyDaiLy_Source
             {
                 e.Cancel = true;
                 //Environment.Exit(0);
-                
+
             }
 
         }
 
         public object NavigationService { get; private set; }
 
-
+        /// <summary>
+        /// Check either mouse is clicked or not.
+        /// </summary>
         bool mouseClicked = false;
-        bool enterPressed = false;
+
+        /// <summary>
+        /// Check either user pressed enter or not.
+        /// </summary>
+        bool IsEnterPressed = false;
+
         private void NavigationListView_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left) mouseClicked = true;
@@ -89,7 +99,7 @@ namespace QuanLyDaiLy_Source
 
         private void NavigationListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (mouseClicked || enterPressed)
+            if (mouseClicked || IsEnterPressed)
             {
                 Models.MenuItem item = (Models.MenuItem)NavigationListView.SelectedItem;
                 //MenuItemCategory category = (Models.MenuItemCategory)item;
@@ -212,6 +222,100 @@ namespace QuanLyDaiLy_Source
         private void Window_LoginSucceed(object sender, EventArgs e)
         {
             this.Show();
+        }
+
+
+        /// <summary>
+        /// Excute the command: Go to HomePage.
+        /// </summary>
+        private void CommandBinding_TrangChu_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            ContentFrame.Navigate(new TiepNhanDaiLy());
+        }
+
+        /// <summary>
+        /// Excute the command: Go to DanhSachDaiLy page.
+        /// </summary>
+        private void CommandBinding_DanhSach_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            ContentFrame.Navigate(new DanhSachDaiLy());
+        }
+
+        /// <summary>
+        /// Excute the command: Go to BusinessHomePage.
+        /// </summary>
+        private void CommandBinding_NghiepVu_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            ContentFrame.Navigate(new BusinessHomePage());
+        }
+
+        /// <summary>
+        /// Excute the command: Go to ReportHomePage.
+        /// </summary>
+        private void CommandBinding_BaoCao_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            ContentFrame.Navigate(new ReportHomePage());
+        }
+
+        /// <summary>
+        /// Excute the command: Go to Settings page.
+        /// </summary>
+        private void CommandBinding_CaiDat_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            ContentFrame.Navigate(new ThayDoiQuyDinh());
+        }
+
+
+        private bool IsAltPressed = false;
+        /// <summary>
+        /// If user presses Alt to use shortcuts for MenuItem, underline all the command letters.
+        /// If not, turn off those underlines.
+        /// </summary>
+        private void CheckAltCommandsInvocation()
+        {
+            if (IsAltPressed)
+            {
+                foreach (var textBlock in Helper.VisualChildren.FindVisualChildren<TextBlock>(this))
+                {
+                    if (textBlock.Name == "TextBlock_CommandLetter")
+                    {
+                        textBlock.TextDecorations = TextDecorations.Underline;
+                    }
+                }
+            }
+            else //Alt key isn't pressed
+            {
+                foreach (var textBlock in Helper.VisualChildren.FindVisualChildren<TextBlock>(this))
+                {
+                    if (textBlock.Name == "TextBlock_CommandLetter")
+                    {
+                        textBlock.TextDecorations = null;
+                    }
+                }
+            }
+        }
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            Key key = (e.Key == Key.System ? e.SystemKey : e.Key);
+            if (key == Key.LeftAlt || key == Key.RightAlt)
+            {
+                IsAltPressed = true;
+            }
+            if (e.Key == Key.Enter)
+            {
+                IsEnterPressed = true;
+            }
+            CheckAltCommandsInvocation();
+        }
+
+        private void Window_KeyUp(object sender, KeyEventArgs e)
+        {
+            IsAltPressed = false;
+
+            IsEnterPressed = false;
+
+            CheckAltCommandsInvocation();
         }
     }
 }

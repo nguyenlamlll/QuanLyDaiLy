@@ -89,6 +89,7 @@
     <Compile Include="Commons\BusinessLogic\ThietLapQuyDinh.cs" />
     <Compile Include="Commons\BusinessLogic\ViewManager.cs" />
     <Compile Include="Commons\BusinessLogic\XuatHangManager.cs" />
+    <Compile Include="Commons\Commands\MenuCommands.cs" />
     <Compile Include="Commons\DataGridTestItem.cs" />
     <Compile Include="Commons\DefaultSettings.cs" />
     <Compile Include="Commons\Exceptions\InvalidPrivilegeException.cs" />
@@ -101,6 +102,7 @@
     <Compile Include="Helper\DataGridHelper.cs" />
     <Compile Include="Helper\FieldChecker.cs" />
     <Compile Include="Helper\Utilities.cs" />
+    <Compile Include="Helper\VisualChildren.cs" />
     <Compile Include="Windows\BaoCaoCongNo.xaml.cs">
       <DependentUpon>BaoCaoCongNo.xaml</DependentUpon>
     </Compile>
