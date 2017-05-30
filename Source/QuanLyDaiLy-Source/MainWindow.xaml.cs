@@ -275,7 +275,7 @@ namespace QuanLyDaiLy_Source
         {
             if (IsAltPressed)
             {
-                foreach (var textBlock in Helper.VisualChildren.FindVisualChildren<TextBlock>(this))
+                foreach (var textBlock in Helper.VisualChildren.FindVisualChildren<TextBlock>(NavigationListView))
                 {
                     if (textBlock.Name == "TextBlock_CommandLetter")
                     {
@@ -285,7 +285,7 @@ namespace QuanLyDaiLy_Source
             }
             else //Alt key isn't pressed
             {
-                foreach (var textBlock in Helper.VisualChildren.FindVisualChildren<TextBlock>(this))
+                foreach (var textBlock in Helper.VisualChildren.FindVisualChildren<TextBlock>(NavigationListView))
                 {
                     if (textBlock.Name == "TextBlock_CommandLetter")
                     {

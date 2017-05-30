@@ -13,6 +13,12 @@ namespace QuanLyDaiLy_Source.Helper
     /// </summary>
     public static class VisualChildren
     {
+        /// <summary>
+        /// Find all visual children of a DepedencyObject.
+        /// </summary>
+        /// <typeparam name="T">Type of visual children you want to find.</typeparam>
+        /// <param name="depObj">The parent Dependency Object.</param>
+        /// <returns>Return a IEnumerable list (to use in foreach loops).</returns>
         public static IEnumerable<T> FindVisualChildren<T>(DependencyObject depObj) where T : DependencyObject
         {
             if (depObj != null)
