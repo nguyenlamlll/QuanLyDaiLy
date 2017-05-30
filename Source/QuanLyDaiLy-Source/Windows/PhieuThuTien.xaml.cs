@@ -43,6 +43,8 @@ namespace QuanLyDaiLy_Source.Windows
             DistrictComboBox.LostFocus += DistrictComboBox_FieldCheck;
             AgencyComboBox.LostFocus += AgencyComboBox_FieldCheck;
             DateDatePicker.LostFocus += DateDatePicker_FieldCheck;
+
+            DateDatePicker.SelectedDate = DateTime.Now;
         }
 
         private void DateDatePicker_FieldCheck(object sender, RoutedEventArgs e)
@@ -115,7 +117,8 @@ namespace QuanLyDaiLy_Source.Windows
                     MessageBox.Show("Đã thêm thành công.", "Thông Báo", MessageBoxButton.OK, MessageBoxImage.Information,
                       MessageBoxResult.OK);
                     NavigationService ns = NavigationService.GetNavigationService(this);
-                    ns.Navigate(new Uri("/QuanLyDaiLy-Source;component/Windows/BusinessHomePage.xaml", UriKind.Relative));
+                    NavigationState state = new NavigationState() { WillNavigatingMethodOfParentsBeSkipped = true };
+                    ns.Navigate(new Uri("/QuanLyDaiLy-Source;component/Windows/BusinessHomePage.xaml", UriKind.Relative), state);
                 }
                 else
                 {
@@ -227,13 +230,13 @@ namespace QuanLyDaiLy_Source.Windows
             if (debt <= 0)
             {
                 MoneyTextBox.IsEnabled = false;
-                DateDatePicker.IsEnabled = false;
+                //DateDatePicker.IsEnabled = false;
                 DebtNotificationTextBlock.Visibility = Visibility.Visible;
             }
             else
             {
                 MoneyTextBox.IsEnabled = true;
-                DateDatePicker.IsEnabled = true;
+                //DateDatePicker.IsEnabled = true;
                 DebtNotificationTextBlock.Visibility = Visibility.Collapsed;
             }
         }

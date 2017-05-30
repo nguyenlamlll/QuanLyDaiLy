@@ -213,7 +213,8 @@ namespace QuanLyDaiLy_Source.Windows
 
             //Exit
             NavigationService ns = NavigationService.GetNavigationService(this);
-            ns.Navigate(new Uri("/QuanLyDaiLy-Source;component/Windows/BusinessHomePage.xaml", UriKind.Relative));
+            NavigationState state = new NavigationState() { WillNavigatingMethodOfParentsBeSkipped = true };
+            ns.Navigate(new Uri("/QuanLyDaiLy-Source;component/Windows/BusinessHomePage.xaml", UriKind.Relative), state);
         }
 
         private void ExitButton_Click(object sender, RoutedEventArgs e)

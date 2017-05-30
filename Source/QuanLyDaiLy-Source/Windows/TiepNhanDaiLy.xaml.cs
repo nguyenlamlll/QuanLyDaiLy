@@ -16,6 +16,7 @@ using QuanLyDaiLy_Source;
 using DAODLL;
 using System.Collections.ObjectModel;
 using QuanLyDaiLy_Source.Commons.BusinessLogic;
+using QuanLyDaiLy_Source.Commons;
 
 namespace QuanLyDaiLy_Source.Windows
 {
@@ -189,7 +190,8 @@ namespace QuanLyDaiLy_Source.Windows
                     MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK);
 
                 NavigationService ns = NavigationService.GetNavigationService(this);
-                ns.Navigate(new Uri("/QuanLyDaiLy-Source;component/Windows/BusinessHomePage.xaml", UriKind.Relative));
+                NavigationState state = new NavigationState() { WillNavigatingMethodOfParentsBeSkipped = true };
+                ns.Navigate(new Uri("/QuanLyDaiLy-Source;component/Windows/BusinessHomePage.xaml", UriKind.Relative), state);
             }
             else
             {
