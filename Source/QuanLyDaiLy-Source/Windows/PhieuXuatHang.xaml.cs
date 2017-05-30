@@ -48,7 +48,7 @@ namespace QuanLyDaiLy_Source.Windows
             //dummyMatHang = matHangManager.GetMatHang();
             MerchandiseDataGrid.ItemsSource = myDataItems;
 
-
+            XuatHangDateDatePicker.SelectedDate = DateTime.Now;
         }
 
         private void PhieuXuatHang_Loaded(object sender, RoutedEventArgs e)
@@ -71,6 +71,7 @@ namespace QuanLyDaiLy_Source.Windows
                 MessageBox.Show(ex.ToString());
             }
         }
+
 
         /// <summary>
         /// After user selects what district the agency is in, narrow down the search in Agency List.
@@ -152,17 +153,37 @@ namespace QuanLyDaiLy_Source.Windows
                 phieu.TONGTIEN = decimal.Parse(SumTextBox.Text);
                 phieu.CONLAI = decimal.Parse(RemainderTextBox.Text);
 
-                phieu.NGAYLAP = DateTime.Now;
+                phieu.NGAYLAP = (XuatHangDateDatePicker.SelectedDate.HasValue)? XuatHangDateDatePicker.SelectedDate.Value : DateTime.Now;
             }
             catch
             {
-
+                MessageBox.Show("Không thể lưu phiếu xuất hàng vào hệ thống. Vui lòng thử lại sau.");
             }
             return phieu;
         }
 
+        /// <summary>
+        /// Check if all required fields are filled. (Note: DateTime doesn't need to be checked. Automatically pick DateTime.Now
+        /// if it was left unfilled).
+        /// </summary>
+        /// <returns>Return true if required fields are filled.</returns>
+        private bool IsAllFieldsFilled()
+        {
+            if (!FieldChecker.IsTextBoxFilled(PaidTextBox)) return false;
+            if (!FieldChecker.IsTextBoxFilled(SumTextBox)) return false;
+            if (!FieldChecker.IsTextBoxFilled(RemainderTextBox)) return false;
+            if (GetAllMaHang().Count <= 0) return false;
+            if (GetAllSoLuongHang().Count <= 0) return false;
+            return true;
+        }
+
         private void SaveAndExitButton_Click(object sender, RoutedEventArgs e)
         {
+            if (!IsAllFieldsFilled())
+            {
+                MessageBox.Show(GenericError.InputErrorContent, GenericError.InputError);
+                return;
+            }
             // Save
             try
             {
@@ -197,6 +218,11 @@ namespace QuanLyDaiLy_Source.Windows
 
         private void SaveAndContinueButton_Click(object sender, RoutedEventArgs e)
         {
+            if (!IsAllFieldsFilled())
+            {
+                MessageBox.Show(GenericError.InputErrorContent, GenericError.InputError);
+                return;
+            }
             // Save
             try
             {
@@ -225,17 +251,11 @@ namespace QuanLyDaiLy_Source.Windows
             DonGiaTextBox.Text = string.Empty;
             SoLuongTextBox.Text = string.Empty;
             ThanhTienTextBox.Text = string.Empty;
+
+            XuatHangDateDatePicker.SelectedDate = null;
         }
 
-        private void EditButton_Click(object sender, RoutedEventArgs e)
-        {
 
-        }
-
-        private void DeleteButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
 
         /// <summary>
         /// After user selects Product. Load all relating information of that product.

@@ -44,6 +44,7 @@ namespace QuanLyDaiLy_Source.Commons.BusinessLogic
         /// <returns></returns>
         public bool Insert(PHIEUXUATHANG obj, ArrayList maHang, ArrayList soLuong)
         {
+            // Check for current Debt.
             DAILY daiLy = daiLyManager.Get(obj.MADL.Value);
             decimal soNoToiDa = ViewManager.Instance.GetSoNoDaiLy(daiLy.LOAIDL.Value);
             if (daiLy.SONO.Value >= soNoToiDa || (daiLy.SONO.Value + obj.CONLAI.Value) >= soNoToiDa) return false;

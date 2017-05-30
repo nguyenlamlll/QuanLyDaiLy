@@ -83,7 +83,7 @@
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right"
                             Margin="0,0,38,0">
 
-                    <Button x:Name="AddRowButton"
+                    <Button x:Name="AddRowButton" Visibility="Collapsed"
                         Click="AddRowButton_Click">
                         <Button.Template>
                             <ControlTemplate>
@@ -272,6 +272,13 @@
                 <StackPanel Grid.Row="3" Orientation="Horizontal"
                             HorizontalAlignment="Right"
                             Margin="0,0,38,0">
+                    <TextBlock Style="{DynamicResource InputTextBlock}">
+                        Ngày lập phiếu:
+                    </TextBlock>
+                    <DatePicker x:Name="XuatHangDateDatePicker" 
+                                IsEnabled="False"
+                                Style="{DynamicResource InputDatePicker}"
+                                Width="396"/>
                     <Button x:Name="SaveAndExitButton" 
                         Content="Lưu"
                         Style="{DynamicResource InputButton}"

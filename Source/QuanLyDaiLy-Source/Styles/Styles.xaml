@@ -63,6 +63,8 @@
         <Setter Property="Margin" Value="9,9,9,9"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="IsTodayHighlighted" Value="True"/>
+        <Setter Property="FirstDayOfWeek" Value="Monday"/>
     </Style>
     
     <!-- Styles for button used in Input Screens-->
