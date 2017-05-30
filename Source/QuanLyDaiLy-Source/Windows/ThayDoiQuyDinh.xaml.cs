@@ -133,7 +133,26 @@ namespace QuanLyDaiLy_Source.Windows
 
         private void LoaiDaiLyWindowButton_Click(object sender, RoutedEventArgs e)
         {
-
+            try
+            {
+                if (!IsCurrentUserAdmin())
+                    throw new InvalidPrivilegeException();
+                TDQD_LoaiDaiLyWindow window = new TDQD_LoaiDaiLyWindow();
+                window.Owner = Window.GetWindow(this);
+                window.ShowDialog();
+            }
+            catch (InvalidPrivilegeException ex)
+            {
+                MessageBox.Show(ex.Message, "Lỗi", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (InvalidOperationException)
+            {
+                MessageBox.Show("Không thể mở. Cửa sổ chính hiện tại đã đóng.", "Lỗi");
+            }
+            catch (ArgumentNullException)
+            {
+                MessageBox.Show("Vui lòng khởi động lại chương trình.", "Lỗi");
+            }
         }
 
         private void ToggleButton_AngecyRules_Click(object sender, RoutedEventArgs e)

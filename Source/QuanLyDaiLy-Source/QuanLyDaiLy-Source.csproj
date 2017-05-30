@@ -95,6 +95,7 @@
     <Compile Include="Commons\GenericError.cs" />
     <Compile Include="Commons\MenuItems.cs" />
     <Compile Include="Commons\PhieuXuatHang_ViewModel.cs" />
+    <Compile Include="Commons\ViewModel\LoaiDaiLy-DataItem.cs" />
     <Compile Include="Helper\CustomScrollViewer.cs" />
     <Compile Include="Helper\DataGridComboBoxColumnWithBindingHack.cs" />
     <Compile Include="Helper\DataGridHelper.cs" />
@@ -136,13 +137,16 @@
     <Compile Include="Windows\ReportHomePage.xaml.cs">
       <DependentUpon>ReportHomePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\TDQD-SoDaiLyToiDaWindow.xaml.cs">
+    <Compile Include="Windows\SettingWindows\TDQD-LoaiDaiLyWindow.xaml.cs">
+      <DependentUpon>TDQD-LoaiDaiLyWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\SettingWindows\TDQD-SoDaiLyToiDaWindow.xaml.cs">
       <DependentUpon>TDQD-SoDaiLyToiDaWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\TDQD-ThemDonViTinhWindow.xaml.cs">
+    <Compile Include="Windows\SettingWindows\TDQD-ThemDonViTinhWindow.xaml.cs">
       <DependentUpon>TDQD-ThemDonViTinhWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\TDQD-ThemMatHangWindow.xaml.cs">
+    <Compile Include="Windows\SettingWindows\TDQD-ThemMatHangWindow.xaml.cs">
       <DependentUpon>TDQD-ThemMatHangWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\ThayDoiQuyDinh.xaml.cs">
@@ -230,15 +234,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\TDQD-SoDaiLyToiDaWindow.xaml">
+    <Page Include="Windows\SettingWindows\TDQD-LoaiDaiLyWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\TDQD-ThemDonViTinhWindow.xaml">
+    <Page Include="Windows\SettingWindows\TDQD-SoDaiLyToiDaWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\TDQD-ThemMatHangWindow.xaml">
+    <Page Include="Windows\SettingWindows\TDQD-ThemDonViTinhWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\SettingWindows\TDQD-ThemMatHangWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
