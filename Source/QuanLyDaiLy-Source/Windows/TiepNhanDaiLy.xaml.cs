@@ -197,7 +197,7 @@ namespace QuanLyDaiLy_Source.Windows
                     MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK);
             }
 
-            
+
         }
 
         /// <summary>
@@ -237,12 +237,13 @@ namespace QuanLyDaiLy_Source.Windows
         /// </summary>
         private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show("Bạn có muốn thoát?", "Thoát", MessageBoxButton.YesNo, MessageBoxImage.Question,
+            MessageBoxResult result = MessageBox.Show("Bạn có muốn quay lại trang Nghiệp Vụ?", "Thoát", MessageBoxButton.YesNo, MessageBoxImage.Question,
                 MessageBoxResult.Yes);
             if (result == MessageBoxResult.Yes)
             {
                 NavigationService ns = NavigationService.GetNavigationService(this);
-                ns.Navigate(new Uri("/QuanLyDaiLy-Source;component/Windows/BusinessHomePage.xaml", UriKind.Relative));
+                Commons.NavigationState state = new Commons.NavigationState() { WillNavigatingMethodOfParentsBeSkipped = true }; // Custom Exit Button. No need to normally check upon navigating.
+                ns.Navigate(new Uri("/QuanLyDaiLy-Source;component/Windows/BusinessHomePage.xaml", UriKind.Relative), state);
             }
         }
 

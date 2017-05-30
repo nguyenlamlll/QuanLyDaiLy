@@ -95,6 +95,7 @@
     <Compile Include="Commons\Exceptions\InvalidPrivilegeException.cs" />
     <Compile Include="Commons\GenericError.cs" />
     <Compile Include="Commons\MenuItems.cs" />
+    <Compile Include="Commons\NavigationState.cs" />
     <Compile Include="Commons\PhieuXuatHang_ViewModel.cs" />
     <Compile Include="Commons\ViewModel\LoaiDaiLy-DataItem.cs" />
     <Compile Include="Helper\CustomScrollViewer.cs" />

@@ -185,7 +185,8 @@ namespace QuanLyDaiLy_Source.Windows
             if (result == MessageBoxResult.Yes)
             {
                 NavigationService ns = NavigationService.GetNavigationService(this);
-                ns.Navigate(new Uri("/QuanLyDaiLy-Source;component/Windows/BusinessHomePage.xaml", UriKind.Relative));
+                NavigationState state = new NavigationState() { WillNavigatingMethodOfParentsBeSkipped = true }; // Custom Exit Button. No need to normally check upon navigating.
+                ns.Navigate(new Uri("/QuanLyDaiLy-Source;component/Windows/BusinessHomePage.xaml", UriKind.Relative), state);
             }
         }
 
@@ -268,7 +269,7 @@ namespace QuanLyDaiLy_Source.Windows
                 else
                 {
                     MoneyStatus.Visibility = Visibility.Visible;
-                   
+
                 }
             }
             catch

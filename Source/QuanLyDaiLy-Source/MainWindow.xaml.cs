@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using QuanLyDaiLy_Source.Models;
 using QuanLyDaiLy_Source.Windows;
 using System.Threading;
+using QuanLyDaiLy_Source.Commons;
 
 namespace QuanLyDaiLy_Source
 {
@@ -32,6 +33,7 @@ namespace QuanLyDaiLy_Source
         {
             InitializeComponent();
             this.Closing += MainWindow_Closing;
+
 
             GoBackButton.Visibility = Visibility.Hidden;
 
@@ -316,6 +318,21 @@ namespace QuanLyDaiLy_Source
             IsEnterPressed = false;
 
             CheckAltCommandsInvocation();
+        }
+
+        private void ContentFrame_Navigating(object sender, NavigatingCancelEventArgs e)
+        {
+            NavigationState state = e.ExtraData as NavigationState;
+            if (state != null && state.WillNavigatingMethodOfParentsBeSkipped == true) return;
+            Page page = ContentFrame.Content as Page;
+            if (page == null) return;
+            if (page.Title == "TiepNhanDaiLy" || page.Title == "PhieuXuatHang" || page.Title == "PhieuThuTien" ||
+                page.Title == "BaoCaoCongNo" || page.Title == "BaoCaoDoanhThu" || page.Title == "DanhSachDaiLy")
+                if (MessageBox.Show("Bạn có chắc chắn là muốn thoát khỏi tác vụ hiện tại?", "Thoát tác vụ hiện tại", MessageBoxButton.YesNo)
+                    != MessageBoxResult.Yes)
+                {
+                    e.Cancel = true;
+                }
         }
     }
 }
