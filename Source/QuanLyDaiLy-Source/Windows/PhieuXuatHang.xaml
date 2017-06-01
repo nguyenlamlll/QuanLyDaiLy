@@ -288,9 +288,9 @@
                             <StackPanel>
                                 <TextBlock FontWeight="Bold" FontSize="14" Margin="0,0,0,5">Lưu Đại Lý</TextBlock>
                                 <TextBlock>
-                                    Lưu hồ sơ đại lý đã nhập vào hệ thống 
+                                    Lưu phiếu xuất hàng đã nhập vào hệ thống 
                                     <LineBreak/>
-                                    và thoát phiên làm việc tiếp nhận đại lí
+                                    và thoát tác vụ hiện tại.
                                 </TextBlock>
                                 <Border BorderBrush="Silver" BorderThickness="0,1,0,0" Margin="0,8" />
                                 <WrapPanel>
@@ -312,9 +312,9 @@
                             <StackPanel>
                                 <TextBlock FontWeight="Bold" FontSize="14" Margin="0,0,0,5">Lưu Đại Lý Và Tiếp Tục</TextBlock>
                                 <TextBlock>
-                                    Lưu hồ sơ đại lý đã nhập vào hệ thống 
+                                    Lưu phiếu xuất hàng đã nhập vào hệ thống 
                                     <LineBreak/>
-                                    và tiếp tục phiên làm việc tiếp nhận đại lí
+                                    và thoát tác vụ hiện tại.
                                 </TextBlock>
                                 <Border BorderBrush="Silver" BorderThickness="0,1,0,0" Margin="0,8" />
                                 <WrapPanel>
@@ -337,7 +337,7 @@
                                 <TextBlock>
                                     Xóa toàn bộ dữ liệu đã nhập
                                     <LineBreak/>
-                                    và thoát phiên làm việc tiếp nhận đại lí
+                                    và thoát tác vụ hiện tại.
                                 </TextBlock>
                                 <Border BorderBrush="Silver" BorderThickness="0,1,0,0" Margin="0,8" />
                                 <WrapPanel>
