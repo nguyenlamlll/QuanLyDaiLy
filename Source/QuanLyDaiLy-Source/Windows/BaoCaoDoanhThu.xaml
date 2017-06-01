@@ -89,7 +89,7 @@
                             </StackPanel>
                         </Button.ToolTip>
                     </Button>
-                    <Button x:Name="ChartButton" 
+                    <Button x:Name="ChartButton" Visibility="Collapsed"
                         Content="Lập Biểu Đồ" Width="Auto"
                         Style="{DynamicResource InputButton}"
                         HorizontalAlignment="Center"

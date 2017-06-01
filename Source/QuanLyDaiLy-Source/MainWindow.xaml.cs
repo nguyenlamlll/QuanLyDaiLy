@@ -39,7 +39,7 @@ namespace QuanLyDaiLy_Source
 
             App.Current.Properties[Models.DefaultSettings.ContentFrameTitle] = "Trang Chủ";
 
-            ContentFrame.Navigate(new HomePage());
+           
 
             MenuItems = MenuItemManager.GetMenuItems(); //ItemSource for NavigationListView
             NavigationListView.ItemsSource = MenuItems;
@@ -223,6 +223,7 @@ namespace QuanLyDaiLy_Source
         /// </summary>
         private void Window_LoginSucceed(object sender, EventArgs e)
         {
+            ContentFrame.Navigate(new HomePage());
             this.Show();
         }
 

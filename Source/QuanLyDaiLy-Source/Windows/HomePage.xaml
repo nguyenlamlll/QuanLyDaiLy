@@ -15,15 +15,54 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Page.Resources>
-    
-    <Grid>
+
+    <Grid Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}">
         <StackPanel Orientation="Vertical"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center"
                     Margin="0,0,0,40">
-            <Image Source="/QuanLyDaiLy-Source;component/Assets/logo.png"
-                       Width="500" Height="500">
-            </Image>
+            <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Border BorderThickness="1" CornerRadius="5" Height="400" Width="400"
+                        HorizontalAlignment="Center"  VerticalAlignment="Center">
+                    <Border.Background>
+                        <ImageBrush x:Name="myImg" Stretch="Fill"/>
+                    </Border.Background>
+                    <Border.Effect>
+                        <DropShadowEffect BlurRadius="10" ShadowDepth="7" Direction="315"/>
+                    </Border.Effect>
+                    <Border.BorderBrush>
+                        <LinearGradientBrush EndPoint="0.811,0.2" StartPoint="0.246,1.023">
+                            <GradientStop Color="#FF7C9FC8" Offset="0"/>
+                            <GradientStop Color="#FF7C9FC8" Offset="1"/>
+                            <GradientStop Color="#FF353535" Offset="0.491"/>
+                        </LinearGradientBrush>
+                    </Border.BorderBrush>
+                    <Border BorderThickness="0"  CornerRadius="0" Margin="0" >
+                        <Border.Background>
+                            <RadialGradientBrush GradientOrigin="0.7,-0.6" RadiusY="0.5" RadiusX="1.001">
+                                <RadialGradientBrush.RelativeTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform CenterY="0.5" CenterX="0.5" ScaleY="1" ScaleX="1"/>
+                                        <SkewTransform AngleY="0" AngleX="0" CenterY="0.5" CenterX="0.5"/>
+                                        <RotateTransform Angle="-29.285" CenterY="0.5" CenterX="0.5"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </RadialGradientBrush.RelativeTransform>
+                                <GradientStop Color="#B6FFFFFF"/>
+                                <GradientStop Color="#0BFFFFFF" Offset="0.578"/>
+                            </RadialGradientBrush>
+                        </Border.Background>
+                    </Border>
+                </Border>
+                
+                <Image Source="/QuanLyDaiLy-Source;component/Assets/logo.png"
+                       HorizontalAlignment="Center"
+                       Width="450" Height="450">
+                </Image>
+            </Grid>
+
+           
+            
             <StackPanel x:Name="InformationStackPanel" Orientation="Vertical">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Style="{DynamicResource InputTextBlock}">Người dùng:</TextBlock>
