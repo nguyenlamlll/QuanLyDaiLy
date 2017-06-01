@@ -43,7 +43,6 @@ namespace QuanLyDaiLy_Source.Windows
             {
 
             }
-
             // If for some reasons we cannot load information, it'd better we hide the placeholders also.
             if (UsernameTextBlock.Text == "" || PositionTextBlock.Text == "")
             {
