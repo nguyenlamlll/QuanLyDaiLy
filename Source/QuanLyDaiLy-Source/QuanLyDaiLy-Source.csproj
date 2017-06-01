@@ -101,6 +101,7 @@
     <Compile Include="Commons\MenuItems.cs" />
     <Compile Include="Commons\NavigationState.cs" />
     <Compile Include="Commons\PhieuXuatHang_ViewModel.cs" />
+    <Compile Include="Commons\ViewModel\DonViTinh-DataItem.cs" />
     <Compile Include="Commons\ViewModel\LoaiDaiLy-DataItem.cs" />
     <Compile Include="Helper\CustomScrollViewer.cs" />
     <Compile Include="Helper\DataGridComboBoxColumnWithBindingHack.cs" />
