@@ -32,6 +32,10 @@ namespace QuanLyDaiLy_Source.Commons.BusinessLogic
             return DAOView.Instance.GetAllMatHang();
         }
 
+        /// <summary>
+        /// Get all DaiLy in database and load them into an observable collection
+        /// </summary>
+        /// <returns>Return a observable collection of all DaiLy</returns>
         public ObservableCollection<DAILY> GetAllDaiLy()
         {
             return DAOView.Instance.GetAllDaiLy();

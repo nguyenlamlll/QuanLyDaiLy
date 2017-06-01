@@ -7,6 +7,8 @@
         xmlns:data="clr-namespace:QuanLyDaiLy_Source.Models"
         xmlns:commands="clr-namespace:QuanLyDaiLy_Source.Commons.Commands"
         mc:Ignorable="d"
+        xmlns:help="clr-namespace:QuanLyDaiLy_Source.Helper"
+        help:HelpProvider.HelpTopic="TrangChu"
         Title="Quản Lý Đại Lý"
         Height="1080" Width="1920"
         MinHeight="720" MinWidth="1280" Loaded="Window_Loaded"
@@ -112,20 +114,20 @@
                                                 Foreground="{DynamicResource {x:Static SystemColors.MenuTextBrushKey}}"
                                                 Text="{Binding IconFile}"
                                                 Height="50" Width="50" Background="{x:Null}"/>
-                                    
+
                                     <TextBlock x:Name="TextBlock_CommandLetter" HorizontalAlignment="Center" VerticalAlignment="Center"
                                                Foreground="{DynamicResource {x:Static SystemColors.MenuTextBrushKey}}"
                                                Margin="5,0,0,0"
                                                Style="{DynamicResource NavigationTextBlock}"
                                                Text="{Binding CommandLetter}"/>
-                                    
+
                                     <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
                                                Foreground="{DynamicResource {x:Static SystemColors.MenuTextBrushKey}}"
                                                Margin="0,0,0,0"
                                                Style="{DynamicResource NavigationTextBlock}"
                                                Text="{Binding Description}"/>
                                 </StackPanel>
-                                
+
 
                             </StackPanel>
                         </DataTemplate>

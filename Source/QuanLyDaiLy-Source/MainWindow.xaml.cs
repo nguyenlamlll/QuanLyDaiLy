@@ -39,7 +39,7 @@ namespace QuanLyDaiLy_Source
 
             App.Current.Properties[Models.DefaultSettings.ContentFrameTitle] = "Trang Chủ";
 
-            ContentFrame.Navigate(new DanhSachDaiLy());
+           
 
             MenuItems = MenuItemManager.GetMenuItems(); //ItemSource for NavigationListView
             NavigationListView.ItemsSource = MenuItems;
@@ -111,7 +111,7 @@ namespace QuanLyDaiLy_Source
                     {
                         case MenuItemCategory.Homepage:
                             {
-                                ContentFrame.Navigate(new TiepNhanDaiLy());
+                                ContentFrame.Navigate(new HomePage());
                                 break;
                             }
                         case MenuItemCategory.Lists:
@@ -223,6 +223,7 @@ namespace QuanLyDaiLy_Source
         /// </summary>
         private void Window_LoginSucceed(object sender, EventArgs e)
         {
+            ContentFrame.Navigate(new HomePage());
             this.Show();
         }
 
@@ -232,7 +233,7 @@ namespace QuanLyDaiLy_Source
         /// </summary>
         private void CommandBinding_TrangChu_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            ContentFrame.Navigate(new TiepNhanDaiLy());
+            ContentFrame.Navigate(new HomePage());
         }
 
         /// <summary>

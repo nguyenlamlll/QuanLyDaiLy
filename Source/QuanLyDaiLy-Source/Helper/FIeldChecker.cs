@@ -8,10 +8,15 @@ using System.Windows.Controls;
 namespace QuanLyDaiLy_Source.Helper
 {
     /// <summary>
-    /// Provide helps when checking common WPF's controls
+    /// Provide helps when checking input of common WPF's controls
     /// </summary>
     public static class FieldChecker
     {
+        /// <summary>
+        /// Check Text property of TextBox.
+        /// </summary>
+        /// <param name="tb"></param>
+        /// <returns>Return true if the Text property is filled with actual text rather than null or empty ("")</returns>
         public static bool IsTextBoxFilled(TextBox tb)
         {
             if (tb.Text == null || tb.Text == "")
@@ -29,5 +34,6 @@ namespace QuanLyDaiLy_Source.Helper
             }
             return true;
         }
+
     }
 }

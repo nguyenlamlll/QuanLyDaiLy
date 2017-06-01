@@ -94,7 +94,7 @@ namespace QuanLyDaiLy_Source.Windows
                     int selectedMaLoaiDaiLy = (int)TypeComboBox.SelectedValue;
                     int selectedMaQuan = (int)DistrictComboBox.SelectedValue;
                     DateTime selectedDate = Helper.Utilities.GetDateTimeFromMonthComboBox(out selectedDate, MonthComboBox);
-
+                    
                     //Get the scope of DaiLy needed to get reports.
                     ObservableCollection<DAILY> listDaiLy = new ObservableCollection<DAILY>();
                     if (selectedMaLoaiDaiLy == 0 && selectedMaQuan == 0)
@@ -113,8 +113,8 @@ namespace QuanLyDaiLy_Source.Windows
                         decimal SumMoneyOfAllDaiLies = 0;
                         foreach (DAILY daiLy in listDaiLy)
                         {
-                            int tongPhieuXuat = xuatHangManager.GetAllPhieuXuatHang(daiLy.MADL).Where(p => p.NGAYLAP.Value.Month == selectedDate.Month).Count();
-                            decimal sum = xuatHangManager.GetAllPhieuXuatHang(daiLy.MADL).Where(p => p.NGAYLAP.Value.Month == selectedDate.Month).Sum(p => p.SOTIENTRA.Value);
+                            int tongPhieuXuat = xuatHangManager.GetAllPhieuXuatHang(daiLy.MADL).Where(p => p.NGAYLAP.Value.Month == selectedDate.Month && p.NGAYLAP.Value.Year == selectedDate.Year).Count();
+                            decimal sum = xuatHangManager.GetAllPhieuXuatHang(daiLy.MADL).Where(p => p.NGAYLAP.Value.Month == selectedDate.Month && p.NGAYLAP.Value.Year == selectedDate.Year).Sum(p => p.SOTIENTRA.Value);
                             SumMoneyOfAllDaiLies += sum;
                             BaoCaoDoanhThuItem item = new BaoCaoDoanhThuItem()
                             {

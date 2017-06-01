@@ -47,6 +47,8 @@ namespace DAODLL
                 DL.NGAYTIEPNHAN = dl.NGAYTIEPNHAN;
                 DL.MAQUAN = dl.MAQUAN;
                 DL.LOAIDL = dl.LOAIDL;
+                DL.TINHTRANG = dl.TINHTRANG;
+                DL.SONO = dl.SONO;
                 db.DAILies.InsertOnSubmit(DL);
                 db.SubmitChanges();
                 return true;

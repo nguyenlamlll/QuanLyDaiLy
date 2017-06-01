@@ -166,7 +166,9 @@
                 <TextBlock Style="{DynamicResource InputTextBlock}">
                            Ngày Thu:
                 </TextBlock>
-                <DatePicker x:Name="DateDatePicker" Style="{DynamicResource InputDatePicker}"
+                <DatePicker x:Name="DateDatePicker" 
+                            IsEnabled="False"
+                            Style="{DynamicResource InputDatePicker}"
                             FirstDayOfWeek="Monday" 
                             SelectedDateFormat="Short">
                     <DatePicker.Resources>

@@ -44,9 +44,10 @@ namespace QuanLyDaiLy_Source.Commons.BusinessLogic
         /// <returns></returns>
         public bool Insert(PHIEUXUATHANG obj, ArrayList maHang, ArrayList soLuong)
         {
+            // Check for current Debt.
             DAILY daiLy = daiLyManager.Get(obj.MADL.Value);
             decimal soNoToiDa = ViewManager.Instance.GetSoNoDaiLy(daiLy.LOAIDL.Value);
-            if (daiLy.SONO.Value >= soNoToiDa || (daiLy.SONO.Value + obj.CONLAI.Value) >= soNoToiDa) return false;
+            if (daiLy.SONO.Value >= soNoToiDa || (daiLy.SONO.Value + obj.CONLAI.Value) > soNoToiDa) return false;
 
             if ((int)obj.CONLAI.Value < 0)
             {
@@ -69,13 +70,13 @@ namespace QuanLyDaiLy_Source.Commons.BusinessLogic
         /// <summary>
         /// Kiểm tra số nợ đại lý hiện có, liệu có được phép để tiếp tục cộng dồn thêm nợ hay không.
         /// </summary>
-        /// <param name="debt"></param>
+        /// <param name="debt">Số tiền nợ dự định cộng thêm vào.</param>
         /// <returns></returns>
         public bool IsMoreDebtsAllowed(int debt, int maDL)
         {
             DAILY daiLy = daiLyManager.Get(maDL);
             decimal soNoToiDa = ViewManager.Instance.GetSoNoDaiLy(daiLy.LOAIDL.Value);
-            if (daiLy.SONO.Value >= soNoToiDa || (daiLy.SONO.Value + debt) >= soNoToiDa) return false;
+            if (daiLy.SONO.Value >= soNoToiDa || (daiLy.SONO.Value + debt) > soNoToiDa) return false;
 
             return true;
         }

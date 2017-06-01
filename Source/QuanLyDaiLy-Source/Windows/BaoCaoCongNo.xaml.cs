@@ -189,7 +189,7 @@ namespace QuanLyDaiLy_Source.Windows
                 {
                     int selectedMaLoaiDaiLy = (int)TypeComboBox.SelectedValue;
                     int selectedMaQuan = (int)DistrictComboBox.SelectedValue;
-                    DateTime selectedDate = GetDateTime(out selectedDate);
+                    DateTime selectedDate = Helper.Utilities.GetDateTimeFromMonthComboBox(out selectedDate, MonthComboBox);
 
                     //Get the scope of DaiLy needed to get reports.
                     ObservableCollection<DAILY> listDaiLy = new ObservableCollection<DAILY>();

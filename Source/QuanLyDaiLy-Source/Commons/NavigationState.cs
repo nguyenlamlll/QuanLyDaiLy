@@ -12,6 +12,9 @@ namespace QuanLyDaiLy_Source.Commons
     /// </summary>
     public class NavigationState : CustomContentState
     {
+        /// <summary>
+        /// Indicating that whether Navigation Method in MainWindow.xaml.cs should be skipped
+        /// </summary>
         public bool WillNavigatingMethodOfParentsBeSkipped { get; set; }
 
         public override void Replay(NavigationService navigationService, NavigationMode mode) { }
