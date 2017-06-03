@@ -358,9 +358,11 @@
     <Resource Include="Assets\logo.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Helper\HelpFiles\Xem.htm" />
     <Resource Include="archive_jOx_icon.ico" />
     <Content Include="Helper\HelpFiles\HuongDanCaiDat.htm" />
     <Content Include="Helper\HelpFiles\NghiepVu.html" />
+    <Content Include="Helper\HelpFiles\PhieuThuTien.htm" />
     <Content Include="Helper\HelpFiles\TrangChu.htm" />
     <Resource Include="Helper\HelpFiles\Images\TiepNhanDaiLy-1.png" />
     <Content Include="Helper\HelpFiles\PhieuXuatHang.htm" />
