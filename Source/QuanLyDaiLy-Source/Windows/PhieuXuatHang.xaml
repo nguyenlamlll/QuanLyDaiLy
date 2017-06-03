@@ -240,6 +240,8 @@
                                 <StackPanel Background="#FFFFA0A0">
                                     <TextBlock>
                                     Số tiền trả phải nhỏ hơn hoặc bằng tổng giá trị phiếu xuất hàng.
+                                        <LineBreak/>
+                                        Chỉ nhập vào các chữ số từ 0 đến 9.
                                     </TextBlock>
                                 </StackPanel>
                             </Image.ToolTip>

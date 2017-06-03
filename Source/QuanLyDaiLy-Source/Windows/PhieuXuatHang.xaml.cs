@@ -175,7 +175,8 @@ namespace QuanLyDaiLy_Source.Windows
         }
 
         /// <summary>
-        /// Check if all required fields are filled. (Note: DateTime doesn't need to be checked. Automatically pick DateTime.Now
+        /// Check if all required fields are filled and filled correctly. 
+        /// (Note: DateTime doesn't need to be checked. Automatically pick DateTime.Now
         /// if it was left unfilled).
         /// </summary>
         /// <returns>Return true if required fields are filled.</returns>
@@ -186,6 +187,7 @@ namespace QuanLyDaiLy_Source.Windows
             if (!FieldChecker.IsTextBoxFilled(RemainderTextBox)) return false;
             if (GetAllMaHang().Count <= 0) return false;
             if (GetAllSoLuongHang().Count <= 0) return false;
+            if (!Utilities.IsDigitsOnly(PaidTextBox.Text)) return false;
             return true;
         }
 
@@ -683,6 +685,9 @@ namespace QuanLyDaiLy_Source.Windows
         /// <param name="e"></param>
         private void PaidTextBox_PreviewKeyUp(object sender, KeyEventArgs e)
         {
+            if (!Utilities.IsDigitsOnly(PaidTextBox.Text)) PaidStatus.Visibility = Visibility.Visible;
+            else PaidStatus.Visibility = Visibility.Collapsed;
+
             if (PaidTextBox.Text == null || PaidTextBox.Text == "") return;
             if (SumTextBox.Text == null || SumTextBox.Text == "") return;
             int sum = 0, paid = 0, remainder = 0;
@@ -696,7 +701,7 @@ namespace QuanLyDaiLy_Source.Windows
             {
 
             }
-            if (remainder < 0) PaidStatus.Visibility = Visibility.Visible;
+            if (remainder < 0 || !Utilities.IsDigitsOnly(PaidTextBox.Text)) PaidStatus.Visibility = Visibility.Visible;
             else PaidStatus.Visibility = Visibility.Collapsed;
 
             RemainderTextBox.Text = remainder.ToString();
