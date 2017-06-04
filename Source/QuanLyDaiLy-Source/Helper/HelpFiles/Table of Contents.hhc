@@ -32,6 +32,14 @@
 			<param name="Local" value="TiepNhanDaiLy.htm">
 			</OBJECT>
 		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Theo Doi Danh Sach Dai Ly">
+			<param name="Local" value="Xem.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Phieu Thu Tien">
+			<param name="Local" value="PhieuThuTien.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
 			<param name="Name" value="Phieu Xuat Hang">
 			<param name="Local" value="PhieuXuatHang.htm">
 			</OBJECT>
