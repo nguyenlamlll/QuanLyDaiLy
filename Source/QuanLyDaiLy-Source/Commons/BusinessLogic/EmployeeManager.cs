@@ -58,5 +58,19 @@ namespace EmployeeManagerQuanLyDaiLy_Source.Models.BusinessLogic
         {
             return DAOQLNhanVien.Instance.Search(thang, macv, ten, dc);
         }
+
+        /// <summary>
+        /// Load all records from NhanVien table.
+        /// </summary>
+        /// <returns>Return all records of NhanVien table in a observable collection.</returns>
+        public ObservableCollection<NHANVIEN> GetAll()
+        {
+            return DAOQLNhanVien.Instance.GetAll();
+        }
+
+        public string GetChucVu(int maCV)
+        {
+            return DAOQLNhanVien.Instance.GetChucVu(maCV);
+        }
     }
 }

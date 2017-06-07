@@ -5,7 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QuanLyDaiLy_Source.Windows"
         mc:Ignorable="d"
-        Title="Lưu Nhân Viên" Height="500" Width="650"
+        Title="Lưu Nhân Viên" 
+        Height="520" 
+        Width="750"
+        ResizeMode="NoResize" ShowInTaskbar="False" WindowStartupLocation="CenterOwner"
         Loaded="Window_Loaded">
     <Window.Resources>
         <ResourceDictionary>
@@ -15,113 +18,168 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-    <Grid>
-        <StackPanel Margin="0,0,10,0" Orientation="Vertical" 
+    <TabControl>
+        <TabItem Header="Thêm"
+                 FontSize="20">
+
+            <Grid>
+                <StackPanel Margin="0,0,10,0" Orientation="Vertical" 
                     HorizontalAlignment="Center">
 
-            <StackPanel Orientation="Horizontal"
+                    <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Right">
-                <TextBlock Style="{DynamicResource InputTextBlock}">
+                        <TextBlock Style="{DynamicResource InputTextBlock}">
                     Tên Nhân Viên:
-                </TextBlock>
-                <TextBox Name="EmployeeNameTextBox" 
+                        </TextBlock>
+                        <TextBox Name="EmployeeNameTextBox" 
                          Style="{DynamicResource InputTextBox}"
-                         Width="300"/>
-            </StackPanel>
+                         Width="300"
+                                 TabIndex="1"/>
+                    </StackPanel>
 
-            <StackPanel Orientation="Horizontal"
+                    <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Right">
-                <TextBlock Style="{DynamicResource InputTextBlock}">
+                        <TextBlock Style="{DynamicResource InputTextBlock}">
                     Tên đăng nhập:
-                </TextBlock>
-                <TextBox Name="UsernameTextBox" 
+                        </TextBlock>
+                        <TextBox Name="UsernameTextBox" 
                          Style="{DynamicResource InputTextBox}"
-                         Width="300"/>
-            </StackPanel>
+                         Width="300"
+                                 TabIndex="2"/>
+                    </StackPanel>
 
-            <StackPanel Orientation="Horizontal"
+                    <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Right">
-                <TextBlock Style="{DynamicResource InputTextBlock}">
+                        <TextBlock Style="{DynamicResource InputTextBlock}">
                     Mật Khẩu:
-                </TextBlock>
-                <Button FontFamily="Segoe MDL2 Assets"
+                        </TextBlock>
+                        <Button FontFamily="Segoe MDL2 Assets"
                         FontSize="7"
                         Content="&#xE004;"
                         Width="11" Height="11"
                         HorizontalContentAlignment="Center"
                         MouseDown="Button_MouseDown"
                         MouseUp="Button_MouseUp">
-                    <Button.ToolTip>
-                        <StackPanel>
-                            <TextBlock>
+                            <Button.ToolTip>
+                                <StackPanel>
+                                    <TextBlock>
                                 Hiện mật khẩu.
-                            </TextBlock>
-                        </StackPanel>
-                    </Button.ToolTip>
-                </Button>
-                <PasswordBox Name="PasswordTextBox" 
+                                    </TextBlock>
+                                </StackPanel>
+                            </Button.ToolTip>
+                        </Button>
+                        <PasswordBox Name="PasswordTextBox" 
                              Style="{DynamicResource InputPasswordBox}"
                              Width="300" Visibility="Visible"
+                                     TabIndex="3"
                              />
-                <TextBlock x:Name="PasswordShowTextBox"
+                        <TextBlock x:Name="PasswordShowTextBox"
                            Visibility="Collapsed"
                            Style="{DynamicResource InputTextBlock}"
                            />
-            </StackPanel>
+                    </StackPanel>
 
-            <StackPanel Orientation="Horizontal"
+                    <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Right">
-                <TextBlock Style="{DynamicResource InputTextBlock}">
+                        <TextBlock Style="{DynamicResource InputTextBlock}">
                     Địa Chỉ:
-                </TextBlock>
-                <TextBox Name="AddressTextBox"
+                        </TextBlock>
+                        <TextBox Name="AddressTextBox"
                          Style="{DynamicResource InputTextBox}"
-                         Width="300"/>
-            </StackPanel>
+                         Width="300"
+                                 TabIndex="4"/>
+                    </StackPanel>
 
-            <StackPanel Orientation="Horizontal"
+                    <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Right">
-                <TextBlock Style="{DynamicResource InputTextBlock}">
+                        <TextBlock Style="{DynamicResource InputTextBlock}">
                     Ngày Sinh:
-                </TextBlock>
-                <DatePicker x:Name="EmployeeDatePicker" Style="{DynamicResource InputDatePicker}"
-                            Width="300"/>
-            </StackPanel>
+                        </TextBlock>
+                        <DatePicker x:Name="EmployeeDatePicker" Style="{DynamicResource InputDatePicker}"
+                            Width="300"
+                                    TabIndex="5"/>
+                    </StackPanel>
 
 
-            <StackPanel Orientation="Horizontal"
+                    <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Right">
-                <TextBlock Style="{DynamicResource InputTextBlock}">
+                        <TextBlock Style="{DynamicResource InputTextBlock}">
                     Chức Vụ:
-                </TextBlock>
-                <ComboBox Name="PositionComboBox" 
+                        </TextBlock>
+                        <ComboBox Name="PositionComboBox" 
                           Style="{DynamicResource InputComboBox}"
                           Width="300" 
                           ItemTemplate="{StaticResource DataCHUCVU}" 
-                          SelectedValuePath="MACHUCVU">
-                </ComboBox>
-            </StackPanel>
+                          SelectedValuePath="MACHUCVU"
+                                  TabIndex="6">
+                        </ComboBox>
+                    </StackPanel>
 
 
-            <StackPanel Margin="0,5,10,0" 
+                    <StackPanel Margin="0,5,10,0" 
                         Orientation="Horizontal"
                         HorizontalAlignment="Right">
-                <Button x:Name="SaveButton" 
+                        <Button x:Name="SaveButton" 
                         Click="SaveButton_Click"
                         Style="{DynamicResource InputButton}"
-                        Width="Auto">
-                    Lưu
-                </Button>
-                <Button x:Name="ExitButton" 
+                        >
+                            Lưu
+                        </Button>
+                        <Button x:Name="ExitButton" 
                         Click="ExitButton_Click"
                         Style="{DynamicResource InputButton}"
-                        Width="Auto">
-                    Thoát
-                </Button>
-            </StackPanel>
-            
-         
-            
-        </StackPanel>
-    </Grid>
+                        >
+                            Thoát
+                        </Button>
+                    </StackPanel>
+
+
+
+                </StackPanel>
+            </Grid>
+
+        </TabItem>
+
+        <TabItem Header="Danh Sách"
+                 FontSize="20">
+            <DataGrid x:Name="EmployeeDataGrid" 
+                  Margin="25"
+                  HorizontalAlignment="Center"
+                  AutoGenerateColumns="False"
+                  CanUserReorderColumns="False"
+                  Height="300" Width="Auto"
+                  Style="{StaticResource DataGridStyle}">
+                <DataGrid.CellStyle>
+                    <Style TargetType="DataGridCell">
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="White" />
+                                <Setter Property="Foreground" Value="Black" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.CellStyle>
+                <DataGrid.RowStyle>
+                    <Style TargetType="DataGridRow">
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="BorderBrush" Value="Aqua" />
+                                <Setter Property="BorderThickness" Value="1" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.RowStyle>
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Mã" Binding="{Binding Path=MANV}"/>
+                    <DataGridTextColumn Header="Tên" Binding="{Binding Path=TENNV}"/>
+                    <DataGridTextColumn Header="Ngày Sinh" Binding="{Binding Path=NGAYSINH}"/>
+                    <DataGridTextColumn Header="Địa Chỉ" Binding="{Binding Path=DIACHI}"/>
+                    <DataGridTextColumn Header="Chức Vụ" Binding="{Binding Path=CHUCVU}"/>
+                </DataGrid.Columns>
+
+            </DataGrid>
+        </TabItem>
+    </TabControl>
+    
 </Window>

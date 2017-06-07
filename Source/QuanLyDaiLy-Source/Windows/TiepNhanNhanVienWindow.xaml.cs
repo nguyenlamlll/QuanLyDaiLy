@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using QuanLyDaiLy_Source.Commons.BusinessLogic;
 using EmployeeManagerQuanLyDaiLy_Source.Models.BusinessLogic;
 using System.Windows.Navigation;
+using System.Collections.ObjectModel;
 
 namespace QuanLyDaiLy_Source.Windows
 {
@@ -22,9 +23,13 @@ namespace QuanLyDaiLy_Source.Windows
     /// </summary>
     public partial class TiepNhanNhanVienWindow : Window
     {
+        ObservableCollection<NhanVienDataGridItem> collection = new ObservableCollection<NhanVienDataGridItem>();
+
         public TiepNhanNhanVienWindow()
         {
             InitializeComponent();
+            EmployeeDataGrid.ItemsSource = collection;
+            InitializeDataGrid();
         }
 
         /// <summary>
@@ -58,12 +63,23 @@ namespace QuanLyDaiLy_Source.Windows
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            EmployeeManager.Instance.Insert(EmployeeNameTextBox.Text.ToString(), EmployeeDatePicker.SelectedDate.Value,
-                AddressTextBox.Text.ToString(), (int)PositionComboBox.SelectedValue, UsernameTextBox.Text.ToString(),
-                PasswordTextBox.Password.ToString());
+            try
+            {
+                if (EmployeeManager.Instance.Insert(EmployeeNameTextBox.Text.ToString(), EmployeeDatePicker.SelectedDate.Value,
+    AddressTextBox.Text.ToString(), (int)PositionComboBox.SelectedValue, UsernameTextBox.Text.ToString(),
+    PasswordTextBox.Password.ToString()))
+                {
+                    MessageBox.Show("Đã thêm thành công.", "Thành công");
+                    ResetInputFields();
+                    InitializeDataGrid();
+                }
 
-            MessageBox.Show("Đã thêm thành công.", "Thành công");
-            ResetInputFields();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Không thể thực hiện tác vụ hiện tại. ", "Lỗi");
+            }
+
         }
 
 
@@ -95,5 +111,33 @@ namespace QuanLyDaiLy_Source.Windows
             PasswordTextBox.Visibility = Visibility.Visible;
             PasswordShowTextBox.Visibility = Visibility.Collapsed;
         }
+
+        private void InitializeDataGrid()
+        {
+            collection.Clear();
+            foreach (var item in EmployeeManager.Instance.GetAll())
+            {
+                collection.Add(new NhanVienDataGridItem()
+                {
+                    MANV = item.MANV,
+                    TENNV = item.TENNV,
+                    NGAYSINH = item.NGAYSINH.Value.ToString("dd/MM/yyyy"),
+                    DIACHI = item.DIACHI,
+                    CHUCVU = EmployeeManager.Instance.GetChucVu(item.MACHUCVU)
+                });
+            }
+        }
+    }
+
+    /// <summary>
+    /// View Model for datagrid
+    /// </summary>
+    public class NhanVienDataGridItem
+    {
+        public int MANV { get; set; }
+        public string TENNV { get; set; }
+        public string NGAYSINH { get; set; }
+        public string DIACHI { get; set; }
+        public string CHUCVU { get; set; }
     }
 }

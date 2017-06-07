@@ -20,9 +20,38 @@
         <ScrollViewer>
             <StackPanel Orientation="Vertical"
                     HorizontalAlignment="Center" VerticalAlignment="Center">
+
+                <ToggleButton  x:Name="ToggleButton_Employee"
+                               Click="ToggleButton_Employee_Click"
+                               Style="{DynamicResource ToggleButtonStyle}"
+                               HorizontalAlignment="Left" >
+                    Quản Lý Nhân Viên
+                </ToggleButton>
+                <Border x:Name="EmployeeBorder" BorderThickness="1" 
+                        BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}">
+                    <StackPanel Orientation="Vertical">
+
+                        <TextBlock Style="{DynamicResource InputTextBlock}">
+                        Nhân Viên
+                        </TextBlock>
+                        <TextBlock Style="{DynamicResource SubtitleInputTextBlock}">
+                        Thêm nhân viên vào cơ sở dữ liệu hoặc xem những tài khoản hiện có.
+                        </TextBlock>
+
+                        <Button x:Name="EmployeeWindowButton" 
+                                Click="EmployeeWindowButton_Click"
+                                Style="{DynamicResource InputButton}"
+                                Width="Auto">
+                            Tùy chỉnh...
+                        </Button>
+
+                    </StackPanel>
+                </Border>
+
                 <ToggleButton  x:Name="ToggleButton_AngecyRules"
                                Click="ToggleButton_AngecyRules_Click"
                                Style="{DynamicResource ToggleButtonStyle}"
+                               Margin="0,20,0,0"
                                HorizontalAlignment="Left" >
                     Quy Định Đại Lý
                 </ToggleButton>

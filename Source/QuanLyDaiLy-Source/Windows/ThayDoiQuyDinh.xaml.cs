@@ -162,5 +162,41 @@ namespace QuanLyDaiLy_Source.Windows
             else
                 AgencyRulesBorder.Visibility = Visibility.Visible;
         }
+
+
+        private void ToggleButton_Employee_Click(object sender, RoutedEventArgs e)
+        {
+            if (EmployeeBorder.Visibility == Visibility.Visible)
+                EmployeeBorder.Visibility = Visibility.Collapsed;
+            else
+                EmployeeBorder.Visibility = Visibility.Visible;
+        }
+
+        /// <summary>
+        /// Open an Employee Window
+        /// </summary>
+        private void EmployeeWindowButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (!IsCurrentUserAdmin())
+                    throw new InvalidPrivilegeException();
+                TiepNhanNhanVienWindow window = new TiepNhanNhanVienWindow();
+                window.Owner = Window.GetWindow(this);
+                window.ShowDialog();
+            }
+            catch (InvalidPrivilegeException ex)
+            {
+                MessageBox.Show(ex.Message, "Lỗi", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (InvalidOperationException)
+            {
+                MessageBox.Show("Không thể thực hiện tác vụ.", "Lỗi");
+            }
+            catch (ArgumentNullException)
+            {
+                MessageBox.Show("Vui lòng khởi động lại chương trình.", "Lỗi");
+            }
+        }
     }
 }
