@@ -16,6 +16,7 @@
     <RootNamespace>AI Setup - Release</RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'DefaultBuild' " />
+  <PropertyGroup Condition=" '$(Configuration)' == 'DefaultBuild' " />
   <ItemGroup>
     <Compile Include="AI Setup - Release.aip">
       <SubType>Code</SubType>

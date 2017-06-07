@@ -5,6 +5,8 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:QuanLyDaiLy_Source.Windows"
       xmlns:helper="clr-namespace:QuanLyDaiLy_Source.Helper"
+      xmlns:help="clr-namespace:QuanLyDaiLy_Source.Helper"
+      help:HelpProvider.HelpTopic="PhieuXuatHang"
       mc:Ignorable="d" 
       d:DesignHeight="720" d:DesignWidth="1280"
       Title="PhieuXuatHang">

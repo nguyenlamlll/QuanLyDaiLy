@@ -5,6 +5,8 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:QuanLyDaiLy_Source.Windows"
       xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+      xmlns:help="clr-namespace:QuanLyDaiLy_Source.Helper"
+      help:HelpProvider.HelpTopic="BaoCao"
       mc:Ignorable="d" 
       d:DesignHeight="720" d:DesignWidth="1280"
       Title="BaoCaoCongNo"
