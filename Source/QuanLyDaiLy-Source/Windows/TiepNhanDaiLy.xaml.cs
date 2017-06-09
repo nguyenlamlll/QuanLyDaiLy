@@ -183,7 +183,7 @@ namespace QuanLyDaiLy_Source.Windows
 
             DAILY daiLy = new DAILY();
 
-            GetDaiLyInput(daiLy);
+            if (!GetDaiLyInput(daiLy)) return;
             if (daiLyManager.Insert(daiLy))
             {
                 MessageBox.Show("Đã thêm thành công.", "Thông Báo",
@@ -211,7 +211,7 @@ namespace QuanLyDaiLy_Source.Windows
 
             DAODLL.DAILY daiLy = new DAODLL.DAILY();
 
-            GetDaiLyInput(daiLy);
+            if (!GetDaiLyInput(daiLy)) return;
             if (daiLyManager.Insert(daiLy))
             {
                 MessageBox.Show("Đã thêm thành công.", "Thông Báo",
@@ -253,15 +253,30 @@ namespace QuanLyDaiLy_Source.Windows
         /// Get all information from XAML.
         /// </summary>
         /// <param name="daiLy"></param>
-        private void GetDaiLyInput(DAODLL.DAILY daiLy)
+        private bool GetDaiLyInput(DAODLL.DAILY daiLy)
         {
             //daiLy.MADL = int.Parse(IDInputTextBox.Text.ToString());
-            daiLy.TENDL = NameInputTextBox.Text.ToString();
-            daiLy.DIENTHOAI = PhoneNumberInputTextBox.Text.ToString();
-            daiLy.DIACHI = AddressNumberInputTextBox.Text.ToString() + ", " + StreetInputTextBox.Text.ToString();
-            daiLy.NGAYTIEPNHAN = AcceptanceDateDatePicker.SelectedDate.Value;
-            daiLy.MAQUAN = (int)DistrictInputComboBox.SelectedValue;
-            daiLy.LOAIDL = (int)TypeInputComboBox.SelectedValue;
+            try
+            {
+                daiLy.TENDL = NameInputTextBox.Text.ToString();
+
+                if (!Helper.Utilities.IsDigitsOnly(PhoneNumberInputTextBox.Text)) return false;
+                daiLy.DIENTHOAI = PhoneNumberInputTextBox.Text.ToString();
+
+                daiLy.DIACHI = AddressNumberInputTextBox.Text.ToString() + ", " + StreetInputTextBox.Text.ToString();
+                daiLy.NGAYTIEPNHAN = AcceptanceDateDatePicker.SelectedDate.Value;
+
+                if (DistrictInputComboBox.SelectedValue == null) return false;
+                if (TypeInputComboBox.SelectedValue == null) return false;
+                daiLy.MAQUAN = (int)DistrictInputComboBox.SelectedValue;
+                daiLy.LOAIDL = (int)TypeInputComboBox.SelectedValue;
+                return true;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Lỗi nhập liệu, vui lòng kiểm tra lại các trường nhập liệu.");
+            }
+            return false;
         }
     }
 }

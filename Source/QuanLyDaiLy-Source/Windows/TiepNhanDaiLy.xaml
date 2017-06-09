@@ -274,6 +274,7 @@
                     <Button x:Name="SaveAndContinueButton" 
                             Click="SaveAndContinueButton_Click"
                             Content="Lưu Và Tiếp Tục"
+                            
                             Style="{DynamicResource InputButton}"
                             Width="250">
                         <Button.ToolTip>
